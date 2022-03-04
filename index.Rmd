@@ -15,14 +15,14 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# About
+# Sobre
 
 Livro relacionado a técnicas de programação e modelagem de temas específicos da **Engenharia Ambiental e Urbana**. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana.
 
 
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
 
-## Usage 
+# R - Introdução e Comandos Básicos
 
 Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
 
