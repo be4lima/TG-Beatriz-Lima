@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "John Doe"
+title: "Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações"
+author: "Beatriz Morais Lima e Wallace Gusmão Ferreira"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -16,6 +16,9 @@ github-repo: rstudio/bookdown-demo
 ---
 
 # About
+
+Pesquisa relacionada a técnicas de programação e modelagem de temas específicos da **Engenharia Ambiental e Urbana**. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana que serão selecionados ao longo da pesquisa.
+
 
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
 
