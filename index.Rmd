@@ -24,7 +24,7 @@ This is a _sample_ book written in **Markdown**. You can use anything that Pando
 
 # R - Introdução e Comandos Básicos
 
-R é uma linguagem e ambiente para computação estatística e gráficos. Essa linguagem de programação fornece um grande variedade de técnicas estatísticas (R provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering, …) and graphical techniques, and is highly extensible. 
+R é uma linguagem e ambiente para computação estatística e gráficos. Essa linguagem de programação fornece uma grande variedade de técnicas estatísticas (modelagem linear e não-linear, testes estatísticos clássicos, análise de séries temporais…) e gráficas.
 
 Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
 
