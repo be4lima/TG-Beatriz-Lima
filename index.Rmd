@@ -24,6 +24,8 @@ This is a _sample_ book written in **Markdown**. You can use anything that Pando
 
 # R - Introdução e Comandos Básicos
 
+R is a language and environment for statistical computing and graphics. It is a GNU project which is similar to the S language and environment which was developed at Bell Laboratories (formerly AT&T, now Lucent Technologies) by John Chambers and colleagues.R provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering, …) and graphical techniques, and is highly extensible. 
+
 Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
 
 Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
