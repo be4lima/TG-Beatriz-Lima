@@ -4,8 +4,8 @@ eq:binom
 thm:tri
 sobre
 r---introdução-e-comandos-básicos
-render-book
-preview-book
+definindo-um-diretório-de-trabalho
+definindo-diretório-de-trabalho
 hello-bookdown
 a-section
 cross

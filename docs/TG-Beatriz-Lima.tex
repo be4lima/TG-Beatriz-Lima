@@ -143,15 +143,18 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{about}{%
-\chapter{About}\label{about}}
+\hypertarget{sobre}{%
+\chapter*{Sobre}\label{sobre}}
+\addcontentsline{toc}{chapter}{Sobre}
 
-Pesquisa relacionada a técnicas de programação e modelagem de temas específicos da \textbf{Engenharia Ambiental e Urbana}. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana que serão selecionados ao longo da pesquisa.
+Livro relacionado a técnicas de programação e modelagem de temas específicos da \textbf{Engenharia Ambiental e Urbana}. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana.
 
 This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports; for example, a math equation \(a^2 + b^2 = c^2\).
 
-\hypertarget{usage}{%
-\section{Usage}\label{usage}}
+\hypertarget{r---introduuxe7uxe3o-e-comandos-buxe1sicos}{%
+\chapter{R - Introdução e Comandos Básicos}\label{r---introduuxe7uxe3o-e-comandos-buxe1sicos}}
+
+R é uma linguagem e ambiente para computação estatística e gráficos. Essa linguagem de programação fornece uma grande variedade de técnicas estatísticas (modelagem linear e não-linear, testes estatísticos clássicos, análise de séries temporais, etc) e gráficas (The R Foundation, 2022).
 
 Each \textbf{bookdown} chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter \emph{must} start with a first-level heading: \texttt{\#\ A\ good\ chapter}, and can contain one (and only one) first-level heading.
 
@@ -159,8 +162,20 @@ Use second-level and higher headings within chapters like: \texttt{\#\#\ A\ shor
 
 The \texttt{index.Rmd} file is required, and is also your first book chapter. It will be the homepage when you render the book.
 
-\hypertarget{render-book}{%
-\section{Render book}\label{render-book}}
+\hypertarget{definindo-um-diretuxf3rio-de-trabalho}{%
+\section{Definindo um diretório de trabalho}\label{definindo-um-diretuxf3rio-de-trabalho}}
+
+O \textbf{diretório de trabalho} é o local onde a base de dados de um projeto está salva. Para verificar qual é o diretório de trabalho atual, basta utilizar a função \texttt{getwd()}.
+
+\begin{verbatim}
+getwd()
+\end{verbatim}
+
+Para definir um novo diretório de trabalho, basta utilizar a função \texttt{setwd()} e inserir como argumento o caminho desejado, conforme exemplo abaixo.
+
+\begin{verbatim}
+setwd(home/fulano/documentos/Pasta)
+\end{verbatim}
 
 You can render the HTML version of this example book without changing anything:
 
@@ -182,8 +197,8 @@ Or build the book from the R console:
 
 To render this example to PDF as a \texttt{bookdown::pdf\_book}, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
 
-\hypertarget{preview-book}{%
-\section{Preview book}\label{preview-book}}
+\hypertarget{definindo-diretuxf3rio-de-trabalho}{%
+\section{Definindo diretório de trabalho}\label{definindo-diretuxf3rio-de-trabalho}}
 
 As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in ``Preview book'', or from the R console:
 
@@ -395,6 +410,7 @@ Or use:
 \end{Highlighting}
 \end{Shaded}
 
+The R Foundation. \textbf{R: The R Project}. Disponível em: \url{https://www.r-project.org/}
 
   \bibliography{book.bib,packages.bib}
 

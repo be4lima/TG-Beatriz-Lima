@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 R - Introdução e Comandos Básicos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
+  <title>Capítulo 2 R - Introdução e Comandos Básicos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 R - Introdução e Comandos Básicos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta property="og:title" content="Capítulo 2 R - Introdução e Comandos Básicos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   <meta property="og:type" content="book" />
   
   
@@ -20,7 +20,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 R - Introdução e Comandos Básicos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta name="twitter:title" content="Capítulo 2 R - Introdução e Comandos Básicos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -163,14 +163,14 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Ciência de dados na Engenharia Ambiental e Urbana</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Sobre<span></span></a></li>
 <li class="chapter" data-level="2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html"><i class="fa fa-check"></i><b>2</b> R - Introdução e Comandos Básicos<span></span></a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#render-book"><i class="fa fa-check"></i><b>2.1</b> Render book<span></span></a></li>
-<li class="chapter" data-level="2.2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#preview-book"><i class="fa fa-check"></i><b>2.2</b> Preview book<span></span></a></li>
+<li class="chapter" data-level="2.1" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#definindo-um-diretório-de-trabalho"><i class="fa fa-check"></i><b>2.1</b> Definindo um diretório de trabalho<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#definindo-diretório-de-trabalho"><i class="fa fa-check"></i><b>2.2</b> Definindo diretório de trabalho<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>3</b> Hello bookdown<span></span></a>
 <ul>
@@ -224,25 +224,30 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="r---introdução-e-comandos-básicos" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> R - Introdução e Comandos Básicos<a href="r---introdução-e-comandos-básicos.html#r---introdução-e-comandos-básicos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Capítulo 2</span> R - Introdução e Comandos Básicos<a href="r---introdução-e-comandos-básicos.html#r---introdução-e-comandos-básicos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>R é uma linguagem e ambiente para computação estatística e gráficos. Essa linguagem de programação fornece uma grande variedade de técnicas estatísticas (modelagem linear e não-linear, testes estatísticos clássicos, análise de séries temporais, etc) e gráficas (The R Foundation, 2022).</p>
 <p>Each <strong>bookdown</strong> chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter <em>must</em> start with a first-level heading: <code># A good chapter</code>, and can contain one (and only one) first-level heading.</p>
 <p>Use second-level and higher headings within chapters like: <code>## A short section</code> or <code>### An even shorter section</code>.</p>
 <p>The <code>index.Rmd</code> file is required, and is also your first book chapter. It will be the homepage when you render the book.</p>
-<div id="render-book" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Render book<a href="r---introdução-e-comandos-básicos.html#render-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="definindo-um-diretório-de-trabalho" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Definindo um diretório de trabalho<a href="r---introdução-e-comandos-básicos.html#definindo-um-diretório-de-trabalho" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>O <strong>diretório de trabalho</strong> é o local onde a base de dados de um projeto está salva. Para verificar qual é o diretório de trabalho atual, basta utilizar a função <code>getwd()</code>.</p>
+<pre><code>getwd()</code></pre>
+<p>Para definir um novo diretório de trabalho, basta utilizar a função <code>setwd()</code> e inserir como argumento o caminho desejado, conforme exemplo abaixo.</p>
+<pre><code>setwd(home/fulano/documentos/Pasta)</code></pre>
 <p>You can render the HTML version of this example book without changing anything:</p>
 <ol style="list-style-type: decimal">
 <li><p>Find the <strong>Build</strong> pane in the RStudio IDE, and</p></li>
 <li><p>Click on <strong>Build Book</strong>, then select your output format, or select “All formats” if you’d like to use multiple formats from the same book source files.</p></li>
 </ol>
 <p>Or build the book from the R console:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="r---introdução-e-comandos-básicos.html#cb1-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r---introdução-e-comandos-básicos.html#cb3-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>()</span></code></pre></div>
 <p>To render this example to PDF as a <code>bookdown::pdf_book</code>, you’ll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>.</p>
 </div>
-<div id="preview-book" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Preview book<a href="r---introdução-e-comandos-básicos.html#preview-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="definindo-diretório-de-trabalho" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Definindo diretório de trabalho<a href="r---introdução-e-comandos-básicos.html#definindo-diretório-de-trabalho" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in “Preview book”, or from the R console:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="r---introdução-e-comandos-básicos.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="r---introdução-e-comandos-básicos.html#cb4-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
 
 </div>
 </div>
