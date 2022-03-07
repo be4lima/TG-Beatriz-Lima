@@ -2,10 +2,9 @@ fig:nice-fig
 tab:nice-tab
 eq:binom
 thm:tri
-sobre
 r---introdução-e-comandos-básicos
 definindo-um-diretório-de-trabalho
-definindo-diretório-de-trabalho
+base-de-dados
 hello-bookdown
 a-section
 cross

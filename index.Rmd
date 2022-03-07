@@ -15,22 +15,16 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# Sobre
+# Sobre {-}
 
 Livro relacionado a técnicas de programação e modelagem de temas específicos da **Engenharia Ambiental e Urbana**. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana.
 
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
 
 # R - Introdução e Comandos Básicos
 
 R é uma linguagem e ambiente para computação estatística e gráficos. Essa linguagem de programação fornece uma grande variedade de técnicas estatísticas (modelagem linear e não-linear, testes estatísticos clássicos, análise de séries temporais, etc) e gráficas (The R Foundation, 2022).
 
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
-
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
-
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
 
 ## Definindo um diretório de trabalho
 
@@ -43,36 +37,20 @@ getwd()
 Para definir um novo diretório de trabalho, basta utilizar a função `setwd()` e inserir como argumento o caminho desejado, conforme exemplo abaixo.
 
 ```
-setwd(home/fulano/documentos/Pasta)
+setwd("Home/Beatriz/documentos/Data Science")
 ```
 
-You can render the HTML version of this example book without changing anything:
+## Base de dados
 
-1. Find the **Build** pane in the RStudio IDE, and
+Para realizar a **leitura** de uma base de dados, basta utilizar a função `read() `. Exemplos de **formatos de arquivo** são .csv, .txt, .xlsx, entre outros. A forma mais comum de disponibilização de dados é o formato `.csv` e a leitura dessa base de dados pode ser realizada conforme demonstrado abaixo. 
 
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
-
-Or build the book from the R console:
-
-```{r, eval=FALSE}
-bookdown::render_book()
+```dados <- read.csv("Data Science/dados.csv")
 ```
 
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+Note que o caminho escrito está pela metade, pois o diretório de trabalho já foi definido. Dessa forma, não é necessário escrever o caminho inteiro do arquivo "dados.csv", por já estar localizado no diretório.
 
-## Definindo diretório de trabalho
+Para **exploração dos dados**, inicialmente algumas funções são úteis: 
 
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
-
-```{r eval=FALSE}
-bookdown::serve_book()
-```
-
-
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+  1. `View()` para visualização dos dados .csv em uma tabela;
+  2. `Names()` para exibição dos nomes das variáveis presentes na base de dados;
+  3. `Summary()` para a realização de um sumário de estatísticas para as variáveis numéricas da base de dados (mínimo, máximo, mediana, média, 1º quartil, 3º quartil e número de NAs).
