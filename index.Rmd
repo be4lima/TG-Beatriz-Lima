@@ -92,6 +92,6 @@ Para **exploração dos dados**, inicialmente algumas funções são úteis:
   
 ## Seleção de variáveis
 
-Para realizar a análise dos dados, é necessário selecionar variáveis do banco de dados e filtrar seus valores. Ou seja, é necessário criar **subconjuntos**. Em R, estes podem ser criados com o uso de colchetes: `dados[valores,variáveis]`.
-
+Para realizar a análise dos dados, é necessário selecionar variáveis do banco de dados e filtrar seus valores. Ou seja, é necessário criar **subconjuntos**. Em R, estes podem ser criados com o uso de colchetes: `dados[observações,variáveis]`.
+Para um conjunto de dados com numerações para cada uma das observações, para selecionar as 4 primeiras observações, basta realizar o comando `dados[1:4,]`, por exemplo.
 
