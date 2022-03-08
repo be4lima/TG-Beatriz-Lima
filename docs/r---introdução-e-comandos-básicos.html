@@ -30,7 +30,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-03-07" />
+<meta name="date" content="2022-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -106,7 +106,9 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html"><i class="fa fa-check"></i><b>1</b> R - Introdução e Comandos Básicos<span></span></a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#definindo-um-diretório-de-trabalho"><i class="fa fa-check"></i><b>1.1</b> Definindo um diretório de trabalho<span></span></a></li>
-<li class="chapter" data-level="1.2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#base-de-dados"><i class="fa fa-check"></i><b>1.2</b> Base de dados<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#vetores"><i class="fa fa-check"></i><b>1.2</b> Vetores<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#base-de-dados"><i class="fa fa-check"></i><b>1.3</b> Base de dados<span></span></a></li>
+<li class="chapter" data-level="1.4" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#seleção-de-variáveis"><i class="fa fa-check"></i><b>1.4</b> Seleção de variáveis<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>2</b> Hello bookdown<span></span></a>
 <ul>
@@ -169,8 +171,34 @@ div.csl-indent {
 <p>Para definir um novo diretório de trabalho, basta utilizar a função <code>setwd()</code> e inserir como argumento o caminho desejado, conforme exemplo abaixo.</p>
 <pre><code>setwd(&quot;Home/Beatriz/documentos/Data Science&quot;)</code></pre>
 </div>
-<div id="base-de-dados" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Base de dados<a href="r---introdução-e-comandos-básicos.html#base-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="vetores" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Vetores<a href="r---introdução-e-comandos-básicos.html#vetores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Vetores permitem que sejam armazenados conjuntos de valores sob um mesmo nome. Serão apresentadas três maneiras de criar vetores abaixo.</p>
+<ol style="list-style-type: decimal">
+<li>Utilizando a função <code>c(v1, v2, v3,..., vi)</code> que concatena os valores presentes no argumento e cria um vetor;</li>
+</ol>
+<pre><code>&gt; Valores &lt;- c(1,2,3,4,5)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Utilizando o comando <code>seq(from,to, by, length)</code> que gera sequências números de um valor inicial (from) até um valor final (to) com um incremento (by) e um comprimento (length).</li>
+</ol>
+<pre><code>Exemplo 1: seq (from, to, by)
+&gt; Valores &lt;- seq(1,6,by=1)
+[1] 1.0 3.0 3.0 4.0 5.0 6.0</code></pre>
+<pre><code>Exemplo 2: seq (from, to, length)
+&gt; Valores &lt;- seq(2,10,length=5)
+[1] 2 4 6 8 10</code></pre>
+<pre><code>Exemplo 3: seq (from, to, length)
+&gt; Valores &lt;- seq(from=2,by=10,length=6)
+[1] 2 12 22 32 42 52 </code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Utilizando o comando <code>from:to</code> que cria a sequência de um valor inicial (from) até um final (to) com o incremento de by=1.</li>
+</ol>
+<pre><code>Exemplo: 
+&gt; Valores &lt;- 1:10
+[1] 1 2 3 4 5 6 7 8 9 10</code></pre>
+</div>
+<div id="base-de-dados" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Base de dados<a href="r---introdução-e-comandos-básicos.html#base-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Para realizar a <strong>leitura</strong> de uma base de dados, basta utilizar a função <code>read()</code>. Exemplos de <strong>formatos de arquivo</strong> são .csv, .txt, .xlsx, entre outros. A forma mais comum de disponibilização de dados é o formato <code>.csv</code> e a leitura dessa base de dados pode ser realizada conforme demonstrado abaixo.</p>
 <p><code>dados &lt;- read.csv("Data Science/dados.csv")</code></p>
 <p>Note que o caminho escrito está pela metade, pois o diretório de trabalho já foi definido. Dessa forma, não é necessário escrever o caminho inteiro do arquivo “dados.csv”, por já estar localizado no diretório.</p>
@@ -180,6 +208,10 @@ div.csl-indent {
 <li><code>Names()</code> para exibição dos nomes das variáveis presentes na base de dados;</li>
 <li><code>Summary()</code> para a realização de um sumário de estatísticas para as variáveis numéricas da base de dados (mínimo, máximo, mediana, média, 1º quartil, 3º quartil e número de NAs).</li>
 </ol>
+</div>
+<div id="seleção-de-variáveis" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Seleção de variáveis<a href="r---introdução-e-comandos-básicos.html#seleção-de-variáveis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para realizar a análise dos dados, é necessário selecionar variáveis do banco de dados e filtrar seus valores. Ou seja, é necessário criar <strong>subconjuntos</strong>. Em R, estes podem ser criados com o uso de colchetes: <code>dados[valores,variáveis]</code>.</p>
 
 </div>
 </div>

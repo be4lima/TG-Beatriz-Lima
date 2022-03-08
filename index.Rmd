@@ -39,7 +39,41 @@ Para definir um novo diretório de trabalho, basta utilizar a função `setwd()`
 ```
 setwd("Home/Beatriz/documentos/Data Science")
 ```
+## Vetores
 
+Vetores permitem que sejam armazenados conjuntos de valores sob um mesmo nome. Serão apresentadas três maneiras de criar vetores abaixo.
+
+  1. Utilizando a função `c(v1, v2, v3,..., vi)` que concatena os valores presentes no argumento e cria um vetor;
+  
+  ```
+  > Valores <- c(1,2,3,4,5)
+  ```
+  
+  2. Utilizando o comando `seq(from,to, by, length)` que gera sequências números de um valor inicial (from) até um valor final (to) com um incremento (by) e um comprimento (length).
+  
+  ```
+  Exemplo 1: seq (from, to, by)
+  > Valores <- seq(1,6,by=1)
+  [1] 1.0 3.0 3.0 4.0 5.0 6.0
+  ```
+  ```
+  Exemplo 2: seq (from, to, length)
+  > Valores <- seq(2,10,length=5)
+  [1] 2 4 6 8 10
+  ```
+  ```
+  Exemplo 3: seq (from, to, length)
+  > Valores <- seq(from=2,by=10,length=6)
+  [1] 2 12 22 32 42 52 
+  ```
+  
+  3. Utilizando o comando `from:to` que cria a sequência de um valor inicial (from) até um final (to) com o incremento de by=1.
+  ```
+  Exemplo: 
+  > Valores <- 1:10
+  [1] 1 2 3 4 5 6 7 8 9 10
+  ```
+  
 ## Base de dados
 
 Para realizar a **leitura** de uma base de dados, basta utilizar a função `read() `. Exemplos de **formatos de arquivo** são .csv, .txt, .xlsx, entre outros. A forma mais comum de disponibilização de dados é o formato `.csv` e a leitura dessa base de dados pode ser realizada conforme demonstrado abaixo. 
@@ -54,3 +88,10 @@ Para **exploração dos dados**, inicialmente algumas funções são úteis:
   1. `View()` para visualização dos dados .csv em uma tabela;
   2. `Names()` para exibição dos nomes das variáveis presentes na base de dados;
   3. `Summary()` para a realização de um sumário de estatísticas para as variáveis numéricas da base de dados (mínimo, máximo, mediana, média, 1º quartil, 3º quartil e número de NAs).
+  
+  
+## Seleção de variáveis
+
+Para realizar a análise dos dados, é necessário selecionar variáveis do banco de dados e filtrar seus valores. Ou seja, é necessário criar **subconjuntos**. Em R, estes podem ser criados com o uso de colchetes: `dados[valores,variáveis]`.
+
+
