@@ -1,11 +1,35 @@
 # Análise Exploratória de Dados 
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (`#`) per .Rmd file.
+A **Análise Exploratória de Dados** (EDA) é uma forma de utilizar ferramentas gráficas e estatísticas apropriadas da linguagem R na exploração de dados. A partir da visualização, transformação e modelagem de dados, essa análise explora os dados de forma sistemática (WICKHMAN & GROLEMUND, 2017).
 
-## A section
+Para aplicar a EDA, de acordo com Wickhman & Grolemund (2017), basta inicialmente gerar questões sobre os dados, utilizar as funcionalidades do R para encontrar respostas e utilizar o que foi aprendido para gerar novas questões. Portanto, essa análise é um ciclo iterativo.
 
-All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+# População e amostra
 
+A **População** é um conjunto de observações relacionadas a indivíduos com uma característica em comum. Já a **Amostra** é um subconjunto da população, com uma parte das observações relacionadas à população. A partir da amostra realizam-se inferências sobre as características da população. 
+
+É importante que a amostra seja representativa para que os resultados não sejam deturpados.
+
+
+## Sumarização numérica de dados
+
+Resumos numéricos de dados são fundamentais para realizar inferências estatísticas, porque, de acordo com Montgomery & Runger (2021), "permitem ao engenheiro focar nas características importantes dos dados ou ter discernimento acerca do tipo de modelo que deveria ser usado na solução do problema". Por isso, torna-se útil descrever numericamente, a partir de medidas de posição, variabilidade e forma, características dos dados.
+
+### Medidas de Posição
+  #### Média
+  
+  #### Mediana
+  #### Moda
+  
+### Medidas de Variabilidade
+  #### Intervalo
+  #### Standard Deviation 
+  #### Inter-quartile range
+  
+### Medidas de Forma
+  #### Skewness
+  #### Kurtosis
+  
 ### An unnumbered section {-}
 
 Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.

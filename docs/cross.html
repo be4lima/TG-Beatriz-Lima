@@ -30,14 +30,14 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-03-07" />
+<meta name="date" content="2022-03-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="hello-bookdown.html"/>
+<link rel="prev" href="análise-exploratória-de-dados.html"/>
 <link rel="next" href="parts.html"/>
 <script src="libs/header-attrs-2.12/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -170,13 +170,19 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html"><i class="fa fa-check"></i><b>1</b> R - Introdução e Comandos Básicos<span></span></a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#definindo-um-diretório-de-trabalho"><i class="fa fa-check"></i><b>1.1</b> Definindo um diretório de trabalho<span></span></a></li>
-<li class="chapter" data-level="1.2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#base-de-dados"><i class="fa fa-check"></i><b>1.2</b> Base de dados<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#vetores"><i class="fa fa-check"></i><b>1.2</b> Vetores<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#base-de-dados"><i class="fa fa-check"></i><b>1.3</b> Base de dados<span></span></a></li>
+<li class="chapter" data-level="1.4" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#seleção-de-variáveis"><i class="fa fa-check"></i><b>1.4</b> Seleção de variáveis<span></span></a></li>
+<li class="chapter" data-level="1.5" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html#r-packages"><i class="fa fa-check"></i><b>1.5</b> R packages<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>2</b> Hello bookdown<span></span></a>
+<li class="chapter" data-level="2" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html"><i class="fa fa-check"></i><b>2</b> Análise Exploratória de Dados<span></span></a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="hello-bookdown.html"><a href="hello-bookdown.html#a-section"><i class="fa fa-check"></i><b>2.1</b> A section<span></span></a>
+<li class="chapter" data-level="2.1" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#introdução-estatística"><i class="fa fa-check"></i><b>2.1</b> Introdução estatística<span></span></a>
 <ul>
-<li><a href="hello-bookdown.html#an-unnumbered-section">An unnumbered section<span></span></a></li>
+<li class="chapter" data-level="2.1.1" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#posição"><i class="fa fa-check"></i><b>2.1.1</b> Posição<span></span></a></li>
+<li class="chapter" data-level="2.1.2" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#variabilidade"><i class="fa fa-check"></i><b>2.1.2</b> Variabilidade<span></span></a></li>
+<li class="chapter" data-level="2.1.3" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#forma"><i class="fa fa-check"></i><b>2.1.3</b> Forma<span></span></a></li>
+<li><a href="análise-exploratória-de-dados.html#an-unnumbered-section">An unnumbered section<span></span></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>3</b> Cross-references<span></span></a>
@@ -245,8 +251,8 @@ div.csl-indent {
 <h2><span class="header-section-number">3.2</span> Captioned figures and tables<a href="cross.html#captioned-figures-and-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Figures and tables <em>with captions</em> can also be cross-referenced from elsewhere in your book using <code>\@ref(fig:chunk-label)</code> and <code>\@ref(tab:chunk-label)</code>, respectively.</p>
 <p>See Figure <a href="cross.html#fig:nice-fig">3.1</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="cross.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
-<span id="cb3-2"><a href="cross.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="cross.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
+<span id="cb9-2"><a href="cross.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:nice-fig"></span>
 <img src="TG-Beatriz-Lima_files/figure-html/nice-fig-1.png" alt="Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases." width="80%" />
 <p class="caption">
@@ -254,10 +260,10 @@ Figure 3.1: Here is a nice figure!
 </p>
 </div>
 <p>Don’t miss Table <a href="cross.html#tab:nice-tab">3.1</a>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="cross.html#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb4-2"><a href="cross.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(pressure, <span class="dv">10</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
-<span id="cb4-3"><a href="cross.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
-<span id="cb4-4"><a href="cross.html#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="cross.html#cb10-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb10-2"><a href="cross.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(pressure, <span class="dv">10</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
+<span id="cb10-3"><a href="cross.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
+<span id="cb10-4"><a href="cross.html#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <caption><span id="tab:nice-tab">Table 3.1: </span>Here is a nice table!</caption>
 <thead>
@@ -317,7 +323,7 @@ Figure 3.1: Here is a nice figure!
           </div>
         </div>
       </div>
-<a href="hello-bookdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="análise-exploratória-de-dados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="parts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

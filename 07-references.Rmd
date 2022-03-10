@@ -2,3 +2,7 @@
 # References {-}
 '`
 The R Foundation. **R: The R Project**. Disponível em: <https://www.r-project.org/>
+
+Wickham, Hadley; Grolemund, Garrett. **R for Data Science**. Disponível em: <https://r4ds.had.co.nz/exploratory-data-analysis.html>
+
+Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.

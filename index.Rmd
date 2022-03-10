@@ -102,4 +102,4 @@ Um *R package* é um conjunto de funções que extendem a capacidade da base R. 
 install.packages("tidyverse")
 ```
 
-Após instalar um pacote, é necessário carregá-lo para poder utilizar todas as funcionalidades do pacote. Portanto, basta utilizar a função `library()` para instalar, inserindo o nome do pacote como argumento. Nesse caso, não utiliza-se aspas no argumento.
+Após instalar um pacote, é necessário carregá-lo para poder utilizar todas as suas funcionalidades. Portanto, basta utilizar a função `library()` para instalar, inserindo o nome do pacote como argumento. Nesse caso, não utiliza-se aspas no argumento.
