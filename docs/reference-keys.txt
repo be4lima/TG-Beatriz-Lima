@@ -24,3 +24,5 @@ pages
 metadata-for-sharing
 vetores
 seleção-de-variáveis
+r-packages
+análise-exploratória-de-dados
