@@ -4,7 +4,7 @@ A **Análise Exploratória de Dados** (EDA) é uma forma de utilizar ferramentas
 
 Para aplicar a EDA, de acordo com Wickhman & Grolemund (2017), basta inicialmente gerar questões sobre os dados, utilizar as funcionalidades do R para encontrar respostas e utilizar o que foi aprendido para gerar novas questões. Portanto, essa análise é um ciclo iterativo.
 
-# População e amostra
+## População e amostra
 
 A **População** é um conjunto de observações relacionadas a indivíduos com uma característica em comum. Já a **Amostra** é um subconjunto da população, com uma parte das observações relacionadas à população. A partir da amostra realizam-se inferências sobre as características da população. 
 
@@ -13,23 +13,68 @@ A **População** é um conjunto de observações relacionadas a indivíduos com
 
 ## Sumarização numérica de dados
 
-Resumos numéricos de dados são fundamentais para realizar inferências estatísticas, porque, de acordo com Montgomery & Runger (2021), "permitem ao engenheiro focar nas características importantes dos dados ou ter discernimento acerca do tipo de modelo que deveria ser usado na solução do problema". Por isso, torna-se útil descrever numericamente, a partir de medidas de posição, variabilidade e forma, características dos dados.
+Resumos numéricos de dados são fundamentais para realizar inferências estatísticas, porque, de acordo com Montgomery & Runger (2021), "*permitem ao engenheiro focar nas características importantes dos dados ou ter discernimento acerca do tipo de modelo que deveria ser usado na solução do problema*". Por isso, torna-se útil descrever numericamente, a partir de medidas de posição, variabilidade e forma, características dos dados.
 
 ### Medidas de Posição
-  #### Média
-  
-  #### Mediana
-  #### Moda
+
+#### Média
+
+A média é a divisão da soma de todos os valores da série pelo número de obervações n.
+
+
+  $\bar{x}=\frac{x_{1}+x_{2}+x_{3}...x_{n}}{n}=\frac{\sum x_n}{n}$
+
+#### Mediana
+
+Em um conjunto de valores ordenados, a mediana é o valor que ocupa a posição central. Portanto, a mediana divide a distribuição de valores na metade.
+
+#### Moda
+  Em um conjunto de valores, a Moda seria o valor que ocorre com maior frequência. Ou seja, o valor que mais se repete.
   
 ### Medidas de Variabilidade
-  #### Intervalo
-  #### Standard Deviation 
-  #### Inter-quartile range
-  
+
+#### Amplitude
+
+Em um conjunto de observações, a Amplitude é a diferença entre o maior valor e o menor.
+
+#### Variância
+
+Para uma amostra de *n* observações, a Variância será:
+
+ $s=\frac{\sum(x_{i}-\bar{x})^{2}}{n-1}$
+
+#### Desvio Médio (*Standard Deviation*)
+
+Para uma amostra de *n* obervações, o Desvio Padrão (SD) será a raiz quadrada positiva da Variância.
+
+#### Quartis, Decis e Percentis
+
+Os **Quartis** dividem um conjunto de obervações ordenados em 4 partes iguais; os **Decis**, em 10; e, os **Percentis**, em 100.
+
 ### Medidas de Forma
-  #### Skewness
-  #### Kurtosis
-  
+
+As medidas de forma permitem a verificação de como um conjunto de dados está se comportando em sua distribuição. Gráficos de distribuição de frequência e histogramas são ferramentas importantes para essa verificação.
+
+#### Assimetria
+
+Distribuições em forma de sino são simétricas, já que a média, mediana e moda desse conjunto de dados são iguais. Ou seja, a metade esquerda do histograma é aproximadamente igual à metade direita.
+
+Distribuições assimétricas possuem uma concentração de seus dados, à direita ou à esquerda, no histograma. Ou seja, apresentam uma "cauda" em uma das extremidades. Se a distribuição desses dados estiverem concentrados à direita, são dados com **assimetria positiva**. Se concentrados à esquerda, **assimetria negativa**.
+
+##### Coeficiente de Assimetria de Pearson
+
+$A_s=\frac{3*(\bar{x} - Md)}{s}$
+
+#### Curtose
+
+Curtose indica o grau de achatamento de uma distribuição em relação à curva normal. 
+
+##### Coeficiente de Curtose
+
+$ C= \frac{Q_3-Q_1}{2*(P_{90} - P_{10})}$
+
+A curva normal possui C=0,263.
+
 ### An unnumbered section {-}
 
 Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
