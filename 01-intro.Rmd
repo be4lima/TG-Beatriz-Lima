@@ -71,10 +71,41 @@ Curtose indica o grau de achatamento de uma distribuição em relação à curva
 
 ##### Coeficiente de Curtose
 
-$ C= \frac{Q_3-Q_1}{2*(P_{90} - P_{10})}$
+$C=\frac{Q_3-Q_1}{2*(P_{90} - P_{10})}$
 
 A curva normal possui C=0,263.
 
-### An unnumbered section {-}
+## Aplicação {-}
 
-Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
+Para a aplicação, será utilizada a base de dados do Instituto Nacional de Meteorologia (INMET) de precipitação e temperatura na estação meterológica do Mirante de Santana em São Paulo, dos anos de 2014 a 2016.
+Para importar a base de dados em .csv, utiliza-se a função read.csv() e insere-se como argumento o *diretório*:
+
+```{r}
+
+met1<- read.csv2("~/UFABC Beatriz/TG Beatriz Lima/Dados/data1.csv")
+
+```
+
+É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto;e, read.csv2(), quando são separados por ponto e vírula e os decimais por vírgula.
+
+Para visualizar a tabela importada, basta executar a função View():
+```{r}
+
+View(met1)
+
+```
+
+Para iniciar a exploração dos dados, inicialmente será utilizada a função str() que exibe de forma compacta a estrutura da tabela importada.
+
+```{r}
+
+str(met1)
+
+```
+
+Continuando, será utilizada a função ´summary()´ para apresentar o sumário de estatísticas descritivas (média, mediana, mínimo, máximo, 1º quartil, 3º quartil e valores faltantes (NA)).
+```{r}
+
+summary(met1)
+
+```

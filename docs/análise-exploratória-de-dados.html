@@ -30,7 +30,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-03-11" />
+<meta name="date" content="2022-03-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,6 +62,70 @@ set in the _output.yml file.</p>" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
@@ -118,8 +182,8 @@ div.csl-indent {
 <li class="chapter" data-level="2.2.1" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#medidas-de-posição"><i class="fa fa-check"></i><b>2.2.1</b> Medidas de Posição<span></span></a></li>
 <li class="chapter" data-level="2.2.2" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#medidas-de-variabilidade"><i class="fa fa-check"></i><b>2.2.2</b> Medidas de Variabilidade<span></span></a></li>
 <li class="chapter" data-level="2.2.3" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#medidas-de-forma"><i class="fa fa-check"></i><b>2.2.3</b> Medidas de Forma<span></span></a></li>
-<li><a href="análise-exploratória-de-dados.html#an-unnumbered-section">An unnumbered section<span></span></a></li>
 </ul></li>
+<li><a href="análise-exploratória-de-dados.html#aplicação">Aplicação<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>3</b> Cross-references<span></span></a>
 <ul>
@@ -230,16 +294,46 @@ div.csl-indent {
 <p>Curtose indica o grau de achatamento de uma distribuição em relação à curva normal.</p>
 <div id="coeficiente-de-curtose" class="section level5 hasAnchor" number="2.2.3.2.1">
 <h5><span class="header-section-number">2.2.3.2.1</span> Coeficiente de Curtose<a href="análise-exploratória-de-dados.html#coeficiente-de-curtose" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>$ C= $</p>
+<p><span class="math inline">\(C=\frac{Q_3-Q_1}{2*(P_{90} - P_{10})}\)</span></p>
 <p>A curva normal possui C=0,263.</p>
 </div>
 </div>
 </div>
-<div id="an-unnumbered-section" class="section level3 unnumbered hasAnchor">
-<h3>An unnumbered section<a href="análise-exploratória-de-dados.html#an-unnumbered-section" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Chapters and sections are numbered by default. To un-number a heading, add a <code>{.unnumbered}</code> or the shorter <code>{-}</code> at the end of the heading, like in this section.</p>
-
 </div>
+<div id="aplicação" class="section level2 unnumbered hasAnchor">
+<h2>Aplicação<a href="análise-exploratória-de-dados.html#aplicação" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para a aplicação, será utilizada a base de dados do Instituto Nacional de Meteorologia (INMET) de precipitação e temperatura na estação meterológica do Mirante de Santana em São Paulo, dos anos de 2014 a 2016.
+Para importar a base de dados em .csv, utiliza-se a função read.csv() e insere-se como argumento o <em>diretório</em>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="análise-exploratória-de-dados.html#cb1-1" aria-hidden="true" tabindex="-1"></a>met1<span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;~/UFABC Beatriz/TG Beatriz Lima/Dados/data1.csv&quot;</span>)</span></code></pre></div>
+<p>É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto;e, read.csv2(), quando são separados por ponto e vírula e os decimais por vírgula.</p>
+<p>Para visualizar a tabela importada, basta executar a função View():</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="análise-exploratória-de-dados.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(met1)</span></code></pre></div>
+<p>Para iniciar a exploração dos dados, inicialmente será utilizada a função str() que exibe de forma compacta a estrutura da tabela importada.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="análise-exploratória-de-dados.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(met1)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    36 obs. of  4 variables:
+##  $ Data.Medicao                           : chr  &quot;31/01/2014&quot; &quot;28/02/2014&quot; &quot;31/03/2014&quot; &quot;30/04/2014&quot; ...
+##  $ NUMERO.DE.DIAS.COM.PRECIP..PLUV..MENSAL: int  16 14 18 8 6 5 4 6 12 8 ...
+##  $ PRECIPITACAO.TOTAL..MENSAL..mm.        : num  223 188.8 212.6 77.2 50.2 ...
+##  $ TEMPERATURA.MEDIA..MENSAL...C.         : int  25 25 23 21 19 18 17 18 20 21 ...</code></pre>
+<p>Continuando, será utilizada a função ´summary()´ para apresentar o sumário de estatísticas descritivas (média, mediana, mínimo, máximo, 1º quartil, 3º quartil e valores faltantes (NA)).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="análise-exploratória-de-dados.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(met1)</span></code></pre></div>
+<pre><code>##  Data.Medicao       NUMERO.DE.DIAS.COM.PRECIP..PLUV..MENSAL
+##  Length:36          Min.   : 2.00                          
+##  Class :character   1st Qu.: 7.75                          
+##  Mode  :character   Median :12.00                          
+##                     Mean   :11.94                          
+##                     3rd Qu.:16.00                          
+##                     Max.   :22.00                          
+##                                                            
+##  PRECIPITACAO.TOTAL..MENSAL..mm. TEMPERATURA.MEDIA..MENSAL...C.
+##  Min.   :  2.40                  Min.   :15.00                 
+##  1st Qu.: 50.35                  1st Qu.:18.00                 
+##  Median :105.90                  Median :21.00                 
+##  Mean   :129.05                  Mean   :20.81                 
+##  3rd Qu.:201.20                  3rd Qu.:23.00                 
+##  Max.   :327.80                  Max.   :25.00                 
+##  NA&#39;s   :2</code></pre>
+
 </div>
 </div>
             </section>

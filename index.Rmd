@@ -96,7 +96,7 @@ Para realizar a análise dos dados, é necessário selecionar variáveis do banc
 Por exemplo, para um conjunto de dados com numerações para cada uma das observações, se desejamos selecionar as 4 primeiras observações, basta realizar o comando `dados[1:4,]`.
 
 ## R packages
-Um *R package* é um conjunto de funções que extendem a capacidade da base R. Na análise exploratória de dados, um pacote importante é o tidyverse(). Para o instalar, basta escrever a seguinte linha de código:
+Um *R package* é um conjunto de funções que extendem a capacidade da base R. Na análise exploratória de dados, um pacote importante para a organização dos dados é o tidyverse(); para visualizações, o ggplot2(); e, para gráficos de correlação, corrplot(). Para o instalar, basta escrever a seguinte linha de código, inserindo no argumento o nome do pacote:
 
 ```
 install.packages("tidyverse")
