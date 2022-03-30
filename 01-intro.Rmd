@@ -77,7 +77,10 @@ A curva normal possui C=0,263.
 
 ## Aplicação {-}
 
-Para a aplicação, será utilizada a base de dados do Instituto Nacional de Meteorologia (INMET) de precipitação e temperatura na estação meterológica do Mirante de Santana em São Paulo, dos anos de 2014 a 2016.
+Para a aplicação, será utilizada a base de dados do Instituto Nacional de Meteorologia (INMET) de precipitação e temperatura na estação meterológica do Mirante de Santana em São Paulo, dos anos de 2014 a 2016. 
+
+No ano de 2014, São Paulo passou pela pior estiagem deste o ano de 1953. Em 2015 e 2016, a cidade registrou o maior El Niño deste 1950. O El Niño, quando ocorre, causa um aumento nas temperaturas, porém, não se comportam de forma constante em relação ao volume de chuvas. Uma das dúvidas do período era se o El niño poderia afetar o regime de chuvas e, assim, aumentar a precipitação em São Paulo. É o que iremos analisar.
+
 Para importar a base de dados em .csv, utiliza-se a função read.csv() e insere-se como argumento o *diretório*:
 
 ```{r}
@@ -86,7 +89,7 @@ met1<- read.csv2("~/UFABC Beatriz/TG Beatriz Lima/Dados/data1.csv")
 
 ```
 
-É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto;e, read.csv2(), quando são separados por ponto e vírula e os decimais por vírgula.
+É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto;e, read.csv2(), quando são separados por ponto e vírgula e os decimais por vírgula.
 
 Para visualizar a tabela importada, basta executar a função View():
 ```{r}
@@ -107,5 +110,13 @@ Continuando, será utilizada a função ´summary()´ para apresentar o sumário
 ```{r}
 
 summary(met1)
+
+```
+
+A fim de analisar a distribuição dos valores de precipitação, será utilizado o Histograma.
+
+```{r}
+
+hist(met1[,3])
 
 ```
