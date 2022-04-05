@@ -87,8 +87,9 @@ Para importar a base de dados em .csv, utiliza-se a função read.csv() e insere
 
 ```{r}
 
-met1<- read.csv2("~/UFABC Beatriz/TG Beatriz Lima/Dados/data1.csv")
+met<- read.csv2("~/UFABC Beatriz/TG Beatriz Lima/Dados/data1.csv")
 
+met1 <- na.omit(met) # Omitindo os valores faltantes do conjunto de dados
 ```
 
 É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto; e, read.csv2(), quando são separados por ponto e vírgula e os decimais por vírgula.
@@ -126,36 +127,57 @@ df <- data.frame(precipitacao=precip, ano=year)
 
 library(ggplot2)
 
-ggplot(df, 
+ggplot(df,
        aes(x = ano, y = precipitacao)) +
        geom_line(linetype="dashed", color="blue", aes(group=1)) +
        geom_point()
 
 ```
 
-Após realizar a sumarização numérica de todos os dados, agora será focado nos dados de interesse: precipitação e ano. Primeiramente, será encontrada a média de precipitação por ano analisado.
+A distribuição de frequência da precipitação apresenta assimetria à direita (positiva):
+
+```{r}
+
+ggplot(data = df, 
+      aes(x = precip)) +
+      geom_histogram() 
+  
+
+```
+
+Após realizar a sumarização numérica de todos os dados, agora será focado nos dados de interesse: precipitação e ano. Primeiramente, será encontrada a média de precipitação por ano analisado, com um intervalo de confiança de 95% (escore-x da curva normal igual a 1,96).
 
 ```{r}
 
 #Média das precipitações por ano
 
-PrepAno <- aggregate(met1[,3], list((met1$ANO)), mean, na.rm=TRUE)
+library(dplyr) #instalando o pacote para utilizar o operador pipe %>%
 
+tabela_stats <- met1 %>%
+  group_by(ANO) %>%
+  summarise(n_obs = n(), media = mean(PRECIPITACAOTOTAL), desvio_padrao = sd(PRECIPITACAOTOTAL)) %>% 
+  mutate(erro = 1.96*desvio_padrao/sqrt(n_obs), 
+         limite_superior = media + erro,
+         limite_inferior = media - erro)
 
 ```
 
-Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras (`barplot()`).
+Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras com os erros padrões das amostras. Utiliza-se o erro padrão e não o desvio padrão porque, neste caso, estamos interessados na variabilidade das médias das amostras e não na variabilidade das observações dentro da amostra.
 
 ```{r}
-#ggplot(PrepAno)+geom_bar(aes(x=PrepAno$x, #y=PrepAno$Group.1))+geom_errorbar(aes(x=PrepAno$x, #ymin=PrepAno$Group.1-sd, ymax=PrepAno$Group.1+sd, width=0.4, #colour="orange"))
+#Visualizando a tabela criada com os dados estatísticos
+View(tabela_stats)
 
-barplot(PrepAno$x,
-        main="Precipitacao média (mm) por ano",
-        xlab="Anos",
-        ylab= "Precipitacao (mm)",
-        col= "blue",
-        names.arg = PrepAno$Group.1)
+#Plotando os valores com seus respectivos erros
+ggplot (data = tabela_stats, aes(x=ANO, y = media, fill=ANO)) +
+  geom_col() +
+  geom_errorbar(aes(ymin=limite_inferior, ymax=limite_superior)) +
+  ggtitle("Média das precipitações por ano") +
+  xlab("") +
+  ylab("") +
+  theme_bw() +
+  theme(legend.position = "none")
 
 ```
 
-É possível analisar que houve um aumento do volume de chuvas no ano de 2015, se comparado com o ano de 2014. O valor médio de precipitação de 2016 é ligeiramente maior que a média de 2014. Porém, não é possível afirmar que este acontecimento é decorrente somente como consequência do El Niño, porque muitos outros fatores não analisados aqui podem ter influenciado no aumento do volume de chuvas. 
+É possível analisar que houve um aumento do volume de chuvas no ano de 2015, se comparado com o ano de 2014. O valor médio de precipitação de 2016 é ligeiramente maior que a média de 2014. Porém, não é possível afirmar que os valores de precipitação se devem somente ao El niño, porque também existem diversos fatores, não analisados aqui, que podem influenciar no volume de chuvas.

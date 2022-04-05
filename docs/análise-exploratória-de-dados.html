@@ -30,7 +30,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-04-04" />
+<meta name="date" content="2022-04-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -306,36 +306,38 @@ div.csl-indent {
 <p>No ano de 2014, São Paulo passou pela pior estiagem deste o ano de 1953. Entre o fim de 2014 e o outono de 2016, a cidade registrou o maior El Niño deste 1950. O El Niño, quando ocorre, causa um aquecimento anômalo das águas superficiais e sub-superficiais do Oceano Pacífico Equatorial, porém, não se comporta de forma constante em relação ao volume de chuvas. Uma das dúvidas do período era se o El niño poderia afetar o regime de chuvas e, assim, aumentar a precipitação em São Paulo.</p>
 <p>Portanto, iremos aplicar a EDA para verificar essa relação entre o El niño e o volume de chuvas.</p>
 <p>Para importar a base de dados em .csv, utiliza-se a função read.csv() e insere-se como argumento o <em>diretório</em>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="análise-exploratória-de-dados.html#cb1-1" aria-hidden="true" tabindex="-1"></a>met1<span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;~/UFABC Beatriz/TG Beatriz Lima/Dados/data1.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="análise-exploratória-de-dados.html#cb1-1" aria-hidden="true" tabindex="-1"></a>met<span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;~/UFABC Beatriz/TG Beatriz Lima/Dados/data1.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="análise-exploratória-de-dados.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="análise-exploratória-de-dados.html#cb1-3" aria-hidden="true" tabindex="-1"></a>met1 <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(met) <span class="co"># Omitindo os valores faltantes do conjunto de dados</span></span></code></pre></div>
 <p>É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto; e, read.csv2(), quando são separados por ponto e vírgula e os decimais por vírgula.</p>
 <p>Para visualizar a tabela importada, basta executar a função View():</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="análise-exploratória-de-dados.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(met1)</span></code></pre></div>
 <p>Para iniciar a exploração dos dados, inicialmente será utilizada a função str() que exibe de forma compacta a estrutura da tabela importada.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="análise-exploratória-de-dados.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(met1)</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    36 obs. of  5 variables:
+<pre><code>## &#39;data.frame&#39;:    34 obs. of  5 variables:
 ##  $ Data             : chr  &quot;2014/01/31&quot; &quot;2014/02/28&quot; &quot;2014/03/31&quot; &quot;2014/04/30&quot; ...
-##  $ NUMDIAS          : int  16 14 18 8 6 5 4 6 12 8 ...
+##  $ NUMDIAS          : int  16 14 18 8 6 5 6 12 8 13 ...
 ##  $ PRECIPITACAOTOTAL: num  223 188.8 212.6 77.2 50.2 ...
-##  $ TEMPERATURAMEDIA : int  25 25 23 21 19 18 17 18 20 21 ...
-##  $ ANO              : int  2014 2014 2014 2014 2014 2014 2014 2014 2014 2014 ...</code></pre>
+##  $ TEMPERATURAMEDIA : int  25 25 23 21 19 18 18 20 21 21 ...
+##  $ ANO              : int  2014 2014 2014 2014 2014 2014 2014 2014 2014 2014 ...
+##  - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:2] 7 26
+##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;7&quot; &quot;26&quot;</code></pre>
 <p>Continuando, será utilizada a função ´summary()´ para apresentar o sumário de estatísticas descritivas (média, mediana, mínimo, máximo, 1º quartil, 3º quartil e valores faltantes (NA)).</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="análise-exploratória-de-dados.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(met1)</span></code></pre></div>
 <pre><code>##      Data              NUMDIAS      PRECIPITACAOTOTAL TEMPERATURAMEDIA
-##  Length:36          Min.   : 2.00   Min.   :  2.40    Min.   :15.00   
-##  Class :character   1st Qu.: 7.75   1st Qu.: 50.35    1st Qu.:18.00   
+##  Length:34          Min.   : 2.00   Min.   :  2.40    Min.   :15.00   
+##  Class :character   1st Qu.: 8.00   1st Qu.: 50.35    1st Qu.:18.00   
 ##  Mode  :character   Median :12.00   Median :105.90    Median :21.00   
-##                     Mean   :11.94   Mean   :129.05    Mean   :20.81   
+##                     Mean   :12.09   Mean   :129.05    Mean   :20.82   
 ##                     3rd Qu.:16.00   3rd Qu.:201.20    3rd Qu.:23.00   
 ##                     Max.   :22.00   Max.   :327.80    Max.   :25.00   
-##                                     NA&#39;s   :2                         
 ##       ANO      
 ##  Min.   :2014  
 ##  1st Qu.:2014  
 ##  Median :2015  
 ##  Mean   :2015  
 ##  3rd Qu.:2016  
-##  Max.   :2016  
-## </code></pre>
+##  Max.   :2016</code></pre>
 <p>Para continuar explorando os dados, realizou-se um gráfico de linhas a fim de analisar o comportamento da precipitação em relação às datas.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="análise-exploratória-de-dados.html#cb7-1" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> met1<span class="sc">$</span>Data</span>
 <span id="cb7-2"><a href="análise-exploratória-de-dados.html#cb7-2" aria-hidden="true" tabindex="-1"></a>precip <span class="ot">&lt;-</span> met1<span class="sc">$</span>PRECIPITACAOTOTAL</span>
@@ -344,27 +346,51 @@ div.csl-indent {
 <span id="cb7-5"><a href="análise-exploratória-de-dados.html#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-6"><a href="análise-exploratória-de-dados.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb7-7"><a href="análise-exploratória-de-dados.html#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="análise-exploratória-de-dados.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, </span>
+<span id="cb7-8"><a href="análise-exploratória-de-dados.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,</span>
 <span id="cb7-9"><a href="análise-exploratória-de-dados.html#cb7-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> ano, <span class="at">y =</span> precipitacao)) <span class="sc">+</span></span>
 <span id="cb7-10"><a href="análise-exploratória-de-dados.html#cb7-10" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_line</span>(<span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb7-11"><a href="análise-exploratória-de-dados.html#cb7-11" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>Após realizar a sumarização numérica de todos os dados, agora será focado nos dados de interesse: precipitação e ano. Primeiramente, será encontrada a média de precipitação por ano analisado.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="análise-exploratória-de-dados.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Média das precipitações por ano</span></span>
-<span id="cb9-2"><a href="análise-exploratória-de-dados.html#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="análise-exploratória-de-dados.html#cb9-3" aria-hidden="true" tabindex="-1"></a>PrepAno <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(met1[,<span class="dv">3</span>], <span class="fu">list</span>((met1<span class="sc">$</span>ANO)), mean, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<p>Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras (<code>barplot()</code>).</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="análise-exploratória-de-dados.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot(PrepAno)+geom_bar(aes(x=PrepAno$x, #y=PrepAno$Group.1))+geom_errorbar(aes(x=PrepAno$x, #ymin=PrepAno$Group.1-sd, ymax=PrepAno$Group.1+sd, width=0.4, #colour=&quot;orange&quot;))</span></span>
+<p>A distribuição de frequência da precipitação apresenta assimetria à direita (positiva):</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="análise-exploratória-de-dados.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, </span>
+<span id="cb8-2"><a href="análise-exploratória-de-dados.html#cb8-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">x =</span> precip)) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="análise-exploratória-de-dados.html#cb8-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_histogram</span>() </span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Após realizar a sumarização numérica de todos os dados, agora será focado nos dados de interesse: precipitação e ano. Primeiramente, será encontrada a média de precipitação por ano analisado, com um intervalo de confiança de 95% (escore-x da curva normal igual a 1,96).</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="análise-exploratória-de-dados.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Média das precipitações por ano</span></span>
 <span id="cb10-2"><a href="análise-exploratória-de-dados.html#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="análise-exploratória-de-dados.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(PrepAno<span class="sc">$</span>x,</span>
-<span id="cb10-4"><a href="análise-exploratória-de-dados.html#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">&quot;Precipitacao média (mm) por ano&quot;</span>,</span>
-<span id="cb10-5"><a href="análise-exploratória-de-dados.html#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">&quot;Anos&quot;</span>,</span>
-<span id="cb10-6"><a href="análise-exploratória-de-dados.html#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span> <span class="st">&quot;Precipitacao (mm)&quot;</span>,</span>
-<span id="cb10-7"><a href="análise-exploratória-de-dados.html#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb10-8"><a href="análise-exploratória-de-dados.html#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">names.arg =</span> PrepAno<span class="sc">$</span>Group<span class="fl">.1</span>)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>É possível analisar que houve um aumento do volume de chuvas no ano de 2015, se comparado com o ano de 2014. O valor médio de precipitação de 2016 é ligeiramente maior que a média de 2014. Porém, não é possível afirmar que este acontecimento é decorrente somente como consequência do El Niño, porque muitos outros fatores não analisados aqui podem ter influenciado no aumento do volume de chuvas.</p>
+<span id="cb10-3"><a href="análise-exploratória-de-dados.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co">#instalando o pacote para utilizar o operador pipe %&gt;%</span></span></code></pre></div>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="análise-exploratória-de-dados.html#cb15-1" aria-hidden="true" tabindex="-1"></a>tabela_stats <span class="ot">&lt;-</span> met1 <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="análise-exploratória-de-dados.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ANO) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="análise-exploratória-de-dados.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_obs =</span> <span class="fu">n</span>(), <span class="at">media =</span> <span class="fu">mean</span>(PRECIPITACAOTOTAL), <span class="at">desvio_padrao =</span> <span class="fu">sd</span>(PRECIPITACAOTOTAL)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="análise-exploratória-de-dados.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">erro =</span> <span class="fl">1.96</span><span class="sc">*</span>desvio_padrao<span class="sc">/</span><span class="fu">sqrt</span>(n_obs), </span>
+<span id="cb15-5"><a href="análise-exploratória-de-dados.html#cb15-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">limite_superior =</span> media <span class="sc">+</span> erro,</span>
+<span id="cb15-6"><a href="análise-exploratória-de-dados.html#cb15-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">limite_inferior =</span> media <span class="sc">-</span> erro)</span></code></pre></div>
+<p>Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras com os erros padrões das amostras. Utiliza-se o erro padrão e não o desvio padrão porque, neste caso, estamos interessados na variabilidade das médias das amostras e não na variabilidade das observações dentro da amostra.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="análise-exploratória-de-dados.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizando a tabela criada com os dados estatísticos</span></span>
+<span id="cb16-2"><a href="análise-exploratória-de-dados.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(tabela_stats)</span>
+<span id="cb16-3"><a href="análise-exploratória-de-dados.html#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="análise-exploratória-de-dados.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotando os valores com seus respectivos erros</span></span>
+<span id="cb16-5"><a href="análise-exploratória-de-dados.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span> (<span class="at">data =</span> tabela_stats, <span class="fu">aes</span>(<span class="at">x=</span>ANO, <span class="at">y =</span> media, <span class="at">fill=</span>ANO)) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="análise-exploratória-de-dados.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb16-7"><a href="análise-exploratória-de-dados.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>limite_inferior, <span class="at">ymax=</span>limite_superior)) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="análise-exploratória-de-dados.html#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Média das precipitações por ano&quot;</span>) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="análise-exploratória-de-dados.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb16-10"><a href="análise-exploratória-de-dados.html#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="análise-exploratória-de-dados.html#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb16-12"><a href="análise-exploratória-de-dados.html#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>É possível analisar que houve um aumento do volume de chuvas no ano de 2015, se comparado com o ano de 2014. O valor médio de precipitação de 2016 é ligeiramente maior que a média de 2014. Porém, não é possível afirmar que os valores de precipitação se devem somente ao El niño, porque também existem diversos fatores, não analisados aqui, que podem influenciar no volume de chuvas.</p>
 
 </div>
 </div>
