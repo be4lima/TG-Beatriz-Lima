@@ -44,3 +44,9 @@ assimetria
 coeficiente-de-assimetria-de-pearson
 curtose
 coeficiente-de-curtose
+modelos-lineares
+regressão-linear-simples
+correlação
+variância-1
+correlação-1
+covariância

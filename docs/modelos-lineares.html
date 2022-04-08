@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
+  <title>Capítulo 3 Modelos lineares | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta property="og:title" content="Capítulo 3 Modelos lineares | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   <meta property="og:type" content="book" />
   
   
@@ -20,7 +20,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta name="twitter:title" content="Capítulo 3 Modelos lineares | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -37,8 +37,8 @@ set in the _output.yml file.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="análise-exploratória-de-dados.html"/>
+<link rel="next" href="parts.html"/>
 <script src="libs/header-attrs-2.12/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -231,19 +231,137 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="modelos-lineares" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Capítulo 3</span> Modelos lineares<a href="modelos-lineares.html#modelos-lineares" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Resumidamente, modelos lineares são utilizados para resumir relações observadas a partir de dados, no caso, ambientais, em uma linha reta. Em um modelo linear descreve-se o comportamento de uma variável dependente (ou variável resposta, y) como função de uma ou mais variáveis independentes (ou variáveis explicativas, x).</p>
+<div id="covariância" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Covariância<a href="modelos-lineares.html#covariância" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A <em>Covariância</em>, denotada <span class="math inline">\(\sigma_{xy}\)</span>, descreve a variação, em relação a média, entre duas variáveis.</p>
+<p><span class="math inline">\(cov(x,y) = \frac{\sum(x_i - \overline{x})}{n-1}\)</span></p>
+<p>Portanto, é possível saber se ambas variáveis desviam na mesma direção (covariância positiva) ou se desviam em direções opostas (covariância negativa). Caso a covariância entre duas variáveis seja zero, a conclusão é que as variáveis são independentes.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="modelos-lineares.html#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Covariancia.png&quot;</span>)</span></code></pre></div>
+<div class="figure">
+<img src="C:/Users/Luiz%20Arthur/Dropbox/PC/Documents/UFABC%20Beatriz/TG%20Beatriz%20Lima/Dados/Figuras/Covariancia.png" alt="Covariância"  />
+<p class="caption">
+(#fig:fig-3.1)Covariância
+</p>
+</div>
+</div>
+<div id="correlação" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Correlação<a href="modelos-lineares.html#correlação" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A <strong>Correlação</strong> é útil para medir a relação linear entre duas variáveis x e y, denotada por <span class="math inline">\(\rho_{xy}\)</span>.</p>
+<p><span class="math inline">\(\rho_xy = \frac{cov(x,Y)}{\sqrt(V(x)V(Y))}\)</span></p>
+<p>Sendo assim, duas variáveis podem estar relacionadas das seguintes formas:</p>
+<ol style="list-style-type: decimal">
+<li>Positivamente relacionadas. Ou seja, se x aumenta, y aumenta. E o mesmo ocorre para caso X diminua (Y diminui) - Correlação positiva;</li>
+<li>Negativamente relacionadas. Ou seja, se x aumenta, y diminui. E o mesmo ocorre para caso x diminua (Y aumenta) - Correlação negativa;</li>
+<li>Não há relação entre as duas variáveis.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="modelos-lineares.html#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg&quot;</span>)</span></code></pre></div>
+<div class="figure">
+<img src="~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg" alt="Covariância"  />
+<p class="caption">
+(#fig:fig-3.2)Covariância
+</p>
+</div>
+<p>Uma forma gráfica de visualizar a correlação das variáveis que apresenta grande utilidade é a partir do <strong>Diagrama de Dispersão</strong>. O diagrama traz informações importantes porque mostra se a relação entre as variáveis é linear ou não, se existem outliers no conjunto de dados e traz uma ideia de quão forte é o relacionamento entre as variáveis.</p>
+</div>
+<div id="regressão-linear-simples" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Regressão linear simples<a href="modelos-lineares.html#regressão-linear-simples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com duas ou mais variáveis independentes (x). Dessa forma, o formato básico do modelo linear resultante é:</p>
+<p><span class="math inline">\(Y = \beta_0 + \beta_1X_1 + ... +\beta_1X_i + \xi_i\)</span></p>
+<p>De acordo com Montgomery &amp; Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, “<em>a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,</em> <span class="math inline">\(\beta_1\)</span><em>, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro</em> <span class="math inline">\(\sigma^2\)</span>”. Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x.</p>
+<p>There are two steps to cross-reference any heading:</p>
+<ol style="list-style-type: decimal">
+<li>Label the heading: <code># Hello world {#nice-label}</code>.
+<ul>
+<li>Leave the label off if you like the automated heading generated based on your heading title: for example, <code># Hello world</code> = <code># Hello world {#hello-world}</code>.</li>
+<li>To label an un-numbered heading, use: <code># Hello world {-#nice-label}</code> or <code>{# Hello world .unnumbered}</code>.</li>
+</ul></li>
+<li>Next, reference the labeled heading anywhere in the text using <code>\@ref(nice-label)</code>; for example, please see Chapter <a href="#cross"><strong>??</strong></a>.
+<ul>
+<li>If you prefer text as the link instead of a numbered reference use: <a href="#cross">any text you want can go here</a>.</li>
+</ul></li>
+</ol>
+</div>
+<div id="captioned-figures-and-tables" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Captioned figures and tables<a href="modelos-lineares.html#captioned-figures-and-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Figures and tables <em>with captions</em> can also be cross-referenced from elsewhere in your book using <code>\@ref(fig:chunk-label)</code> and <code>\@ref(tab:chunk-label)</code>, respectively.</p>
+<p>See Figure <a href="modelos-lineares.html#fig:nice-fig">3.1</a>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="modelos-lineares.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
+<span id="cb3-2"><a href="modelos-lineares.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:nice-fig"></span>
+<img src="TG-Beatriz-Lima_files/figure-html/nice-fig-1.png" alt="Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases." width="80%" />
+<p class="caption">
+Figure 3.1: Here is a nice figure!
+</p>
+</div>
+<p>Don’t miss Table <a href="modelos-lineares.html#tab:nice-tab">3.1</a>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="modelos-lineares.html#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb4-2"><a href="modelos-lineares.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(pressure, <span class="dv">10</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
+<span id="cb4-3"><a href="modelos-lineares.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
+<span id="cb4-4"><a href="modelos-lineares.html#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:nice-tab">Table 3.1: </span>Here is a nice table!</caption>
+<thead>
+<tr class="header">
+<th align="right">temperature</th>
+<th align="right">pressure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.0002</td>
+</tr>
+<tr class="even">
+<td align="right">20</td>
+<td align="right">0.0012</td>
+</tr>
+<tr class="odd">
+<td align="right">40</td>
+<td align="right">0.0060</td>
+</tr>
+<tr class="even">
+<td align="right">60</td>
+<td align="right">0.0300</td>
+</tr>
+<tr class="odd">
+<td align="right">80</td>
+<td align="right">0.0900</td>
+</tr>
+<tr class="even">
+<td align="right">100</td>
+<td align="right">0.2700</td>
+</tr>
+<tr class="odd">
+<td align="right">120</td>
+<td align="right">0.7500</td>
+</tr>
+<tr class="even">
+<td align="right">140</td>
+<td align="right">1.8500</td>
+</tr>
+<tr class="odd">
+<td align="right">160</td>
+<td align="right">4.2000</td>
+</tr>
+<tr class="even">
+<td align="right">180</td>
+<td align="right">8.8000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="análise-exploratória-de-dados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -274,7 +392,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/%s",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-cross-refs.Rmd",
 "text": "Edit"
 },
 "history": {

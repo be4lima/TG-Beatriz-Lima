@@ -1,8 +1,79 @@
-# Cross-references {#cross}
+# Modelos lineares
 
-Cross-references make it easier for your readers to find and link to elements in your book.
+Resumidamente, modelos lineares são utilizados para resumir relações observadas a partir de dados, no caso, ambientais, em uma linha reta. Em um modelo linear descreve-se o comportamento de uma variável dependente (ou variável resposta, y) como função de uma ou mais variáveis independentes (ou variáveis explicativas, x). 
 
-## Chapters and sub-chapters
+## Covariância
+A *Covariância*, denotada $\sigma_{xy}$, descreve a variação, em relação a média, entre duas variáveis. 
+
+$cov(x,y) = \frac{\sum(x_i - \overline{x})}{n-1}$
+
+Portanto, é possível saber se ambas variáveis desviam na mesma direção (covariância positiva) ou se desviam em direções opostas (covariância negativa). Caso a covariância entre duas variáveis seja zero, a conclusão é que as variáveis são independentes. 
+
+```{r fig-3.1, fig.cap="Covariância"}
+
+knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Covariancia.png")
+
+```
+
+## Correlação
+
+A **Correlação** é útil para medir a relação linear entre duas variáveis x e y, denotada por $\rho_{xy}$.
+
+$\rho_xy = \frac{cov(x,Y)}{\sqrt(V(x)V(Y))}$
+
+Sendo assim, duas variáveis podem estar relacionadas das seguintes formas:
+
+  1. Positivamente relacionadas. Ou seja, se x aumenta, y aumenta. E o mesmo ocorre para caso X diminua (Y diminui) -  Correlação positiva;
+  2. Negativamente relacionadas. Ou seja, se x aumenta, y diminui. E o mesmo ocorre para caso x diminua (Y aumenta) - Correlação negativa;
+  3. Não há relação entre as duas variáveis.
+
+```{r fig-3.2, fig.cap="Covariância"}
+
+knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg")
+
+```
+
+Uma forma gráfica de visualizar a correlação das variáveis que apresenta grande utilidade é a partir do **Diagrama de Dispersão**. O diagrama traz informações importantes porque mostra se a relação entre as variáveis é linear ou não, se existem outliers no conjunto de dados e traz uma ideia de quão forte é o relacionamento entre as variáveis.
+
+
+## Regressão linear simples
+
+A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com duas ou mais variáveis independentes (x). Dessa forma, o formato básico do modelo linear resultante é:
+
+$Y = \beta_0 + \beta_1X_1 + ... +\beta_1X_i + \xi_i$
+                          
+De acordo com Montgomery & Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, "*a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,* $\beta_1$*, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro* $\sigma^2$". Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 There are two steps to cross-reference any heading:
 
@@ -12,6 +83,7 @@ There are two steps to cross-reference any heading:
 
 1. Next, reference the labeled heading anywhere in the text using `\@ref(nice-label)`; for example, please see Chapter \@ref(cross). 
     - If you prefer text as the link instead of a numbered reference use: [any text you want can go here](#cross).
+
 
 ## Captioned figures and tables
 
