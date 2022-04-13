@@ -30,7 +30,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-04-08" />
+<meta name="date" content="2022-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -190,6 +190,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.1" data-path="modelos-lineares.html"><a href="modelos-lineares.html#covariância"><i class="fa fa-check"></i><b>3.1</b> Covariância<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="modelos-lineares.html"><a href="modelos-lineares.html#correlação"><i class="fa fa-check"></i><b>3.2</b> Correlação<span></span></a></li>
 <li class="chapter" data-level="3.3" data-path="modelos-lineares.html"><a href="modelos-lineares.html#regressão-linear-simples"><i class="fa fa-check"></i><b>3.3</b> Regressão linear simples<span></span></a></li>
+<li><a href="modelos-lineares.html#aplicação-1">Aplicação<span></span></a></li>
 <li class="chapter" data-level="3.4" data-path="modelos-lineares.html"><a href="modelos-lineares.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.4</b> Captioned figures and tables<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>4</b> Parts<span></span></a></li>
@@ -268,9 +269,13 @@ div.csl-indent {
 </div>
 <div id="regressão-linear-simples" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Regressão linear simples<a href="modelos-lineares.html#regressão-linear-simples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com duas ou mais variáveis independentes (x). Dessa forma, o formato básico do modelo linear resultante é:</p>
+<p>A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da regressão linear simples, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo linear resultante é:</p>
 <p><span class="math inline">\(Y = \beta_0 + \beta_1X_1 + ... +\beta_1X_i + \xi_i\)</span></p>
 <p>De acordo com Montgomery &amp; Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, “<em>a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,</em> <span class="math inline">\(\beta_1\)</span><em>, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro</em> <span class="math inline">\(\sigma^2\)</span>”. Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x.</p>
+</div>
+<div id="aplicação-1" class="section level2 unnumbered hasAnchor">
+<h2>Aplicação<a href="modelos-lineares.html#aplicação-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para a aplicação serão utilizados dados de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de <span class="math inline">\(CO_2\)</span> na Amazônia Legal.</p>
 <p>There are two steps to cross-reference any heading:</p>
 <ol style="list-style-type: decimal">
 <li>Label the heading: <code># Hello world {#nice-label}</code>.

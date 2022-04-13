@@ -38,22 +38,16 @@ Uma forma gráfica de visualizar a correlação das variáveis que apresenta gra
 
 ## Regressão linear simples
 
-A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com duas ou mais variáveis independentes (x). Dessa forma, o formato básico do modelo linear resultante é:
+A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da regressão linear simples, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo linear resultante é:
 
 $Y = \beta_0 + \beta_1X_1 + ... +\beta_1X_i + \xi_i$
                           
 De acordo com Montgomery & Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, "*a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,* $\beta_1$*, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro* $\sigma^2$". Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x.
 
 
+## Aplicação {-}
 
-
-
-
-
-
-
-
-
+Para a aplicação serão utilizados dados de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de $CO_2$ na Amazônia Legal.
 
 
 
