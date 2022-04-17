@@ -50,3 +50,4 @@ correlação
 variância-1
 correlação-1
 covariância
+condições

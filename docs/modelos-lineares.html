@@ -30,7 +30,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-04-13" />
+<meta name="date" content="2022-04-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -189,7 +189,10 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.1" data-path="modelos-lineares.html"><a href="modelos-lineares.html#covariância"><i class="fa fa-check"></i><b>3.1</b> Covariância<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="modelos-lineares.html"><a href="modelos-lineares.html#correlação"><i class="fa fa-check"></i><b>3.2</b> Correlação<span></span></a></li>
-<li class="chapter" data-level="3.3" data-path="modelos-lineares.html"><a href="modelos-lineares.html#regressão-linear-simples"><i class="fa fa-check"></i><b>3.3</b> Regressão linear simples<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="modelos-lineares.html"><a href="modelos-lineares.html#regressão-linear-simples"><i class="fa fa-check"></i><b>3.3</b> Regressão linear simples<span></span></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="modelos-lineares.html"><a href="modelos-lineares.html#condições"><i class="fa fa-check"></i><b>3.3.1</b> Condições<span></span></a></li>
+</ul></li>
 <li><a href="modelos-lineares.html#aplicação-1">Aplicação<span></span></a></li>
 <li class="chapter" data-level="3.4" data-path="modelos-lineares.html"><a href="modelos-lineares.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.4</b> Captioned figures and tables<span></span></a></li>
 </ul></li>
@@ -272,10 +275,90 @@ div.csl-indent {
 <p>A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da regressão linear simples, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo linear resultante é:</p>
 <p><span class="math inline">\(Y = \beta_0 + \beta_1X_1 + ... +\beta_1X_i + \xi_i\)</span></p>
 <p>De acordo com Montgomery &amp; Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, “<em>a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,</em> <span class="math inline">\(\beta_1\)</span><em>, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro</em> <span class="math inline">\(\sigma^2\)</span>”. Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x.</p>
+<div id="condições" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Condições<a href="modelos-lineares.html#condições" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
 </div>
 <div id="aplicação-1" class="section level2 unnumbered hasAnchor">
 <h2>Aplicação<a href="modelos-lineares.html#aplicação-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Para a aplicação serão utilizados dados de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de <span class="math inline">\(CO_2\)</span> na Amazônia Legal.</p>
+<p>Para a aplicação serão utilizados dados de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de 1ª ordem de <span class="math inline">\(CO_2\)</span> na Amazônia Legal.A estimativa de 1ª ordem supõe que, de modo simplificado, 100% das emissões ocorreram no momento da mudança de uso/cobertura.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="modelos-lineares.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;install.lock&quot;</span><span class="ot">=</span><span class="cn">FALSE</span>)</span>
+<span id="cb3-2"><a href="modelos-lineares.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="modelos-lineares.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Carregar pacotes que serão usados</span></span>
+<span id="cb3-4"><a href="modelos-lineares.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(pacman)) <span class="fu">install.packages</span>(<span class="st">&quot;pacman&quot;</span>)</span></code></pre></div>
+<pre><code>## Carregando pacotes exigidos: pacman</code></pre>
+<pre><code>## Warning: package &#39;pacman&#39; was built under R version 4.1.3</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="modelos-lineares.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb6-2"><a href="modelos-lineares.html#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="modelos-lineares.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Checando repositório</span></span>
+<span id="cb6-4"><a href="modelos-lineares.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/Luiz Arthur/Dropbox/PC/Documents/UFABC Beatriz/TG Beatriz Lima/Dados&quot;</span>)</span>
+<span id="cb6-5"><a href="modelos-lineares.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="modelos-lineares.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Carregar base de dados</span></span>
+<span id="cb6-7"><a href="modelos-lineares.html#cb6-7" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;CO2Amazonia.csv&quot;</span>)</span>
+<span id="cb6-8"><a href="modelos-lineares.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(dados)</span>
+<span id="cb6-9"><a href="modelos-lineares.html#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="modelos-lineares.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificando pressupostos para a regressão linear</span></span>
+<span id="cb6-11"><a href="modelos-lineares.html#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="modelos-lineares.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Relação linear entre a VD e a VI</span></span>
+<span id="cb6-13"><a href="modelos-lineares.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dados<span class="sc">$</span>D_Area, dados<span class="sc">$</span>VR_CO2_1stOrder)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="modelos-lineares.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Construção do modelo</span></span>
+<span id="cb7-2"><a href="modelos-lineares.html#cb7-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(VR_CO2_1stOrder <span class="sc">~</span> D_Area, dados)</span>
+<span id="cb7-3"><a href="modelos-lineares.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="modelos-lineares.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Análise gráfica</span></span>
+<span id="cb7-5"><a href="modelos-lineares.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="do">## Os gráficos que vem depois, sairão com imagens de 2 linhas e 2 colunas</span></span>
+<span id="cb7-6"><a href="modelos-lineares.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod) <span class="do">## Gráfico de regressão linear</span></span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="modelos-lineares.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)) <span class="do">## Gráficos saem sozinhos na visualização</span></span>
+<span id="cb8-2"><a href="modelos-lineares.html#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="modelos-lineares.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Normalidade dos resíduos</span></span>
+<span id="cb8-4"><a href="modelos-lineares.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(mod<span class="sc">$</span>residuals)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  mod$residuals
+## W = 0.75119, p-value = 8.119e-09</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="modelos-lineares.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Outliers nos resíduos</span></span>
+<span id="cb10-2"><a href="modelos-lineares.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">rstandard</span>(mod)) <span class="do">## Saber o resumo/sumário dos resíduos padronizados</span></span></code></pre></div>
+<pre><code>##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+## -0.8036784 -0.8036784 -0.2565440  0.0008034  0.1001292  3.0676706</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="modelos-lineares.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Independência dos resíduos (Durbin-Watson) </span></span>
+<span id="cb12-2"><a href="modelos-lineares.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#durbinWatsonTest(mod) &lt;- procurar função no pacote</span></span>
+<span id="cb12-3"><a href="modelos-lineares.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="modelos-lineares.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Homocedasticidade (Breusch-Pagan)</span></span>
+<span id="cb12-5"><a href="modelos-lineares.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#bptest(mod) &lt;- procurar função no pacote</span></span>
+<span id="cb12-6"><a href="modelos-lineares.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="modelos-lineares.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Análise do modelo</span></span>
+<span id="cb12-8"><a href="modelos-lineares.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = VR_CO2_1stOrder ~ D_Area, data = dados)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -12.178 -12.178  -3.886   1.503  46.689 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 2.005e+01  4.593e+00   4.364 5.21e-05 ***
+## D_Area      4.783e-04  3.134e-06 152.615  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 15.35 on 59 degrees of freedom
+## Multiple R-squared:  0.9975, Adjusted R-squared:  0.9974 
+## F-statistic: 2.329e+04 on 1 and 59 DF,  p-value: &lt; 2.2e-16</code></pre>
+<ul>
+<li><p>Residuals vs Fitted
+O gráfico mostra se os resíduos tem padrões não-lineares.</p></li>
+<li><p>Normal Q-Q
+O gráfico mostra se os resíduos são normalmente distribuídos.</p></li>
+<li><p>Scale-Location
+O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade.</p></li>
+<li><p>Residuals vs Leverage
+O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente.</p></li>
+</ul>
+<p>De acordo com o teste de Shapiro, é possível confirmar que p-value tem valor menos que 0,05 e, portanto, possui distribuição diferente da normal.</p>
 <p>There are two steps to cross-reference any heading:</p>
 <ol style="list-style-type: decimal">
 <li>Label the heading: <code># Hello world {#nice-label}</code>.
@@ -293,8 +376,8 @@ div.csl-indent {
 <h2><span class="header-section-number">3.4</span> Captioned figures and tables<a href="modelos-lineares.html#captioned-figures-and-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Figures and tables <em>with captions</em> can also be cross-referenced from elsewhere in your book using <code>\@ref(fig:chunk-label)</code> and <code>\@ref(tab:chunk-label)</code>, respectively.</p>
 <p>See Figure <a href="modelos-lineares.html#fig:nice-fig">3.1</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="modelos-lineares.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
-<span id="cb3-2"><a href="modelos-lineares.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="modelos-lineares.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
+<span id="cb14-2"><a href="modelos-lineares.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:nice-fig"></span>
 <img src="TG-Beatriz-Lima_files/figure-html/nice-fig-1.png" alt="Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases." width="80%" />
 <p class="caption">
@@ -302,10 +385,10 @@ Figure 3.1: Here is a nice figure!
 </p>
 </div>
 <p>Don’t miss Table <a href="modelos-lineares.html#tab:nice-tab">3.1</a>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="modelos-lineares.html#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb4-2"><a href="modelos-lineares.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(pressure, <span class="dv">10</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
-<span id="cb4-3"><a href="modelos-lineares.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
-<span id="cb4-4"><a href="modelos-lineares.html#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="modelos-lineares.html#cb15-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb15-2"><a href="modelos-lineares.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(pressure, <span class="dv">10</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
+<span id="cb15-3"><a href="modelos-lineares.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
+<span id="cb15-4"><a href="modelos-lineares.html#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <caption><span id="tab:nice-tab">Table 3.1: </span>Here is a nice table!</caption>
 <thead>
