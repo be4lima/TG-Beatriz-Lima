@@ -95,7 +95,8 @@ summary(rstandard(mod)) ## Saber o resumo/sumário dos resíduos padronizados
 summary(mod)
 
 #Retirando outliers dos resíduos
-outliers <- boxplot(mod$residuals, plot=FALSE)$out
+boxplot(mod$residuals)
+
 
 ```
 

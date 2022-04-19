@@ -348,7 +348,8 @@ div.csl-indent {
 ## Multiple R-squared:  0.9975, Adjusted R-squared:  0.9974 
 ## F-statistic: 2.329e+04 on 1 and 59 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="modelos-lineares.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Retirando outliers dos resíduos</span></span>
-<span id="cb14-2"><a href="modelos-lineares.html#cb14-2" aria-hidden="true" tabindex="-1"></a>outliers <span class="ot">&lt;-</span> <span class="fu">boxplot</span>(mod<span class="sc">$</span>residuals, <span class="at">plot=</span><span class="cn">FALSE</span>)<span class="sc">$</span>out</span></code></pre></div>
+<span id="cb14-2"><a href="modelos-lineares.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(mod<span class="sc">$</span>residuals)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-1-3.png" width="672" /></p>
 <ul>
 <li><p>Residuals vs Fitted
 O gráfico mostra se os resíduos tem padrões não-lineares.</p></li>
