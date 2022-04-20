@@ -46,6 +46,9 @@ De acordo com Montgomery & Runger (2021), o modelo de regressão é, na verdade,
 
 ### Condições
 
+Existem pré-requisitos para a regressão linear: homocedasticidade, normalidade dos resíduos, independência dos resíduos e ausência de outliers influentes.
+
+
 ## Aplicação {-}
 
 Para a aplicação serão utilizados dados de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de 1ª ordem de $CO_2$ na Amazônia Legal.A estimativa de 1ª ordem supõe que, de modo simplificado, 100% das emissões ocorreram no momento da mudança de uso/cobertura.
@@ -71,13 +74,24 @@ View(dados)
 plot(dados$D_Area, dados$VR_CO2_1stOrder)
 
 ## Construção do modelo
-mod <- lm(VR_CO2_1stOrder ~ D_Area, dados)
+mod <- lm(VR_CO2_1stOrder ~ D_Area, dados, na.action = na.exclude)
+summary(mod)
 
 ## Análise gráfica
 par(mfrow=c(2,2)) ## Os gráficos que vem depois, sairão com imagens de 2 linhas e 2 colunas
 plot(mod) ## Gráfico de regressão linear
 
-par(mfrow=c(1,1)) ## Gráficos saem sozinhos na visualização
+
+```
+
+O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de $CO_2$.Dessa forma, conclui-se que o modelo possui bom ajuste.
+
+O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe alta probabilidade dos resultados apresentados pelo medelo não possuírem erro amostral.
+
+
+```{r}
+# Análise dos resíduos
+
 
 ## Normalidade dos resíduos
 shapiro.test(mod$residuals)
@@ -96,10 +110,10 @@ summary(mod)
 
 #Retirando outliers dos resíduos
 boxplot(mod$residuals)
-
+r=mod$residuals
+print(r)
 
 ```
-
  - Residuals vs Fitted
   O gráfico mostra se os resíduos tem padrões não-lineares.
  
@@ -112,7 +126,14 @@ boxplot(mod$residuals)
  - Residuals vs Leverage
   O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. 
 
-De acordo com o teste de Shapiro, é possível confirmar que p-value tem valor menos que 0,05 e, portanto, possui distribuição diferente da normal.
+De acordo com o teste de Shapiro, é possível confirmar que p-value tem valor menor que 0,05 e, portanto, possui distribuição diferente da normal. <- rever isso
 
 
+```{r}
 
+#Diagrama de dispersão com o ajuste
+
+plot(x = dados$D_Area, y = dados$VR_CO2_1stOrder, xlab = "Área desmatada no ano", ylab = "Emissão de CO2 de 1a ordem")
+
+abline(mod, col = "blue")
+```
