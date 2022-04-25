@@ -30,7 +30,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-04-20" />
+<meta name="date" content="2022-04-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -242,13 +242,7 @@ div.csl-indent {
 <p>A <em>Covariância</em>, denotada <span class="math inline">\(\sigma_{xy}\)</span>, descreve a variação, em relação a média, entre duas variáveis.</p>
 <p><span class="math inline">\(cov(x,y) = \frac{\sum(x_i - \overline{x})}{n-1}\)</span></p>
 <p>Portanto, é possível saber se ambas variáveis desviam na mesma direção (covariância positiva) ou se desviam em direções opostas (covariância negativa). Caso a covariância entre duas variáveis seja zero, a conclusão é que as variáveis são independentes.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="modelos-lineares.html#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Covariancia.png&quot;</span>)</span></code></pre></div>
-<div class="figure">
-<img src="C:/Users/Luiz%20Arthur/Dropbox/PC/Documents/UFABC%20Beatriz/TG%20Beatriz%20Lima/Dados/Figuras/Covariancia.png" alt="Covariância"  />
-<p class="caption">
-(#fig:fig-3.1)Covariância
-</p>
-</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="modelos-lineares.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#knitr::include_graphics(&quot;~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Covariancia.png&quot;)</span></span></code></pre></div>
 </div>
 <div id="correlação" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Correlação<a href="modelos-lineares.html#correlação" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -260,13 +254,7 @@ div.csl-indent {
 <li>Negativamente relacionadas. Ou seja, se x aumenta, y diminui. E o mesmo ocorre para caso x diminua (Y aumenta) - Correlação negativa;</li>
 <li>Não há relação entre as duas variáveis.</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="modelos-lineares.html#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg&quot;</span>)</span></code></pre></div>
-<div class="figure">
-<img src="~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg" alt="Covariância"  />
-<p class="caption">
-(#fig:fig-3.2)Covariância
-</p>
-</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="modelos-lineares.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#knitr::include_graphics(&quot;~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg&quot;)</span></span></code></pre></div>
 <p>Uma forma gráfica de visualizar a correlação das variáveis que apresenta grande utilidade é a partir do <strong>Diagrama de Dispersão</strong>. O diagrama traz informações importantes porque mostra se a relação entre as variáveis é linear ou não, se existem outliers no conjunto de dados e traz uma ideia de quão forte é o relacionamento entre as variáveis.</p>
 </div>
 <div id="regressão-linear-simples" class="section level2 hasAnchor" number="3.3">
@@ -276,7 +264,14 @@ div.csl-indent {
 <p>De acordo com Montgomery &amp; Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, “<em>a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,</em> <span class="math inline">\(\beta_1\)</span><em>, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro</em> <span class="math inline">\(\sigma^2\)</span>”. Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x.</p>
 <div id="condições" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Condições<a href="modelos-lineares.html#condições" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Existem pré-requisitos para a regressão linear: homocedasticidade, normalidade dos resíduos, independência dos resíduos e ausência de outliers influentes.</p>
+<p>Existem pré-requisitos para a regressão linear:</p>
+<ol style="list-style-type: decimal">
+<li><p>Linearidade: a relação entre X e Y deve ser linear;</p></li>
+<li><p>Homocedasticidade: a variância da variável dependente (Y) deve ser constante para todos os valores das variáveis independentes (X);</p></li>
+<li><p>Normalidade: para um valor fixo de X, Y é uma variável aleatória com distribuição norma. Os resíduos também devem ser normalmente distribuídos;</p></li>
+<li><p>Independência dos resíduo: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes. Uma forma de verificar isso é realizar o teste de Durbin-Watson.</p></li>
+<li><p>Ausência de outliers influentes: não devem existir outliers que influenciem consideravelmente o modelo;</p></li>
+</ol>
 </div>
 </div>
 <div id="aplicação-1" class="section level2 unnumbered hasAnchor">
@@ -324,11 +319,12 @@ div.csl-indent {
 ## Multiple R-squared:  0.9975, Adjusted R-squared:  0.9974 
 ## F-statistic: 2.329e+04 on 1 and 59 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="modelos-lineares.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Análise gráfica</span></span>
-<span id="cb9-2"><a href="modelos-lineares.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="do">## Os gráficos que vem depois, sairão com imagens de 2 linhas e 2 colunas</span></span>
+<span id="cb9-2"><a href="modelos-lineares.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) </span>
 <span id="cb9-3"><a href="modelos-lineares.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod) <span class="do">## Gráfico de regressão linear</span></span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
 <p>O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de <span class="math inline">\(CO_2\)</span>.Dessa forma, conclui-se que o modelo possui bom ajuste.</p>
 <p>O p-value do modelo apresenta valor <span class="math inline">\(2.2e^{-16}\)</span> e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe alta probabilidade dos resultados apresentados pelo medelo não possuírem erro amostral.</p>
+<p>De acordo com Montgomery e Runger (2021), “<em>A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo</em>”. Dessa forma, abaixo será realizada a análise residual.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="modelos-lineares.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise dos resíduos</span></span>
 <span id="cb10-2"><a href="modelos-lineares.html#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="modelos-lineares.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -396,6 +392,7 @@ div.csl-indent {
 ##   2.20423853   0.04732170  17.39153017   6.63708866  12.47622856  36.41699898 
 ##           61 
 ##  31.55915429</code></pre>
+<p>Para a análise residual, é necessário investigar se a relação entre X e Y não é linear, se os erros possuem variância constante (homocedasticidade), se os erros são correlacionados, se os erros não são normalmente distribuídos, se o modelo não possui ajuste bom a uma ou mais observações e uma ou mais covariáveis não foram incluídas no modelo.</p>
 <ul>
 <li><p>Residuals vs Fitted
 O gráfico mostra se os resíduos tem padrões não-lineares.</p></li>

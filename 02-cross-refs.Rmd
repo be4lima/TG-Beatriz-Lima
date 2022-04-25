@@ -11,7 +11,8 @@ Portanto, é possível saber se ambas variáveis desviam na mesma direção (cov
 
 ```{r fig-3.1, fig.cap="Covariância"}
 
-knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Covariancia.png")
+
+#knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Covariancia.png")
 
 ```
 
@@ -29,7 +30,7 @@ Sendo assim, duas variáveis podem estar relacionadas das seguintes formas:
 
 ```{r fig-3.2, fig.cap="Covariância"}
 
-knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg")
+#knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg")
 
 ```
 
@@ -46,7 +47,17 @@ De acordo com Montgomery & Runger (2021), o modelo de regressão é, na verdade,
 
 ### Condições
 
-Existem pré-requisitos para a regressão linear: homocedasticidade, normalidade dos resíduos, independência dos resíduos e ausência de outliers influentes.
+Existem pré-requisitos para a regressão linear: 
+
+1. Linearidade: a relação entre X e Y deve ser linear;
+
+2. Homocedasticidade: a variância da variável dependente (Y) deve ser constante para todos os valores das variáveis independentes (X);
+
+3. Normalidade: para um valor fixo de X, Y é uma variável aleatória com distribuição norma. Os resíduos também devem ser normalmente distribuídos;
+
+3. Independência dos resíduo: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes. Uma forma de verificar isso é realizar o teste de Durbin-Watson.
+
+4. Ausência de outliers influentes: não devem existir outliers que influenciem consideravelmente o modelo;
 
 
 ## Aplicação {-}
@@ -78,7 +89,7 @@ mod <- lm(VR_CO2_1stOrder ~ D_Area, dados, na.action = na.exclude)
 summary(mod)
 
 ## Análise gráfica
-par(mfrow=c(2,2)) ## Os gráficos que vem depois, sairão com imagens de 2 linhas e 2 colunas
+par(mfrow=c(2,2)) 
 plot(mod) ## Gráfico de regressão linear
 
 
@@ -88,6 +99,7 @@ O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se i
 
 O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe alta probabilidade dos resultados apresentados pelo medelo não possuírem erro amostral.
 
+De acordo com Montgomery e Runger (2021), "*A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo*". Dessa forma, abaixo será realizada a análise residual.
 
 ```{r}
 # Análise dos resíduos
@@ -114,6 +126,9 @@ r=mod$residuals
 print(r)
 
 ```
+
+Para a análise residual, é necessário investigar se a relação entre X e Y não é linear, se os erros possuem variância constante (homocedasticidade), se os erros são correlacionados, se os erros não são normalmente distribuídos, se o modelo não possui ajuste bom a uma ou mais observações e uma ou mais covariáveis não foram incluídas no modelo.
+ 
  - Residuals vs Fitted
   O gráfico mostra se os resíduos tem padrões não-lineares.
  
