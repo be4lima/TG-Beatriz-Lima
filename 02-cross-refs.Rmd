@@ -28,7 +28,7 @@ Sendo assim, duas variáveis podem estar relacionadas das seguintes formas:
   2. Negativamente relacionadas. Ou seja, se x aumenta, y diminui. E o mesmo ocorre para caso x diminua (Y aumenta) - Correlação negativa;
   3. Não há relação entre as duas variáveis.
 
-```{r fig-3.2, fig.cap="Covariância"}
+```{r fig-3.2, fig.cap="Correlação"}
 
 #knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg")
 
