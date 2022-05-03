@@ -124,6 +124,7 @@ Para a análise residual, é necessário investigar se os resíduos refletem as 
  
   O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. 
 
+Por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.
 
 ```{r}
 
