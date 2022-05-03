@@ -12,7 +12,7 @@ Portanto, é possível saber se ambas variáveis desviam na mesma direção (cov
 ```{r fig-3.1, fig.cap="Covariância"}
 
 
-#knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Covariancia.png")
+knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Covariancia.png")
 
 ```
 
@@ -30,7 +30,7 @@ Sendo assim, duas variáveis podem estar relacionadas das seguintes formas:
 
 ```{r fig-3.2, fig.cap="Correlação"}
 
-#knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg")
+knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg")
 
 ```
 
