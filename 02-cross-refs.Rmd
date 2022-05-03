@@ -41,21 +41,21 @@ Uma forma gráfica de visualizar a correlação das variáveis que apresenta gra
 
 A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da regressão linear simples, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo linear resultante é:
 
-$Y = \beta_0 + \beta_1X_1 + ... +\beta_1X_i + \xi_i$
+$Y = \beta_0 + \beta_1X_1$, sendo $\beta_0$ o coeficiente do intercepto e $\beta_1$ o coeficiente de inclinação
                           
 De acordo com Montgomery & Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, "*a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,* $\beta_1$*, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro* $\sigma^2$". Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x.
 
 ### Condições
 
-Existem pré-requisitos para a regressão linear: 
+São assumidas algumas hipóteses sobre os dados de entrada na Regressão Linear:
 
 1. Linearidade: a relação entre X e Y deve ser linear;
 
 2. Homocedasticidade: a variância da variável dependente (Y) deve ser constante para todos os valores das variáveis independentes (X);
 
-3. Normalidade: para um valor fixo de X, Y é uma variável aleatória com distribuição norma. Os resíduos também devem ser normalmente distribuídos;
+3. Normalidade: para um valor fixo de X, Y é uma variável aleatória com distribuição normal. Os resíduos também devem ser normalmente distribuídos;
 
-3. Independência dos resíduo: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes. Uma forma de verificar isso é realizar o teste de Durbin-Watson.
+3. Independência dos resíduo: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes.
 
 4. Ausência de outliers influentes: não devem existir outliers que influenciem consideravelmente o modelo;
 
@@ -88,10 +88,6 @@ plot(dados$D_Area, dados$VR_CO2_1stOrder)
 mod <- lm(VR_CO2_1stOrder ~ D_Area, dados, na.action = na.exclude)
 summary(mod)
 
-## Análise gráfica
-par(mfrow=c(2,2)) 
-plot(mod) ## Gráfico de regressão linear
-
 
 ```
 
@@ -105,43 +101,28 @@ De acordo com Montgomery e Runger (2021), "*A análise dos resíduos é frequent
 # Análise dos resíduos
 
 
-## Normalidade dos resíduos
-shapiro.test(mod$residuals)
-
-## Outliers nos resíduos
-summary(rstandard(mod)) ## Saber o resumo/sumário dos resíduos padronizados
-
-## Independência dos resíduos (Durbin-Watson) 
-#durbinWatsonTest(mod) <- procurar função no pacote
-
-## Homocedasticidade (Breusch-Pagan)
-#bptest(mod) <- procurar função no pacote
-
-## Análise do modelo
-summary(mod)
-
-#Retirando outliers dos resíduos
-boxplot(mod$residuals)
-r=mod$residuals
-print(r)
+par(mfrow=c(2,2)) 
+plot(mod) ## Gráfico de regressão linear
 
 ```
 
-Para a análise residual, é necessário investigar se a relação entre X e Y não é linear, se os erros possuem variância constante (homocedasticidade), se os erros são correlacionados, se os erros não são normalmente distribuídos, se o modelo não possui ajuste bom a uma ou mais observações e uma ou mais covariáveis não foram incluídas no modelo.
+Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo.
  
  - Residuals vs Fitted
-  O gráfico mostra se os resíduos tem padrões não-lineares.
+ 
+  O gráfico mostra a relação entre os resíduos e os valores ajustados, ou seja, é possível verificar se resíduos tem padrões não-lineares. A distribuição dos resíduos próxima à linha pontilhada demonsta um bom ajuste do modelo.
  
  - Normal Q-Q
-  O gráfico mostra se os resíduos são normalmente distribuídos.
+ 
+  O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada.
   
  - Scale-Location
-  O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade.
+ 
+  O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade. O ideal, no caso, seria que os resíduos estivessem uniformemente distribuídos ao redor da linha vermelha.
   
  - Residuals vs Leverage
+ 
   O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. 
-
-De acordo com o teste de Shapiro, é possível confirmar que p-value tem valor menor que 0,05 e, portanto, possui distribuição diferente da normal. <- rever isso
 
 
 ```{r}

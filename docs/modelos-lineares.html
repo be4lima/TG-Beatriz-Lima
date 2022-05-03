@@ -30,7 +30,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-04-29" />
+<meta name="date" content="2022-05-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -260,16 +260,16 @@ div.csl-indent {
 <div id="regressão-linear-simples" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Regressão linear simples<a href="modelos-lineares.html#regressão-linear-simples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da regressão linear simples, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo linear resultante é:</p>
-<p><span class="math inline">\(Y = \beta_0 + \beta_1X_1 + ... +\beta_1X_i + \xi_i\)</span></p>
+<p><span class="math inline">\(Y = \beta_0 + \beta_1X_1\)</span>, sendo <span class="math inline">\(\beta_0\)</span> o coeficiente do intercepto e <span class="math inline">\(\beta_1\)</span> o coeficiente de inclinação</p>
 <p>De acordo com Montgomery &amp; Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, “<em>a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,</em> <span class="math inline">\(\beta_1\)</span><em>, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro</em> <span class="math inline">\(\sigma^2\)</span>”. Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x.</p>
 <div id="condições" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Condições<a href="modelos-lineares.html#condições" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Existem pré-requisitos para a regressão linear:</p>
+<p>São assumidas algumas hipóteses sobre os dados de entrada na Regressão Linear:</p>
 <ol style="list-style-type: decimal">
 <li><p>Linearidade: a relação entre X e Y deve ser linear;</p></li>
 <li><p>Homocedasticidade: a variância da variável dependente (Y) deve ser constante para todos os valores das variáveis independentes (X);</p></li>
-<li><p>Normalidade: para um valor fixo de X, Y é uma variável aleatória com distribuição norma. Os resíduos também devem ser normalmente distribuídos;</p></li>
-<li><p>Independência dos resíduo: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes. Uma forma de verificar isso é realizar o teste de Durbin-Watson.</p></li>
+<li><p>Normalidade: para um valor fixo de X, Y é uma variável aleatória com distribuição normal. Os resíduos também devem ser normalmente distribuídos;</p></li>
+<li><p>Independência dos resíduo: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes.</p></li>
 <li><p>Ausência de outliers influentes: não devem existir outliers que influenciem consideravelmente o modelo;</p></li>
 </ol>
 </div>
@@ -318,97 +318,37 @@ div.csl-indent {
 ## Residual standard error: 15.35 on 59 degrees of freedom
 ## Multiple R-squared:  0.9975, Adjusted R-squared:  0.9974 
 ## F-statistic: 2.329e+04 on 1 and 59 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="modelos-lineares.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Análise gráfica</span></span>
-<span id="cb9-2"><a href="modelos-lineares.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) </span>
-<span id="cb9-3"><a href="modelos-lineares.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod) <span class="do">## Gráfico de regressão linear</span></span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
 <p>O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de <span class="math inline">\(CO_2\)</span>.Dessa forma, conclui-se que o modelo possui bom ajuste.</p>
 <p>O p-value do modelo apresenta valor <span class="math inline">\(2.2e^{-16}\)</span> e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe alta probabilidade dos resultados apresentados pelo medelo não possuírem erro amostral.</p>
 <p>De acordo com Montgomery e Runger (2021), “<em>A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo</em>”. Dessa forma, abaixo será realizada a análise residual.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="modelos-lineares.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise dos resíduos</span></span>
-<span id="cb10-2"><a href="modelos-lineares.html#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="modelos-lineares.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="modelos-lineares.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Normalidade dos resíduos</span></span>
-<span id="cb10-5"><a href="modelos-lineares.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(mod<span class="sc">$</span>residuals)</span></code></pre></div>
-<pre><code>## 
-##  Shapiro-Wilk normality test
-## 
-## data:  mod$residuals
-## W = 0.75119, p-value = 8.119e-09</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="modelos-lineares.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Outliers nos resíduos</span></span>
-<span id="cb12-2"><a href="modelos-lineares.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">rstandard</span>(mod)) <span class="do">## Saber o resumo/sumário dos resíduos padronizados</span></span></code></pre></div>
-<pre><code>##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
-## -0.8036784 -0.8036784 -0.2565440  0.0008034  0.1001292  3.0676706</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="modelos-lineares.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Independência dos resíduos (Durbin-Watson) </span></span>
-<span id="cb14-2"><a href="modelos-lineares.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#durbinWatsonTest(mod) &lt;- procurar função no pacote</span></span>
-<span id="cb14-3"><a href="modelos-lineares.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="modelos-lineares.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Homocedasticidade (Breusch-Pagan)</span></span>
-<span id="cb14-5"><a href="modelos-lineares.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#bptest(mod) &lt;- procurar função no pacote</span></span>
-<span id="cb14-6"><a href="modelos-lineares.html#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="modelos-lineares.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Análise do modelo</span></span>
-<span id="cb14-8"><a href="modelos-lineares.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = VR_CO2_1stOrder ~ D_Area, data = dados, na.action = na.exclude)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -12.178 -12.178  -3.886   1.503  46.689 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 2.005e+01  4.593e+00   4.364 5.21e-05 ***
-## D_Area      4.783e-04  3.134e-06 152.615  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 15.35 on 59 degrees of freedom
-## Multiple R-squared:  0.9975, Adjusted R-squared:  0.9974 
-## F-statistic: 2.329e+04 on 1 and 59 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="modelos-lineares.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Retirando outliers dos resíduos</span></span>
-<span id="cb16-2"><a href="modelos-lineares.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(mod<span class="sc">$</span>residuals)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="modelos-lineares.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise dos resíduos</span></span>
+<span id="cb9-2"><a href="modelos-lineares.html#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="modelos-lineares.html#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="modelos-lineares.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) </span>
+<span id="cb9-5"><a href="modelos-lineares.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod) <span class="do">## Gráfico de regressão linear</span></span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="modelos-lineares.html#cb17-1" aria-hidden="true" tabindex="-1"></a>r<span class="ot">=</span>mod<span class="sc">$</span>residuals</span>
-<span id="cb17-2"><a href="modelos-lineares.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(r)</span></code></pre></div>
-<pre><code>##            1            2            3            4            5            6 
-## -12.17811559 -12.17811559 -12.17811559 -12.17811559 -12.17811559 -12.17811559 
-##            7            8            9           10           11           12 
-## -12.17811559 -12.17811559 -12.17811559 -12.17811559 -12.17811559 -12.17811559 
-##           13           14           15           16           17           18 
-## -12.17811559 -12.17811559 -12.17811559 -12.17811559 -12.17811559 -12.17811559 
-##           19           20           21           22           23           24 
-## -12.17811559   1.50259792   1.50259792   1.02828466   1.02828466   1.02828466 
-##           25           26           27           28           29           30 
-##   0.02828466   0.02828466   0.02828466   0.02828466   0.02828466  -3.07337641 
-##           31           32           33           34           35           36 
-##  -7.82054432  -9.66642386  -7.49929645  -6.59599041  -6.59599041   5.91889550 
-##           37           38           39           40           41           42 
-##  -3.77680645  -8.75961002  -4.56128581  -4.62976324  -3.88607231  -3.96814589 
-##           43           44           45           46           47           48 
-##  -0.72907613   2.09684760   4.48044619  -3.58855182  -7.41672616  46.68935706 
-##           49           50           51           52           53           54 
-##  26.35811895  45.92942707  43.10805964  27.94842618  -4.70106681   3.15931049 
-##           55           56           57           58           59           60 
-##   2.20423853   0.04732170  17.39153017   6.63708866  12.47622856  36.41699898 
-##           61 
-##  31.55915429</code></pre>
-<p>Para a análise residual, é necessário investigar se a relação entre X e Y não é linear, se os erros possuem variância constante (homocedasticidade), se os erros são correlacionados, se os erros não são normalmente distribuídos, se o modelo não possui ajuste bom a uma ou mais observações e uma ou mais covariáveis não foram incluídas no modelo.</p>
+<p>Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo.</p>
 <ul>
-<li><p>Residuals vs Fitted
-O gráfico mostra se os resíduos tem padrões não-lineares.</p></li>
-<li><p>Normal Q-Q
-O gráfico mostra se os resíduos são normalmente distribuídos.</p></li>
-<li><p>Scale-Location
-O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade.</p></li>
-<li><p>Residuals vs Leverage
-O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente.</p></li>
+<li>Residuals vs Fitted</li>
 </ul>
-<p>De acordo com o teste de Shapiro, é possível confirmar que p-value tem valor menor que 0,05 e, portanto, possui distribuição diferente da normal. &lt;- rever isso</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="modelos-lineares.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Diagrama de dispersão com o ajuste</span></span>
-<span id="cb19-2"><a href="modelos-lineares.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="modelos-lineares.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> dados<span class="sc">$</span>D_Area, <span class="at">y =</span> dados<span class="sc">$</span>VR_CO2_1stOrder, <span class="at">xlab =</span> <span class="st">&quot;Área desmatada no ano&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Emissão de CO2 de 1a ordem&quot;</span>)</span>
-<span id="cb19-4"><a href="modelos-lineares.html#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="modelos-lineares.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p>O gráfico mostra a relação entre os resíduos e os valores ajustados, ou seja, é possível verificar se resíduos tem padrões não-lineares. A distribuição dos resíduos próxima à linha pontilhada demonsta um bom ajuste do modelo.</p>
+<ul>
+<li>Normal Q-Q</li>
+</ul>
+<p>O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada.</p>
+<ul>
+<li>Scale-Location</li>
+</ul>
+<p>O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade. O ideal, no caso, seria que os resíduos estivessem uniformemente distribuídos ao redor da linha vermelha.</p>
+<ul>
+<li>Residuals vs Leverage</li>
+</ul>
+<p>O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="modelos-lineares.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Diagrama de dispersão com o ajuste</span></span>
+<span id="cb10-2"><a href="modelos-lineares.html#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="modelos-lineares.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> dados<span class="sc">$</span>D_Area, <span class="at">y =</span> dados<span class="sc">$</span>VR_CO2_1stOrder, <span class="at">xlab =</span> <span class="st">&quot;Área desmatada no ano&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Emissão de CO2 de 1a ordem&quot;</span>)</span>
+<span id="cb10-4"><a href="modelos-lineares.html#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="modelos-lineares.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 
 </div>
