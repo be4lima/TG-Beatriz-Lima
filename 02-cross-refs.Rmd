@@ -39,7 +39,7 @@ Uma forma gráfica de visualizar a correlação das variáveis que apresenta gra
 
 ## Regressão linear simples
 
-A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da regressão linear simples, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo linear resultante é:
+A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da **regressão linear simples**, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo de regressão linear é:
 
 $Y = \beta_0 + \beta_1X_1$, sendo $\beta_0$ o coeficiente do intercepto e $\beta_1$ o coeficiente de inclinação
                           
@@ -64,25 +64,47 @@ São assumidas algumas hipóteses sobre os dados de entrada na Regressão Linear
 
 Para a aplicação serão utilizados dados de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de 1ª ordem de $CO_2$ na Amazônia Legal.A estimativa de 1ª ordem supõe que, de modo simplificado, 100% das emissões ocorreram no momento da mudança de uso/cobertura.
 
+Um **primeiro passo** será carregar os dados:
 
 ```{r}
 options("install.lock"=FALSE)
 
 ## Carregar pacotes que serão usados
-if(!require(pacman)) install.packages("pacman")
-library(pacman)
+
 
 ## Checando repositório
 setwd("C:/Users/Luiz Arthur/Dropbox/PC/Documents/UFABC Beatriz/TG Beatriz Lima/Dados")
 
-## Carregar base de dados
+## Carregando base de dados
 dados <- read.csv2("CO2Amazonia.csv")
 View(dados)
+data_size= dim(dados)
 
-# Verificando pressupostos para a regressão linear
+```
+Agora que os dados foram carregados, o **segundo passo** será entender os dados. Para saber algumas propriedade dos dados carregados, será utilizado o comando ``head()`, que apresentará uma amostra dos dados, e ``summary()`, que apresenta as estatísticas básicas dos dados (média, mediana, 1º quartil, etc).
 
-## Relação linear entre a VD e a VI
+```{r}
+
+head(dados)
+
+summary(dados)
+
+```
+Como iremos analisar a relação entre a área desmatada por ano (D_Area) e a emissão de 1ª ordem de $CO_2$, é importante verificar qual é o comportamento entre esses dados.
+
+```{r}
+
+## Verificando a relação entre a variável dependente e a variável independente
 plot(dados$D_Area, dados$VR_CO2_1stOrder)
+
+## Correlação entre as variáveis da base de dados
+cor(dados$VR_CO2_1stOrder,dados$D_Area)
+
+```
+
+A partir desse gráfico, é possível verificar que a relação entre as variáveis é linear e, dessa forma, conforme a área desmatada aumenta, a emissão de $CO_2$ aumenta linearmente. D
+
+```{r}
 
 ## Construção do modelo
 mod <- lm(VR_CO2_1stOrder ~ D_Area, dados, na.action = na.exclude)
@@ -90,7 +112,6 @@ summary(mod)
 
 
 ```
-
 O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de $CO_2$.Dessa forma, conclui-se que o modelo possui bom ajuste.
 
 O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe alta probabilidade dos resultados apresentados pelo medelo não possuírem erro amostral.
