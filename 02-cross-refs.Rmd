@@ -98,11 +98,11 @@ Como iremos analisar a relação entre a área desmatada por ano (D_Area) e a em
 plot(dados$D_Area, dados$VR_CO2_1stOrder)
 
 ## Correlação entre as variáveis da base de dados
-cor(dados$VR_CO2_1stOrder,dados$D_Area)
+cor.test(dados$VR_CO2_1stOrder,dados$D_Area)
 
 ```
 
-A partir desse gráfico, é possível verificar que a relação entre as variáveis é linear e, dessa forma, conforme a área desmatada aumenta, a emissão de $CO_2$ aumenta linearmente. D
+A partir desse gráfico, é possível verificar que a relação entre as variáveis é linear e, dessa forma, conforme a área desmatada aumenta, a emissão de $CO_2$ aumenta linearmente. O valor da correlação indica que a relação entre as duas variáveis é forte e positiva, já que 0,9987358 é próximo de 1 e maior que zero.
 
 ```{r}
 
@@ -114,7 +114,7 @@ summary(mod)
 ```
 O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de $CO_2$.Dessa forma, conclui-se que o modelo possui bom ajuste.
 
-O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe alta probabilidade dos resultados apresentados pelo medelo não possuírem erro amostral.
+O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe alta probabilidade dos resultados apresentados pelo modelo não possuírem erro amostral.
 
 De acordo com Montgomery e Runger (2021), "*A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo*". Dessa forma, abaixo será realizada a análise residual.
 
@@ -155,3 +155,5 @@ plot(x = dados$D_Area, y = dados$VR_CO2_1stOrder, xlab = "Área desmatada no ano
 
 abline(mod, col = "blue")
 ```
+
+É importante afirmar que as estatísticas calculadas não implicam causalidade, mas quantificam a relação entre as variáveis selecionadas para o modelo. Portanto, as estatísicas calculadas indicam que o modelo criado para representar a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal é adequado.
