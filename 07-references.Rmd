@@ -8,3 +8,11 @@ Wickham, Hadley; Grolemund, Garrett. **R for Data Science**. Disponível em: <ht
 Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
 
 SIDHU, Rishi. **Layman's Introduction to Linear Regression**. Disponível em: <https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09> 
+
+DAVIS, Jerry. Introduction to Environmental Data Science. SFSU Institute for Geographic Information Science, 2022. Disponível em: https://bookdown.org/igisc/EnvDataSci/#environmental-data-science. Acesso em: 27 abr. 2022.
+
+FILATRO, Andrea C. Data science da educação. [Digite o Local da Editora]: Editora Saraiva, 2020. 9786587958446. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9786587958446/. Acesso em: 27 abr. 2022.
+
+Gibert, Karina; Horsburgh, Jeffery S.; Athanasiadis, Ioannis N.; Holmes, Geoff. Environmental Data Science. Environmental Modelling & Software, 2018. Disponível em: <https://reader.elsevier.com/reader/sd/pii/S1364815218301269?token=6B7E02806686B9D1213F7D7D568DD8607AC7EDC45701E1AB2FF569284245D3B9B73444E8F4532FFF767F851CCECF7289&originRegion=us-east-1&originCreation=20220429000236>. Acesso em: 28 abr. 2022.
+
+R DOCUMENTATION. *shapiro.test(x)*. Disponível em: <https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test>

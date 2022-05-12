@@ -36,14 +36,20 @@ knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlaç
 
 Uma forma gráfica de visualizar a correlação das variáveis que apresenta grande utilidade é a partir do **Diagrama de Dispersão**. O diagrama traz informações importantes porque mostra se a relação entre as variáveis é linear ou não, se existem outliers no conjunto de dados e traz uma ideia de quão forte é o relacionamento entre as variáveis.
 
+### Coeficiente de Pearson
+
+### Coeficiente de Determinação (R²)
+
 
 ## Regressão linear simples
 
 A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da **regressão linear simples**, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo de regressão linear é:
 
-$Y = \beta_0 + \beta_1X_1$, sendo $\beta_0$ o coeficiente do intercepto e $\beta_1$ o coeficiente de inclinação
-                          
-De acordo com Montgomery & Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, "*a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,* $\beta_1$*, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro* $\sigma^2$". Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x.
+$Y = \beta_0 + \beta_1X_1 + e_1$, sendo $\beta_0$ o coeficiente do intercepto, $\beta_1$ o coeficiente de inclinação, $e_1$ o erro no ajuste do modelo para a observação y.
+
+De acordo com Montgomery & Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, "*a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,* $\beta_1$*, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro* $\sigma^2$". Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x. 
+
+O erro $e_1$ é estimado pela variabilidade de Y que o modelo criado não consegue explicar, ou seja, o resíduo pode ser quantificado por $\widehat{Y}-Y$. Os resíduos conseguem indicar se as suposições do modelo foram violadas e, por isso, agora conheceremos as condições necessárias para a aplicação da Regressão Linear.
 
 ### Condições
 
@@ -53,9 +59,10 @@ São assumidas algumas hipóteses sobre os dados de entrada na Regressão Linear
 
 2. Homocedasticidade: a variância da variável dependente (Y) deve ser constante para todos os valores das variáveis independentes (X);
 
-3. Normalidade: para um valor fixo de X, Y é uma variável aleatória com distribuição normal. Os resíduos também devem ser normalmente distribuídos;
+3. Normalidade: para um valor fixo de X, Y é uma variável aleatória com distribuição normal. Os erros também devem ser normalmente distribuídos;
+Dentre diversos testes possíveis, para verificar a não-normalidade dos erros é possível realizar o Teste de Shapiro-Wilk ou um gráfico de Probabilidade Normal com objetivo de verificar visualmente se os dados do modelo apresentam distribuição normal.
 
-3. Independência dos resíduo: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes.
+3. Independência dos resíduos: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes;
 
 4. Ausência de outliers influentes: não devem existir outliers que influenciem consideravelmente o modelo;
 
@@ -100,6 +107,7 @@ plot(dados$D_Area, dados$VR_CO2_1stOrder)
 ## Correlação entre as variáveis da base de dados
 cor.test(dados$VR_CO2_1stOrder,dados$D_Area)
 
+
 ```
 
 A partir desse gráfico, é possível verificar que a relação entre as variáveis é linear e, dessa forma, conforme a área desmatada aumenta, a emissão de $CO_2$ aumenta linearmente. O valor da correlação indica que a relação entre as duas variáveis é forte e positiva, já que 0,9987358 é próximo de 1 e maior que zero.
@@ -125,6 +133,9 @@ De acordo com Montgomery e Runger (2021), "*A análise dos resíduos é frequent
 par(mfrow=c(2,2)) 
 plot(mod) ## Gráfico de regressão linear
 
+## Teste de normalidade
+shapiro.test(mod$residuals)
+
 ```
 
 Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo.
@@ -135,7 +146,7 @@ Para a análise residual, é necessário investigar se os resíduos refletem as 
  
  - Normal Q-Q
  
-  O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada.
+  O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada.Pelo gráfico é possível perceber que a distribuição dos resíduos está diferente da distribuição normal e, portanto, 
   
  - Scale-Location
  
@@ -144,6 +155,8 @@ Para a análise residual, é necessário investigar se os resíduos refletem as 
  - Residuals vs Leverage
  
   O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. 
+
+Pelo Teste de Shapiro, é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. já que a hipotese nula . <- rever isso
 
 Por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.
 
