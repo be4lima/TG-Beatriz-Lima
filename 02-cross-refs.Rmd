@@ -36,10 +36,17 @@ knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlaç
 
 Uma forma gráfica de visualizar a correlação das variáveis que apresenta grande utilidade é a partir do **Diagrama de Dispersão**. O diagrama traz informações importantes porque mostra se a relação entre as variáveis é linear ou não, se existem outliers no conjunto de dados e traz uma ideia de quão forte é o relacionamento entre as variáveis.
 
-### Coeficiente de Pearson
+### Coeficiente de Pearson (r)
 
-### Coeficiente de Determinação (R²)
+O *Coeficiente de Pearson*, também chamado de coeficiente de correlação da amostra $r_{xy}$, mede a força da relação linear entre duas variáveis aleatórias x e y. Se duas variáveis relacionarem-se perfeitamente com inclinação positiva, $r_{xy}=1$; com inclinação negativa, $r_{xy}=-1$; se $r_{xy}=0$, não há relação entre as variáveis. 
 
+De acordo com Filho e Júnior (2009), existem métricas diferentes de acordo com cada autor:
+
+- Cohen (1998) considera valores entre 0,10 e 0,29 pequenos; entre 0,30 e 0,49, médios; e entre 0,50 e 1, grandes.
+
+- Dancey e Reidy (2005) considera valores entre 0,10 e 0,30 pequenos; entre 0,40 e 0,60 moderados; e de 0,70 até 1, grandes.
+
+O consenso é que quanto mais próximo de 1, maior a força da relação linear entre as variáveis, independente do sinal.
 
 ## Regressão linear simples
 
@@ -65,6 +72,14 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 3. Independência dos resíduos: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes;
 
 4. Ausência de outliers influentes: não devem existir outliers que influenciem consideravelmente o modelo;
+
+
+### Coeficiente de Determinação (R²)
+
+O *Coeficiente de Determinação* é utilizado frequentemente pra avaliar a adequação de um modelo de regressão. É definido pelo quadrado do coeficiente de correlação entre X e Y. Quanto mais próximo de 1, maior a quantidade de variabilidade nos dados explicada pelo modelo de regressão. 
+
+O R² pode trazer interpretações errôneas, já que sempre é possível fazer com que R² seja unitário realizando a adição de mais termos ao modelo. Ou seja, R² aumenta se for adicionado uma nova variável ao modelo, mas isso não indica que o modelo esteja mais adequado.
+
 
 
 ## Aplicação {-}
@@ -120,9 +135,10 @@ summary(mod)
 
 
 ```
-O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de $CO_2$.Dessa forma, conclui-se que o modelo possui bom ajuste.
 
-O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe alta probabilidade dos resultados apresentados pelo modelo não possuírem erro amostral.
+O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de $CO_2$ O valor indica que o modelo possui bom ajuste. 
+
+O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe baixa probabilidade dos resultados apresentados pelo modelo não possuírem erro amostral. Ou seja, existe alta probabilidade do modelo não ser um bom ajuste. Isso continuará sendo testado a diante.
 
 De acordo com Montgomery e Runger (2021), "*A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo*". Dessa forma, abaixo será realizada a análise residual.
 
@@ -142,21 +158,55 @@ Para a análise residual, é necessário investigar se os resíduos refletem as 
  
  - Residuals vs Fitted
  
-  O gráfico mostra a relação entre os resíduos e os valores ajustados, ou seja, é possível verificar se resíduos tem padrões não-lineares. A distribuição dos resíduos próxima à linha pontilhada demonsta um bom ajuste do modelo.
+  O gráfico mostra a relação entre os resíduos e os valores ajustados. Como a distribuição dos resíduos próxima à linha pontilhada demonsta um bom ajuste do modelo, é possível verificar se resíduos tem padrões não-lineares. No caso do nosso modelo, os resíduos não se apresentam próximos à linha pontilhada.
  
  - Normal Q-Q
  
-  O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada.Pelo gráfico é possível perceber que a distribuição dos resíduos está diferente da distribuição normal e, portanto, 
+  O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada. Pelo gráfico é possível perceber que a distribuição dos resíduos está diferente da distribuição normal. 
   
  - Scale-Location
  
-  O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade. O ideal, no caso, seria que os resíduos estivessem uniformemente distribuídos ao redor da linha vermelha.
+  O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade. O ideal, no caso, seria que os resíduos estivessem uniformemente distribuídos ao redor da linha vermelha. Para o caso do nosso modelo, demonstra que há heterocedasticidade, ou seja, os resíduos não estão uniformemente distribuídos em relação ao intervalo de preditores.
   
  - Residuals vs Leverage
  
-  O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. 
+  O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. No caso do modelo criado, há possibilidade de existirem outliers influentes.
 
-Pelo Teste de Shapiro, é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. já que a hipotese nula . <- rever isso
+Pelo Teste de Shapiro, é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. O gráfico Normal Q-Q serve como uma contra-prova, também mostrando que os dados não são normalmente distribuídos e, dessa forma, não são adequados.
+
+Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste, é interessante utilizar os gráficos Boxplot e Histograma. 
+
+```{r}
+
+#Encontrando potenciais outliers a partir de gráficos
+
+boxplot(dados$D_Area)
+
+boxplot(dados$VR_CO2_1stOrder)
+
+hist(dados$D_Area)
+
+hist(dados$VR_CO2_1stOrder)
+
+```
+
+O Boxplot não apresentou a existência de outliers, porém, pelo histograma é possível identificar possíveis outliers. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote `outliers` pode ser utilizado, já que a função `outlier()` consegue encontrar o valor mais distante da média das variáveis.
+
+```{r}
+#Encontrando os valores com maior diferença da média com o pacote `outliers`
+
+library(outliers)
+
+
+outArea <- outlier(dados$D_Area)
+
+outCO2 <- outlier(dados$VR_CO2_1stOrder)
+
+print(outArea)
+
+print(outCO2)
+
+```
 
 Por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.
 
@@ -169,4 +219,15 @@ plot(x = dados$D_Area, y = dados$VR_CO2_1stOrder, xlab = "Área desmatada no ano
 abline(mod, col = "blue")
 ```
 
-É importante afirmar que as estatísticas calculadas não implicam causalidade, mas quantificam a relação entre as variáveis selecionadas para o modelo. Portanto, as estatísicas calculadas indicam que o modelo criado para representar a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal é adequado.
+É importante afirmar que as estatísticas calculadas não implicam causalidade, mas quantificam a relação entre as variáveis selecionadas para o modelo. Portanto, indicam que o modelo criado para representar a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal é adequado.
+
+
+Referências Bibliográficas {-}
+
+Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
+
+SIDHU, Rishi. **Layman's Introduction to Linear Regression**. Disponível em: <https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09> 
+
+R DOCUMENTATION. *shapiro.test(x)*. Disponível em: <https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test>
+
+https://periodicos.ufpe.br/revistas/politicahoje/article/viewFile/3852/3156
