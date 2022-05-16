@@ -26,8 +26,10 @@ coeficiente-de-curtose
 modelos-lineares
 covariância
 correlação
+coeficiente-de-pearson-r
 regressão-linear-simples
 condições
+coeficiente-de-determinação-r²
 parts
 footnotes-and-citations
 footnotes
@@ -40,4 +42,3 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
-url-your-book-url-like-httpsbookdown.orgyihuibookdown

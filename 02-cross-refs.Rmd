@@ -9,12 +9,6 @@ $cov(x,y) = \frac{\sum(x_i - \overline{x})}{n-1}$
 
 Portanto, é possível saber se ambas variáveis desviam na mesma direção (covariância positiva) ou se desviam em direções opostas (covariância negativa). Caso a covariância entre duas variáveis seja zero, a conclusão é que as variáveis são independentes. 
 
-```{r fig-3.1, fig.cap="Covariância"}
-
-
-knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Covariancia.png")
-
-```
 
 ## Correlação
 
@@ -27,12 +21,6 @@ Sendo assim, duas variáveis podem estar relacionadas das seguintes formas:
   1. Positivamente relacionadas. Ou seja, se x aumenta, y aumenta. E o mesmo ocorre para caso X diminua (Y diminui) -  Correlação positiva;
   2. Negativamente relacionadas. Ou seja, se x aumenta, y diminui. E o mesmo ocorre para caso x diminua (Y aumenta) - Correlação negativa;
   3. Não há relação entre as duas variáveis.
-
-```{r fig-3.2, fig.cap="Correlação"}
-
-knitr::include_graphics("~/UFABC Beatriz/TG Beatriz Lima/Dados/Figuras/Correlação.jpg")
-
-```
 
 Uma forma gráfica de visualizar a correlação das variáveis que apresenta grande utilidade é a partir do **Diagrama de Dispersão**. O diagrama traz informações importantes porque mostra se a relação entre as variáveis é linear ou não, se existem outliers no conjunto de dados e traz uma ideia de quão forte é o relacionamento entre as variáveis.
 
@@ -78,7 +66,7 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 
 O *Coeficiente de Determinação* é utilizado frequentemente pra avaliar a adequação de um modelo de regressão. É definido pelo quadrado do coeficiente de correlação entre X e Y. Quanto mais próximo de 1, maior a quantidade de variabilidade nos dados explicada pelo modelo de regressão. 
 
-O R² pode trazer interpretações errôneas, já que sempre é possível fazer com que R² seja unitário realizando a adição de mais termos ao modelo. Ou seja, R² aumenta se for adicionado uma nova variável ao modelo, mas isso não indica que o modelo esteja mais adequado.
+De acordo com Montgomery (2021), o R² pode trazer interpretações errôneas, já que sempre é possível fazer com que R² seja unitário realizando a adição de mais termos ao modelo. Ou seja, R² aumenta se for adicionado uma nova variável ao modelo, mas isso não indica que o modelo esteja mais adequado.
 
 
 
@@ -174,7 +162,7 @@ Para a análise residual, é necessário investigar se os resíduos refletem as 
 
 Pelo Teste de Shapiro, é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. O gráfico Normal Q-Q serve como uma contra-prova, também mostrando que os dados não são normalmente distribuídos e, dessa forma, não são adequados.
 
-Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste, é interessante utilizar os gráficos Boxplot e Histograma. 
+Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste de outliers, é interessante utilizar os gráficos Boxplot e Histograma. 
 
 ```{r}
 
@@ -208,7 +196,9 @@ print(outCO2)
 
 ```
 
-Por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.
+Com esse resultado, analisa-se que existe grande possibilidade de existirem outliers no conjunto de dados. Além disso, a hipótese de que o resultado dos resíduos indica que seja necessário um maior conjunto de dados também é uma possibilidade.
+
+Após todos os testes, por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.
 
 ```{r}
 
@@ -219,10 +209,10 @@ plot(x = dados$D_Area, y = dados$VR_CO2_1stOrder, xlab = "Área desmatada no ano
 abline(mod, col = "blue")
 ```
 
-É importante afirmar que as estatísticas calculadas não implicam causalidade, mas quantificam a relação entre as variáveis selecionadas para o modelo. Portanto, indicam que o modelo criado para representar a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal é adequado.
+É importante afirmar que as estatísticas calculadas não implicam causalidade, mas quantificam a relação entre as variáveis selecionadas para o modelo. Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal.
 
 
-Referências Bibliográficas {-}
+#Referências Bibliográficas {-}
 
 Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
 
