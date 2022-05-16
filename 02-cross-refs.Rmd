@@ -142,7 +142,7 @@ shapiro.test(mod$residuals)
 
 ```
 
-Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo.
+Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo. Os resíduos não podem apresentar uma tendência e, por isso, eles serão analisado abaixo.
  
  - Residuals vs Fitted
  
@@ -209,7 +209,7 @@ plot(x = dados$D_Area, y = dados$VR_CO2_1stOrder, xlab = "Área desmatada no ano
 abline(mod, col = "blue")
 ```
 
-É importante afirmar que as estatísticas calculadas não implicam causalidade, mas quantificam a relação entre as variáveis selecionadas para o modelo. Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal.
+É importante afirmar que as estatísticas calculadas não implicam causalidade, mas quantificam a relação entre as variáveis selecionadas para o modelo. Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal. Portanto, seria importante refazer o modelo, de forma que os outliers sejam retirados e um maior número de dados seja utilizado, para verificar se este estaria mais adequado para representar as variáveis. 
 
 
 #Referências Bibliográficas {-}
