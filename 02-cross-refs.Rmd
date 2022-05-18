@@ -24,6 +24,8 @@ Sendo assim, duas variáveis podem estar relacionadas das seguintes formas:
 
 Uma forma gráfica de visualizar a correlação das variáveis que apresenta grande utilidade é a partir do **Diagrama de Dispersão**. O diagrama traz informações importantes porque mostra se a relação entre as variáveis é linear ou não, se existem outliers no conjunto de dados e traz uma ideia de quão forte é o relacionamento entre as variáveis.
 
+É importante afirmar que o valor não implica causalidade, mas quantifica a relação entre as variáveis selecionadas.
+
 ### Coeficiente de Pearson (r)
 
 O *Coeficiente de Pearson*, também chamado de coeficiente de correlação da amostra $r_{xy}$, mede a força da relação linear entre duas variáveis aleatórias x e y. Se duas variáveis relacionarem-se perfeitamente com inclinação positiva, $r_{xy}=1$; com inclinação negativa, $r_{xy}=-1$; se $r_{xy}=0$, não há relação entre as variáveis. 
@@ -86,7 +88,9 @@ options("install.lock"=FALSE)
 setwd("C:/Users/Luiz Arthur/Dropbox/PC/Documents/UFABC Beatriz/TG Beatriz Lima/Dados")
 
 ## Carregando base de dados
-dados <- read.csv2("CO2Amazonia.csv")
+dados0 <- read.csv2("CO2Amazonia.csv")
+dados <- na.omit(dados0)
+
 View(dados)
 data_size= dim(dados)
 
@@ -123,7 +127,6 @@ summary(mod)
 
 
 ```
-
 O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de $CO_2$ O valor indica que o modelo possui bom ajuste. 
 
 O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe baixa probabilidade dos resultados apresentados pelo modelo não possuírem erro amostral. Ou seja, existe alta probabilidade do modelo não ser um bom ajuste. Isso continuará sendo testado a diante.
@@ -133,9 +136,11 @@ De acordo com Montgomery e Runger (2021), "*A análise dos resíduos é frequent
 ```{r}
 # Análise dos resíduos
 
+plot(mod,which = 4)
 
 par(mfrow=c(2,2)) 
-plot(mod) ## Gráfico de regressão linear
+plot(mod)
+
 
 ## Teste de normalidade
 shapiro.test(mod$residuals)
@@ -147,10 +152,12 @@ Para a análise residual, é necessário investigar se os resíduos refletem as 
  - Residuals vs Fitted
  
 O gráfico mostra a relação entre os resíduos e os valores ajustados. Como a distribuição dos resíduos próxima à linha pontilhada demonsta um bom ajuste do modelo, é possível verificar se resíduos tem padrões não-lineares. No caso do nosso modelo, os resíduos não se apresentam próximos à linha pontilhada.
+
+As observações 48, 50 e 51 apresentam grandes valores de resíduos e, por isso, é interessante realizar toda a análise após a remoção dessas observações.
  
  - Normal Q-Q
  
-O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada. Pelo gráfico é possível perceber que a distribuição dos resíduos está diferente da distribuição normal. 
+O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada. Pelo gráfico é possível perceber que a distribuição dos resíduos está diferente da distribuição normal. As observações 48, 50 e 51 apresentam-se extremas novamente.
   
  - Scale-Location
  
@@ -160,6 +167,18 @@ O gráfico mostra se os resíduos são igualmente distribuídos em relação ao 
  
 O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. No caso do modelo criado, há possibilidade de existirem outliers influentes.
 
+ - Cook's distance
+ 
+A Distância de Cook informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações 48, 50 e 51 são extremas. 
+
+```` {r}
+CD <- cooks.distance(mod)
+influentes <- CD[(CD > (3* mean(CD, na.rm=TRUE)))]
+
+print(influentes)
+````
+É possível analisar que existem 6 observações que possuem uma distância de Cook três vezes maior que a média. Além disso, é confirmado que as observações 48, 50 e 51 são extremas.
+
 Pelo Teste de Shapiro, é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. O gráfico Normal Q-Q serve como uma contra-prova, também mostrando que os dados não são normalmente distribuídos e, dessa forma, não são adequados.
 
 Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste de outliers, é interessante utilizar os gráficos Boxplot e Histograma. 
@@ -168,17 +187,13 @@ Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do nú
 
 #Encontrando potenciais outliers a partir de gráficos
 
-boxplot(dados$D_Area)
-
-boxplot(dados$VR_CO2_1stOrder)
-
 hist(dados$D_Area)
 
 hist(dados$VR_CO2_1stOrder)
 
 ```
 
-O Boxplot não apresentou a existência de outliers, porém, pelo histograma é possível identificar possíveis outliers. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote `outliers` pode ser utilizado, já que a função `outlier()` consegue encontrar o valor mais distante da média das variáveis.
+A partir da análise dos resíduos, foi possível inferir que as observações 48, 50 e 51 são outliers influentes. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote `outliers` pode ser utilizado, já que a função `outlier()` consegue encontrar o valor mais distante da média das variáveis.
 
 ```{r}
 #Encontrando os valores com maior diferença da média com o pacote `outliers`
@@ -196,7 +211,7 @@ print(outCO2)
 
 ```
 
-Com esse resultado, analisa-se que existe grande possibilidade de existirem outliers no conjunto de dados. Além disso, a hipótese de que o resultado dos resíduos indica que seja necessário um maior conjunto de dados também é uma possibilidade.
+Com esse resultado, analisa-se que existe grande possibilidade de existirem outliers no conjunto de dados, já que as observações 48, 50 e 51 apresentam-se extremas e influentes no modelo de regressão. Além disso, a hipótese de que o resultado dos resíduos indica que seja necessário um maior conjunto de dados também é uma possibilidade.
 
 Após todos os testes, por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.
 
@@ -209,15 +224,35 @@ plot(x = dados$D_Area, y = dados$VR_CO2_1stOrder, xlab = "Área desmatada no ano
 abline(mod, col = "blue")
 ```
 
-É importante afirmar que as estatísticas calculadas não implicam causalidade, mas quantificam a relação entre as variáveis selecionadas para o modelo. Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal. Portanto, seria importante refazer o modelo, de forma que os outliers sejam retirados e um maior número de dados seja utilizado, para verificar se este estaria mais adequado para representar as variáveis. 
+Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal. Portanto, torna-se importante refazer o modelo, de forma que os outliers influentes (observações 48, 50, 51, 52, 60 e 61) sejam retirados, para verificar se este novo modelo estaria mais adequado para representar a relação entre as variáveis. 
 
+É isso que faremos:
 
-#Referências Bibliográficas {-}
+```{r}
+nomes_influentes <- names(influentes)
+out_influentes <- dados[nomes_influentes,]
+dados_sem_outliers <- dados[!dados %in% out_influentes]
+
+length(dados)
+length(dados_sem_outliers)
+
+View(dados_sem_outliers2)
+
+mod2<- lm(VR_CO2_1stOrder ~ D_Area, data=dados_sem_outliers)
+
+summary(mod2)
+
+plot(mod2)
+```
+
+Referências Bibliográficas {-}
 
 Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
 
 SIDHU, Rishi. **Layman's Introduction to Linear Regression**. Disponível em: <https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09> 
 
-R DOCUMENTATION. *shapiro.test(x)*. Disponível em: <https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test>
+R DOCUMENTATION. *shapiro.test(x)*. Disponível em: <https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test>.
 
-https://periodicos.ufpe.br/revistas/politicahoje/article/viewFile/3852/3156
+FILHO, Dalson Britto Figueiredo; JÚNIOR, José Alexandre da Silva. *Desvendando os Mistérios do Coeficiente de Correlação de Pearson (r)*. Revista Política Hoje vol. 18, n. 1,  2009. Disponível em: <https://periodicos.ufpe.br/revistas/politicahoje/article/viewFile/3852/3156>.
+
+THIEME, Christian. Identifying Outliers in Linear Regression — Cook’s Distance. Towards Data Science, 2021. Disponível em: <https://towardsdatascience.com/identifying-outliers-in-linear-regression-cooks-distance-9e212e9136a#:~:text=One%20method%20that%20is%20often,the%20ith%20observation%20is%20removed>.

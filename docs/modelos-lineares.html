@@ -30,7 +30,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-05-16" />
+<meta name="date" content="2022-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -406,26 +406,28 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 <p>De acordo com Montgomery e Runger (2021), “<em>A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo</em>”. Dessa forma, abaixo será realizada a análise residual.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="modelos-lineares.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise dos resíduos</span></span>
 <span id="cb35-2"><a href="modelos-lineares.html#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="modelos-lineares.html#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="modelos-lineares.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) </span>
-<span id="cb35-5"><a href="modelos-lineares.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod) <span class="do">## Gráfico de regressão linear</span></span></code></pre></div>
+<span id="cb35-3"><a href="modelos-lineares.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod,<span class="at">which =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="modelos-lineares.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Teste de normalidade</span></span>
-<span id="cb36-2"><a href="modelos-lineares.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(mod<span class="sc">$</span>residuals)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="modelos-lineares.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) </span>
+<span id="cb36-2"><a href="modelos-lineares.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="modelos-lineares.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Teste de normalidade</span></span>
+<span id="cb37-2"><a href="modelos-lineares.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(mod<span class="sc">$</span>residuals)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  mod$residuals
 ## W = 0.75119, p-value = 8.119e-09</code></pre>
-<p>Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo.</p>
+<p>Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo. Os resíduos não podem apresentar uma tendência e, por isso, eles serão analisado abaixo.</p>
 <ul>
 <li>Residuals vs Fitted</li>
 </ul>
 <p>O gráfico mostra a relação entre os resíduos e os valores ajustados. Como a distribuição dos resíduos próxima à linha pontilhada demonsta um bom ajuste do modelo, é possível verificar se resíduos tem padrões não-lineares. No caso do nosso modelo, os resíduos não se apresentam próximos à linha pontilhada.</p>
+<p>As observações 48, 50 e 51 apresentam grandes valores de resíduos e, por isso, é interessante realizar toda a análise após a remoção dessas observações.</p>
 <ul>
 <li>Normal Q-Q</li>
 </ul>
-<p>O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada. Pelo gráfico é possível perceber que a distribuição dos resíduos está diferente da distribuição normal.</p>
+<p>O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada. Pelo gráfico é possível perceber que a distribuição dos resíduos está diferente da distribuição normal. As observações 48, 50 e 51 apresentam-se extremas novamente.</p>
 <ul>
 <li>Scale-Location</li>
 </ul>
@@ -434,45 +436,46 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 <li>Residuals vs Leverage</li>
 </ul>
 <p>O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. No caso do modelo criado, há possibilidade de existirem outliers influentes.</p>
+<ul>
+<li>Cook’s distance</li>
+</ul>
+<p>A Distância de Cook informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações 48, 50 e 51 são extremas.</p>
 <p>Pelo Teste de Shapiro, é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. O gráfico Normal Q-Q serve como uma contra-prova, também mostrando que os dados não são normalmente distribuídos e, dessa forma, não são adequados.</p>
 <p>Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste de outliers, é interessante utilizar os gráficos Boxplot e Histograma.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="modelos-lineares.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Encontrando potenciais outliers a partir de gráficos</span></span>
-<span id="cb38-2"><a href="modelos-lineares.html#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="modelos-lineares.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(dados<span class="sc">$</span>D_Area)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="modelos-lineares.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Encontrando potenciais outliers a partir de gráficos</span></span>
+<span id="cb39-2"><a href="modelos-lineares.html#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="modelos-lineares.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dados<span class="sc">$</span>D_Area)</span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="modelos-lineares.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(dados<span class="sc">$</span>VR_CO2_1stOrder)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="modelos-lineares.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dados<span class="sc">$</span>VR_CO2_1stOrder)</span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="modelos-lineares.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dados<span class="sc">$</span>D_Area)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-14-3.png" width="672" /></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="modelos-lineares.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dados<span class="sc">$</span>VR_CO2_1stOrder)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-14-4.png" width="672" /></p>
-<p>O Boxplot não apresentou a existência de outliers, porém, pelo histograma é possível identificar possíveis outliers. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote <code>outliers</code> pode ser utilizado, já que a função <code>outlier()</code> consegue encontrar o valor mais distante da média das variáveis.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="modelos-lineares.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Encontrando os valores com maior diferença da média com o pacote `outliers`</span></span>
-<span id="cb42-2"><a href="modelos-lineares.html#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="modelos-lineares.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(outliers)</span></code></pre></div>
+<p>A partir da análise dos resíduos, foi possível inferir que as observações 48, 50 e 51 são outliers influentes. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote <code>outliers</code> pode ser utilizado, já que a função <code>outlier()</code> consegue encontrar o valor mais distante da média das variáveis.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="modelos-lineares.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Encontrando os valores com maior diferença da média com o pacote `outliers`</span></span>
+<span id="cb41-2"><a href="modelos-lineares.html#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="modelos-lineares.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(outliers)</span></code></pre></div>
 <pre><code>## Warning: package &#39;outliers&#39; was built under R version 4.1.3</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="modelos-lineares.html#cb44-1" aria-hidden="true" tabindex="-1"></a>outArea <span class="ot">&lt;-</span> <span class="fu">outlier</span>(dados<span class="sc">$</span>D_Area)</span>
-<span id="cb44-2"><a href="modelos-lineares.html#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="modelos-lineares.html#cb44-3" aria-hidden="true" tabindex="-1"></a>outCO2 <span class="ot">&lt;-</span> <span class="fu">outlier</span>(dados<span class="sc">$</span>VR_CO2_1stOrder)</span>
-<span id="cb44-4"><a href="modelos-lineares.html#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-5"><a href="modelos-lineares.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(outArea)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="modelos-lineares.html#cb43-1" aria-hidden="true" tabindex="-1"></a>outArea <span class="ot">&lt;-</span> <span class="fu">outlier</span>(dados<span class="sc">$</span>D_Area)</span>
+<span id="cb43-2"><a href="modelos-lineares.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="modelos-lineares.html#cb43-3" aria-hidden="true" tabindex="-1"></a>outCO2 <span class="ot">&lt;-</span> <span class="fu">outlier</span>(dados<span class="sc">$</span>VR_CO2_1stOrder)</span>
+<span id="cb43-4"><a href="modelos-lineares.html#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="modelos-lineares.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(outArea)</span></code></pre></div>
 <pre><code>## [1] 2905900</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="modelos-lineares.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(outCO2)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="modelos-lineares.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(outCO2)</span></code></pre></div>
 <pre><code>## [1] 1416</code></pre>
-<p>Com esse resultado, analisa-se que existe grande possibilidade de existirem outliers no conjunto de dados. Além disso, a hipótese de que o resultado dos resíduos indica que seja necessário um maior conjunto de dados também é uma possibilidade.</p>
+<p>Com esse resultado, analisa-se que existe grande possibilidade de existirem outliers no conjunto de dados, já que as observações 48, 50 e 51 apresentam-se extremas e influentes no modelo de regressão. Além disso, a hipótese de que o resultado dos resíduos indica que seja necessário um maior conjunto de dados também é uma possibilidade.</p>
 <p>Após todos os testes, por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="modelos-lineares.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Diagrama de dispersão com o ajuste</span></span>
-<span id="cb48-2"><a href="modelos-lineares.html#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="modelos-lineares.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> dados<span class="sc">$</span>D_Area, <span class="at">y =</span> dados<span class="sc">$</span>VR_CO2_1stOrder, <span class="at">xlab =</span> <span class="st">&quot;Área desmatada no ano&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Emissão de CO2 de 1a ordem&quot;</span>)</span>
-<span id="cb48-4"><a href="modelos-lineares.html#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-5"><a href="modelos-lineares.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="modelos-lineares.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Diagrama de dispersão com o ajuste</span></span>
+<span id="cb47-2"><a href="modelos-lineares.html#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="modelos-lineares.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> dados<span class="sc">$</span>D_Area, <span class="at">y =</span> dados<span class="sc">$</span>VR_CO2_1stOrder, <span class="at">xlab =</span> <span class="st">&quot;Área desmatada no ano&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Emissão de CO2 de 1a ordem&quot;</span>)</span>
+<span id="cb47-4"><a href="modelos-lineares.html#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="modelos-lineares.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<p>É importante afirmar que as estatísticas calculadas não implicam causalidade, mas quantificam a relação entre as variáveis selecionadas para o modelo. Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de <span class="math inline">\(CO_2\)</span> na Amazônia Legal.</p>
+<p>É importante afirmar que as estatísticas calculadas não implicam causalidade, mas quantificam a relação entre as variáveis selecionadas para o modelo. Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de <span class="math inline">\(CO_2\)</span> na Amazônia Legal. Portanto, seria importante refazer o modelo, de forma que os outliers (observações 48, 50 e 51) sejam retirados, para verificar se este novo modelo estaria mais adequado para representar a relação entre as variáveis.</p>
 <p>#Referências Bibliográficas {-}</p>
 <p>Montgomery, Douglas C.; Runger, George C.. <strong>Estatística aplicada e probabilidade para engenheiros</strong>. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.</p>
 <p>SIDHU, Rishi. <strong>Layman’s Introduction to Linear Regression</strong>. Disponível em: <a href="https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09" class="uri">https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09</a></p>
 <p>R DOCUMENTATION. <em>shapiro.test(x)</em>. Disponível em: <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test" class="uri">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test</a></p>
 <p><a href="https://periodicos.ufpe.br/revistas/politicahoje/article/viewFile/3852/3156" class="uri">https://periodicos.ufpe.br/revistas/politicahoje/article/viewFile/3852/3156</a></p>
+<p><a href="https://towardsdatascience.com/identifying-outliers-in-linear-regression-cooks-distance-9e212e9136a#" class="uri">https://towardsdatascience.com/identifying-outliers-in-linear-regression-cooks-distance-9e212e9136a#</a>:~:text=One%20method%20that%20is%20often,the%20ith%20observation%20is%20removed.</p>
 
 </div>
 </div>
