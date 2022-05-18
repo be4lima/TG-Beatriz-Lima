@@ -236,7 +236,6 @@ dados_sem_outliers <- dados[!dados %in% out_influentes]
 length(dados)
 length(dados_sem_outliers)
 
-View(dados_sem_outliers2)
 
 mod2<- lm(VR_CO2_1stOrder ~ D_Area, data=dados_sem_outliers)
 
