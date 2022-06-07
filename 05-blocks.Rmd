@@ -1,4 +1,7 @@
-# Blocks
+# Análise geoespacial
+
+## Dados espaciais e geoespaciais
+Dados espaciais são os que utilizam o sistema de coordenadas cartesianas com três (x, y e z) ou mais dimensões. Dados geoespaciais são dados que podem ser mapeados no planeta Terra e relacionadas com outros dados baseados em sistemas de coordenadas geográficas. 
 
 ## Equations
 
@@ -24,7 +27,4 @@ $$a^2 + b^2 = c^2$$
 
 Read more here <https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html>.
 
-## Callout blocks
-
-
-The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html
+## Referências Biliográficas {-}

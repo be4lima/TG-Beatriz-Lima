@@ -5,7 +5,7 @@ Resumidamente, modelos lineares são utilizados para resumir relações observad
 ## Covariância
 A *Covariância*, denotada $\sigma_{xy}$, descreve a variação, em relação a média, entre duas variáveis. 
 
-$cov(x,y) = \frac{\sum(x_i - \overline{x})}{n-1}$
+$$cov(x,y) = \frac{\sum(x_i - \overline{x})}{n-1}$$
 
 Portanto, é possível saber se ambas variáveis desviam na mesma direção (covariância positiva) ou se desviam em direções opostas (covariância negativa). Caso a covariância entre duas variáveis seja zero, a conclusão é que as variáveis são independentes. 
 
@@ -14,7 +14,7 @@ Portanto, é possível saber se ambas variáveis desviam na mesma direção (cov
 
 A **Correlação** é útil para medir a relação linear entre duas variáveis x e y, denotada por $\rho_{xy}$.
 
-$\rho_xy = \frac{cov(x,Y)}{\sqrt(V(x)V(Y))}$
+$$\rho_xy = \frac{cov(x,Y)}{\sqrt(V(x)V(Y))}$$
 
 Sendo assim, duas variáveis podem estar relacionadas das seguintes formas:
 
@@ -42,7 +42,7 @@ O consenso é que quanto mais próximo de 1, maior a força da relação linear 
 
 A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da **regressão linear simples**, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo de regressão linear é:
 
-$Y = \beta_0 + \beta_1X_1 + e_1$, sendo $\beta_0$ o coeficiente do intercepto, $\beta_1$ o coeficiente de inclinação, $e_1$ o erro no ajuste do modelo para a observação y.
+$$Y = \beta_0 + \beta_1X_1 + e_1$$, sendo $\beta_0$ o coeficiente do intercepto, $\beta_1$ o coeficiente de inclinação, $e_1$ o erro no ajuste do modelo para a observação y.
 
 De acordo com Montgomery & Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, "*a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,* $\beta_1$*, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro* $\sigma^2$". Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x. 
 
@@ -242,6 +242,7 @@ mod2<- lm(VR_CO2_1stOrder ~ D_Area, data=dados_sem_outliers)
 summary(mod2)
 
 plot(mod2)
+
 ```
 
 Referências Bibliográficas {-}

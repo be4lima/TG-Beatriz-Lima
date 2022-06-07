@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 5 Footnotes and citations | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
+  <title>Capítulo 4 Modelos não-lineares e multivariados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 5 Footnotes and citations | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta property="og:title" content="Capítulo 4 Modelos não-lineares e multivariados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   <meta property="og:type" content="book" />
   
   
@@ -20,7 +20,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 5 Footnotes and citations | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta name="twitter:title" content="Capítulo 4 Modelos não-lineares e multivariados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -37,8 +37,8 @@ set in the _output.yml file.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="modelos-não-lineares-e-multivariados.html"/>
-<link rel="next" href="análise-geoespacial.html"/>
+<link rel="prev" href="modelos-lineares.html"/>
+<link rel="next" href="footnotes-and-citations.html"/>
 <script src="libs/header-attrs-2.12/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -243,28 +243,17 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="footnotes-and-citations" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Capítulo 5</span> Footnotes and citations<a href="footnotes-and-citations.html#footnotes-and-citations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="footnotes" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Footnotes<a href="footnotes-and-citations.html#footnotes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Footnotes are put inside the square brackets after a caret <code>^[]</code>. Like this one <a href="references.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
-</div>
-<div id="citations" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Citations<a href="footnotes-and-citations.html#citations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Reference items in your bibliography file(s) using <code>@key</code>.</p>
-<p>For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="#ref-R-bookdown" role="doc-biblioref">Xie 2021</a>)</span> (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span> (this citation was added manually in an external file book.bib).
-Note that the <code>.bib</code> files need to be listed in the index.Rmd with the YAML <code>bibliography</code> key.</p>
-<p>The RStudio Visual Markdown Editor can also make it easier to insert citations: <a href="https://rstudio.github.io/visual-markdown-editing/#/citations" class="uri">https://rstudio.github.io/visual-markdown-editing/#/citations</a></p>
+<div id="modelos-não-lineares-e-multivariados" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Capítulo 4</span> Modelos não-lineares e multivariados<a href="modelos-não-lineares-e-multivariados.html#modelos-não-lineares-e-multivariados" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>A análise de regressão linear (ARL), conforme apresentado no capítulo anterior, exige suposições que nem sempre são satisfeitas, como normalidade, linearidade, independência e homocedasticidade dos erros. Em situações práticas, isso acaba se tornando uma limitação porque muitos fenômenos geralmente não são lineares. Em diversas aplicações, são envolvidas situações em que há mais de uma variável independente (ou regressora).</p>
+<p>Portanto, em geral, a variável dependente (Y) pode relacionar-se com k variáveis regressoras:</p>
+<p><span class="math display">\[Y=\beta_0+\beta_1x_1+\beta_2x_2...+\beta_kx_k+\epsilon \]</span></p>
+<p>Em modelos mais complexos que o apresentado anteriormente também é possível aplicar a regressão linear múltipla, a partir de aproximações como no caso de <span class="math inline">\(x_1=x, x_2=x^2, x_3=x^3\)</span>, por mais que a superfície gerada pelo modelo não seja linear. Conforme Montgomery &amp; Runger (2021), “qualquer modelo de regressão que seja linear nos parâmetros (os <span class="math inline">\(\beta\)</span>), independentemente da forma da superfície que ele gere, é um modelo de regressão linear.”</p>
+<div id="referências-bibliográficas" class="section level2 unnumbered hasAnchor">
+<h2>Referências Bibliográficas<a href="modelos-não-lineares-e-multivariados.html#referências-bibliográficas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>MATTOS, Thalita do Bem. <em>Modelos Não Lineares e suas Aplicações</em>. Universidade Federal de Juiz de Fora, Juiz de Fora, 2013. Disponível em: <a href="https://www.ufjf.br/cursoestatistica/files/2014/04/Modelos-N%C3%A3o-Lineares-e-suas-Aplica%C3%A7%C3%B5es.pdf" class="uri">https://www.ufjf.br/cursoestatistica/files/2014/04/Modelos-N%C3%A3o-Lineares-e-suas-Aplica%C3%A7%C3%B5es.pdf</a> Acesso em: 07/06/2022.</p>
+<p>Montgomery, Douglas C.; Runger, George C.. <strong>Estatística aplicada e probabilidade para engenheiros</strong>. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-xie2015" class="csl-entry">
-Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.org/knitr/">http://yihui.org/knitr/</a>.
-</div>
-<div id="ref-R-bookdown" class="csl-entry">
-———. 2021. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
 </div>
 </div>
             </section>
@@ -272,8 +261,8 @@ Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd 
           </div>
         </div>
       </div>
-<a href="modelos-não-lineares-e-multivariados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="análise-geoespacial.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modelos-lineares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="footnotes-and-citations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -304,7 +293,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-citations.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-parts.Rmd",
 "text": "Edit"
 },
 "history": {

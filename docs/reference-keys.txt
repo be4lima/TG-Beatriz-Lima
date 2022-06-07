@@ -30,14 +30,14 @@ coeficiente-de-pearson-r
 regressão-linear-simples
 condições
 coeficiente-de-determinação-r²
-parts
+modelos-não-lineares-e-multivariados
 footnotes-and-citations
 footnotes
 citations
-blocks
+análise-geoespacial
+dados-espaciais-e-geoespaciais
 equations
 theorems-and-proofs
-callout-blocks
 sharing-your-book
 publishing
 pages

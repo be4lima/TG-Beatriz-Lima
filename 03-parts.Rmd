@@ -1,12 +1,16 @@
-# Parts
+# Modelos não-lineares e multivariados
 
-You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file. 
+A análise de regressão linear (ARL), conforme apresentado no capítulo anterior, exige suposições que nem sempre são satisfeitas, como normalidade, linearidade, independência e homocedasticidade dos erros. Em situações práticas, isso acaba se tornando uma limitação porque muitos fenômenos geralmente não são lineares. Em diversas aplicações, são envolvidas situações em que há mais de uma variável independente (ou regressora).
 
-Add a numbered part: `# (PART) Act one {-}` (followed by `# A chapter`)
+Portanto, em geral, a variável dependente (Y) pode relacionar-se com k variáveis regressoras:
 
-Add an unnumbered part: `# (PART\*) Act one {-}` (followed by `# A chapter`)
+$$Y=\beta_0+\beta_1x_1+\beta_2x_2...+\beta_kx_k+\epsilon $$
 
-Add an appendix as a special kind of un-numbered part: `# (APPENDIX) Other stuff {-}` (followed by `# A chapter`). Chapters in an appendix are prepended with letters instead of numbers.
+Em modelos mais complexos que o apresentado anteriormente também é possível aplicar a regressão linear múltipla, a partir de aproximações como no caso de $x_1=x, x_2=x^2, x_3=x^3$, por mais que a superfície gerada pelo modelo não seja linear. Conforme Montgomery & Runger (2021), "qualquer modelo de regressão que seja linear nos parâmetros (os $\beta$), independentemente da forma da superfície que ele gere, é um modelo de regressão linear."
 
 
+## Referências Bibliográficas {-}
 
+MATTOS, Thalita do Bem. *Modelos Não Lineares e suas Aplicações*. Universidade Federal de Juiz de Fora, Juiz de Fora, 2013. Disponível em: <https://www.ufjf.br/cursoestatistica/files/2014/04/Modelos-N%C3%A3o-Lineares-e-suas-Aplica%C3%A7%C3%B5es.pdf> Acesso em: 07/06/2022.
+
+Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
