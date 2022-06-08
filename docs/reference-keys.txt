@@ -42,3 +42,8 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
+url-your-book-url-like-httpsbookdown.orgyihuibookdown
+modelos-de-regressão-linear-múltipla
+testes-de-hipótese
+modelos-de-regressão
+linear-múltipla

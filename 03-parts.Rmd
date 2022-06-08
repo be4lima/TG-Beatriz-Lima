@@ -1,4 +1,6 @@
-# Modelos não-lineares e multivariados
+# Modelos de Regressão 
+
+## Linear múltipla
 
 A análise de regressão linear (ARL), conforme apresentado no capítulo anterior, exige suposições que nem sempre são satisfeitas, como normalidade, linearidade, independência e homocedasticidade dos erros. Em situações práticas, isso acaba se tornando uma limitação porque muitos fenômenos geralmente não são lineares. Em diversas aplicações, são envolvidas situações em que há mais de uma variável independente (ou regressora).
 
@@ -6,7 +8,10 @@ Portanto, em geral, a variável dependente (Y) pode relacionar-se com k variáve
 
 $$Y=\beta_0+\beta_1x_1+\beta_2x_2...+\beta_kx_k+\epsilon $$
 
-Em modelos mais complexos que o apresentado anteriormente também é possível aplicar a regressão linear múltipla, a partir de aproximações como no caso de $x_1=x, x_2=x^2, x_3=x^3$, por mais que a superfície gerada pelo modelo não seja linear. Conforme Montgomery & Runger (2021), "qualquer modelo de regressão que seja linear nos parâmetros (os $\beta$), independentemente da forma da superfície que ele gere, é um modelo de regressão linear."
+Em modelos mais complexos que o apresentado anteriormente, também é possível aplicar a regressão linear múltipla, a partir de aproximações como, por exemplo, $x_1=x, x_2=x^2, x_3=x^3$, ainda que a superfície gerada pelo modelo não seja linear. Conforme Montgomery & Runger (2021), "qualquer modelo de regressão que seja linear nos parâmetros (os $\beta$), independentemente da forma da superfície que ele gere, é um modelo de regressão linear."
+
+## Testes de hipótese
+
 
 
 ## Referências Bibliográficas {-}
