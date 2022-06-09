@@ -229,12 +229,7 @@ Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de f
 É isso que faremos:
 
 ```{r}
-nomes_influentes <- names(influentes)
-out_influentes <- dados[nomes_influentes,]
-dados_sem_outliers <- dados[!dados %in% out_influentes]
-
-length(dados)
-length(dados_sem_outliers)
+dados_sem_outliers <- dados[-c(48,50,51,52,60,61),]
 
 
 mod2<- lm(VR_CO2_1stOrder ~ D_Area, data=dados_sem_outliers)
@@ -245,7 +240,7 @@ plot(mod2)
 
 ```
 
-Referências Bibliográficas {-}
+## Referências Bibliográficas {-}
 
 Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
 

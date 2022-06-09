@@ -30,7 +30,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-06-07" />
+<meta name="date" content="2022-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -38,7 +38,7 @@ set in the _output.yml file.</p>" />
   
   
 <link rel="prev" href="análise-exploratória-de-dados.html"/>
-<link rel="next" href="modelos-não-lineares-e-multivariados.html"/>
+<link rel="next" href="modelos-de-regressão.html"/>
 <script src="libs/header-attrs-2.12/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -199,10 +199,13 @@ div.csl-indent {
 <li class="chapter" data-level="3.3.2" data-path="modelos-lineares.html"><a href="modelos-lineares.html#coeficiente-de-determinação-r²"><i class="fa fa-check"></i><b>3.3.2</b> Coeficiente de Determinação (R²)<span></span></a></li>
 </ul></li>
 <li><a href="modelos-lineares.html#aplicação-1">Aplicação<span></span></a></li>
+<li><a href="modelos-lineares.html#referências-bibliográficas">Referências Bibliográficas<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modelos-não-lineares-e-multivariados.html"><a href="modelos-não-lineares-e-multivariados.html"><i class="fa fa-check"></i><b>4</b> Modelos não-lineares e multivariados<span></span></a>
+<li class="chapter" data-level="4" data-path="modelos-de-regressão.html"><a href="modelos-de-regressão.html"><i class="fa fa-check"></i><b>4</b> Modelos de Regressão<span></span></a>
 <ul>
-<li><a href="modelos-não-lineares-e-multivariados.html#referências-bibliográficas">Referências Bibliográficas<span></span></a></li>
+<li class="chapter" data-level="4.1" data-path="modelos-de-regressão.html"><a href="modelos-de-regressão.html#linear-múltipla"><i class="fa fa-check"></i><b>4.1</b> Linear múltipla<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="modelos-de-regressão.html"><a href="modelos-de-regressão.html#testes-de-hipótese"><i class="fa fa-check"></i><b>4.2</b> Testes de hipótese<span></span></a></li>
+<li><a href="modelos-de-regressão.html#referências-bibliográficas-1">Referências Bibliográficas<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations<span></span></a>
 <ul>
@@ -485,38 +488,35 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de <span class="math inline">\(CO_2\)</span> na Amazônia Legal. Portanto, torna-se importante refazer o modelo, de forma que os outliers influentes (observações 48, 50, 51, 52, 60 e 61) sejam retirados, para verificar se este novo modelo estaria mais adequado para representar a relação entre as variáveis.</p>
 <p>É isso que faremos:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modelos-lineares.html#cb50-1" aria-hidden="true" tabindex="-1"></a>nomes_influentes <span class="ot">&lt;-</span> <span class="fu">names</span>(influentes)</span>
-<span id="cb50-2"><a href="modelos-lineares.html#cb50-2" aria-hidden="true" tabindex="-1"></a>out_influentes <span class="ot">&lt;-</span> dados[nomes_influentes,]</span>
-<span id="cb50-3"><a href="modelos-lineares.html#cb50-3" aria-hidden="true" tabindex="-1"></a>dados_sem_outliers <span class="ot">&lt;-</span> dados[<span class="sc">!</span>dados <span class="sc">%in%</span> out_influentes]</span>
-<span id="cb50-4"><a href="modelos-lineares.html#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-5"><a href="modelos-lineares.html#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(dados)</span></code></pre></div>
-<pre><code>## [1] 15</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="modelos-lineares.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(dados_sem_outliers)</span></code></pre></div>
-<pre><code>## [1] 15</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="modelos-lineares.html#cb54-1" aria-hidden="true" tabindex="-1"></a>mod2<span class="ot">&lt;-</span> <span class="fu">lm</span>(VR_CO2_1stOrder <span class="sc">~</span> D_Area, <span class="at">data=</span>dados_sem_outliers)</span>
-<span id="cb54-2"><a href="modelos-lineares.html#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-3"><a href="modelos-lineares.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modelos-lineares.html#cb50-1" aria-hidden="true" tabindex="-1"></a>dados_sem_outliers <span class="ot">&lt;-</span> dados[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">48</span>,<span class="dv">50</span>,<span class="dv">51</span>,<span class="dv">52</span>,<span class="dv">60</span>,<span class="dv">61</span>),]</span>
+<span id="cb50-2"><a href="modelos-lineares.html#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="modelos-lineares.html#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="modelos-lineares.html#cb50-4" aria-hidden="true" tabindex="-1"></a>mod2<span class="ot">&lt;-</span> <span class="fu">lm</span>(VR_CO2_1stOrder <span class="sc">~</span> D_Area, <span class="at">data=</span>dados_sem_outliers)</span>
+<span id="cb50-5"><a href="modelos-lineares.html#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="modelos-lineares.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = VR_CO2_1stOrder ~ D_Area, data = dados_sem_outliers)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -12.178 -12.178  -3.886   1.503  46.689 
+##    Min     1Q Median     3Q    Max 
+## -5.408 -5.408 -2.126  1.689 30.958 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 2.005e+01  4.593e+00   4.364 5.21e-05 ***
-## D_Area      4.783e-04  3.134e-06 152.615  &lt; 2e-16 ***
+## (Intercept) 9.199e+00  2.461e+00   3.739 0.000455 ***
+## D_Area      4.832e-04  1.626e-06 297.158  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 15.35 on 59 degrees of freedom
-## Multiple R-squared:  0.9975, Adjusted R-squared:  0.9974 
-## F-statistic: 2.329e+04 on 1 and 59 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modelos-lineares.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2)</span></code></pre></div>
+## Residual standard error: 7.716 on 53 degrees of freedom
+## Multiple R-squared:  0.9994, Adjusted R-squared:  0.9994 
+## F-statistic: 8.83e+04 on 1 and 53 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="modelos-lineares.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2)</span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-18-1.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-18-2.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-18-3.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-18-4.png" width="672" /></p>
-<p>Referências Bibliográficas {-}</p>
+</div>
+<div id="referências-bibliográficas" class="section level2 unnumbered hasAnchor">
+<h2>Referências Bibliográficas<a href="modelos-lineares.html#referências-bibliográficas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Montgomery, Douglas C.; Runger, George C.. <strong>Estatística aplicada e probabilidade para engenheiros</strong>. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.</p>
 <p>SIDHU, Rishi. <strong>Layman’s Introduction to Linear Regression</strong>. Disponível em: <a href="https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09" class="uri">https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09</a></p>
 <p>R DOCUMENTATION. <em>shapiro.test(x)</em>. Disponível em: <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test" class="uri">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test</a>.</p>
@@ -531,7 +531,7 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
         </div>
       </div>
 <a href="análise-exploratória-de-dados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="modelos-não-lineares-e-multivariados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modelos-de-regressão.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

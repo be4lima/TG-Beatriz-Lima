@@ -30,7 +30,9 @@ coeficiente-de-pearson-r
 regressão-linear-simples
 condições
 coeficiente-de-determinação-r²
-modelos-não-lineares-e-multivariados
+modelos-de-regressão
+linear-múltipla
+testes-de-hipótese
 footnotes-and-citations
 footnotes
 citations
@@ -42,8 +44,3 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
-url-your-book-url-like-httpsbookdown.orgyihuibookdown
-modelos-de-regressão-linear-múltipla
-testes-de-hipótese
-modelos-de-regressão
-linear-múltipla
