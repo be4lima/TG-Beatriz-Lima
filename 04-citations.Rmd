@@ -1,6 +1,26 @@
-# Footnotes and citations 
+# Análise de séries temporais
 
-## Footnotes
+Qualquer conjunto de observações ordenadas no tempo são chamadas de Séries Temporais. No caso da Engenharia Ambiental e Urbana, podem ser citados alguns exemplos: valores diários de poluição, valores mensais de temperatura, temperaturas máximas e mínimas diárias ou precipitação atmosférica anual em uma cidade, entre outros (Morettin, 2018). 
+
+É suposto que, em uma análise de série temporal, "*há um sistema causal mais ou menos constante, relacionado com o tempo, que exerceu influência sobre os dados no passado e pode continuar a fazê-lo no futuro. Este sistema causal costuma atuar criando padrões não aleatórios que podem ser detectados em um gráfico da série temporal, ou mediante algum outro processo estatístico*" (REIS, 2022).
+
+É importante citar que identificar esses padrões não aleatórios na série temporal de uma variável de interesse é o objetivo da análise. A partir dessa identificação, é possível realizar previsões, orientando tomadas de decisões na área de interesse (REIS, 2022).
+
+De acordo com Reis (2022), séries temporais são compostas por até quatro padrões:
+
+1) *tendência (T), que é o comportamento de longo prazo da série, que pode ser causada pelo crescimento demográfico, ou mudança gradual de hábitos de consumo, ou qualquer outro aspecto que afete a variável de interesse no longo prazo;*
+
+2) *variações cíclicas ou ciclos (C), flutuações nos valores da variável com duração superior a um ano, e que se repetem com certa periodicidade, que podem ser resultado de variações da economia como períodos de crescimento ou recessão, ou fenômenos climáticos como o El Niño (que se repete com periodicidade superior a um ano);*
+
+3) *variações sazonais ou sazonalidade (S), flutuações nos valores da variável com duração inferior a um ano, e que se repetem todos os anos, geralmente em função das estações do ano (ou em função de feriados ou festas populares, ou por exigências legais, como o período para entrega da declaração de Imposto de Renda); se os dados forem registrados anualmente NÃO haverá influência da sazonalidade na série;*
+
+4) *variações irregulares (I), que são as flutuações inexplicáveis, resultado de fatos fortuitos e inesperados como catástrofes naturais, atentados terroristas como o de 11 de setembro de 2001, decisões intempestivas de governos, etc.*
+
+É importante citar que uma série temporal nem sempre apresentará todos os padrões citados acima, por mais que o modelo clássico seja o apropriado para analisá-la.
+
+Conforme Morettin (2018), existem dois enfoques na análise de séries temporais: 1) análise feita no domínio temporal e os modelos propostos possuem um número finito de parâmetros (paramétricos) e 2) análise feita do domínio de frequências e os modelos propostos são não paramétricos. 
+
+## Modelos para séries temporais
 
 Footnotes are put inside the square brackets after a caret `^[]`. Like this one ^[This is a footnote.]. 
 
@@ -13,3 +33,8 @@ Note that the `.bib` files need to be listed in the index.Rmd with the YAML `bib
 
 
 The RStudio Visual Markdown Editor can also make it easier to insert citations: <https://rstudio.github.io/visual-markdown-editing/#/citations>
+
+## Referências Bibliográficas {-}
+MORETTIN, Pedro A. Análise de Séries Temporais. Editora Blucher, 2018. 9788521213529. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9788521213529/. Acesso em: 10 jun. 2022.
+
+REIS, Marcelo Menezes. Análise de séries temporais. Santa Catarina, UFSC, 2022. Disponível em: <https://www.inf.ufsc.br/~marcelo.menezes.reis/Cap4.pdf> Acesso em: 10/06/2022.

@@ -240,7 +240,7 @@ plot(mod2)
 
 ```
 
-## Referências Bibliográficas {-}
+##Referências Bibliográficas {-}
 
 Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
 
