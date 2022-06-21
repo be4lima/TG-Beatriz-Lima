@@ -35,6 +35,9 @@ Note that the `.bib` files need to be listed in the index.Rmd with the YAML `bib
 The RStudio Visual Markdown Editor can also make it easier to insert citations: <https://rstudio.github.io/visual-markdown-editing/#/citations>
 
 ## Referências Bibliográficas {-}
+
+BARROS, Anna C.; MATTOS, Daiane Marcolino D.; OLIVEIRA, Ingrid Christyne Luquett D.; et al. **Análise de Séries Temporais em R: Curso Introdutório**. Grupo GEN, 2017. 9788595154902. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9788595154902/. Acesso em: 21 jun. 2022.
+
 MORETTIN, Pedro A. Análise de Séries Temporais. Editora Blucher, 2018. 9788521213529. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9788521213529/. Acesso em: 10 jun. 2022.
 
 REIS, Marcelo Menezes. Análise de séries temporais. Santa Catarina, UFSC, 2022. Disponível em: <https://www.inf.ufsc.br/~marcelo.menezes.reis/Cap4.pdf> Acesso em: 10/06/2022.

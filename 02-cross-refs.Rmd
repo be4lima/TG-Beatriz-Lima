@@ -74,14 +74,57 @@ De acordo com Montgomery (2021), o R² pode trazer interpretações errôneas, j
 
 ## Aplicação {-}
 
-Para a aplicação serão utilizados dados de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de 1ª ordem de $CO_2$ na Amazônia Legal.A estimativa de 1ª ordem supõe que, de modo simplificado, 100% das emissões ocorreram no momento da mudança de uso/cobertura.
+### Estudo de Caso 1
+Para a primeira aplicação, será realizado o exercício 12-14 do livro do autor Montgomery et al (2016) chamado Estatistica Aplicada e Probabilidade para Engenheiros. O enunciado é o seguinte: ""
+
+```{r}
+options("install.lock"=FALSE)
+## Carregar pacotes que serão usados
+library(tidyverse)
+library(ggplot2)
+
+setwd("C:/Users/Luiz Arthur/Dropbox/PC/Documents/UFABC Beatriz/TG Beatriz Lima/Dados")
+
+## Criação do dataframe
+
+dados <- read.delim("Exemplo_12-14_Montgomery.txt")
+View(dados)
+
+## Regressão linear
+mod1 <- lm(Qualidade ~Claridade + Aroma + Corpo + Sabor + Afinacao, dados)
+summary(mod1)
+plot(mod1)
+
+```
+Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo. Os resíduos não podem apresentar uma tendência e, por isso, eles serão analisado abaixo.
+ 
+ - Residuals vs Fitted
+ 
+O gráfico mostra a relação entre os resíduos e os valores ajustados. Como a distribuição dos resíduos próxima à linha pontilhada demonsta um bom ajuste do modelo, é possível verificar se resíduos tem padrões não-lineares. No caso do nosso modelo,
+ 
+ - Normal Q-Q
+ 
+O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada. Pelo gráfico é possível perceber que a distribuição dos resíduos está 
+  
+ - Scale-Location
+ 
+O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade. O ideal, no caso, seria que os resíduos estivessem uniformemente distribuídos ao redor da linha vermelha. Para o caso do nosso modelo, 
+  
+ - Residuals vs Leverage
+ 
+O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. No caso do modelo criado, há possibilidade 
+
+ - Cook's distance
+ 
+A Distância de Cook informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações 48, 50 e 51 são extremas. 
+
+### Estudo de Caso 2
+Para o segundo estudo de caso serão utilizados dados de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de 1ª ordem de $CO_2$ na Amazônia Legal.A estimativa de 1ª ordem supõe que, de modo simplificado, 100% das emissões ocorreram no momento da mudança de uso/cobertura.
 
 Um **primeiro passo** será carregar os dados:
 
 ```{r}
 options("install.lock"=FALSE)
-
-## Carregar pacotes que serão usados
 
 
 ## Checando repositório
@@ -241,6 +284,8 @@ plot(mod2)
 ```
 
 ##Referências Bibliográficas {-}
+
+CHAPRA, Steven C. **Métodos Numéricos Aplicados com MATLAB® para Engenheiros e Cientistas**. Grupo A, 2013. 9788580551778. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9788580551778/. Acesso em: 21 jun. 2022.
 
 Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
 

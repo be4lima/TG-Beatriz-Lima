@@ -30,11 +30,12 @@ coeficiente-de-pearson-r
 regressão-linear-simples
 condições
 coeficiente-de-determinação-r²
-modelos-de-regressão
-linear-múltipla
+estudo-de-caso-1
+estudo-de-caso-2
+modelos-lineares-generalizados
 testes-de-hipótese
-footnotes-and-citations
-footnotes
+análise-de-séries-temporais
+modelos-para-séries-temporais
 citations
 análise-geoespacial
 dados-espaciais-e-geoespaciais
