@@ -2,6 +2,9 @@
 title: "Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações"
 author: "Beatriz Morais Lima e Wallace Gusmão Ferreira"
 date: "`r Sys.Date()`"
+output:
+    html_document:
+      theme: cerulean
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

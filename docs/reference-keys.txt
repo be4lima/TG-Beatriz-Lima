@@ -28,7 +28,7 @@ covariância
 correlação
 coeficiente-de-pearson-r
 regressão-linear-simples
-condições
+Condicoes
 coeficiente-de-determinação-r²
 estudo-de-caso-1
 estudo-de-caso-2

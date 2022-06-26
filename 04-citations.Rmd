@@ -6,19 +6,17 @@ Qualquer conjunto de observações ordenadas no tempo são chamadas de Séries T
 
 É importante citar que identificar esses padrões não aleatórios na série temporal de uma variável de interesse é o objetivo da análise. A partir dessa identificação, é possível realizar previsões, orientando tomadas de decisões na área de interesse (REIS, 2022).
 
-De acordo com Reis (2022), séries temporais são compostas por até quatro padrões:
+De acordo com Reis (2022) e Barros et. al (2022), séries temporais são compostas pelos seguintes padrões:
 
-1) *tendência (T), que é o comportamento de longo prazo da série, que pode ser causada pelo crescimento demográfico, ou mudança gradual de hábitos de consumo, ou qualquer outro aspecto que afete a variável de interesse no longo prazo;*
+1) Tendência (T): série temporal que segue determinada direção, não necessariamente linear, podendo também ser crescente ou decrescente. Exemplos podem ser: crescimento demográfico, ou mudança gradual de hábitos de consumo, ou qualquer outro aspecto que afete a variável de interesse no longo prazo;
 
-2) *variações cíclicas ou ciclos (C), flutuações nos valores da variável com duração superior a um ano, e que se repetem com certa periodicidade, que podem ser resultado de variações da economia como períodos de crescimento ou recessão, ou fenômenos climáticos como o El Niño (que se repete com periodicidade superior a um ano);*
+2) Variações cíclicas ou ciclos (C), flutuações nos valores da variável com duração superior a um ano, e que se repetem com certa periodicidade, que podem ser resultado de variações da economia como períodos de crescimento ou recessão, ou fenômenos climáticos como o El Niño (que se repete com periodicidade superior a um ano);*
 
 3) *variações sazonais ou sazonalidade (S), flutuações nos valores da variável com duração inferior a um ano, e que se repetem todos os anos, geralmente em função das estações do ano (ou em função de feriados ou festas populares, ou por exigências legais, como o período para entrega da declaração de Imposto de Renda); se os dados forem registrados anualmente NÃO haverá influência da sazonalidade na série;*
 
 4) *variações irregulares (I), que são as flutuações inexplicáveis, resultado de fatos fortuitos e inesperados como catástrofes naturais, atentados terroristas como o de 11 de setembro de 2001, decisões intempestivas de governos, etc.*
 
-É importante citar que uma série temporal nem sempre apresentará todos os padrões citados acima, por mais que o modelo clássico seja o apropriado para analisá-la.
-
-Conforme Morettin (2018), existem dois enfoques na análise de séries temporais: 1) análise feita no domínio temporal e os modelos propostos possuem um número finito de parâmetros (paramétricos) e 2) análise feita do domínio de frequências e os modelos propostos são não paramétricos. 
+Ressalta-se que podem ser encontradas combinações desses padrões em diversos tipos de dados para séries temporais (BARROS et. al, 2022).
 
 ## Modelos para séries temporais
 
