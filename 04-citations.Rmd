@@ -8,9 +8,9 @@ Qualquer conjunto de observações ordenadas no tempo são chamadas de Séries T
 
 De acordo com Reis (2022) e Barros et. al (2022), séries temporais são compostas pelos seguintes padrões:
 
-1) Tendência (T): série temporal que segue determinada direção, não necessariamente linear, podendo também ser crescente ou decrescente. Exemplos podem ser: crescimento demográfico, ou mudança gradual de hábitos de consumo, ou qualquer outro aspecto que afete a variável de interesse no longo prazo;
+1) *Tendência (T): série temporal que segue determinada direção, não necessariamente linear, podendo também ser crescente ou decrescente. Exemplos podem ser: crescimento demográfico, ou mudança gradual de hábitos de consumo, ou qualquer outro aspecto que afete a variável de interesse no longo prazo;*
 
-2) Variações cíclicas ou ciclos (C), flutuações nos valores da variável com duração superior a um ano, e que se repetem com certa periodicidade, que podem ser resultado de variações da economia como períodos de crescimento ou recessão, ou fenômenos climáticos como o El Niño (que se repete com periodicidade superior a um ano);*
+2) *Variações cíclicas ou ciclos (C), flutuações nos valores da variável com duração superior a um ano, e que se repetem com certa periodicidade, que podem ser resultado de variações da economia como períodos de crescimento ou recessão, ou fenômenos climáticos como o El Niño (que se repete com periodicidade superior a um ano);*
 
 3) *variações sazonais ou sazonalidade (S), flutuações nos valores da variável com duração inferior a um ano, e que se repetem todos os anos, geralmente em função das estações do ano (ou em função de feriados ou festas populares, ou por exigências legais, como o período para entrega da declaração de Imposto de Renda); se os dados forem registrados anualmente NÃO haverá influência da sazonalidade na série;*
 
@@ -18,9 +18,35 @@ De acordo com Reis (2022) e Barros et. al (2022), séries temporais são compost
 
 Ressalta-se que podem ser encontradas combinações desses padrões em diversos tipos de dados para séries temporais (BARROS et. al, 2022).
 
+```{r figura 3.1, fig.cap="Figura 3.1: Séries exibindo diferentes tipos de padrões (Fonte: BARROS et. al, 2022)"} 
+
+
+knitr::include_graphics("Figuras/Fig4_1.jpg")
+
+```
+
+Conforme COSTA (2022), em resumo, nas séries temporais existem:
+1. Variáveis aleatórias
+2. Medidas adjacentes (próximas no tempo) tendem a correlatas
+3. Tendência: mudança sistemática da média
+4. Sazonalidade: variações sazonais ou periódicas
+5. Mudanças fundamentais/abruptas
+
+O foco principal da modelagem, após a análise descritiva da série temporal, é a variável aleatótia, porque ela possui uma dependência no tempo. Conforme citado anteriormente, as variáveis aleatórias possuem valores correlatos em medidas adjacentes (próximas no tempo).
+
 ## Modelos para séries temporais
 
-Footnotes are put inside the square brackets after a caret `^[]`. Like this one ^[This is a footnote.]. 
+De acordo com Barros et. al (2022), uma série temporal pode ser representada por um modelo aditivo ou multiplicativo. No modelo aditivo, todas as componentes tem a mesma unidade da série; já no multiplicativo, somente a tendência tem a mesma unidade da variável e todas as outras componentes assumem valor próximos de 1 (Reis, 2022).
+
+$$ \tag{4.1} Z_t=T_t+S_t+E_t$$ $$ou$$ $$ \tag{4.2}Z_t=T_t*S_t*E_t$$
+### Suavização exponencial simples (SES)
+O SES é um modelo mais adequado para previsão de séries temporais livres das componentes tendência (T) e sazonalidade (S). Portanto, a estratégia é identificar e remover esses componentes da série, a tornando uma série estacionária.
+
+Para garantir que a série é estacionária, deve-se garantir que a média da série temporal seja constante, que sua variância também seja constante e sua covariância seja dependente somente da diferença no tempo (h) entre duas medidas.
+
+
+### Suavização exponencial de Holt (SEH)
+
 
 ## Citations
 
@@ -38,4 +64,6 @@ BARROS, Anna C.; MATTOS, Daiane Marcolino D.; OLIVEIRA, Ingrid Christyne Luquett
 
 MORETTIN, Pedro A. Análise de Séries Temporais. Editora Blucher, 2018. 9788521213529. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9788521213529/. Acesso em: 10 jun. 2022.
 
-REIS, Marcelo Menezes. Análise de séries temporais. Santa Catarina, UFSC, 2022. Disponível em: <https://www.inf.ufsc.br/~marcelo.menezes.reis/Cap4.pdf> Acesso em: 10/06/2022.
+REIS, Marcelo Menezes. Análise de séries temporais. Santa Catarina, UFSC, 2022. Disponível em: <https://www.inf.ufsc.br/~marcelo.menezes.reis/Cap4.pdf> Acesso em: 10 jun. 2022.
+
+COSTA, Alexandre Cunha. "Introdução à Análise de Séries Temporais". Disponível em: <https://www.youtube.com/watch?v=emnSZ7qKv9M&list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&index=1> Acesso em: 27 jun. 2022.

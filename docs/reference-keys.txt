@@ -45,3 +45,5 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
+url-your-book-url-like-httpsbookdown.orgyihuibookdown
+suavização-exponencial-de-holt-seh
