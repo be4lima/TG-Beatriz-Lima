@@ -47,3 +47,4 @@ pages
 metadata-for-sharing
 url-your-book-url-like-httpsbookdown.orgyihuibookdown
 suavização-exponencial-de-holt-seh
+estacionaridade
