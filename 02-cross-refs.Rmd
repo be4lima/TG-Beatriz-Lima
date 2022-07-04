@@ -91,8 +91,8 @@ dados <- read.delim("Ex12_14_Montgomery.txt")
 View(dados)
 
 ## Regressão linear
-mod1 <- lm(Qualidade ~ Claridade + Aroma + Corpo + Sabor + Afinacao, dados)
-summary(mod1) # Estatísticas do modelo
+#mod1 <- lm(Qualidade ~ Claridade + Aroma + Corpo + Sabor + Afinacao, dados)
+#summary(mod1) # Estatísticas do modelo
 
 ```
 O Coeficiente de Determinação tem como valor 0,7206, ou seja...
@@ -100,19 +100,19 @@ O Coeficiente de Determinação tem como valor 0,7206, ou seja...
 ```{r}
 
 ## Plotando mod1
-plot(mod1, which = 4)
-par(mfrow=c(2,2))
+#plot(mod1, which = 4)
+#par(mfrow=c(2,2))
 
 
 ## Análise dos resíduos
-res1 <- resid(mod1)
-res_std1 <- (res1 - mean(res1))/sd(res1) # Padronização dos resíduos
+#res1 <- resid(mod1)
+#res_std1 <- (res1 - mean(res1))/sd(res1) # Padronização dos resíduos
 
-par(mfrow=c(2,2))
-plot(res_std1)
-hist(res_std1)
-boxplot(res_std1)
-qqnorm(res_std1)
+#par(mfrow=c(2,2))
+#plot(res_std1)
+#hist(res_std1)
+#boxplot(res_std1)
+#qqnorm(res_std1)
 
 ```
 
@@ -140,9 +140,9 @@ A Distância de Cook informa o quanto um caso é capaz de influenciar o modelo d
 
 ```{r}
 
-out1 <- cooks.distance(mod1)
-influentes1 <- out1[(CD > (3* mean(out1, na.rm=TRUE)))]
-print(influentes1)
+#out1 <- cooks.distance(mod1)
+#influentes1 <- out1[(CD > (3* mean(out1, na.rm=TRUE)))]
+#print(influentes1)
 ```
 
 

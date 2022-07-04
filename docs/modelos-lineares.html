@@ -30,7 +30,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-06-22" />
+<meta name="date" content="2022-07-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -211,8 +211,12 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html"><i class="fa fa-check"></i><b>5</b> Análise de séries temporais<span></span></a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html#modelos-para-séries-temporais"><i class="fa fa-check"></i><b>5.1</b> Modelos para séries temporais<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html#citations"><i class="fa fa-check"></i><b>5.2</b> Citations<span></span></a></li>
+<li class="chapter" data-level="5.1" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html#estacionaridade"><i class="fa fa-check"></i><b>5.1</b> Estacionaridade<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html#modelos-para-séries-temporais"><i class="fa fa-check"></i><b>5.2</b> Modelos para séries temporais<span></span></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html#suavização-exponencial-de-holt-seh"><i class="fa fa-check"></i><b>5.2.1</b> Suavização exponencial de Holt (SEH)<span></span></a></li>
+<li class="chapter" data-level="5.2.2" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html#suavização-exponencial-sazonal-de-holt-winters"><i class="fa fa-check"></i><b>5.2.2</b> Suavização exponencial sazonal de Holt-Winters<span></span></a></li>
+</ul></li>
 <li><a href="análise-de-séries-temporais.html#referências-bibliográficas-1">Referências Bibliográficas<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="análise-geoespacial.html"><a href="análise-geoespacial.html"><i class="fa fa-check"></i><b>6</b> Análise geoespacial<span></span></a>
@@ -309,7 +313,7 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 <h2>Aplicação<a href="modelos-lineares.html#aplicação-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="estudo-de-caso-1" class="section level3 hasAnchor" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Estudo de Caso 1<a href="modelos-lineares.html#estudo-de-caso-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Para a primeira aplicação, será realizado o exercício 12-14 do livro do autor Montgomery et al (2016) chamado Estatistica Aplicada e Probabilidade para Engenheiros. O enunciado é o seguinte: “”</p>
+<p>Para a primeira aplicação, serão utilizados dados do exemplo 12-14 do livro do autor Montgomery et al (2016) chamado Estatistica Aplicada e Probabilidade para Engenheiros. O enunciado é o seguinte: “”</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="modelos-lineares.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;install.lock&quot;</span><span class="ot">=</span><span class="cn">FALSE</span>)</span>
 <span id="cb25-2"><a href="modelos-lineares.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Carregar pacotes que serão usados</span></span>
 <span id="cb25-3"><a href="modelos-lineares.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
@@ -326,50 +330,27 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 <span id="cb29-4"><a href="modelos-lineares.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/Luiz Arthur/Dropbox/PC/Documents/UFABC Beatriz/TG Beatriz Lima/Dados&quot;</span>)</span>
 <span id="cb29-5"><a href="modelos-lineares.html#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-6"><a href="modelos-lineares.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Criação do dataframe</span></span>
-<span id="cb29-7"><a href="modelos-lineares.html#cb29-7" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;Exemplo_12-14_Montgomery.txt&quot;</span>)</span>
+<span id="cb29-7"><a href="modelos-lineares.html#cb29-7" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;Ex12_14_Montgomery.txt&quot;</span>)</span>
 <span id="cb29-8"><a href="modelos-lineares.html#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(dados)</span>
 <span id="cb29-9"><a href="modelos-lineares.html#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-10"><a href="modelos-lineares.html#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Regressão linear</span></span>
-<span id="cb29-11"><a href="modelos-lineares.html#cb29-11" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Qualidade <span class="sc">~</span> Claridade <span class="sc">+</span> Aroma <span class="sc">+</span> Corpo <span class="sc">+</span> Sabor <span class="sc">+</span> Afinacao, dados)</span>
-<span id="cb29-12"><a href="modelos-lineares.html#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1) <span class="co"># Estatísticas do modelo</span></span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = Qualidade ~ Claridade + Aroma + Corpo + Sabor + 
-##     Afinacao, data = dados)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -2.85552 -0.57448 -0.07092  0.67275  1.68093 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   3.9969     2.2318   1.791 0.082775 .  
-## Claridade     2.3395     1.7348   1.349 0.186958    
-## Aroma         0.4826     0.2724   1.771 0.086058 .  
-## Corpo         0.2732     0.3326   0.821 0.417503    
-## Sabor         1.1683     0.3045   3.837 0.000552 ***
-## Afinacao     -0.6840     0.2712  -2.522 0.016833 *  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1.163 on 32 degrees of freedom
-## Multiple R-squared:  0.7206, Adjusted R-squared:  0.6769 
-## F-statistic: 16.51 on 5 and 32 DF,  p-value: 4.703e-08</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="modelos-lineares.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Plotando mod1</span></span>
-<span id="cb31-2"><a href="modelos-lineares.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb31-3"><a href="modelos-lineares.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="modelos-lineares.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Análise dos resíduos</span></span>
-<span id="cb32-2"><a href="modelos-lineares.html#cb32-2" aria-hidden="true" tabindex="-1"></a>res1 <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod1)</span>
-<span id="cb32-3"><a href="modelos-lineares.html#cb32-3" aria-hidden="true" tabindex="-1"></a>res_std1 <span class="ot">&lt;-</span> (res1 <span class="sc">-</span> <span class="fu">mean</span>(res1))<span class="sc">/</span><span class="fu">sd</span>(res1) <span class="co"># Padronização dos resíduos</span></span>
-<span id="cb32-4"><a href="modelos-lineares.html#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="modelos-lineares.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb32-6"><a href="modelos-lineares.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res_std1)</span>
-<span id="cb32-7"><a href="modelos-lineares.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(res_std1)</span>
-<span id="cb32-8"><a href="modelos-lineares.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(res_std1)</span>
-<span id="cb32-9"><a href="modelos-lineares.html#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(res_std1)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="modelos-lineares.html#cb33-1" aria-hidden="true" tabindex="-1"></a>out1 <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(mod1)</span></code></pre></div>
+<span id="cb29-11"><a href="modelos-lineares.html#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">#mod1 &lt;- lm(Qualidade ~ Claridade + Aroma + Corpo + Sabor + Afinacao, dados)</span></span>
+<span id="cb29-12"><a href="modelos-lineares.html#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(mod1) # Estatísticas do modelo</span></span></code></pre></div>
+<p>O Coeficiente de Determinação tem como valor 0,7206, ou seja…</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="modelos-lineares.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Plotando mod1</span></span>
+<span id="cb30-2"><a href="modelos-lineares.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(mod1, which = 4)</span></span>
+<span id="cb30-3"><a href="modelos-lineares.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow=c(2,2))</span></span>
+<span id="cb30-4"><a href="modelos-lineares.html#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="modelos-lineares.html#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="modelos-lineares.html#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Análise dos resíduos</span></span>
+<span id="cb30-7"><a href="modelos-lineares.html#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co">#res1 &lt;- resid(mod1)</span></span>
+<span id="cb30-8"><a href="modelos-lineares.html#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co">#res_std1 &lt;- (res1 - mean(res1))/sd(res1) # Padronização dos resíduos</span></span>
+<span id="cb30-9"><a href="modelos-lineares.html#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="modelos-lineares.html#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow=c(2,2))</span></span>
+<span id="cb30-11"><a href="modelos-lineares.html#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(res_std1)</span></span>
+<span id="cb30-12"><a href="modelos-lineares.html#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co">#hist(res_std1)</span></span>
+<span id="cb30-13"><a href="modelos-lineares.html#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="co">#boxplot(res_std1)</span></span>
+<span id="cb30-14"><a href="modelos-lineares.html#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co">#qqnorm(res_std1)</span></span></code></pre></div>
 <p>Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo. Os resíduos não podem apresentar uma tendência e, por isso, eles serão analisado abaixo.</p>
 <ul>
 <li>Residuals vs Fitted</li>
@@ -391,24 +372,27 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 <li>Cook’s distance</li>
 </ul>
 <p>A Distância de Cook informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações são extremas.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="modelos-lineares.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#out1 &lt;- cooks.distance(mod1)</span></span>
+<span id="cb31-2"><a href="modelos-lineares.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#influentes1 &lt;- out1[(CD &gt; (3* mean(out1, na.rm=TRUE)))]</span></span>
+<span id="cb31-3"><a href="modelos-lineares.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#print(influentes1)</span></span></code></pre></div>
 </div>
 <div id="estudo-de-caso-2" class="section level3 hasAnchor" number="3.3.4">
 <h3><span class="header-section-number">3.3.4</span> Estudo de Caso 2<a href="modelos-lineares.html#estudo-de-caso-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Para o segundo estudo de caso serão utilizados dados de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de 1ª ordem de <span class="math inline">\(CO_2\)</span> na Amazônia Legal.A estimativa de 1ª ordem supõe que, de modo simplificado, 100% das emissões ocorreram no momento da mudança de uso/cobertura.</p>
+<p>Para o segundo estudo de caso serão utilizados dados reais de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de 1ª ordem de <span class="math inline">\(CO_2\)</span> na Amazônia Legal.A estimativa de 1ª ordem supõe que, de modo simplificado, 100% das emissões ocorreram no momento da mudança de uso/cobertura.</p>
 <p>Um <strong>primeiro passo</strong> será carregar os dados:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="modelos-lineares.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;install.lock&quot;</span><span class="ot">=</span><span class="cn">FALSE</span>)</span>
-<span id="cb34-2"><a href="modelos-lineares.html#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="modelos-lineares.html#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="modelos-lineares.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Checando repositório</span></span>
-<span id="cb34-5"><a href="modelos-lineares.html#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/Luiz Arthur/Dropbox/PC/Documents/UFABC Beatriz/TG Beatriz Lima/Dados&quot;</span>)</span>
-<span id="cb34-6"><a href="modelos-lineares.html#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="modelos-lineares.html#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Carregando base de dados</span></span>
-<span id="cb34-8"><a href="modelos-lineares.html#cb34-8" aria-hidden="true" tabindex="-1"></a>dados0 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;CO2Amazonia.csv&quot;</span>)</span>
-<span id="cb34-9"><a href="modelos-lineares.html#cb34-9" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(dados0)</span>
-<span id="cb34-10"><a href="modelos-lineares.html#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-11"><a href="modelos-lineares.html#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(dados)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="modelos-lineares.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;install.lock&quot;</span><span class="ot">=</span><span class="cn">FALSE</span>)</span>
+<span id="cb32-2"><a href="modelos-lineares.html#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="modelos-lineares.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="modelos-lineares.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Checando repositório</span></span>
+<span id="cb32-5"><a href="modelos-lineares.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/Luiz Arthur/Dropbox/PC/Documents/UFABC Beatriz/TG Beatriz Lima/Dados&quot;</span>)</span>
+<span id="cb32-6"><a href="modelos-lineares.html#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="modelos-lineares.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Carregando base de dados</span></span>
+<span id="cb32-8"><a href="modelos-lineares.html#cb32-8" aria-hidden="true" tabindex="-1"></a>dados0 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;CO2Amazonia.csv&quot;</span>)</span>
+<span id="cb32-9"><a href="modelos-lineares.html#cb32-9" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(dados0)</span>
+<span id="cb32-10"><a href="modelos-lineares.html#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="modelos-lineares.html#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(dados)</span></code></pre></div>
 <p>Agora que os dados foram carregados, o <strong>segundo passo</strong> será entender os dados. Para saber algumas propriedade dos dados carregados, será utilizado o comando <code>head()`, que apresentará uma amostra dos dados, e</code>summary()`, que apresenta as estatísticas básicas dos dados (média, mediana, 1º quartil, etc).</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="modelos-lineares.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="modelos-lineares.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados)</span></code></pre></div>
 <pre><code>##   Year D_AreaAcc D_Area DEGRAD_Area X. VR_CO2_1stOrder VR_CO2_2ndOrder
 ## 1 1960    842754 842754           0  -             411             133
 ## 2 1961   1685508 842754           0  -             411             222
@@ -430,7 +414,7 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 ## 4    -           409           309
 ## 5    -           407           329
 ## 6    -           404           342</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="modelos-lineares.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dados)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="modelos-lineares.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dados)</span></code></pre></div>
 <pre><code>##       Year        D_AreaAcc            D_Area         DEGRAD_Area     
 ##  Min.   :1960   Min.   :  842754   Min.   : 457100   Min.   :      0  
 ##  1st Qu.:1975   1st Qu.:13484064   1st Qu.: 842754   1st Qu.:      0  
@@ -460,11 +444,11 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 ##                     3rd Qu.: 880.0   3rd Qu.: 853.0  
 ##                     Max.   :1380.0   Max.   :1053.0</code></pre>
 <p>Como iremos analisar a relação entre a área desmatada por ano (D_Area) e a emissão de 1ª ordem de <span class="math inline">\(CO_2\)</span>, é importante verificar qual é o comportamento entre esses dados.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="modelos-lineares.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Verificando a relação entre a variável dependente e a variável independente</span></span>
-<span id="cb39-2"><a href="modelos-lineares.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dados<span class="sc">$</span>D_Area, dados<span class="sc">$</span>VR_CO2_1stOrder)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="modelos-lineares.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Correlação entre as variáveis da base de dados</span></span>
-<span id="cb40-2"><a href="modelos-lineares.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(dados<span class="sc">$</span>VR_CO2_1stOrder,dados<span class="sc">$</span>D_Area)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="modelos-lineares.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Verificando a relação entre a variável dependente e a variável independente</span></span>
+<span id="cb37-2"><a href="modelos-lineares.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dados<span class="sc">$</span>D_Area, dados<span class="sc">$</span>VR_CO2_1stOrder)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="modelos-lineares.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Correlação entre as variáveis da base de dados</span></span>
+<span id="cb38-2"><a href="modelos-lineares.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(dados<span class="sc">$</span>VR_CO2_1stOrder,dados<span class="sc">$</span>D_Area)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -477,9 +461,9 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 ##       cor 
 ## 0.9987358</code></pre>
 <p>A partir desse gráfico, é possível verificar que a relação entre as variáveis é linear e, dessa forma, conforme a área desmatada aumenta, a emissão de <span class="math inline">\(CO_2\)</span> aumenta linearmente. O valor da correlação indica que a relação entre as duas variáveis é forte e positiva, já que 0,9987358 é próximo de 1 e maior que zero.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="modelos-lineares.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Construção do modelo</span></span>
-<span id="cb42-2"><a href="modelos-lineares.html#cb42-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(VR_CO2_1stOrder <span class="sc">~</span> D_Area, dados, <span class="at">na.action =</span> na.exclude)</span>
-<span id="cb42-3"><a href="modelos-lineares.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="modelos-lineares.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Construção do modelo</span></span>
+<span id="cb40-2"><a href="modelos-lineares.html#cb40-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(VR_CO2_1stOrder <span class="sc">~</span> D_Area, dados, <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb40-3"><a href="modelos-lineares.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = VR_CO2_1stOrder ~ D_Area, data = dados, na.action = na.exclude)
@@ -501,15 +485,15 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 <p>O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de <span class="math inline">\(CO_2\)</span> O valor indica que o modelo possui bom ajuste.</p>
 <p>O p-value do modelo apresenta valor <span class="math inline">\(2.2e^{-16}\)</span> e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe baixa probabilidade dos resultados apresentados pelo modelo não possuírem erro amostral. Ou seja, existe alta probabilidade do modelo não ser um bom ajuste. Isso continuará sendo testado a diante.</p>
 <p>De acordo com Montgomery e Runger (2021), “<em>A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo</em>”. Dessa forma, abaixo será realizada a análise residual.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="modelos-lineares.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise dos resíduos</span></span>
-<span id="cb44-2"><a href="modelos-lineares.html#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="modelos-lineares.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod,<span class="at">which =</span> <span class="dv">4</span>)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="modelos-lineares.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) </span>
-<span id="cb45-2"><a href="modelos-lineares.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="modelos-lineares.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Teste de normalidade</span></span>
-<span id="cb46-2"><a href="modelos-lineares.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(mod<span class="sc">$</span>residuals)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="modelos-lineares.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise dos resíduos</span></span>
+<span id="cb42-2"><a href="modelos-lineares.html#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="modelos-lineares.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod,<span class="at">which =</span> <span class="dv">4</span>)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="modelos-lineares.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) </span>
+<span id="cb43-2"><a href="modelos-lineares.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="modelos-lineares.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Teste de normalidade</span></span>
+<span id="cb44-2"><a href="modelos-lineares.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(mod<span class="sc">$</span>residuals)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -537,50 +521,50 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 <li>Cook’s distance</li>
 </ul>
 <p>A Distância de Cook informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações 48, 50 e 51 são extremas.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="modelos-lineares.html#cb48-1" aria-hidden="true" tabindex="-1"></a>CD <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(mod)</span>
-<span id="cb48-2"><a href="modelos-lineares.html#cb48-2" aria-hidden="true" tabindex="-1"></a>influentes <span class="ot">&lt;-</span> CD[(CD <span class="sc">&gt;</span> (<span class="dv">3</span><span class="sc">*</span> <span class="fu">mean</span>(CD, <span class="at">na.rm=</span><span class="cn">TRUE</span>)))]</span>
-<span id="cb48-3"><a href="modelos-lineares.html#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="modelos-lineares.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(influentes)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="modelos-lineares.html#cb46-1" aria-hidden="true" tabindex="-1"></a>CD <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(mod)</span>
+<span id="cb46-2"><a href="modelos-lineares.html#cb46-2" aria-hidden="true" tabindex="-1"></a>influentes <span class="ot">&lt;-</span> CD[(CD <span class="sc">&gt;</span> (<span class="dv">3</span><span class="sc">*</span> <span class="fu">mean</span>(CD, <span class="at">na.rm=</span><span class="cn">TRUE</span>)))]</span>
+<span id="cb46-3"><a href="modelos-lineares.html#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="modelos-lineares.html#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(influentes)</span></code></pre></div>
 <pre><code>##         48         50         51         52         60         61 
 ## 0.08358518 0.14427282 0.13748969 0.06382214 0.05991051 0.04018312</code></pre>
 <p>É possível analisar que existem 6 observações que possuem uma distância de Cook três vezes maior que a média. Além disso, é confirmado que as observações 48, 50 e 51 são extremas.</p>
 <p>Pelo Teste de Shapiro, é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. O gráfico Normal Q-Q serve como uma contra-prova, também mostrando que os dados não são normalmente distribuídos e, dessa forma, não são adequados.</p>
 <p>Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste de outliers, é interessante utilizar os gráficos Boxplot e Histograma.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modelos-lineares.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Encontrando potenciais outliers a partir de gráficos</span></span>
-<span id="cb50-2"><a href="modelos-lineares.html#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-3"><a href="modelos-lineares.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dados<span class="sc">$</span>D_Area)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="modelos-lineares.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dados<span class="sc">$</span>VR_CO2_1stOrder)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="modelos-lineares.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Encontrando potenciais outliers a partir de gráficos</span></span>
+<span id="cb48-2"><a href="modelos-lineares.html#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="modelos-lineares.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dados<span class="sc">$</span>D_Area)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="modelos-lineares.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dados<span class="sc">$</span>VR_CO2_1stOrder)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
 <p>A partir da análise dos resíduos, foi possível inferir que as observações 48, 50 e 51 são outliers influentes. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote <code>outliers</code> pode ser utilizado, já que a função <code>outlier()</code> consegue encontrar o valor mais distante da média das variáveis.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="modelos-lineares.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Encontrando os valores com maior diferença da média com o pacote `outliers`</span></span>
-<span id="cb52-2"><a href="modelos-lineares.html#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="modelos-lineares.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(outliers)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modelos-lineares.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Encontrando os valores com maior diferença da média com o pacote `outliers`</span></span>
+<span id="cb50-2"><a href="modelos-lineares.html#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="modelos-lineares.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(outliers)</span></code></pre></div>
 <pre><code>## Warning: package &#39;outliers&#39; was built under R version 4.1.3</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="modelos-lineares.html#cb54-1" aria-hidden="true" tabindex="-1"></a>outArea <span class="ot">&lt;-</span> <span class="fu">outlier</span>(dados<span class="sc">$</span>D_Area)</span>
-<span id="cb54-2"><a href="modelos-lineares.html#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-3"><a href="modelos-lineares.html#cb54-3" aria-hidden="true" tabindex="-1"></a>outCO2 <span class="ot">&lt;-</span> <span class="fu">outlier</span>(dados<span class="sc">$</span>VR_CO2_1stOrder)</span>
-<span id="cb54-4"><a href="modelos-lineares.html#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-5"><a href="modelos-lineares.html#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(outArea)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="modelos-lineares.html#cb52-1" aria-hidden="true" tabindex="-1"></a>outArea <span class="ot">&lt;-</span> <span class="fu">outlier</span>(dados<span class="sc">$</span>D_Area)</span>
+<span id="cb52-2"><a href="modelos-lineares.html#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="modelos-lineares.html#cb52-3" aria-hidden="true" tabindex="-1"></a>outCO2 <span class="ot">&lt;-</span> <span class="fu">outlier</span>(dados<span class="sc">$</span>VR_CO2_1stOrder)</span>
+<span id="cb52-4"><a href="modelos-lineares.html#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="modelos-lineares.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(outArea)</span></code></pre></div>
 <pre><code>## [1] 2905900</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modelos-lineares.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(outCO2)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="modelos-lineares.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(outCO2)</span></code></pre></div>
 <pre><code>## [1] 1416</code></pre>
 <p>Com esse resultado, analisa-se que existe grande possibilidade de existirem outliers no conjunto de dados, já que as observações 48, 50 e 51 apresentam-se extremas e influentes no modelo de regressão. Além disso, a hipótese de que o resultado dos resíduos indica que seja necessário um maior conjunto de dados também é uma possibilidade.</p>
 <p>Após todos os testes, por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="modelos-lineares.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Diagrama de dispersão com o ajuste</span></span>
-<span id="cb58-2"><a href="modelos-lineares.html#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-3"><a href="modelos-lineares.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> dados<span class="sc">$</span>D_Area, <span class="at">y =</span> dados<span class="sc">$</span>VR_CO2_1stOrder, <span class="at">xlab =</span> <span class="st">&quot;Área desmatada no ano&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Emissão de CO2 de 1a ordem&quot;</span>)</span>
-<span id="cb58-4"><a href="modelos-lineares.html#cb58-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-5"><a href="modelos-lineares.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modelos-lineares.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Diagrama de dispersão com o ajuste</span></span>
+<span id="cb56-2"><a href="modelos-lineares.html#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="modelos-lineares.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> dados<span class="sc">$</span>D_Area, <span class="at">y =</span> dados<span class="sc">$</span>VR_CO2_1stOrder, <span class="at">xlab =</span> <span class="st">&quot;Área desmatada no ano&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Emissão de CO2 de 1a ordem&quot;</span>)</span>
+<span id="cb56-4"><a href="modelos-lineares.html#cb56-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-5"><a href="modelos-lineares.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de <span class="math inline">\(CO_2\)</span> na Amazônia Legal. Portanto, torna-se importante refazer o modelo, de forma que os outliers influentes (observações 48, 50, 51, 52, 60 e 61) sejam retirados, para verificar se este novo modelo estaria mais adequado para representar a relação entre as variáveis.</p>
 <p>É isso que faremos:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="modelos-lineares.html#cb59-1" aria-hidden="true" tabindex="-1"></a>dados_sem_outliers <span class="ot">&lt;-</span> dados[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">48</span>,<span class="dv">50</span>,<span class="dv">51</span>,<span class="dv">52</span>,<span class="dv">60</span>,<span class="dv">61</span>),]</span>
-<span id="cb59-2"><a href="modelos-lineares.html#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-3"><a href="modelos-lineares.html#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-4"><a href="modelos-lineares.html#cb59-4" aria-hidden="true" tabindex="-1"></a>mod2<span class="ot">&lt;-</span> <span class="fu">lm</span>(VR_CO2_1stOrder <span class="sc">~</span> D_Area, <span class="at">data=</span>dados_sem_outliers)</span>
-<span id="cb59-5"><a href="modelos-lineares.html#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-6"><a href="modelos-lineares.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="modelos-lineares.html#cb57-1" aria-hidden="true" tabindex="-1"></a>dados_sem_outliers <span class="ot">&lt;-</span> dados[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">48</span>,<span class="dv">50</span>,<span class="dv">51</span>,<span class="dv">52</span>,<span class="dv">60</span>,<span class="dv">61</span>),]</span>
+<span id="cb57-2"><a href="modelos-lineares.html#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="modelos-lineares.html#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="modelos-lineares.html#cb57-4" aria-hidden="true" tabindex="-1"></a>mod2<span class="ot">&lt;-</span> <span class="fu">lm</span>(VR_CO2_1stOrder <span class="sc">~</span> D_Area, <span class="at">data=</span>dados_sem_outliers)</span>
+<span id="cb57-5"><a href="modelos-lineares.html#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="modelos-lineares.html#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = VR_CO2_1stOrder ~ D_Area, data = dados_sem_outliers)
@@ -599,9 +583,9 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 ## Residual standard error: 7.716 on 53 degrees of freedom
 ## Multiple R-squared:  0.9994, Adjusted R-squared:  0.9994 
 ## F-statistic: 8.83e+04 on 1 and 53 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="modelos-lineares.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-20-1.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-20-2.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-20-3.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-20-4.png" width="672" /></p>
-<p>Mesmo com a retirada de grande parte dos outliers influentes, o modelo ainda não possui resíduos adequados. Para a realização de uma regressão linear <a href="modelos-lineares.html#Condicoes">3.3.1</a>, são assumidas alguns preceitos que</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="modelos-lineares.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-21-1.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-21-2.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-21-3.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-21-4.png" width="672" /></p>
+<p>Mesmo com a retirada de grande parte dos outliers influentes, o modelo ainda não possui resíduos adequados. Para a realização de uma regressão linear, são assumidas alguns preceitos que, provavelmente, não são o caso dos dados utilizados para o segundo estudo de caso (vide tópico <a href="modelos-lineares.html#Condicoes">3.3.1</a>). Conforme verificamos, os resíduos não seguem uma distribuição normal e os dados não possuem variância constante. Portanto, pode-se afirmar que a regressão linear não explica os dados de forma adequada. Talvez seja necessário aplicar outro tipo de modelo para estes dados. Além disso, os dados podem não conter variáveis suficientes para explicar a variável resposta (Emissão de primeira ordem de <span class="math inline">\(CO_2\)</span>).</p>
 <p>##Referências Bibliográficas {-}</p>
 <p>CHAPRA, Steven C. <strong>Métodos Numéricos Aplicados com MATLAB® para Engenheiros e Cientistas</strong>. Grupo A, 2013. 9788580551778. Disponível em: <a href="https://integrada.minhabiblioteca.com.br/#/books/9788580551778/" class="uri">https://integrada.minhabiblioteca.com.br/#/books/9788580551778/</a>. Acesso em: 21 jun. 2022.</p>
 <p>Montgomery, Douglas C.; Runger, George C.. <strong>Estatística aplicada e probabilidade para engenheiros</strong>. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.</p>
