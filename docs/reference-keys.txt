@@ -49,3 +49,6 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
+url-your-book-url-like-httpsbookdown.orgyihuibookdown
+modelos-univariados-para-séries-temporais
+suavização-exponencial-simples-ses
