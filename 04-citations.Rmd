@@ -56,65 +56,33 @@ Dessa forma, quando a covariância é positiva, a tendência é positiva entre $
 
 É importante citar que se uma série não for estacionária, modelos padrões podem não representar de forma adequada o processo gerador da série temporal e, por isso, não seria possível utilizar o modelo para realizar previsões ou outros objetivos da análise. Conforme o Teorema de Wald, a estacionariedade dá estabilidade e coerência ao modelo.
 
-## Modelos univariados para séries temporais
+## Operador de diferenças
 
-De acordo com Barros et. al (2022), uma série temporal pode ser representada por um modelo aditivo ou multiplicativo. No modelo aditivo, todas as componentes tem a mesma unidade da série; já no multiplicativo, somente a tendência tem a mesma unidade da variável e todas as outras componentes assumem valor próximos de 1 (Reis, 2022).
+### Testes de raiz unitária
 
-$$ \tag{4.1} Z_t=T_t+S_t+E_t$$ $$ou$$ $$ \tag{4.2}Z_t=T_t*S_t*E_t$$
+##Ruído branco
+No ruído branco, toda a trajetória da série temporal é atribuida a fatores puramente aleatórios. Ou seja, variáveis aleatórias não correlacionadas em um processo estocástico ${\epsilon_t, t \in T}$  possuem média zero e variância constante, portanto, $\epsilon_t\sim RB(0,\sigma^2)$.
 
-### Suavização exponencial simples (SES)
-O SES é um modelo mais adequado para previsão de séries temporais livres das componentes tendência (T) e sazonalidade (S). Portanto, a estratégia é identificar e remover esses componentes da série, a tornando uma série estacionária.
+É representado como:
+$$\tag{4.5}y_t=\epsilon_t$$
 
-Este modelo é descrito da seguinte forma:
-$$\tag{4.2}\overline{Z_t}=\alpha Z_t+\alpha(1-\alpha)Z_{t-1}+\alpha(1-\alpha)^2Z_{t-2}+...$$, onde $\overline{Z_0}=Z_1, t=1,...,N$.
+## Passeio aleatório
+O passeio aleatório é representado por $\tag{4.6}y_t=y_{t-1}+\epsilon_t$ em que $\epsilon_t\sim RB(0,\sigma^2)$. Portanto, o valor da série em $t$ é igual ao valor da série em um instante anterior somado a um erro de média zero e variância constante.
 
-O $\alpha$ representa o parâmetro de suavização com valores de 0 a 1 e quanto mais estável for a previsão, menor o valor de $alpha$ porque as observações passadas terão pesos maiores do que teriam com um $alpha$ grande. Quanto mais próximo de 1, menor amortecimento e $\overline{Z_t}$ é aproximadamente igual a $Z_t$ (COSTA, 2022). Para aplicar o método em R, utiliza-se a função `HoltWinters()`, sendo x a série temporal de interesse e alpha o parâmetro de suavização. Os parâmetros beta e gamma são descritos como "FALSE".
+É possível escrever o passeio aleatório em função de $y_0$:
+$$y_t=y_0+\sum_{i=1}^t{\epsilon_i}$$
 
-Conforme (COSTA, 2022), a previsão de obervações futuras para o modelo SES consite em:
-$$\tag{4.3a}\widehat{Z_t}=\overline{Z_t}, \forall h>0$$
-$$\tag{4.3b}\widehat{Z_t}=\alpha Z_t+\alpha(1-\alpha)Z_{t-1}(h+1)$$, sendo $h$ o número de passos à frente do previsto. Para realizar previsões em R, utiliza-se a função `forecast()` do pacote forecast, em que objeject é um objeto de classe "HoltWinters", h é o número de períodos a serem previstos e level é o intervalo de confiança para a predição.
+## Modelos ARIMA
+Um modelo ARIMA (Modelos autoregressivos integrados de médias móveis), a partir da abordagem de Box & Jenkins, permite que previsões sejam realizadas tomando por base valores presentes e passados da série temporal. O modelo é formado por três componentes: o Auto Regressivo (AR), o filtro de integração (I) e o componente de médias móveis. 
 
-É importante citar que o modelo SES não é apropriado para séries com tendência linear, porque acarretaria em previsões que subestimariam ou superestimariam os valores da série temporal.
-
-### Suavização exponencial de Holt (SEH)
-O modelo SEH possui um parâmetro de suavização para trabalhar com a tendência da série temporal e, dessa forma, é possível realizar previsões em séries que apresentam o efeito de tendência linear. O modelo é estimado por:
-$$\tag{4.4} L_t=(1-\alpha)(L_{t-1}+T_{t-1}), 0\le\alpha\le1; t=2,...N$$
-$$\tag{4.5}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1; t=2,...N$$
-em que $L_t$ estima o nível da série no tempo t, $t_t$ estima a tendência no tempo t e $\alpha$ e $\beta$ são os parâmetros de suavisão para o nível e tendência, respectivamente. Para representar o modelo, também é utilizada a função `HoltWinters()`. Nesse caso, o argumento $gamma$ será descrito como "FALSE", já que o modelo utiliza somente os argumentos $\alpha$ e $\beta$.
-
-A previsão ($Z_{t+h}$) é dada por:
-$$\tag{4.6}\widehat{Z_h}=h\widehat{T_t}, \forall h>0$$
-Para a previsão, também utiliza-se a função `forecast()`. 
-
-### Suavização exponencial sazonal de Holt-Winters
-Para séries temporais que apresental comportamento sazonal, o modelo de Holt-Winters (HW) é o mais indicado. Nesse caso, existe uma equação adicional para a sazonalidade. Existem dois métodos de análise:
-
-#### Modelo aditivo
-Se a componente sazonal for tratada de forma aditiva, o modelo será:
-$$\tag{4.7}L_t=\alpha(Z_t-S_{t-m})+(1-\alpha)(L_{t-1}+T_{t-1}, 0\le\alpha\le1, t=m+1,...,N$$
-$$\tag{4.8}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1, t=m+1,...,N$$
-$$\tag{4.9}S_t=\gamma(Z_t-L_{t-1}-T_{t-1})+(1-\gamma)S_{t-m}, 0\le\gamma\le1, t=m+1,...,N$$
-, onde $\alpha, \beta$ e $\gamma$ são os parâmetros de suavização para o nível, tendência e sazonalidade respectivamente.
-O modelo de previsão h passos à frente é representado por:
-$$\tag{4.10}\widehat{Z_{t+h}}=L_t+T_th+S_{t+h-m}$$
-
-#### Modelo multiplicativo
-Seguindo o mesmo raciocínio anterior, o modelo é dado por:
-$$\tag{4.11}L_t=\alpha(\frac{Z_t}{S_{t-m}})+(1-\alpha)(L_{t-1}+T_{t-1}, 0\le\alpha\le1, t=m+1,...,N$$
-$$\tag{4.12}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1, t=m+1,...,N$$
-$$\tag{4.13}S_t=\gamma(\frac{Z_t}{L_{t-1}-T_{t-1}})+(1-\gamma)S_{t-m}, 0\le\gamma\le1, t=m+1,...,N$$
-E, para a previsão:
-$$\tag{4.14}\widehat{Z_{t+h}}=(L_t+T_th)S_{t+h-m}$$
-### Modelos ARIMA
-Um modelo ARIMA (Modelos autoregressivos integrados de médias móveis), a partir da abordagem de Box & Jenkins, permite que previsões sejam realizadas tomando por base valores presentes e passados da série temporal. O modelo é formado por três componentes: o Auto Regressivo (AR), o filtro de integração (I) e o componente de médias móveis. Um modelo AR(p) pode ser descrito como:
+Um modelo AR(p) é baseado na ideia de que um valor atual $y_t$ pode ser explicado como uma função de valores passados. Este pode ser descrito como:
 $$y_t=c+\phi_1y_{t-1}+...+\phi_py_{t-p}+\epsilon_t$$ onde $\phi_p$ são parâmetros auto-regressivos; $c$ é uma constante e $\epsilon_t \sim RB(0,\sigma^2)$
 
-Já um modelo MA(p):
+Já um modelo MA(q):
 $$y_t=\mu+\epsilon_t-\theta_1\epsilon_{t-1}-...-\theta_q\epsilon_{t-q}$$, onde $\theta_n$ são parâmetros de médias móveis; $c$ é uma constante e $\epsilon_t\sim(0,\sigma^2)$.
 
 
-
-### Modelos SARIMA
+## Modelos SARIMA
 
 Quando considerada a sazonalidade, o modelo é denominado SARIMA $(p,d,q)(P,D,Q)_s$, representado pela equação 4.15.
 $$\tag{4.15}\phi(L)\Phi(L)\Delta^d\Delta^Dy_t=\theta(L)\Theta(L)\epsilon_t$$, em que:
@@ -149,16 +117,99 @@ Realiza-se a nálise dos resíduos, na qual:
   
 4. Previsão
 
+## Aplicação {-}
+Para a aplicação, será realizado o exemplo do capítulo 4 do livro de BARROS *et.al* (2017). Será utilizada como *database* a série temporal de vendas de passagens aéreas nos EUA de janeiro de 1949 a dezembro de 1960. 
 
+```{r}
+# Intalando pacotes necessários
+  install.packages("BETS")
+  install.packages("urca")
+  install.packages("TSA")
+  install.packages("forecast")
+  install.packages("lmtest")
+  install.packages("normtest")
+  install.packages("FinTS")
+  install.packages("xlsx")
+```
 
+```{r}
+# Carregando a série temporal
+  data(AirPassengers)
 
-Reference items in your bibliography file(s) using `@key`.
+# Análise gráfica
+  ts.plot(AirPassengers, ylab = "Vendas de Passagens ", xlab = "Anos")
 
-For example, we are using the **bookdown** package [@R-bookdown] (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and **knitr** [@xie2015] (this citation was added manually in an external file book.bib). 
-Note that the `.bib` files need to be listed in the index.Rmd with the YAML `bibliography` key.
+```
+A partir do gráfico é possível perceber que existe uma tendência de aumento nas vendas de passagens. Em relação à variância, verifica-se que a distância entre os meses de maior e menor venda está aumentando, indicando uma variância não constante. Além de haver oscilações que se repetem anualmente, dando indícios de presença de sazonalidade, que será analisada mensalmente abaixo:
 
+```{r}
+monthplot(AirPassengers,ylab = "Vendas de Passagens ", xlab = "Meses")
+```
 
-The RStudio Visual Markdown Editor can also make it easier to insert citations: <https://rstudio.github.io/visual-markdown-editing/#/citations>
+No gráfico acima, os traços horizontais representam a média, a qual aumenta nos meses de férias dos EUA (Junho, Julho e Agosto). Pelos traços verticais e sua inclinação positiva, é possível verificar um aumento constante na venda de passagens ao longo dos anos. Ambos trazem indícios da não estacionariedade da série temporal.
+
+Conforma comentado ao longo do capítulo, a série temporal é composta por quatro componentes não observáveis e estas serão analisadas a seguir com a função `decompose()`.
+```{r}
+
+plot(decompose(AirPassengers))
+```
+A partir da figura acima, verifica-se que a série temporal é fortemente afetada pela tendência (*trend*), além da sazonalidade (*seasonal*). Sobra, ainda, a componente aleatória que é levemente "contmainada" pela componente sazonal, como é possível verificar na comparação entre *random* e *seasonal* no gráfico.
+
+Conforme citado anteriormente, as análises gráficas dão indícios de não estacionariedade. Portanto, a estacionariedade será testada com significância estatística na parte não sazonal e sazonal da série temporal. Para isso, será realizada novamente a análise gráfica, além da comparação da média e da variância em diferentes períodos, observação da Função de Autocorrelação (FAC) e testes de raiz unitária. 
+
+  - **Parte não sazonal**
+  A identificação da autocorrelação entre o valor atual e suas defasagens (lags) é feita abaixo. O intervalo de confiança (de 95%) são as linhas pontilhadas vermelhas e valores acima ou abaixo da linha são estatisticamente significantes. Portanto, existe autocorrelação significante até a defasagem 36.
+  
+```{r}
+  require(BETS)
+    BETS::corrgram(AirPassengers, lag.max = 36, ci=0.95)
+```
+  
+  No teste ADF, existem três formas de realizar o teste de Raiz Unitária (RU): raiz unitária + constante + tendência determinística escolhe-se 'type="trend"'; raiz unitária + constante, `type = "dryft"`; raiz unitária, `type= "none"`. No teste de raiz unitária, a hipótese nula é que a série temporal possui uma raiz unitária (ST é não estacionária) e a hipótese alternativa é que a série é estacionária.
+  
+  Considerando a série temporal como sem tendência, com variância constante e com o critério de informação sendo o AIC:
+  
+```{r}
+  adf.drift <- urca::ur.df(y=AirPassengers, type= "drift", lag=24, selectlags="AIC")
+  BETS::corrgram(adf.drift@res, lag.max=36)
+ 
+  # Estatística de teste 
+  adf.drift@teststat 
+  adf.drift@cval #valores tabulados por MacKinnon (1996)
+```
+A partir do gráfico, é possível afirmar que não há presença de autocorrelação nos resíduos. Além disso, a estatística teste ($\tau^2=1,8582$) é maior do que o valor máximo associado ao nível de confiança (-2,88). Portanto, a hipótese nula não é rejeitada e é possível concluir que a série temporal não é estacionária e possui raiz unitária. Agora precisamos descobrir o número de diferenciações necessárias para torná-la estacionária. 
+ 
+```{r}
+  ts.plot(diff(AirPassengers, lag=1, differences=1))
+  BETS::corrgram(diff(AirPassengers, lag=1, differences=1))
+```
+ Com uma diferenciação é possível verificar que a série está estacionária na média, mas não na variância, porque esta está crescendo ao longo do tempo. Portanto, será aplicado *log* na série temporal para que a variância passe a ser contante:
+```{r}
+  ts.plot(diff(log(AirPassengers), lag=1, differences=1))
+  BETS::corrgram(diff(log(AirPassengers), lag=1, differences=1))
+```
+ 
+  - **Parte sazonal**
+Pelo gráfico de correlação, é possível verificar que nos lags sazonais (12, 24, 36...) a função de autocorrelação apresenta um decrescimento, o que indica que a série temporal não é estacionária. 
+
+```{r}
+BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
+
+```
+A partir da figura acima, é possível verificar que a FAC não apresenta mais o decrescimento de antes, além de ter cortes bruscos nos lags 1 e 12. Para verificar a estacionariedade, será realizado o teste de RU:
+
+```{r}
+  adf.drift2 <- urca::ur.df(y = diff(diff(log(AirPassengers), lag = 1), lag = 12), type = "drift", lags = 24, selectlags = "AIC")
+
+  adf.drift2@teststat # Estatística de Teste
+  
+  adf.drift2@cval #valores tabulados por MacKinnon (1996)
+  
+  BETS::corrgram(adf.drift2@res, lag.max = 36)
+  
+```
+A estatística teste ($\tau^2=-4.03891$) é menor do que o valor máximo associado ao nível de confiança (-2,88). Portanto, conclui-se que a série é estacionária.
+
 
 ## Referências Bibliográficas {-}
 

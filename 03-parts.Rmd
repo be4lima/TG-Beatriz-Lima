@@ -1,13 +1,56 @@
 # Modelos Lineares Generalizados
 
-##Modelos Não Lineares
-A análise de regressão linear (ARL), conforme apresentado no capítulo anterior, exige suposições que nem sempre são satisfeitas, como normalidade, linearidade, independência e homocedasticidade dos erros. Em situações práticas, isso acaba se tornando uma limitação porque muitos fenômenos geralmente não são lineares. Em diversas aplicações, são envolvidas situações em que há mais de uma variável independente (ou regressora).
+## Modelos univariados para séries temporais
 
-Portanto, em geral, a variável dependente (Y) pode relacionar-se com k variáveis regressoras:
+De acordo com Barros et. al (2022), uma série temporal pode ser representada por um modelo aditivo ou multiplicativo. No modelo aditivo, todas as componentes tem a mesma unidade da série; já no multiplicativo, somente a tendência tem a mesma unidade da variável e todas as outras componentes assumem valor próximos de 1 (Reis, 2022).
 
-Em modelos mais complexos que o apresentado anteriormente, também é possível aplicar a regressão linear múltipla, a partir de aproximações como, por exemplo, , ainda que a superfície gerada pelo modelo não seja linear. Conforme Montgomery & Runger (2021), “qualquer modelo de regressão que seja linear nos parâmetros (os β), independentemente da forma da superfície que ele gere, é um modelo de regressão linear.”
+$$ \tag{4.1} Z_t=T_t+S_t+E_t$$ $$ou$$ $$ \tag{4.2}Z_t=T_t*S_t*E_t$$
 
-## Testes de hipótese
+### Suavização exponencial simples (SES)
+O SES é um modelo mais adequado para previsão de séries temporais livres das componentes tendência (T) e sazonalidade (S). Portanto, a estratégia é identificar e remover esses componentes da série, a tornando uma série estacionária.
+
+Este modelo é descrito da seguinte forma:
+$$\tag{4.2}\overline{Z_t}=\alpha Z_t+\alpha(1-\alpha)Z_{t-1}+\alpha(1-\alpha)^2Z_{t-2}+...$$, onde $\overline{Z_0}=Z_1, t=1,...,N$.
+
+O $\alpha$ representa o parâmetro de suavização com valores de 0 a 1 e quanto mais estável for a previsão, menor o valor de $alpha$ porque as observações passadas terão pesos maiores do que teriam com um $alpha$ grande. Quanto mais próximo de 1, menor amortecimento e $\overline{Z_t}$ é aproximadamente igual a $Z_t$ (COSTA, 2022). Para aplicar o método em R, utiliza-se a função `HoltWinters()`, sendo x a série temporal de interesse e alpha o parâmetro de suavização. Os parâmetros beta e gamma são descritos como "FALSE".
+
+Conforme (COSTA, 2022), a previsão de obervações futuras para o modelo SES consite em:
+$$\tag{4.3a}\widehat{Z_t}=\overline{Z_t}, \forall h>0$$
+$$\tag{4.3b}\widehat{Z_t}=\alpha Z_t+\alpha(1-\alpha)Z_{t-1}(h+1)$$, sendo $h$ o número de passos à frente do previsto. Para realizar previsões em R, utiliza-se a função `forecast()` do pacote forecast, em que objeject é um objeto de classe "HoltWinters", h é o número de períodos a serem previstos e level é o intervalo de confiança para a predição.
+
+É importante citar que o modelo SES não é apropriado para séries com tendência linear, porque acarretaria em previsões que subestimariam ou superestimariam os valores da série temporal.
+
+### Suavização exponencial de Holt (SEH)
+O modelo SEH possui um parâmetro de suavização para trabalhar com a tendência da série temporal e, dessa forma, é possível realizar previsões em séries que apresentam o efeito de tendência linear. O modelo é estimado por:
+$$\tag{4.4} L_t=(1-\alpha)(L_{t-1}+T_{t-1}), 0\le\alpha\le1; t=2,...N$$
+$$\tag{4.5}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1; t=2,...N$$
+em que $L_t$ estima o nível da série no tempo t, $t_t$ estima a tendência no tempo t e $\alpha$ e $\beta$ são os parâmetros de suavisão para o nível e tendência, respectivamente. Para representar o modelo, também é utilizada a função `HoltWinters()`. Nesse caso, o argumento $gamma$ será descrito como "FALSE", já que o modelo utiliza somente os argumentos $\alpha$ e $\beta$.
+
+A previsão ($Z_{t+h}$) é dada por:
+$$\tag{4.6}\widehat{Z_h}=h\widehat{T_t}, \forall h>0$$
+Para a previsão, também utiliza-se a função `forecast()`. 
+
+### Suavização exponencial sazonal de Holt-Winters
+Para séries temporais que apresental comportamento sazonal, o modelo de Holt-Winters (HW) é o mais indicado. Nesse caso, existe uma equação adicional para a sazonalidade. Existem dois métodos de análise:
+
+#### Modelo aditivo
+Se a componente sazonal for tratada de forma aditiva, o modelo será:
+$$\tag{4.7}L_t=\alpha(Z_t-S_{t-m})+(1-\alpha)(L_{t-1}+T_{t-1}, 0\le\alpha\le1, t=m+1,...,N$$
+$$\tag{4.8}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1, t=m+1,...,N$$
+$$\tag{4.9}S_t=\gamma(Z_t-L_{t-1}-T_{t-1})+(1-\gamma)S_{t-m}, 0\le\gamma\le1, t=m+1,...,N$$
+, onde $\alpha, \beta$ e $\gamma$ são os parâmetros de suavização para o nível, tendência e sazonalidade respectivamente.
+O modelo de previsão h passos à frente é representado por:
+$$\tag{4.10}\widehat{Z_{t+h}}=L_t+T_th+S_{t+h-m}$$
+
+#### Modelo multiplicativo
+Seguindo o mesmo raciocínio anterior, o modelo é dado por:
+$$\tag{4.11}L_t=\alpha(\frac{Z_t}{S_{t-m}})+(1-\alpha)(L_{t-1}+T_{t-1}, 0\le\alpha\le1, t=m+1,...,N$$
+$$\tag{4.12}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1, t=m+1,...,N$$
+$$\tag{4.13}S_t=\gamma(\frac{Z_t}{L_{t-1}-T_{t-1}})+(1-\gamma)S_{t-m}, 0\le\gamma\le1, t=m+1,...,N$$
+E, para a previsão:
+$$\tag{4.14}\widehat{Z_{t+h}}=(L_t+T_th)S_{t+h-m}$$
+
+
 
 
 
