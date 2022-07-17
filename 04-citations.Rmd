@@ -105,8 +105,18 @@ $$\tag{4.12}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1, t=m+1,...,N$
 $$\tag{4.13}S_t=\gamma(\frac{Z_t}{L_{t-1}-T_{t-1}})+(1-\gamma)S_{t-m}, 0\le\gamma\le1, t=m+1,...,N$$
 E, para a previsão:
 $$\tag{4.14}\widehat{Z_{t+h}}=(L_t+T_th)S_{t+h-m}$$
+### Modelos ARIMA
+Um modelo ARIMA (Modelos autoregressivos integrados de médias móveis), a partir da abordagem de Box & Jenkins, permite que previsões sejam realizadas tomando por base valores presentes e passados da série temporal. O modelo é formado por três componentes: o Auto Regressivo (AR), o filtro de integração (I) e o componente de médias móveis. Um modelo AR(p) pode ser descrito como:
+$$y_t=c+\phi_1y_{t-1}+...+\phi_py_{t-p}+\epsilon_t$$ onde $\phi_p$ são parâmetros auto-regressivos; $c$ é uma constante e $\epsilon_t \sim RB(0,\sigma^2)$
+
+Já um modelo MA(p):
+$$y_t=\mu+\epsilon_t-\theta_1\epsilon_{t-1}-...-\theta_q\epsilon_{t-q}$$, onde $\theta_n$ são parâmetros de médias móveis; $c$ é uma constante e $\epsilon_t\sim(0,\sigma^2)$.
+
+
+
 ### Modelos SARIMA
-Um modelo ARIMA (Modelos autoregressivos integrados de médias móveis), a partir da abordagem de Box & Jenkins, permite que previsões sejam realizadas tomando por base valores presentes e passados da série temporal. Quando considerada a sazonalidade, o modelo é denominado SARIMA $(p,d,q)(P,D,Q)_s$, representado pela equação 4.15.
+
+Quando considerada a sazonalidade, o modelo é denominado SARIMA $(p,d,q)(P,D,Q)_s$, representado pela equação 4.15.
 $$\tag{4.15}\phi(L)\Phi(L)\Delta^d\Delta^Dy_t=\theta(L)\Theta(L)\epsilon_t$$, em que:
 
 p: ordem do polinômio autoregressivo não sazonal $\phi(L)$
@@ -121,9 +131,11 @@ $\theta(L)=(1-\theta_1L-\theta_2L^2-...-\theta_pL^q)$
 $\Theta(L)=(1-\Theta_1L^2-\Theta_2L^{2s}-\Theta_pL^{Qs})$
 $\Delta-=1-L$, sendo o operador de desafasagem (L): $L^ny_t=y_{t-n}$
 
+
 Conforme Morettin (2018), Na abordagem de Box & Jenkins, existem 4 etapas:
 1. Identificação do processo gerador de dados
-Para descobrir qual modelo descreve melhor o comportamento dos dados, inicialmente, realiza-se uma análise gráfica, verificando estacionaridade, tendência, sazonalidade, etc. A partir disso...
+Para descobrir qual modelo descreve melhor o comportamento dos dados, inicialmente, realiza-se uma análise gráfica, verificando estacionaridade, tendência, sazonalidade, etc. A partir disso, verifica-se a ordem de integração da série, ou seja, número de diferenças necessárias para tornar uma série estacionária. Para isso, realiza-se o teste de Dickey-Fuller em que:
+
 
 2. Estimação de parâmetros
 Os parâmetros do modelo são identificados e, para isso, utilizam-se critérios de informação (Akaike, bayesiano, Hannan-Quinn...). O modelo mais adequado é o que minimiza os critérios de informação.
@@ -159,3 +171,5 @@ REIS, Marcelo Menezes. Análise de séries temporais. Santa Catarina, UFSC, 2022
 SOARES, Thiago Costa. Séries Temporais. Universidade Federal de Juiz de Fora, 2020. Disponível em: <https://www.youtube.com/watch?v=T4N8ZhmiUEM&list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&index=5>. Acesso em: 29 jun 2022.
 
 COSTA, Alexandre Cunha. "Introdução à Análise de Séries Temporais". Disponível em: <https://www.youtube.com/watch?v=emnSZ7qKv9M&list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&index=1> Acesso em: 27 jun. 2022.
+
+https://www.maxwell.vrac.puc-rio.br/24787/24787_3.PDF
