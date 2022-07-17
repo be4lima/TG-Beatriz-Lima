@@ -102,18 +102,20 @@ $\Delta-=1-L$, sendo o operador de desafasagem (L): $L^ny_t=y_{t-n}$
 
 Conforme Morettin (2018), Na abordagem de Box & Jenkins, existem 4 etapas:
 1. Identificação do processo gerador de dados
-Para descobrir qual modelo descreve melhor o comportamento dos dados, inicialmente, realiza-se uma análise gráfica, verificando estacionaridade, tendência, sazonalidade, etc. A partir disso, verifica-se a ordem de integração da série, ou seja, número de diferenças necessárias para tornar uma série estacionária. Para isso, realiza-se o teste de Dickey-Fuller em que:
+Para descobrir qual modelo descreve melhor o comportamento dos dados, inicialmente, realiza-se uma análise gráfica, verificando estacionaridade, tendência, sazonalidade, etc. A partir disso, utiliza-se a FAC e FACP (função de autocorrelação parcial) amostrais, além de verificar a ordem de integração da série, ou seja, número de diferenças necessárias para tornar uma série estacionária. 
 
 
 2. Estimação de parâmetros
-Os parâmetros do modelo são identificados e, para isso, utilizam-se critérios de informação (Akaike, bayesiano, Hannan-Quinn...). O modelo mais adequado é o que minimiza os critérios de informação.
+Os parâmetros do modelo são identificados e testados estatisticamente e, para isso, utilizam-se critérios de informação.
 
 3. Verificação do modelo (diagnóstico)
-Realiza-se a nálise dos resíduos, na qual:
+
   a) resíduos devem possuir média zero, variância constante e serem estacionários, comportando-se como um *ruído branco*.
   b) As funções de autocorrelação devem ser não significativas, ou seja, devem ficar dentro do intervalo de confiança.
-  c) Homocedasticidade: o gráfico deve ter variância constante
-  d) Não correlacionados.
+  c) Pelo teste de Ljung-Box,avalia-se se o modelo sugerido é adequado.
+  d) Verifica-e se os critérios AIC e BIC possuem valores menores.
+  
+  Caso haja qualquer problema na etapa, volta-se à etapa de Identificação.
   
 4. Previsão
 
@@ -210,6 +212,14 @@ A partir da figura acima, é possível verificar que a FAC não apresenta mais o
 ```
 A estatística teste ($\tau^2=-4.03891$) é menor do que o valor máximo associado ao nível de confiança (-2,88). Portanto, conclui-se que a série é estacionária.
 
+A partir daqui, será aplicado o método de Box & Jenkins. Para a fase de **identificação** será observado a FAC e FACP do modelo estacionário:
+````{r}
+#FAC
+  BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
+
+#FACP
+  BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), type = "partial", lag.max = 48)
+````
 
 ## Referências Bibliográficas {-}
 
