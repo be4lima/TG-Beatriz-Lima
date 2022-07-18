@@ -57,8 +57,12 @@ Dessa forma, quando a covariância é positiva, a tendência é positiva entre $
 É importante citar que se uma série não for estacionária, modelos padrões podem não representar de forma adequada o processo gerador da série temporal e, por isso, não seria possível utilizar o modelo para realizar previsões ou outros objetivos da análise. Conforme o Teorema de Wald, a estacionariedade dá estabilidade e coerência ao modelo.
 
 ## Operador de diferenças
+Dada uma série temporal {$y_t^T_{t=1}$}, o operador de diferenças transforma a série original em uma nova série formada por diferenças sucessivas:
+$\nabla^dy_t$ é uma série diferenciada "d" vezes, sendo que $\nabla y_t=y_t - y_{t-1}$ é a primeira diferença da série.
 
-### Testes de raiz unitária
+Dessa forma, a segunda diferença da série será: $\nabla^2y_t = \nabla(\nabla y_t) = \nabla (y_t - y_{t-1}) = \nabla y_t - \nabla y_{t-1} = y_t - 2y_{t-1} + y_{t-2}$
+
+Para a n-ésima diferença da série: $\nabla^n y_t = \nabla(\nabla y_t) = \sum_{r=0}^n (-1)^r \binom{n}{r} y_{t-r}$, em que $\binom{n}{r}=\frac{n!}{r!(n-r)!}$.
 
 ##Ruído branco
 No ruído branco, toda a trajetória da série temporal é atribuida a fatores puramente aleatórios. Ou seja, variáveis aleatórias não correlacionadas em um processo estocástico ${\epsilon_t, t \in T}$  possuem média zero e variância constante, portanto, $\epsilon_t\sim RB(0,\sigma^2)$.
@@ -71,9 +75,36 @@ O passeio aleatório é representado por $\tag{4.6}y_t=y_{t-1}+\epsilon_t$ em qu
 
 É possível escrever o passeio aleatório em função de $y_0$:
 $$y_t=y_0+\sum_{i=1}^t{\epsilon_i}$$
+### Testes de raiz unitária
+A raiz unitária indica que a série é uma realização de um processo estocástico não-estacionário. Portanto, uma série com raiz unitária precisa ser diferenciada para se tornar estacionária:
+
+$$ y_t= y_{t-1} + \epsilon_t$$
+$$y_t-(y_{t-1}) = y_{t-1} - (y_{t-1}) + \epsilon_t$$
+$$\nabla y_t= e_{1t}$$
+O número de diferenças necessárias para tornar uma série estacionária é chamado de **ordem de integração** da série. No exemplo acima, a primeira diferença de um passeio aleatório é estacionária e, portanto, passa a ser um ruído branco.
+
+Um processo é dito ser integrado de ordem d se uma série temporal {$y_t_{t=1}^T$} é não estacionária. Porém, após d diferenças, o resultado é uma série temporal estacionária e, portanto, pode ser modelada por um modelo ARMA(p,q).
+
+Para realizar o teste da raiz unitária, os mais utilizados são o de teste de Ljung-Box e o teste Aumentado de Dickey-Fuller (ADF).
+
+## Modelos autoregressivos
+Modelos autoregressivos AR(p) é caracterizado por realizar a modelagem somente a partir das defasagens de uma série temporal, ou seja:
+
+$$y_t=\phi_0+\phi_1y_{t-1}+\phi_2y_{t-2}+...+\phi_py_{t-p}+ \epsilon_t$$
+## Médias Móveis
+O modelo de médias móveis MA(q) modela a partir das defasagens do termo de erro $\epsilon_t$, sendo assim uma combinação linear de ruídos brancos ($\epsilon+t$ tem média zero, variância constante e não-autocorrelacionado).
+
+$$y_t=\mu+\theta_1\epsilon_{t-1}+\theta_2\epsilon_{t-2}+...+\theta_p\epsilon_{t-q}+ \epsilon_t$$
+
+## Modelos ARMA
+Um modelo ARMA (p,q) é apresentado como:
+$$\overline Z_t = \phi_1\overline Z_{t-1}+...+\phi_p\overline Z_{t-p}+\alpha_t-\theta_1\alpha_{t-1}-...-\theta_q\alpha_{t-q}$$
+Sendo que $\phi(B)$ e $\theta(B)$ são, respectivamente, os operadores autoregressivos e de médias móveis. Dessa forma:
+$$\phi(B) \overline Z_t=\theta(B) \alpha_t$$
+A determinação das ordens p e q do modelo pode ser realizada a partir da análise gráfica das função de autorrelação FAC (Função de Autocorrelação) e FACP (Função de Autocorrelação Parcial).
 
 ## Modelos ARIMA
-Um modelo ARIMA (Modelos autoregressivos integrados de médias móveis), a partir da abordagem de Box & Jenkins, permite que previsões sejam realizadas tomando por base valores presentes e passados da série temporal. O modelo é formado por três componentes: o Auto Regressivo (AR), o filtro de integração (I) e o componente de médias móveis. 
+Um modelo ARIMA (p,d,q) (Modelos autoregressivos integrados de médias móveis), a partir da abordagem de Box & Jenkins, permite que previsões sejam realizadas tomando por base valores presentes e passados da série temporal. O modelo é formado por três componentes: o Auto Regressivo (AR), o filtro de integração (I) e o componente de médias móveis. 
 
 Um modelo AR(p) é baseado na ideia de que um valor atual $y_t$ pode ser explicado como uma função de valores passados. Este pode ser descrito como:
 $$y_t=c+\phi_1y_{t-1}+...+\phi_py_{t-p}+\epsilon_t$$ onde $\phi_p$ são parâmetros auto-regressivos; $c$ é uma constante e $\epsilon_t \sim RB(0,\sigma^2)$
@@ -210,9 +241,9 @@ A partir da figura acima, é possível verificar que a FAC não apresenta mais o
   BETS::corrgram(adf.drift2@res, lag.max = 36)
   
 ```
-A estatística teste ($\tau^2=-4.03891$) é menor do que o valor máximo associado ao nível de confiança (-2,88). Portanto, conclui-se que a série é estacionária.
+A estatística teste ($\tau^2=-4.03891$) é menor do que o valor máximo associado ao nível de confiança (-2,88). Portanto, conclui-se que a *série é estacionária*.
 
-A partir daqui, será aplicado o método de Box & Jenkins. Para a fase de **identificação** será observado a FAC e FACP do modelo estacionário:
+A partir daqui, será aplicado o método de Box & Jenkins. Para a fase de **identificação** será observado a FAC (Função de Autocorrelação) e FACP (Função de Autocorrelação Parcial) do modelo estacionário:
 ````{r}
 #FAC
   BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
@@ -220,6 +251,9 @@ A partir daqui, será aplicado o método de Box & Jenkins. Para a fase de **iden
 #FACP
   BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), type = "partial", lag.max = 48)
 ````
+
+
+
 
 ## Referências Bibliográficas {-}
 
@@ -234,3 +268,6 @@ SOARES, Thiago Costa. Séries Temporais. Universidade Federal de Juiz de Fora, 2
 COSTA, Alexandre Cunha. "Introdução à Análise de Séries Temporais". Disponível em: <https://www.youtube.com/watch?v=emnSZ7qKv9M&list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&index=1> Acesso em: 27 jun. 2022.
 
 https://www.maxwell.vrac.puc-rio.br/24787/24787_3.PDF
+https://rpubs.com/frank-pinho/522364#:~:text=A%20classe%20de%20modelos%20autorregressivos,constante%20e%20n%C3%A3o%2Dautocorrelacionado).
+
+https://rpubs.com/hudsonchavs/modeloma#:~:text=A%20classe%20de%20modelos%20de,modelar%20o%20retorno%20em%20t.
