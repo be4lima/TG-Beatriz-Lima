@@ -101,7 +101,7 @@ Um modelo ARMA (p,q) é apresentado como:
 $$\overline Z_t = \phi_1\overline Z_{t-1}+...+\phi_p\overline Z_{t-p}+\alpha_t-\theta_1\alpha_{t-1}-...-\theta_q\alpha_{t-q}$$
 Sendo que $\phi(B)$ e $\theta(B)$ são, respectivamente, os operadores autoregressivos e de médias móveis. Dessa forma:
 $$\phi(B) \overline Z_t=\theta(B) \alpha_t$$
-A determinação das ordens p e q do modelo pode ser realizada a partir da análise gráfica das função de autorrelação FAC (Função de Autocorrelação) e FACP (Função de Autocorrelação Parcial).
+A determinação das ordens p e q do modelo pode ser realizada a partir da análise gráfica das função de autorrelação FAC (**Função de Autocorrelação**) e FACP (**Função de Autocorrelação Parcial**). A FAC determina a ordem de médias móveis e FACP a ordem autoregressiva.
 
 ## Modelos ARIMA
 Um modelo ARIMA (p,d,q) (Modelos autoregressivos integrados de médias móveis), a partir da abordagem de Box & Jenkins, permite que previsões sejam realizadas tomando por base valores presentes e passados da série temporal. O modelo é formado por três componentes: o Auto Regressivo (AR), o filtro de integração (I) e o componente de médias móveis. 
@@ -144,7 +144,7 @@ Os parâmetros do modelo são identificados e testados estatisticamente e, para 
   a) resíduos devem possuir média zero, variância constante e serem estacionários, comportando-se como um *ruído branco*.
   b) As funções de autocorrelação devem ser não significativas, ou seja, devem ficar dentro do intervalo de confiança.
   c) Pelo teste de Ljung-Box,avalia-se se o modelo sugerido é adequado.
-  d) Verifica-e se os critérios AIC e BIC possuem valores menores.
+  d) Verifica-e se os critérios AIC (Akaike) e BIC (Bayesiano) possuem valores menores.
   
   Caso haja qualquer problema na etapa, volta-se à etapa de Identificação.
   
@@ -253,7 +253,7 @@ A partir daqui, será aplicado o método de Box & Jenkins. Para a fase de **iden
 ````
 
 
-
+Como a FAC determina a ordem das médias móveis, com a observação significativa no gráfico acima, o modelo possui a ordem q=
 
 ## Referências Bibliográficas {-}
 
@@ -271,3 +271,4 @@ https://www.maxwell.vrac.puc-rio.br/24787/24787_3.PDF
 https://rpubs.com/frank-pinho/522364#:~:text=A%20classe%20de%20modelos%20autorregressivos,constante%20e%20n%C3%A3o%2Dautocorrelacionado).
 
 https://rpubs.com/hudsonchavs/modeloma#:~:text=A%20classe%20de%20modelos%20de,modelar%20o%20retorno%20em%20t.
+
