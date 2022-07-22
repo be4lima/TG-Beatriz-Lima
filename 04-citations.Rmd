@@ -85,7 +85,7 @@ O número de diferenças necessárias para tornar uma série estacionária é ch
 
 Um processo é dito ser integrado de ordem d se uma série temporal {$y_t_{t=1}^T$} é não estacionária. Porém, após d diferenças, o resultado é uma série temporal estacionária e, portanto, pode ser modelada por um modelo ARMA(p,q).
 
-Para realizar o teste da raiz unitária, os mais utilizados são o de teste de Ljung-Box e o teste Aumentado de Dickey-Fuller (ADF).
+Para realizar o teste da raiz unitária, os mais utilizados é o teste Aumentado de Dickey-Fuller (ADF).
 
 ## Modelos autoregressivos
 Modelos autoregressivos AR(p) é caracterizado por realizar a modelagem somente a partir das defasagens de uma série temporal, ou seja:
@@ -133,7 +133,7 @@ $\Delta-=1-L$, sendo o operador de desafasagem (L): $L^ny_t=y_{t-n}$
 
 Conforme Morettin (2018), Na abordagem de Box & Jenkins, existem 4 etapas:
 1. Identificação do processo gerador de dados
-Para descobrir qual modelo descreve melhor o comportamento dos dados, inicialmente, realiza-se uma análise gráfica, verificando estacionaridade, tendência, sazonalidade, etc. A partir disso, utiliza-se a FAC e FACP (função de autocorrelação parcial) amostrais, além de verificar a ordem de integração da série, ou seja, número de diferenças necessárias para tornar uma série estacionária. 
+Para descobrir qual modelo descreve melhor o comportamento dos dados, inicialmente, realiza-se uma análise gráfica, verificando estacionaridade, tendência, sazonalidade, etc. A partir disso, utiliza-se a FAC e FACP (função de autocorrelação parcial) amostrais, além de verificar a ordem de integração da série, ou seja, número de diferenças necessárias para tornar uma série estacionária. É importante que a estacionariedade seja testada a partir dos testes de raiz unitária. 
 
 
 2. Estimação de parâmetros
@@ -186,19 +186,23 @@ Conforma comentado ao longo do capítulo, a série temporal é composta por quat
 
 plot(decompose(AirPassengers))
 ```
-A partir da figura acima, verifica-se que a série temporal é fortemente afetada pela tendência (*trend*), além da sazonalidade (*seasonal*). Sobra, ainda, a componente aleatória que é levemente "contmainada" pela componente sazonal, como é possível verificar na comparação entre *random* e *seasonal* no gráfico.
+A partir da figura acima, verifica-se que a série temporal é fortemente afetada pela tendência (*trend*), além da sazonalidade (*seasonal*). Sobra, ainda, a componente aleatória que é levemente "contaminada" pela componente sazonal, como é possível verificar na comparação entre *random* e *seasonal* no gráfico.
 
-Conforme citado anteriormente, as análises gráficas dão indícios de não estacionariedade. Portanto, a estacionariedade será testada com significância estatística na parte não sazonal e sazonal da série temporal. Para isso, será realizada novamente a análise gráfica, além da comparação da média e da variância em diferentes períodos, observação da Função de Autocorrelação (FAC) e testes de raiz unitária. 
+Conforme citado anteriormente, as análises gráficas dão indícios de não estacionariedade. Portanto, a estacionariedade será testada com **significância estatística** nas partes não sazonal e sazonal da série temporal. Para isso, serão realizados os seguintes passos:
+  1) análise gráfica;
+  2) análise da média e variância em diferentes períodos de tempo;
+  3) análise da Função de Autocorrelação (FAC)
+  4) testes de raiz unitária. 
 
   - **Parte não sazonal**
-  A identificação da autocorrelação entre o valor atual e suas defasagens (lags) é feita abaixo. O intervalo de confiança (de 95%) são as linhas pontilhadas vermelhas e valores acima ou abaixo da linha são estatisticamente significantes. Portanto, existe autocorrelação significante até a defasagem 36.
+  A identificação da autocorrelação entre o valor atual e suas defasagens (lags) é feita abaixo. O intervalo de confiança (de 95%) são as linhas pontilhadas vermelhas e valores acima ou abaixo da linha são estatisticamente significantes. Portanto, existe autocorrelação significativa até o lag 36.
   
 ```{r}
   require(BETS)
     BETS::corrgram(AirPassengers, lag.max = 36, ci=0.95)
 ```
   
-  No teste ADF, existem três formas de realizar o teste de Raiz Unitária (RU): raiz unitária + constante + tendência determinística escolhe-se 'type="trend"'; raiz unitária + constante, `type = "dryft"`; raiz unitária, `type= "none"`. No teste de raiz unitária, a hipótese nula é que a série temporal possui uma raiz unitária (ST é não estacionária) e a hipótese alternativa é que a série é estacionária.
+  Existem três formas de realizar o teste ADF: raiz unitária + constante + tendência determinística escolhe-se 'type="trend"'; raiz unitária + constante, `type = "dryft"`; raiz unitária, `type= "none"`. No teste de raiz unitária, a hipótese nula é que a série temporal possui uma raiz unitária (ST é não estacionária) e a hipótese alternativa é que a série é estacionária.
   
   Considerando a série temporal como sem tendência, com variância constante e com o critério de informação sendo o AIC:
   
@@ -209,26 +213,38 @@ Conforme citado anteriormente, as análises gráficas dão indícios de não est
   # Estatística de teste 
   adf.drift@teststat 
   adf.drift@cval #valores tabulados por MacKinnon (1996)
+  summary(adf.drift)
 ```
-A partir do gráfico, é possível afirmar que não há presença de autocorrelação nos resíduos. Além disso, a estatística teste ($\tau^2=1,8582$) é maior do que o valor máximo associado ao nível de confiança (-2,88). Portanto, a hipótese nula não é rejeitada e é possível concluir que a série temporal não é estacionária e possui raiz unitária. Agora precisamos descobrir o número de diferenciações necessárias para torná-la estacionária. 
+
+A partir do gráfico, é possível afirmar que a estatística teste ($\tau^2=1,8582$) é maior do que o valor máximo associado ao nível de confiança (-2,88). Portanto, a hipótese nula não é rejeitada e é possível concluir que a série temporal não é estacionária e, portanto, possui raiz unitária. Agora precisamos descobrir o número de diferenciações necessárias para torná-la estacionária. 
+
+Inicialmente, será realizada uma diferenciação para verificar se torna a série estacionária:
  
 ```{r}
   ts.plot(diff(AirPassengers, lag=1, differences=1))
-  BETS::corrgram(diff(AirPassengers, lag=1, differences=1))
-```
- Com uma diferenciação é possível verificar que a série está estacionária na média, mas não na variância, porque esta está crescendo ao longo do tempo. Portanto, será aplicado *log* na série temporal para que a variância passe a ser contante:
-```{r}
-  ts.plot(diff(log(AirPassengers), lag=1, differences=1))
-  BETS::corrgram(diff(log(AirPassengers), lag=1, differences=1))
+  BETS::corrgram(diff(AirPassengers, lag=1, differences=1), lag.max=36)
 ```
  
+Com uma diferenciação é possível verificar que a série está estacionária na média. Porém, a ST está crescendo ao longo do tempo e, dessa forma, sua variância não está constante. Uma estratégia importante para tornar a variância constante, é aplicar *log* na série temporal. É o que será feito: 
+ 
+```{r}
+  ts.plot(diff(log(AirPassengers), lag=1, differences=1))
+  BETS::corrgram(diff(log(AirPassengers), lag=1, differences=1), lag.max=48)
+```
+ 
+ Agora, a parte não sazonal da série temporal é estacionária.
+ 
   - **Parte sazonal**
-Pelo gráfico de correlação, é possível verificar que nos lags sazonais (12, 24, 36...) a função de autocorrelação apresenta um decrescimento, o que indica que a série temporal não é estacionária. 
+  
+Pela FAC acima, é possível verificar que nos lags sazonais (12, 24, 36...) a função de autocorrelação apresenta um decrescimento, o que indica que a série temporal não é estacionária na parte sazonal. 
+
+Da mesma forma realizada na parte não sazonal, também será necessário realizar uma diferenciação para verificar se ela se torna estacionária. Nesse caso, o lag é modificado para 12 e, assim, é possível realizar a diferenciação na parte sazonal:
 
 ```{r}
 BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
 
 ```
+
 A partir da figura acima, é possível verificar que a FAC não apresenta mais o decrescimento de antes, além de ter cortes bruscos nos lags 1 e 12. Para verificar a estacionariedade, será realizado o teste de RU:
 
 ```{r}
@@ -241,9 +257,11 @@ A partir da figura acima, é possível verificar que a FAC não apresenta mais o
   BETS::corrgram(adf.drift2@res, lag.max = 36)
   
 ```
-A estatística teste ($\tau^2=-4.03891$) é menor do que o valor máximo associado ao nível de confiança (-2,88). Portanto, conclui-se que a *série é estacionária*.
+
+A estatística teste ($\tau^2=-4.03891$) é menor do que o valor máximo associado ao nível de confiança (-2,88). Portanto, conclui-se que a *série é estacionária*!
 
 A partir daqui, será aplicado o método de Box & Jenkins. Para a fase de **identificação** será observado a FAC (Função de Autocorrelação) e FACP (Função de Autocorrelação Parcial) do modelo estacionário:
+
 ````{r}
 #FAC
   BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
@@ -252,8 +270,103 @@ A partir daqui, será aplicado o método de Box & Jenkins. Para a fase de **iden
   BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), type = "partial", lag.max = 48)
 ````
 
+É importante citar que o próximo passo é verificar as FAC e FACP e obter "p" e "q" nos lags 1, 2, 3... (Não-sazonal) e lags 12, 24, 36... (Sazonais). Em um primeiro cenário, como a FAC determina a ordem das médias móveis (q), é possível verificar que a última observação significativa da FAC é o lag 1, portanto, q=1. Já a FACP dá a ordem da componente autoregressiva (p). Da mesma forma que na FAC, a última observação sigificativa é a 1. Como foi realizada uma diferenciação na parte sazonal e uma na parte não sazonal, a ordem de integração é 1 (d=1). O modelo resultante seria SARIMA(1,1,1)(1,1,1).
 
-Como a FAC determina a ordem das médias móveis, com a observação significativa no gráfico acima, o modelo possui a ordem q=
+Em um segundo cenário, a última observação significativa da FAC continua sendo o lag 1 (q=1). A ordem de integração também continua a mesma. Mas no caso da FACP, é possível visualizar um decrescimento não só na parte sazonal, como também na parte não sazonal (p=0). Portanto, o modelo seria SARIMA(0,1,1)(0,1,1).
+
+Com esses possíveis modelos, podemos iniciar a etapa de **Estimação**. Será utilizada a função `Arima()`, em que a variável de entrada é a série temporal original. A transformação logarítmica necessária pra deixar a variância constante é garantida pelo argumento `lambda = 0`. A função `Arima()` automaticamente já diferencia a série. 
+
+```{r}
+
+library("forecast")
+
+fit.air <- Arima(AirPassengers, order = c(1,1,1), seasonal = c(1,1,1), method = "ML", lambda = 0)
+
+fit.air 
+
+```
+O próximo passo é verificar se os parâmetros do modelo são significativos:
+
+```{r}
+
+BETS::t_test(fit.air)
+
+```
+Como o parâmetro AR (ar1) foi rejeitado porque não é sigificativo, é importante retirar o parâmetro e analisá-lo novamente. Ele será retirado colocando o parâmetro p=0.
+
+```{r}
+
+fit.air <- Arima(AirPassengers, order=c(0,1,1), seasonal = c(0,1,1), method = "ML", lambda = 0)
+
+fit.air
+
+BETS::t_test(fit.air)
+
+```
+
+Como todos os parâmetros do modelo $SARIMA(0,1,1)(0,1,1)_{12}$ são significativos e os critérios de informação AIC, AICc e BIC foram minimizados, esse será o modelo escolhido para a próxima fase: o **diagnóstico**.
+
+No diagnóstico, os resíduos serão testados, assim como foram testados no capítulo anterior. Serão analisados a ausência de autocorrelação linear, de heterocedasticidade condicional e normalidade. Para uma análise geral, será utilizada a função `tsdiag()`. 
+
+```{r}
+
+diag <- tsdiag(fit.air, gof.lag = 20)
+
+```
+A partir do gráfico **Standarized Residuals**, visualmente os dados aparentam ter heterocedasticidade e média zero, o que indica normalidade. Além disso, é possível verificar a existência de outliers, já que observações fora do intervalo [-3;3] seriam observações atípicas. Portanto, aparentemente não existem outliers.
+
+A **FAC** dos resíduos (segundo gráfico) mostra que não há nenhuma defasagem significativa, portanto, o modelo SARIMA está representando bem a série temporal. O gráfico **p-values for Ljung-Box statistic** não é confiável, já que os p-values são calculados sem levar em conta o fato de os resíduos terem sido gerados a partir de um modelo ajustado. Por mais que a conclusão deste gráfico mostre que não há dependência linear entre os resíduos, a informação não é confiável.
+
+O teste de Ljung & Box será realizado para testar a autocorrelação dos resíduos:
+
+```{r}
+
+Box.test(fit.air$residuals, lag=24, type="Ljung-Box", fitdf = 2)
+
+```
+O teste mostra a ausência de autocorrelação linear nos resíduos, já que o p-value é maior que 0.05. Portanto, a hipótese nula de que a série temporal não possui autocorrelação até o lag 24 não pode ser rejeitada. 
+
+A seguir será testada a estacionariedade da variância e, para isso, o teste Multiplicador de Lagrange para heterocedasticidade condicional autoregressiva será utilizado. Além disso, também será testada a normalidade dos resíduos com o teste de Shapiro-Wilk.
+
+```{r}
+
+# Variância
+FinTS::ArchTest(fit.air$residuals, lags=12)
+
+#Normalidade dos resíduos
+shapiro.test(fit.air$residuals)
+
+```
+Em relação à variância, com p-value maior que 0.05, a hipótese nula de estacionariedade da vaiância nao é rejeitada. No caso do teste de Shapiro-Wilk, verifica-se que como p-value é maior que 0.05, a hipótese nula de normalidade também não é rejeitada.
+
+A próxima fase será a **Previsão** utilizando o pacote `forecast()`. O argumento "h" é o horizonte de previsão e o "level" é o nível de confiança. Para verificar se a previsão é adequada, serão analisadas as métricas utilizando a função `accuracy`.
+
+```{r}
+library(forecast)
+
+# Previsão
+plot(forecast(object=fit.air, h=12, level=0.95))
+
+# Métricas
+accuracy(fit.air)
+
+```
+Pelas métricas, o MAPE demonstra que o erro de previsão está em 0,47%, o que é muito bom. Dessa forma, conseguimos confirmar que a previsão está adequada!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Referências Bibliográficas {-}
 
@@ -272,3 +385,4 @@ https://rpubs.com/frank-pinho/522364#:~:text=A%20classe%20de%20modelos%20autorre
 
 https://rpubs.com/hudsonchavs/modeloma#:~:text=A%20classe%20de%20modelos%20de,modelar%20o%20retorno%20em%20t.
 
+https://koalatea.io/r-ljung-box-test/
