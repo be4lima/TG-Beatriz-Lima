@@ -77,6 +77,82 @@ A curva normal possui C=0,263.
 
 ## Aplicação {-}
 
+### Pacote Climate
+Para a análise exploratória de dados, serão utilizados os dados do pacote `climate`, que automatiza o download de dados meteorológicos e hidrológicos de repositórios públicos. Inicialmente, os dados serão carregados e também serão imotidos os valores NA coma  função `na.omit`:
+
+```{r}
+library(tidyverse)
+
+# Carregar pacote climate
+library(climate)
+
+# Carregar dados para análise
+dados1 <- hydro_imgw_monthly(year=2010, coords= FALSE, col_names = "full")
+dados2 <- na.omit(dados1)
+```
+Para visualizar a contagem total de valores faltantes (NA) em cada coluna do dataset utilizaremos a função `sapply`. Por ela, é possível concluir que as colunas com dados faltantes são as de *State, Temperature*, e *Flow*.
+
+```{r}
+
+sapply(dados1, function(x) sum(is.na(x)))
+
+```
+Após, é possível visualizar as primeiras seis linhas dos dados com a função `head()`. A partir disso, seguimos com a função `summary` que apresenta a sumarização dos dados. Ou seja, calcula, para cada uma das variáveis numéricas, as seguintes informações: valor mínimo (Min) e máximo (Max); o valor do 25º percentil, também conhecido como primeiro quartil (1st Qu); o valor do 75º quartil, também conhecido como terceiro quartil (3rs Qu); e, por fim, a média e a mediana. 
+
+```{r}
+
+# Visualizar as seis primeiras linhas do dataset
+head(dados2)
+view(dados2)
+
+# Sumarizando os dados
+summary(dados2)
+
+```
+Também é possível utilizar a função `dim()` para visualizar a dimensão do dataset. 
+
+```{r}
+
+#Dimensão do dataset
+dim(dados2)
+
+```
+Portanto, o dataset possui 4831 linhas e 10 colunas. 
+
+Após visualizar a sumarização dos dados, podemos seguir para a visualização dos dados. Iremos criar um histograma dos valores de Vazão (m³/s) dos rios (Coluna *River_or_Lake*) do nosso dataset.
+
+```{r}
+#Histograma da vazão
+
+ggplot(data=dados2, aes(x=dados2$`Flow [m3_s]`)) +
+  geom_histogram(fill="blue", color="blue") +
+  ggtitle("Histograma de Vazão [m³/s]")
+
+```
+É possível visualizar que a grande maioria das vazões estão próximas ou são zero. Também é possível visualizar as vazões em um gráfico de dispersão, pareando qualquer combinação de variáveis:
+
+```{r}
+
+  ggplot(data=dados2, aes(x=dados2$River_or_Lake, y=dados2$`Flow [m3_s]`)) +
+  geom_point() +
+  ggtitle("Distribuição de vazões por rio ou lago") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+Também é possível criar um Boxplot da vazão agrupada pelo rio ou lago correspondente:
+
+```{r}
+
+ggplot(data=dados2, aes(x=dados2$River_or_Lake, y=dados2$`Flow [m3_s]`)) + 
+  geom_boxplot(fill="steelblue") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  
+
+```
+Por existirem rios e lagos com vazões muito próximas, alguns boxplots não são visualizados. Porém, nos outros é possível visualizar.
+
+### INMET
+
 Para a aplicação, será utilizada a base de dados do Instituto Nacional de Meteorologia (INMET) de precipitação e temperatura na estação meterológica do Mirante de Santana em São Paulo, dos anos de 2014 a 2016. 
 
 No ano de 2014, São Paulo passou pela pior estiagem deste o ano de 1953. Entre o fim de 2014 e o outono de 2016, a cidade registrou o maior El Niño deste 1950. O El Niño, quando ocorre, causa um aquecimento anômalo das águas superficiais e sub-superficiais do Oceano Pacífico Equatorial, porém, não se comporta de forma constante em relação ao volume de chuvas. Uma das dúvidas do período era se o El niño poderia afetar o regime de chuvas e, assim, aumentar a precipitação em São Paulo. 

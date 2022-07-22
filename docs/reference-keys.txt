@@ -52,3 +52,13 @@ metadata-for-sharing
 url-your-book-url-like-httpsbookdown.orgyihuibookdown
 modelos-univariados-para-séries-temporais
 suavização-exponencial-simples-ses
+pacote-climate
+inmet
+operador-de-diferenças
+passeio-aleatório
+testes-de-raiz-unitária
+modelos-autoregressivos
+médias-móveis
+modelos-arma
+modelos-arima
+modelos-sarima

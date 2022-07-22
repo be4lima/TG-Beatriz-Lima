@@ -354,20 +354,6 @@ accuracy(fit.air)
 Pelas métricas, o MAPE demonstra que o erro de previsão está em 0,47%, o que é muito bom. Dessa forma, conseguimos confirmar que a previsão está adequada!
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Referências Bibliográficas {-}
 
 BARROS, Anna C.; MATTOS, Daiane Marcolino D.; OLIVEIRA, Ingrid Christyne Luquett D.; et al. **Análise de Séries Temporais em R: Curso Introdutório**. Grupo GEN, 2017. 9788595154902. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9788595154902/. Acesso em: 21 jun. 2022.
