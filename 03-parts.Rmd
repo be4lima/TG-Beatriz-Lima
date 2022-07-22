@@ -1,61 +1,328 @@
-# Modelos Lineares Generalizados
+# Modelos lineares
 
-## Modelos univariados para séries temporais
+Resumidamente, modelos lineares são utilizados para resumir relações observadas a partir de dados, no caso, ambientais, em uma linha reta. Em um modelo linear descreve-se o comportamento de uma variável dependente (ou variável resposta, y) como função de uma ou mais variáveis independentes (ou variáveis explicativas, x). 
 
-De acordo com Barros et. al (2022), uma série temporal pode ser representada por um modelo aditivo ou multiplicativo. No modelo aditivo, todas as componentes tem a mesma unidade da série; já no multiplicativo, somente a tendência tem a mesma unidade da variável e todas as outras componentes assumem valor próximos de 1 (Reis, 2022).
+## Covariância
+A *Covariância*, denotada $\sigma_{xy}$, descreve a variação, em relação a média, entre duas variáveis. 
 
-$$ \tag{4.1} Z_t=T_t+S_t+E_t$$ $$ou$$ $$ \tag{4.2}Z_t=T_t*S_t*E_t$$
+$$cov(x,y) = \frac{\sum(x_i - \overline{x})}{n-1}$$
 
-### Suavização exponencial simples (SES)
-O SES é um modelo mais adequado para previsão de séries temporais livres das componentes tendência (T) e sazonalidade (S). Portanto, a estratégia é identificar e remover esses componentes da série, a tornando uma série estacionária.
-
-Este modelo é descrito da seguinte forma:
-$$\tag{4.2}\overline{Z_t}=\alpha Z_t+\alpha(1-\alpha)Z_{t-1}+\alpha(1-\alpha)^2Z_{t-2}+...$$, onde $\overline{Z_0}=Z_1, t=1,...,N$.
-
-O $\alpha$ representa o parâmetro de suavização com valores de 0 a 1 e quanto mais estável for a previsão, menor o valor de $alpha$ porque as observações passadas terão pesos maiores do que teriam com um $alpha$ grande. Quanto mais próximo de 1, menor amortecimento e $\overline{Z_t}$ é aproximadamente igual a $Z_t$ (COSTA, 2022). Para aplicar o método em R, utiliza-se a função `HoltWinters()`, sendo x a série temporal de interesse e alpha o parâmetro de suavização. Os parâmetros beta e gamma são descritos como "FALSE".
-
-Conforme (COSTA, 2022), a previsão de obervações futuras para o modelo SES consite em:
-$$\tag{4.3a}\widehat{Z_t}=\overline{Z_t}, \forall h>0$$
-$$\tag{4.3b}\widehat{Z_t}=\alpha Z_t+\alpha(1-\alpha)Z_{t-1}(h+1)$$, sendo $h$ o número de passos à frente do previsto. Para realizar previsões em R, utiliza-se a função `forecast()` do pacote forecast, em que objeject é um objeto de classe "HoltWinters", h é o número de períodos a serem previstos e level é o intervalo de confiança para a predição.
-
-É importante citar que o modelo SES não é apropriado para séries com tendência linear, porque acarretaria em previsões que subestimariam ou superestimariam os valores da série temporal.
-
-### Suavização exponencial de Holt (SEH)
-O modelo SEH possui um parâmetro de suavização para trabalhar com a tendência da série temporal e, dessa forma, é possível realizar previsões em séries que apresentam o efeito de tendência linear. O modelo é estimado por:
-$$\tag{4.4} L_t=(1-\alpha)(L_{t-1}+T_{t-1}), 0\le\alpha\le1; t=2,...N$$
-$$\tag{4.5}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1; t=2,...N$$
-em que $L_t$ estima o nível da série no tempo t, $t_t$ estima a tendência no tempo t e $\alpha$ e $\beta$ são os parâmetros de suavisão para o nível e tendência, respectivamente. Para representar o modelo, também é utilizada a função `HoltWinters()`. Nesse caso, o argumento $gamma$ será descrito como "FALSE", já que o modelo utiliza somente os argumentos $\alpha$ e $\beta$.
-
-A previsão ($Z_{t+h}$) é dada por:
-$$\tag{4.6}\widehat{Z_h}=h\widehat{T_t}, \forall h>0$$
-Para a previsão, também utiliza-se a função `forecast()`. 
-
-### Suavização exponencial sazonal de Holt-Winters
-Para séries temporais que apresental comportamento sazonal, o modelo de Holt-Winters (HW) é o mais indicado. Nesse caso, existe uma equação adicional para a sazonalidade. Existem dois métodos de análise:
-
-#### Modelo aditivo
-Se a componente sazonal for tratada de forma aditiva, o modelo será:
-$$\tag{4.7}L_t=\alpha(Z_t-S_{t-m})+(1-\alpha)(L_{t-1}+T_{t-1}, 0\le\alpha\le1, t=m+1,...,N$$
-$$\tag{4.8}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1, t=m+1,...,N$$
-$$\tag{4.9}S_t=\gamma(Z_t-L_{t-1}-T_{t-1})+(1-\gamma)S_{t-m}, 0\le\gamma\le1, t=m+1,...,N$$
-, onde $\alpha, \beta$ e $\gamma$ são os parâmetros de suavização para o nível, tendência e sazonalidade respectivamente.
-O modelo de previsão h passos à frente é representado por:
-$$\tag{4.10}\widehat{Z_{t+h}}=L_t+T_th+S_{t+h-m}$$
-
-#### Modelo multiplicativo
-Seguindo o mesmo raciocínio anterior, o modelo é dado por:
-$$\tag{4.11}L_t=\alpha(\frac{Z_t}{S_{t-m}})+(1-\alpha)(L_{t-1}+T_{t-1}, 0\le\alpha\le1, t=m+1,...,N$$
-$$\tag{4.12}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1, t=m+1,...,N$$
-$$\tag{4.13}S_t=\gamma(\frac{Z_t}{L_{t-1}-T_{t-1}})+(1-\gamma)S_{t-m}, 0\le\gamma\le1, t=m+1,...,N$$
-E, para a previsão:
-$$\tag{4.14}\widehat{Z_{t+h}}=(L_t+T_th)S_{t+h-m}$$
+Portanto, é possível saber se ambas variáveis desviam na mesma direção (covariância positiva) ou se desviam em direções opostas (covariância negativa). Caso a covariância entre duas variáveis seja zero, a conclusão é que as variáveis são independentes. 
 
 
+## Correlação
+
+A **Correlação** é útil para medir a relação linear entre duas variáveis x e y, denotada por $\rho_{xy}$.
+
+$$\rho_xy = \frac{cov(x,Y)}{\sqrt(V(x)V(Y))}$$
+
+Sendo assim, duas variáveis podem estar relacionadas das seguintes formas:
+
+  1. Positivamente relacionadas. Ou seja, se x aumenta, y aumenta. E o mesmo ocorre para caso X diminua (Y diminui) -  Correlação positiva;
+  2. Negativamente relacionadas. Ou seja, se x aumenta, y diminui. E o mesmo ocorre para caso x diminua (Y aumenta) - Correlação negativa;
+  3. Não há relação entre as duas variáveis.
+
+Uma forma gráfica de visualizar a correlação das variáveis que apresenta grande utilidade é a partir do **Diagrama de Dispersão**. O diagrama traz informações importantes porque mostra se a relação entre as variáveis é linear ou não, se existem outliers no conjunto de dados e traz uma ideia de quão forte é o relacionamento entre as variáveis.
+
+É importante afirmar que o valor não implica causalidade, mas quantifica a relação entre as variáveis selecionadas.
+
+### Coeficiente de Pearson (r)
+
+O *Coeficiente de Pearson*, também chamado de coeficiente de correlação da amostra $r_{xy}$, mede a força da relação linear entre duas variáveis aleatórias x e y. Se duas variáveis relacionarem-se perfeitamente com inclinação positiva, $r_{xy}=1$; com inclinação negativa, $r_{xy}=-1$; se $r_{xy}=0$, não há relação entre as variáveis. 
+
+De acordo com Filho e Júnior (2009), existem métricas diferentes de acordo com cada autor:
+
+- Cohen (1998) considera valores entre 0,10 e 0,29 pequenos; entre 0,30 e 0,49, médios; e entre 0,50 e 1, grandes.
+
+- Dancey e Reidy (2005) considera valores entre 0,10 e 0,30 pequenos; entre 0,40 e 0,60 moderados; e de 0,70 até 1, grandes.
+
+O consenso é que quanto mais próximo de 1, maior a força da relação linear entre as variáveis, independente do sinal.
+
+## Regressão linear simples
+
+A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da **regressão linear simples**, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo de regressão linear é:
+
+$$Y = \beta_0 + \beta_1X_1 + e_1$$, sendo $\beta_0$ o coeficiente do intercepto, $\beta_1$ o coeficiente de inclinação, $e_1$ o erro no ajuste do modelo para a observação y.
+
+De acordo com Montgomery & Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, "*a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,* $\beta_1$*, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro* $\sigma^2$". Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x. 
+
+O erro $e_1$ é estimado pela variabilidade de Y que o modelo criado não consegue explicar, ou seja, o resíduo pode ser quantificado por $\widehat{Y}-Y$. Os resíduos conseguem indicar se as suposições do modelo foram violadas e, por isso, agora conheceremos as condições necessárias para a aplicação da Regressão Linear.
+
+### Condições {#Condicoes}
+
+São assumidas algumas hipóteses sobre os dados de entrada na Regressão Linear:
+
+1. Linearidade: a relação entre X e Y deve ser linear;
+
+2. Homocedasticidade: a variância da variável dependente (Y) deve ser constante para todos os valores das variáveis independentes (X);
+
+3. Normalidade: para um valor fixo de X, Y é uma variável aleatória com distribuição normal. Os erros também devem ser normalmente distribuídos;
+Dentre diversos testes possíveis, para verificar a não-normalidade dos erros é possível realizar o Teste de Shapiro-Wilk ou um gráfico de Probabilidade Normal com objetivo de verificar visualmente se os dados do modelo apresentam distribuição normal.
+
+3. Independência dos resíduos: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes;
+
+4. Ausência de outliers influentes: não devem existir outliers que influenciem consideravelmente o modelo;
+
+
+### Coeficiente de Determinação (R²)
+
+O *Coeficiente de Determinação* é utilizado frequentemente pra avaliar a adequação de um modelo de regressão. É definido pelo quadrado do coeficiente de correlação entre X e Y. Quanto mais próximo de 1, maior a quantidade de variabilidade nos dados explicada pelo modelo de regressão. 
+
+De acordo com Montgomery (2021), o R² pode trazer interpretações errôneas, já que sempre é possível fazer com que R² seja unitário realizando a adição de mais termos ao modelo. Ou seja, R² aumenta se for adicionado uma nova variável ao modelo, mas isso não indica que o modelo esteja mais adequado.
 
 
 
-## Referências Bibliográficas {-}
+## Aplicação {-}
 
-MATTOS, Thalita do Bem. *Modelos Não Lineares e suas Aplicações*. Universidade Federal de Juiz de Fora, Juiz de Fora, 2013. Disponível em: <https://www.ufjf.br/cursoestatistica/files/2014/04/Modelos-N%C3%A3o-Lineares-e-suas-Aplica%C3%A7%C3%B5es.pdf> Acesso em: 07/06/2022.
+### Estudo de Caso 1
+Para a primeira aplicação, serão utilizados dados do exemplo 12-14 do livro do autor Montgomery et al (2016) chamado Estatistica Aplicada e Probabilidade para Engenheiros. O enunciado é o seguinte: ""
+
+```{r}
+options("install.lock"=FALSE)
+## Carregar pacotes que serão usados
+library(tidyverse)
+library(ggplot2)
+
+## Checando repositório
+setwd("C:/Users/Luiz Arthur/Dropbox/PC/Documents/UFABC Beatriz/TG Beatriz Lima/Dados")
+
+## Criação do dataframe
+dados <- read.delim("Ex12_14_Montgomery.txt")
+View(dados)
+
+## Regressão linear
+#mod1 <- lm(Qualidade ~ Claridade + Aroma + Corpo + Sabor + Afinacao, dados)
+#summary(mod1) # Estatísticas do modelo
+
+```
+O Coeficiente de Determinação tem como valor 0,7206, ou seja...
+
+```{r}
+
+## Plotando mod1
+#plot(mod1, which = 4)
+#par(mfrow=c(2,2))
+
+
+## Análise dos resíduos
+#res1 <- resid(mod1)
+#res_std1 <- (res1 - mean(res1))/sd(res1) # Padronização dos resíduos
+
+#par(mfrow=c(2,2))
+#plot(res_std1)
+#hist(res_std1)
+#boxplot(res_std1)
+#qqnorm(res_std1)
+
+```
+
+Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo. Os resíduos não podem apresentar uma tendência e, por isso, eles serão analisado abaixo.
+ 
+ - Residuals vs Fitted
+ 
+O gráfico mostra a relação entre os resíduos e os valores ajustados. Como a distribuição dos resíduos próxima à linha pontilhada demonsta um bom ajuste do modelo, é possível verificar se resíduos tem padrões não-lineares. No caso do nosso modelo,
+ 
+ - Normal Q-Q
+ 
+O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada. Pelo gráfico é possível perceber que a distribuição dos resíduos está 
+  
+ - Scale-Location
+ 
+O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade. O ideal, no caso, seria que os resíduos estivessem uniformemente distribuídos ao redor da linha vermelha. Para o caso do nosso modelo, 
+  
+ - Residuals vs Leverage
+ 
+O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. No caso do modelo criado, há possibilidade 
+
+ - Cook's distance
+ 
+A Distância de Cook informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações  são extremas. 
+
+```{r}
+
+#out1 <- cooks.distance(mod1)
+#influentes1 <- out1[(CD > (3* mean(out1, na.rm=TRUE)))]
+#print(influentes1)
+```
+
+
+### Estudo de Caso 2
+Para o segundo estudo de caso serão utilizados dados reais de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de 1ª ordem de $CO_2$ na Amazônia Legal.A estimativa de 1ª ordem supõe que, de modo simplificado, 100% das emissões ocorreram no momento da mudança de uso/cobertura.
+
+Um **primeiro passo** será carregar os dados:
+
+```{r}
+options("install.lock"=FALSE)
+
+
+## Checando repositório
+setwd("C:/Users/Luiz Arthur/Dropbox/PC/Documents/UFABC Beatriz/TG Beatriz Lima/Dados")
+
+## Carregando base de dados
+dados0 <- read.csv2("CO2Amazonia.csv")
+dados <- na.omit(dados0)
+
+View(dados)
+
+```
+Agora que os dados foram carregados, o **segundo passo** será entender os dados. Para saber algumas propriedade dos dados carregados, será utilizado o comando ``head()`, que apresentará uma amostra dos dados, e ``summary()`, que apresenta as estatísticas básicas dos dados (média, mediana, 1º quartil, etc).
+
+```{r}
+
+head(dados)
+
+summary(dados)
+
+```
+Como iremos analisar a relação entre a área desmatada por ano (D_Area) e a emissão de 1ª ordem de $CO_2$, é importante verificar qual é o comportamento entre esses dados.
+
+```{r}
+
+## Verificando a relação entre a variável dependente e a variável independente
+plot(dados$D_Area, dados$VR_CO2_1stOrder)
+
+## Correlação entre as variáveis da base de dados
+cor.test(dados$VR_CO2_1stOrder,dados$D_Area)
+
+
+```
+
+A partir desse gráfico, é possível verificar que a relação entre as variáveis é linear e, dessa forma, conforme a área desmatada aumenta, a emissão de $CO_2$ aumenta linearmente. O valor da correlação indica que a relação entre as duas variáveis é forte e positiva, já que 0,9987358 é próximo de 1 e maior que zero.
+
+```{r}
+
+## Construção do modelo
+mod <- lm(VR_CO2_1stOrder ~ D_Area, dados, na.action = na.exclude)
+summary(mod)
+
+
+```
+O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de $CO_2$ O valor indica que o modelo possui bom ajuste. 
+
+O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe baixa probabilidade dos resultados apresentados pelo modelo não possuírem erro amostral. Ou seja, existe alta probabilidade do modelo não ser um bom ajuste. Isso continuará sendo testado a diante.
+
+De acordo com Montgomery e Runger (2021), "*A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo*". Dessa forma, abaixo será realizada a análise residual.
+
+```{r}
+# Análise dos resíduos
+
+plot(mod,which = 4)
+
+par(mfrow=c(2,2)) 
+plot(mod)
+
+
+## Teste de normalidade
+shapiro.test(mod$residuals)
+
+```
+
+Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo. Os resíduos não podem apresentar uma tendência e, por isso, eles serão analisado abaixo.
+ 
+ - Residuals vs Fitted
+ 
+O gráfico mostra a relação entre os resíduos e os valores ajustados. Como a distribuição dos resíduos próxima à linha pontilhada demonsta um bom ajuste do modelo, é possível verificar se resíduos tem padrões não-lineares. No caso do nosso modelo, os resíduos não se apresentam próximos à linha pontilhada.
+
+As observações 48, 50 e 51 apresentam grandes valores de resíduos e, por isso, é interessante realizar toda a análise após a remoção dessas observações.
+ 
+ - Normal Q-Q
+ 
+O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada. Pelo gráfico é possível perceber que a distribuição dos resíduos está diferente da distribuição normal. As observações 48, 50 e 51 apresentam-se extremas novamente.
+  
+ - Scale-Location
+ 
+O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade. O ideal, no caso, seria que os resíduos estivessem uniformemente distribuídos ao redor da linha vermelha. Para o caso do nosso modelo, demonstra que há heterocedasticidade, ou seja, os resíduos não estão uniformemente distribuídos em relação ao intervalo de preditores.
+  
+ - Residuals vs Leverage
+ 
+O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. No caso do modelo criado, há possibilidade de existirem outliers influentes.
+
+ - Cook's distance
+ 
+A Distância de Cook informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações 48, 50 e 51 são extremas. 
+
+```` {r}
+CD <- cooks.distance(mod)
+influentes <- CD[(CD > (3* mean(CD, na.rm=TRUE)))]
+
+print(influentes)
+````
+É possível analisar que existem 6 observações que possuem uma distância de Cook três vezes maior que a média. Além disso, é confirmado que as observações 48, 50 e 51 são extremas.
+
+Pelo Teste de Shapiro, é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. O gráfico Normal Q-Q serve como uma contra-prova, também mostrando que os dados não são normalmente distribuídos e, dessa forma, não são adequados.
+
+Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste de outliers, é interessante utilizar os gráficos Boxplot e Histograma. 
+
+```{r}
+
+#Encontrando potenciais outliers a partir de gráficos
+
+hist(dados$D_Area)
+
+hist(dados$VR_CO2_1stOrder)
+
+```
+
+A partir da análise dos resíduos, foi possível inferir que as observações 48, 50 e 51 são outliers influentes. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote `outliers` pode ser utilizado, já que a função `outlier()` consegue encontrar o valor mais distante da média das variáveis.
+
+```{r}
+#Encontrando os valores com maior diferença da média com o pacote `outliers`
+
+library(outliers)
+
+
+outArea <- outlier(dados$D_Area)
+
+outCO2 <- outlier(dados$VR_CO2_1stOrder)
+
+print(outArea)
+
+print(outCO2)
+
+```
+
+Com esse resultado, analisa-se que existe grande possibilidade de existirem outliers no conjunto de dados, já que as observações 48, 50 e 51 apresentam-se extremas e influentes no modelo de regressão. Além disso, a hipótese de que o resultado dos resíduos indica que seja necessário um maior conjunto de dados também é uma possibilidade.
+
+Após todos os testes, por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.
+
+```{r}
+
+#Diagrama de dispersão com o ajuste
+
+plot(x = dados$D_Area, y = dados$VR_CO2_1stOrder, xlab = "Área desmatada no ano", ylab = "Emissão de CO2 de 1a ordem")
+
+abline(mod, col = "blue")
+```
+
+Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal. Portanto, torna-se importante refazer o modelo, de forma que os outliers influentes (observações 48, 50, 51, 52, 60 e 61) sejam retirados, para verificar se este novo modelo estaria mais adequado para representar a relação entre as variáveis. 
+
+É isso que faremos:
+
+```{r}
+dados_sem_outliers <- dados[-c(48,50,51,52,60,61),]
+
+
+mod2<- lm(VR_CO2_1stOrder ~ D_Area, data=dados_sem_outliers)
+
+summary(mod2)
+
+plot(mod2)
+
+```
+
+Mesmo com a retirada de grande parte dos outliers influentes, o modelo ainda não possui resíduos adequados. Para a realização de uma regressão linear, são assumidas alguns preceitos que, provavelmente, não são o caso dos dados utilizados para o segundo estudo de caso (vide tópico \@ref(Condicoes)). Conforme verificamos, os resíduos não seguem uma distribuição normal e os dados não possuem variância constante. Portanto, pode-se afirmar que a regressão linear não explica os dados de forma adequada. Talvez seja necessário aplicar outro tipo de modelo para estes dados. Além disso, os dados podem não conter variáveis suficientes para explicar a variável resposta (Emissão de primeira ordem de $CO_2$).
+
+
+##Referências Bibliográficas {-}
+
+CHAPRA, Steven C. **Métodos Numéricos Aplicados com MATLAB® para Engenheiros e Cientistas**. Grupo A, 2013. 9788580551778. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9788580551778/. Acesso em: 21 jun. 2022.
 
 Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
+
+SIDHU, Rishi. **Layman's Introduction to Linear Regression**. Disponível em: <https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09> 
+
+R DOCUMENTATION. *shapiro.test(x)*. Disponível em: <https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test>.
+
+FILHO, Dalson Britto Figueiredo; JÚNIOR, José Alexandre da Silva. *Desvendando os Mistérios do Coeficiente de Correlação de Pearson (r)*. Revista Política Hoje vol. 18, n. 1,  2009. Disponível em: <https://periodicos.ufpe.br/revistas/politicahoje/article/viewFile/3852/3156>.
+
+THIEME, Christian. Identifying Outliers in Linear Regression — Cook’s Distance. Towards Data Science, 2021. Disponível em: <https://towardsdatascience.com/identifying-outliers-in-linear-regression-cooks-distance-9e212e9136a#:~:text=One%20method%20that%20is%20often,the%20ith%20observation%20is%20removed>.
