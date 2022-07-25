@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-07-22" />
+<meta name="date" content="2022-07-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -326,11 +326,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="análise-exploratória-de-dados.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregar dados para análise</span></span>
 <span id="cb8-2"><a href="análise-exploratória-de-dados.html#cb8-2" aria-hidden="true" tabindex="-1"></a>dados1 <span class="ot">&lt;-</span> <span class="fu">hydro_imgw_monthly</span>(<span class="at">year=</span><span class="dv">2010</span>, <span class="at">coords=</span> <span class="cn">FALSE</span>, <span class="at">col_names =</span> <span class="st">&quot;full&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/&quot;</code></pre>
-<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\Rtmpm6LMIq\file33dc14d56eb3</code></pre>
+<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\RtmpqiOEMg\file4c50342e1212</code></pre>
 <pre><code>## [1] &quot;https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/mies_info.txt&quot;</code></pre>
-<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\Rtmpm6LMIq\file33dc238d5581</code></pre>
+<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\RtmpqiOEMg\file4c5061f16c7d</code></pre>
 <pre><code>## [1] &quot;https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2010/mies_2010.zip&quot;</code></pre>
-<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\Rtmpm6LMIq\file33dc31be5391</code></pre>
+<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\RtmpqiOEMg\file4c50381e7647</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="análise-exploratória-de-dados.html#cb15-1" aria-hidden="true" tabindex="-1"></a>dados2 <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(dados1)</span></code></pre></div>
 <p>Para visualizar a contagem total de valores faltantes (NA) em cada coluna do dataset utilizaremos a função <code>sapply</code>. Por ela, é possível concluir que as colunas com dados faltantes são as de <em>State, Temperature</em>, e <em>Flow</em>.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="análise-exploratória-de-dados.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(dados1, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))</span></code></pre></div>
