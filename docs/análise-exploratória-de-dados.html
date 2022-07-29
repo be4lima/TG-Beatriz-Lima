@@ -324,11 +324,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="análise-exploratória-de-dados.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregar dados para análise</span></span>
 <span id="cb8-2"><a href="análise-exploratória-de-dados.html#cb8-2" aria-hidden="true" tabindex="-1"></a>dados1 <span class="ot">&lt;-</span> <span class="fu">hydro_imgw_monthly</span>(<span class="at">year=</span><span class="dv">2010</span>, <span class="at">coords=</span> <span class="cn">FALSE</span>, <span class="at">col_names =</span> <span class="st">&quot;full&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/&quot;</code></pre>
-<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\Rtmp0E4nQz\file25b042704e92</code></pre>
+<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\RtmpSQ1lvK\file4e2419d750ee</code></pre>
 <pre><code>## [1] &quot;https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/mies_info.txt&quot;</code></pre>
-<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\Rtmp0E4nQz\file25b0782d1410</code></pre>
+<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\RtmpSQ1lvK\file4e2418a6621f</code></pre>
 <pre><code>## [1] &quot;https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2010/mies_2010.zip&quot;</code></pre>
-<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\Rtmp0E4nQz\file25b041425f65</code></pre>
+<pre><code>## C:\Users\LUIZAR~1\AppData\Local\Temp\RtmpSQ1lvK\file4e2462305e61</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="análise-exploratória-de-dados.html#cb15-1" aria-hidden="true" tabindex="-1"></a>dados2 <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(dados1)</span></code></pre></div>
 <p>Para visualizar a contagem total de valores faltantes (NA) em cada coluna do dataset utilizaremos a função <code>sapply</code>. Por ela, é possível concluir que as colunas com dados faltantes são as de <em>State, Temperature</em>, e <em>Flow</em>.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="análise-exploratória-de-dados.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(dados1, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))</span></code></pre></div>
