@@ -1,0 +1,338 @@
+--- 
+title: "Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações"
+author: "Beatriz Morais Lima e Wallace Gusmão Ferreira"
+date: "`r Sys.Date()`"
+output:
+    html_document:
+      theme: cerulean
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+--- 
+title: "Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações"
+author: "Beatriz Morais Lima e Wallace Gusmão Ferreira"
+date: "`r Sys.Date()`"
+output:
+    html_document:
+      theme: cerulean
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+# Sobre {-}
+
+Livro relacionado a técnicas de programação e modelagem de temas específicos da **Engenharia Ambiental e Urbana**. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana.
+
+
+
+
+<!--chapter:end:index.Rmd-->
+
+
+# R - Introdução e Comandos Básicos
+
+Placeholder
+
+
+## Definindo um diretório de trabalho
+## Vetores
+## Base de dados
+## Seleção de variáveis
+## R packages
+
+<!--chapter:end:01-intro.Rmd-->
+
+
+# Análise Exploratória de Dados 
+
+Placeholder
+
+
+## População e amostra
+## Sumarização numérica de dados
+### Medidas de Posição
+#### Média
+#### Mediana
+#### Moda
+### Medidas de Variabilidade
+#### Amplitude
+#### Variância
+#### Desvio Médio (*Standard Deviation*)
+#### Quartis, Decis e Percentis
+### Medidas de Forma
+#### Assimetria
+##### Coeficiente de Assimetria de Pearson
+#### Curtose
+##### Coeficiente de Curtose
+## Aplicação {-}
+### Pacote Climate
+### INMET
+
+<!--chapter:end:02-cross-refs.Rmd-->
+
+
+# Modelos lineares
+
+Placeholder
+
+
+## Covariância
+## Correlação
+### Coeficiente de Pearson (r)
+## Regressão linear simples
+### Condições {#Condicoes}
+### Coeficiente de Determinação (R²)
+## Aplicação {-}
+### Estudo de Caso 1
+### Estudo de Caso 2
+
+<!--chapter:end:03-parts.Rmd-->
+
+
+# Análise de séries temporais
+
+Placeholder
+
+
+## Estacionaridade
+## Operador de diferenças
+## Passeio aleatório
+### Testes de raiz unitária
+## Modelos autoregressivos
+## Médias Móveis
+## Modelos ARMA
+## Modelos ARIMA
+## Modelos SARIMA
+## Aplicação {-}
+## Referências Bibliográficas {-}
+
+<!--chapter:end:04-citations.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Análise geoespacial
+
+## Dados espaciais e geoespaciais
+Dados espaciais são os que utilizam o sistema de coordenadas cartesianas com três (x, y e z) ou mais dimensões. Dados geoespaciais são dados que podem ser mapeados no planeta Terra e relacionadas com outros dados baseados em sistemas de coordenadas geográficas. Como grande parte dos dados ambientais são afetados pela localização geográfica, a análise geoespacial traz informações importantes.
+
+A teoria por trás da análise feoespacial já é coberta pela disciplina de Cartografia e Geoprocessamento, portanto, aqui iremos abordar somente a parte prática.
+
+No capítulo, serão utilizados os seguintes pacotes: `sf` para ler e trabalhar com dados espaciais e `mapview` para a etapa de criação de mapas.
+
+No curso de Engenharia Ambiental e Urbana, utilizam-se *shapefiles* (.shp) para realizar análises espaciais, portanto, estes serão utilizados no capítulo.
+
+### Sistema Geodésico de Referência (SGR)
+Basicamente, o SGR é um sistema de coordenadas definido a partir de um elipsóide de referência, posicionado e orientado em relação à superfície da Terra. A partir dele, é possível localizar espacialmente qualquer feição na superfície terrestre. Os mais conhecidos são: SAD69, WGS84 e o SIRGAS 2000. 
+
+## Aplicação {-}
+Para a aplicação será reproduzido o exemplo do TBEP R Training. Para isso, serão instalados os pacotes `sf` e `mapview`.
+
+```{r}
+options(repos = list(CRAN="http://cran.rstudio.com/"))
+
+install.packages(c('sf','mapview'), repos = "http://cran.us.r-project.org")
+
+library(sf)
+library(mapview)
+library(tidyverse)
+```
+
+O shapefile "sgdat.shp" são dados da cobertura de algas marinhas em Tampa Bay em 2016. As "features" são as linhas do vetor e os "fields" são as colunas, ou melhor, atributos ("OBJECT ID" e "FLUCCS"). O SGR do arquivo é WGS 84. A coluna "geometry" armazena os dados espaciais (longitude e latitude).
+
+```{r}
+#sgdat shapefile
+sgdat <- st_read('Data/sgdat.shp')
+
+# utilidades do pacote sf
+methods(class="sf")
+
+```
+Esse é o passo a passo de como importar um shapefile. Porém, muitas vezes não possuímos um shapefile e queremos criar um a partir de um dataframe. Para isso, é necessário que o dataframe inclua as coordenadas geográficas (longitude e latitude) e que tenhamos conhecimento do SGR. O dataframe ´fishdat´ possui as características dos peixes encontrados e o statloc apresenta a localização deles. O passo a passo será realizado abaixo.
+
+```{r}
+getwd()
+# dados da presença de peixes em Tampa Bay
+fishdat <- read.csv("Data/fishdat.csv")
+
+statloc <- read.csv("Data/statloc.csv")
+
+```
+
+```{r}
+# estrutura dos dados
+str(fishdat)
+str(statloc)
+
+```
+Para isso, utilizaremos a função `st_as_sf()` para transformar o dataframe em um objeto sf. Primeiramente, precisamos juntar os dois *datasets* (fishdat e statloc) e dizer qual coluna que possui os dados da geometria (latitude e longitude). Além disso, é necessário dizer qual o SGR e, além disso, precisamos garantir que ambos datasets possuam o mesmo SGR. Por enquanto, podemos fazer um "chute calibrado" que é o WGS84.
+
+```{r}
+#juntando os dois dataframes
+joindata <- left_join(fishdat,statloc,by="Reference")
+
+#criando o objeto de dados espaciais
+joindata <- st_as_sf(joindata, coords=c('Longitude','Latitude'), crs = st_crs(sgdat))
+
+#tipo de objeto sf
+str(joindata)
+
+#checando SGR
+st_crs(joindata)
+st_crs(sgdat) 
+
+```
+Caso seja necessário modificar a projeção, utiliza-se a função ``st_transform()`. Nesse caso, não precisamos modificar já que o shapefile (sgdat) tem o mesmo SGR do que estamo querendo criar. 
+
+Agora, iniciaremos a **análise geoespacial** dos dados. Inicialmente, iremos dar uma olhada geral para entender qual os dados que estamos lidando. 
+
+O padrão é que a função ´plot()´ plote todas as feições. Para plotar somente a geometria, utiliza-se `st_geometry()`.
+
+
+```{r}
+plot(st_geometry(joindata)) 
+```
+```{r}
+plot(joindata)
+
+```
+```{r}
+plot(sgdat)
+```
+
+Conforme observamos o shapefile "sgdat" com os dados das algas marinhas e o "joindata" com os dados do posicionamento de peixes, é possível verificar que existem áreas de intersecção entre ambos. Para analisar novamente, iremos plotar somente a geometria de ambos:
+
+```{r}
+plot(joindata$geometry)
+plot(sgdat$geometry)
+```
+
+Vamos filtrar somente os dados dos peixes do ano de 2016:
+```{r}
+filt_data <- joindata %>%
+  filter(yr == 2016)
+plot(st_geometry(filt_data))
+```
+
+Agora, verificaremos quantos peixes foram vistos nos mesmos locais em que encontraram-se algas marinhas em 2016. Ou seja, iremos selecionar as localizações que possuem ambos dados. Para isso, iremos utilizar o código abaixo:
+```{r}
+
+fish_crop <- filt_data[sgdat, ]
+
+plot(fish_crop$geometry)
+
+```
+O que foi realizado até agora é somente a intersecção da geometria de ambos datasets. Portanto, agora realizaremos a intersecção de ambos dados, incluindo atributos:
+
+```{r}
+
+fish_int <- st_intersection(filt_data, sgdat)
+
+plot(st_geometry(fish_int))
+
+View(fish_int)
+```
+
+É possível utilizar ferramentas do `tidyverse`. Abaixo, iremos fazer a soma de todos os Pinfish foram pegos em 2016:
+
+```{r}
+
+fish_cnt <- fish_int %>% 
+  group_by(FLUCCS) %>% 
+  summarise(
+    cnt = sum(Pinfish)
+  ) 
+
+fish_cnt
+
+```
+Além de realizar a soma nos atributos numéricos (quantidade de Pinfish), também é realizada nos atributos geométricos (latitude e longitude). Conforme apresentado na tabela anterior, existe uma maior quantidade de Pinfishs em áreas onde existe maior quantidade de algas marinhas (FLUCCS=9116). É possível realizar um gráfico em relação às duas categorias de cobertura de algas marinhas (´9113´: desigual, ´9116´: contínua).
+
+```{r}
+ggplot(fish_cnt, aes(x = FLUCCS, y = cnt)) + 
+  geom_bar(stat = 'identity', fill='navyblue') 
+  
+```
+Agora será realizada a **confecção de mapas**. Utilizaremos os pacotes `ggplot2` inicialmente:
+
+```{r}
+
+ggplot() + 
+  geom_sf(data = sgdat, fill = 'green') + 
+  geom_sf(data = joindata) 
+
+```
+Agora, para criar um mapa interativo para selecionar e dar zoom nos dados, utilizaremos o pacote `mapview`:
+
+```{r}
+
+mapview(sgdat, col.regions = 'green') +
+  mapview(joindata, zcol = 'Gear')
+
+```
+
+
+## Referências Biliográficas {-}
+
+https://bookdown.org/igisc/EnvDataSci/spatial-data-and-maps.html
+
+https://www.youtube.com/watch?v=nQVFqkifeSE&t=152s
+
+https://tbep-tech.github.io/tbep-r-training/mapping.html#Exercise_13
+
+
+<!--chapter:end:05-blocks.Rmd-->
+
+
+# Sharing your book
+
+Placeholder
+
+
+## Publishing
+## 404 pages
+## Metadata for sharing
+
+<!--chapter:end:06-share.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+The R Foundation. **R: The R Project**. Disponível em: <https://www.r-project.org/>
+
+Wickham, Hadley; Grolemund, Garrett. **R for Data Science**. Disponível em: <https://r4ds.had.co.nz/exploratory-data-analysis.html>
+
+Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
+
+SIDHU, Rishi. **Layman's Introduction to Linear Regression**. Disponível em: <https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09> 
+
+DAVIS, Jerry. Introduction to Environmental Data Science. SFSU Institute for Geographic Information Science, 2022. Disponível em: https://bookdown.org/igisc/EnvDataSci/#environmental-data-science. Acesso em: 27 abr. 2022.
+
+FILATRO, Andrea C. Data science da educação. [Digite o Local da Editora]: Editora Saraiva, 2020. 9786587958446. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9786587958446/. Acesso em: 27 abr. 2022.
+
+Gibert, Karina; Horsburgh, Jeffery S.; Athanasiadis, Ioannis N.; Holmes, Geoff. Environmental Data Science. Environmental Modelling & Software, 2018. Disponível em: <https://reader.elsevier.com/reader/sd/pii/S1364815218301269?token=6B7E02806686B9D1213F7D7D568DD8607AC7EDC45701E1AB2FF569284245D3B9B73444E8F4532FFF767F851CCECF7289&originRegion=us-east-1&originCreation=20220429000236>. Acesso em: 28 abr. 2022.
+
+R DOCUMENTATION. *shapiro.test(x)*. Disponível em: <https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test>
+
+<!--chapter:end:07-references.Rmd-->
+

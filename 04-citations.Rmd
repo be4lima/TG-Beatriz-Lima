@@ -154,6 +154,9 @@ Os parâmetros do modelo são identificados e testados estatisticamente e, para 
 Para a aplicação, será realizado o exemplo do capítulo 4 do livro de BARROS *et.al* (2017). Será utilizada como *database* a série temporal de vendas de passagens aéreas nos EUA de janeiro de 1949 a dezembro de 1960. 
 
 ```{r}
+options(repos = list(CRAN="http://cran.rstudio.com/"))
+options("install.lock"=FALSE)
+
 # Intalando pacotes necessários
   install.packages("BETS")
   install.packages("urca")
@@ -262,13 +265,13 @@ A estatística teste ($\tau^2=-4.03891$) é menor do que o valor máximo associa
 
 A partir daqui, será aplicado o método de Box & Jenkins. Para a fase de **identificação** será observado a FAC (Função de Autocorrelação) e FACP (Função de Autocorrelação Parcial) do modelo estacionário:
 
-````{r}
+```{r}
 #FAC
   BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
 
 #FACP
   BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), type = "partial", lag.max = 48)
-````
+```
 
 É importante citar que o próximo passo é verificar as FAC e FACP e obter "p" e "q" nos lags 1, 2, 3... (Não-sazonal) e lags 12, 24, 36... (Sazonais). Em um primeiro cenário, como a FAC determina a ordem das médias móveis (q), é possível verificar que a última observação significativa da FAC é o lag 1, portanto, q=1. Já a FACP dá a ordem da componente autoregressiva (p). Da mesma forma que na FAC, a última observação sigificativa é a 1. Como foi realizada uma diferenciação na parte sazonal e uma na parte não sazonal, a ordem de integração é 1 (d=1). O modelo resultante seria SARIMA(1,1,1)(1,1,1).
 
