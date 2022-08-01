@@ -78,17 +78,21 @@ De acordo com Montgomery (2021), o R² pode trazer interpretações errôneas, j
 Para a primeira aplicação, serão utilizados dados do exemplo 12-14 do livro do autor Montgomery et al (2016) chamado Estatistica Aplicada e Probabilidade para Engenheiros. O enunciado é o seguinte: ""
 
 ```{r}
+options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
-## Carregar pacotes que serão usados
-library(tidyverse)
-library(ggplot2)
+install.packages("rlang")
+update.packages(c('ggplot2','tidyverse'))
 
-## Checando repositório
-setwd("C:/Users/Luiz Arthur/Dropbox/PC/Documents/UFABC Beatriz/TG Beatriz Lima/Dados")
+
+## Carregar pacotes que serão usados
+
+#library(tidyverse)
+#install.packages("tidyverse")
+#library(ggplot2)
 
 ## Criação do dataframe
-dados <- read.delim("Ex12_14_Montgomery.txt")
-View(dados)
+#dados <- read.delim("Ex12_14_Montgomery.txt")
+#View(dados)
 
 ## Regressão linear
 #mod1 <- lm(Qualidade ~ Claridade + Aroma + Corpo + Sabor + Afinacao, dados)
@@ -153,13 +157,17 @@ Um **primeiro passo** será carregar os dados:
 
 ```{r}
 options("install.lock"=FALSE)
+options(repos = list(CRAN="http://cran.rstudio.com/"))
+options("install.lock"=FALSE)
 
+install.packages(c('rlang','tidyverse'))
 
-## Checando repositório
-setwd("C:/Users/Luiz Arthur/Dropbox/PC/Documents/UFABC Beatriz/TG Beatriz Lima/Dados")
+library(ggplot2)
+#library(tidyverse)
+
 
 ## Carregando base de dados
-dados0 <- read.csv2("CO2Amazonia.csv")
+dados0 <- read.csv2("Data/CO2Amazonia.csv")
 dados <- na.omit(dados0)
 
 View(dados)

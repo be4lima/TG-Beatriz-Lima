@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.2 Sumarização numérica de dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.2 Sumarização numérica de dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.2 Sumarização numérica de dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+<meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
+
+
+<meta name="date" content="2022-08-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="população-e-amostra.html"/>
+<link rel="next" href="aplicação.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Ciência de dados na Engenharia Ambiental e Urbana</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a></li>
+<li class="chapter" data-level="2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html"><i class="fa fa-check"></i><b>2</b> R - Introdução e Comandos Básicos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="definindo-um-diretório-de-trabalho.html"><a href="definindo-um-diretório-de-trabalho.html"><i class="fa fa-check"></i><b>2.1</b> Definindo um diretório de trabalho</a></li>
+<li class="chapter" data-level="2.2" data-path="vetores.html"><a href="vetores.html"><i class="fa fa-check"></i><b>2.2</b> Vetores</a></li>
+<li class="chapter" data-level="2.3" data-path="base-de-dados.html"><a href="base-de-dados.html"><i class="fa fa-check"></i><b>2.3</b> Base de dados</a></li>
+<li class="chapter" data-level="2.4" data-path="seleção-de-variáveis.html"><a href="seleção-de-variáveis.html"><i class="fa fa-check"></i><b>2.4</b> Seleção de variáveis</a></li>
+<li class="chapter" data-level="2.5" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>2.5</b> R packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html"><i class="fa fa-check"></i><b>3</b> Análise Exploratória de Dados</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="população-e-amostra.html"><a href="população-e-amostra.html"><i class="fa fa-check"></i><b>3.1</b> População e amostra</a></li>
+<li class="chapter" data-level="3.2" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html"><i class="fa fa-check"></i><b>3.2</b> Sumarização numérica de dados</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-posição"><i class="fa fa-check"></i><b>3.2.1</b> Medidas de Posição</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-variabilidade"><i class="fa fa-check"></i><b>3.2.2</b> Medidas de Variabilidade</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-forma"><i class="fa fa-check"></i><b>3.2.3</b> Medidas de Forma</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="aplicação.html"><a href="aplicação.html"><i class="fa fa-check"></i>Aplicação</a>
+<ul>
+<li class="chapter" data-level="3.2.4" data-path="aplicação.html"><a href="aplicação.html#pacote-climate"><i class="fa fa-check"></i><b>3.2.4</b> Pacote Climate</a></li>
+<li class="chapter" data-level="3.2.5" data-path="aplicação.html"><a href="aplicação.html#inmet"><i class="fa fa-check"></i><b>3.2.5</b> INMET</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="modelos-lineares.html"><a href="modelos-lineares.html"><i class="fa fa-check"></i><b>4</b> Modelos lineares</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="covariância.html"><a href="covariância.html"><i class="fa fa-check"></i><b>4.1</b> Covariância</a></li>
+<li class="chapter" data-level="4.2" data-path="correlação.html"><a href="correlação.html"><i class="fa fa-check"></i><b>4.2</b> Correlação</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="correlação.html"><a href="correlação.html#coeficiente-de-pearson-r"><i class="fa fa-check"></i><b>4.2.1</b> Coeficiente de Pearson (r)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html"><i class="fa fa-check"></i><b>4.3</b> Regressão linear simples</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html#Condicoes"><i class="fa fa-check"></i><b>4.3.1</b> Condições</a></li>
+<li class="chapter" data-level="4.3.2" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html#coeficiente-de-determinação-r²"><i class="fa fa-check"></i><b>4.3.2</b> Coeficiente de Determinação (R²)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="aplicação-1.html"><a href="aplicação-1.html"><i class="fa fa-check"></i>Aplicação</a>
+<ul>
+<li class="chapter" data-level="4.3.3" data-path="aplicação-1.html"><a href="aplicação-1.html#estudo-de-caso-1"><i class="fa fa-check"></i><b>4.3.3</b> Estudo de Caso 1</a></li>
+<li class="chapter" data-level="4.3.4" data-path="aplicação-1.html"><a href="aplicação-1.html#estudo-de-caso-2"><i class="fa fa-check"></i><b>4.3.4</b> Estudo de Caso 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html"><i class="fa fa-check"></i><b>5</b> Análise de séries temporais</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="estacionaridade.html"><a href="estacionaridade.html"><i class="fa fa-check"></i><b>5.1</b> Estacionaridade</a></li>
+<li class="chapter" data-level="5.2" data-path="operador-de-diferenças.html"><a href="operador-de-diferenças.html"><i class="fa fa-check"></i><b>5.2</b> Operador de diferenças</a></li>
+<li class="chapter" data-level="5.3" data-path="passeio-aleatório.html"><a href="passeio-aleatório.html"><i class="fa fa-check"></i><b>5.3</b> Passeio aleatório</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="passeio-aleatório.html"><a href="passeio-aleatório.html#testes-de-raiz-unitária"><i class="fa fa-check"></i><b>5.3.1</b> Testes de raiz unitária</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="modelos-autoregressivos.html"><a href="modelos-autoregressivos.html"><i class="fa fa-check"></i><b>5.4</b> Modelos autoregressivos</a></li>
+<li class="chapter" data-level="5.5" data-path="médias-móveis.html"><a href="médias-móveis.html"><i class="fa fa-check"></i><b>5.5</b> Médias Móveis</a></li>
+<li class="chapter" data-level="5.6" data-path="modelos-arma.html"><a href="modelos-arma.html"><i class="fa fa-check"></i><b>5.6</b> Modelos ARMA</a></li>
+<li class="chapter" data-level="5.7" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>5.7</b> Modelos ARIMA</a></li>
+<li class="chapter" data-level="5.8" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>5.8</b> Modelos SARIMA</a></li>
+<li class="chapter" data-level="" data-path="aplicação-2.html"><a href="aplicação-2.html"><i class="fa fa-check"></i>Aplicação</a></li>
+<li class="chapter" data-level="" data-path="referências-bibliográficas.html"><a href="referências-bibliográficas.html"><i class="fa fa-check"></i>Referências Bibliográficas</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="analise-geoespacial.html"><a href="analise-geoespacial.html"><i class="fa fa-check"></i><b>6</b> Analise geoespacial</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dados-espaciais-e-geoespaciais.html"><a href="dados-espaciais-e-geoespaciais.html"><i class="fa fa-check"></i><b>6.1</b> Dados espaciais e geoespaciais</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="dados-espaciais-e-geoespaciais.html"><a href="dados-espaciais-e-geoespaciais.html#sistema-geodesico-de-referência-sgr"><i class="fa fa-check"></i><b>6.1.1</b> Sistema Geodesico de Referência (SGR)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="aplicação-3.html"><a href="aplicação-3.html"><i class="fa fa-check"></i>Aplicação</a></li>
+<li class="chapter" data-level="" data-path="referências-biliográficas.html"><a href="referências-biliográficas.html"><i class="fa fa-check"></i>Referências Biliográficas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="8" data-path="url-your-book-url-like-httpsbookdown.orgyihuibookdown-1.html"><a href="url-your-book-url-like-httpsbookdown.orgyihuibookdown-1.html"><i class="fa fa-check"></i><b>8</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sumarização-numérica-de-dados" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Sumarização numérica de dados<a href="sumarização-numérica-de-dados.html#sumarização-numérica-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Resumos numéricos de dados são fundamentais para realizar inferências estatísticas, porque, de acordo com Montgomery &amp; Runger (2021), “<em>permitem ao engenheiro focar nas características importantes dos dados ou ter discernimento acerca do tipo de modelo que deveria ser usado na solução do problema</em>”. Por isso, torna-se útil descrever numericamente, a partir de medidas de posição, variabilidade e forma, características dos dados.</p>
+<div id="medidas-de-posição" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Medidas de Posição<a href="sumarização-numérica-de-dados.html#medidas-de-posição" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="média" class="section level4 hasAnchor" number="3.2.1.1">
+<h4><span class="header-section-number">3.2.1.1</span> Média<a href="sumarização-numérica-de-dados.html#média" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A média é a divisão da soma de todos os valores da série pelo número de obervações n.</p>
+<p><span class="math inline">\(\bar{x}=\frac{x_{1}+x_{2}+x_{3}...x_{n}}{n}=\frac{\sum x_n}{n}\)</span></p>
+</div>
+<div id="mediana" class="section level4 hasAnchor" number="3.2.1.2">
+<h4><span class="header-section-number">3.2.1.2</span> Mediana<a href="sumarização-numérica-de-dados.html#mediana" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Em um conjunto de valores ordenados, a mediana é o valor que ocupa a posição central. Portanto, a mediana divide a distribuição de valores na metade.</p>
+</div>
+<div id="moda" class="section level4 hasAnchor" number="3.2.1.3">
+<h4><span class="header-section-number">3.2.1.3</span> Moda<a href="sumarização-numérica-de-dados.html#moda" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Em um conjunto de valores, a Moda seria o valor que ocorre com maior frequência. Ou seja, o valor que mais se repete.</p>
+</div>
+</div>
+<div id="medidas-de-variabilidade" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Medidas de Variabilidade<a href="sumarização-numérica-de-dados.html#medidas-de-variabilidade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="amplitude" class="section level4 hasAnchor" number="3.2.2.1">
+<h4><span class="header-section-number">3.2.2.1</span> Amplitude<a href="sumarização-numérica-de-dados.html#amplitude" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Em um conjunto de observações, a Amplitude é a diferença entre o maior valor e o menor.</p>
+</div>
+<div id="variância" class="section level4 hasAnchor" number="3.2.2.2">
+<h4><span class="header-section-number">3.2.2.2</span> Variância<a href="sumarização-numérica-de-dados.html#variância" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Para uma amostra de <em>n</em> observações, a Variância será:</p>
+<p><span class="math inline">\(s=\frac{\sum(x_{i}-\bar{x})^{2}}{n-1}\)</span></p>
+</div>
+<div id="desvio-médio-standard-deviation" class="section level4 hasAnchor" number="3.2.2.3">
+<h4><span class="header-section-number">3.2.2.3</span> Desvio Médio (<em>Standard Deviation</em>)<a href="sumarização-numérica-de-dados.html#desvio-médio-standard-deviation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Para uma amostra de <em>n</em> obervações, o Desvio Padrão (SD) será a raiz quadrada positiva da Variância.</p>
+</div>
+<div id="quartis-decis-e-percentis" class="section level4 hasAnchor" number="3.2.2.4">
+<h4><span class="header-section-number">3.2.2.4</span> Quartis, Decis e Percentis<a href="sumarização-numérica-de-dados.html#quartis-decis-e-percentis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Os <strong>Quartis</strong> dividem um conjunto de obervações ordenados em 4 partes iguais; os <strong>Decis</strong>, em 10; e, os <strong>Percentis</strong>, em 100.</p>
+</div>
+</div>
+<div id="medidas-de-forma" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Medidas de Forma<a href="sumarização-numérica-de-dados.html#medidas-de-forma" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As medidas de forma permitem a verificação de como um conjunto de dados está se comportando em sua distribuição. Gráficos de distribuição de frequência e histogramas são ferramentas importantes para essa verificação.</p>
+<div id="assimetria" class="section level4 hasAnchor" number="3.2.3.1">
+<h4><span class="header-section-number">3.2.3.1</span> Assimetria<a href="sumarização-numérica-de-dados.html#assimetria" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Distribuições em forma de sino são simétricas, já que a média, mediana e moda desse conjunto de dados são iguais. Ou seja, a metade esquerda do histograma é aproximadamente igual à metade direita.</p>
+<p>Distribuições assimétricas possuem uma concentração de seus dados, à direita ou à esquerda, no histograma. Ou seja, apresentam uma “cauda” em uma das extremidades. Se a distribuição desses dados estiverem concentrados à direita, são dados com <strong>assimetria positiva</strong>. Se concentrados à esquerda, <strong>assimetria negativa</strong>.</p>
+<div id="coeficiente-de-assimetria-de-pearson" class="section level5 hasAnchor" number="3.2.3.1.1">
+<h5><span class="header-section-number">3.2.3.1.1</span> Coeficiente de Assimetria de Pearson<a href="sumarização-numérica-de-dados.html#coeficiente-de-assimetria-de-pearson" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><span class="math inline">\(A_s=\frac{3*(\bar{x} - Md)}{s}\)</span></p>
+</div>
+</div>
+<div id="curtose" class="section level4 hasAnchor" number="3.2.3.2">
+<h4><span class="header-section-number">3.2.3.2</span> Curtose<a href="sumarização-numérica-de-dados.html#curtose" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Curtose indica o grau de achatamento de uma distribuição em relação à curva normal.</p>
+<div id="coeficiente-de-curtose" class="section level5 hasAnchor" number="3.2.3.2.1">
+<h5><span class="header-section-number">3.2.3.2.1</span> Coeficiente de Curtose<a href="sumarização-numérica-de-dados.html#coeficiente-de-curtose" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><span class="math inline">\(C=\frac{Q_3-Q_1}{2*(P_{90} - P_{10})}\)</span></p>
+<p>A curva normal possui C=0,263.</p>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="população-e-amostra.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="aplicação.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-cross-refs.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

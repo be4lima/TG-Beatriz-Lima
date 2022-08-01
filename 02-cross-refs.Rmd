@@ -81,10 +81,16 @@ A curva normal possui C=0,263.
 Para a análise exploratória de dados, serão utilizados os dados do pacote `climate`, que automatiza o download de dados meteorológicos e hidrológicos de repositórios públicos. Inicialmente, os dados serão carregados e também serão imotidos os valores NA coma  função `na.omit`:
 
 ```{r}
-library(tidyverse)
+options(repos = list(CRAN="http://cran.rstudio.com/"))
+options("install.lock"=FALSE)
+
+install.packages("tidyverse")
+#library(tidyverse)
 
 # Carregar pacote climate
 library(climate)
+library(rlang)
+library(ggplot2)
 
 # Carregar dados para análise
 dados1 <- hydro_imgw_monthly(year=2010, coords= FALSE, col_names = "full")
@@ -103,7 +109,7 @@ Após, é possível visualizar as primeiras seis linhas dos dados com a função
 
 # Visualizar as seis primeiras linhas do dataset
 head(dados2)
-view(dados2)
+View(dados2)
 
 # Sumarizando os dados
 summary(dados2)
@@ -163,7 +169,7 @@ Para importar a base de dados em .csv, utiliza-se a função read.csv() e insere
 
 ```{r}
 
-met<- read.csv2("~/UFABC Beatriz/TG Beatriz Lima/Dados/data1.csv")
+met<- read.csv2("Data/data1.csv")
 
 met1 <- na.omit(met) # Omitindo os valores faltantes do conjunto de dados
 ```
@@ -217,7 +223,6 @@ A distribuição de frequência da precipitação apresenta assimetria à direit
 ggplot(data = df, 
       aes(x = precip)) +
       geom_histogram() 
-  
 
 ```
 

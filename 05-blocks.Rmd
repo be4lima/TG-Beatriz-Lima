@@ -23,7 +23,9 @@ install.packages(c('sf','mapview'))
 
 library(sf)
 library(mapview)
-library(tidyverse)
+library(ggplot2)
+install.packages("tidyverse")
+#library(tidyverse)
 ```
 
 O shapefile "sgdat.shp" são dados da cobertura de algas marinhas em Tampa Bay em 2016. As "features" são as linhas do vetor e os "fields" são as colunas, ou melhor, atributos ("OBJECT ID" e "FLUCCS"). O SGR do arquivo é WGS 84. A coluna "geometry" armazena os dados espaciais (longitude e latitude).
@@ -43,6 +45,7 @@ getwd()
 # dados da presença de peixes em Tampa Bay
 fishdat <- read.csv("Data/fishdat.csv")
 
+#localização geográfica dos peixes
 statloc <- read.csv("Data/statloc.csv")
 
 ```
@@ -57,6 +60,7 @@ Para isso, utilizaremos a função `st_as_sf()` para transformar o dataframe em 
 
 ```{r}
 #juntando os dois dataframes
+library(dplyr)
 joindata <- left_join(fishdat,statloc,by="Reference")
 
 #criando o objeto de dados espaciais

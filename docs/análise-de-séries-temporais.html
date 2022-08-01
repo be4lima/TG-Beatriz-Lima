@@ -6,49 +6,47 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 5 Análise de séries temporais | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 5 Análise de séries temporais | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   <meta property="og:type" content="book" />
   
-  
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Capítulo 5 Análise de séries temporais | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
   
 
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-07-07" />
+<meta name="date" content="2022-08-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="modelos-lineares-generalizados.html"/>
-<link rel="next" href="análise-geoespacial.html"/>
-<script src="libs/header-attrs-2.12/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link rel="prev" href="aplicação-1.html"/>
+<link rel="next" href="estacionaridade.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -57,9 +55,9 @@ set in the _output.yml file.</p>" />
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -127,28 +125,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -166,73 +142,72 @@ div.csl-indent {
 <li><a href="./">Ciência de dados na Engenharia Ambiental e Urbana</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span><span></span></a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a></li>
+<li class="chapter" data-level="2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html"><i class="fa fa-check"></i><b>2</b> R - Introdução e Comandos Básicos</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#definindo-um-diretório-de-trabalho"><i class="fa fa-check"></i><b>1.1</b> Definindo um diretório de trabalho<span></span></a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#vetores"><i class="fa fa-check"></i><b>1.2</b> Vetores<span></span></a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#base-de-dados"><i class="fa fa-check"></i><b>1.3</b> Base de dados<span></span></a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#seleção-de-variáveis"><i class="fa fa-check"></i><b>1.4</b> Seleção de variáveis<span></span></a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#r-packages"><i class="fa fa-check"></i><b>1.5</b> R packages<span></span></a></li>
+<li class="chapter" data-level="2.1" data-path="definindo-um-diretório-de-trabalho.html"><a href="definindo-um-diretório-de-trabalho.html"><i class="fa fa-check"></i><b>2.1</b> Definindo um diretório de trabalho</a></li>
+<li class="chapter" data-level="2.2" data-path="vetores.html"><a href="vetores.html"><i class="fa fa-check"></i><b>2.2</b> Vetores</a></li>
+<li class="chapter" data-level="2.3" data-path="base-de-dados.html"><a href="base-de-dados.html"><i class="fa fa-check"></i><b>2.3</b> Base de dados</a></li>
+<li class="chapter" data-level="2.4" data-path="seleção-de-variáveis.html"><a href="seleção-de-variáveis.html"><i class="fa fa-check"></i><b>2.4</b> Seleção de variáveis</a></li>
+<li class="chapter" data-level="2.5" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>2.5</b> R packages</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html"><i class="fa fa-check"></i><b>2</b> Análise Exploratória de Dados<span></span></a>
+<li class="chapter" data-level="3" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html"><i class="fa fa-check"></i><b>3</b> Análise Exploratória de Dados</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#população-e-amostra"><i class="fa fa-check"></i><b>2.1</b> População e amostra<span></span></a></li>
-<li class="chapter" data-level="2.2" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#sumarização-numérica-de-dados"><i class="fa fa-check"></i><b>2.2</b> Sumarização numérica de dados<span></span></a>
+<li class="chapter" data-level="3.1" data-path="população-e-amostra.html"><a href="população-e-amostra.html"><i class="fa fa-check"></i><b>3.1</b> População e amostra</a></li>
+<li class="chapter" data-level="3.2" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html"><i class="fa fa-check"></i><b>3.2</b> Sumarização numérica de dados</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#medidas-de-posição"><i class="fa fa-check"></i><b>2.2.1</b> Medidas de Posição<span></span></a></li>
-<li class="chapter" data-level="2.2.2" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#medidas-de-variabilidade"><i class="fa fa-check"></i><b>2.2.2</b> Medidas de Variabilidade<span></span></a></li>
-<li class="chapter" data-level="2.2.3" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#medidas-de-forma"><i class="fa fa-check"></i><b>2.2.3</b> Medidas de Forma<span></span></a></li>
+<li class="chapter" data-level="3.2.1" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-posição"><i class="fa fa-check"></i><b>3.2.1</b> Medidas de Posição</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-variabilidade"><i class="fa fa-check"></i><b>3.2.2</b> Medidas de Variabilidade</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-forma"><i class="fa fa-check"></i><b>3.2.3</b> Medidas de Forma</a></li>
 </ul></li>
-<li><a href="análise-exploratória-de-dados.html#aplicação">Aplicação<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="modelos-lineares.html"><a href="modelos-lineares.html"><i class="fa fa-check"></i><b>3</b> Modelos lineares<span></span></a>
+<li class="chapter" data-level="" data-path="aplicação.html"><a href="aplicação.html"><i class="fa fa-check"></i>Aplicação</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="modelos-lineares.html"><a href="modelos-lineares.html#covariância"><i class="fa fa-check"></i><b>3.1</b> Covariância<span></span></a></li>
-<li class="chapter" data-level="3.2" data-path="modelos-lineares.html"><a href="modelos-lineares.html#correlação"><i class="fa fa-check"></i><b>3.2</b> Correlação<span></span></a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="modelos-lineares.html"><a href="modelos-lineares.html#coeficiente-de-pearson-r"><i class="fa fa-check"></i><b>3.2.1</b> Coeficiente de Pearson (r)<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="modelos-lineares.html"><a href="modelos-lineares.html#regressão-linear-simples"><i class="fa fa-check"></i><b>3.3</b> Regressão linear simples<span></span></a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="modelos-lineares.html"><a href="modelos-lineares.html#Condicoes"><i class="fa fa-check"></i><b>3.3.1</b> Condições<span></span></a></li>
-<li class="chapter" data-level="3.3.2" data-path="modelos-lineares.html"><a href="modelos-lineares.html#coeficiente-de-determinação-r²"><i class="fa fa-check"></i><b>3.3.2</b> Coeficiente de Determinação (R²)<span></span></a></li>
-</ul></li>
-<li><a href="modelos-lineares.html#aplicação-1">Aplicação<span></span></a>
-<ul>
-<li class="chapter" data-level="3.3.3" data-path="modelos-lineares.html"><a href="modelos-lineares.html#estudo-de-caso-1"><i class="fa fa-check"></i><b>3.3.3</b> Estudo de Caso 1<span></span></a></li>
-<li class="chapter" data-level="3.3.4" data-path="modelos-lineares.html"><a href="modelos-lineares.html#estudo-de-caso-2"><i class="fa fa-check"></i><b>3.3.4</b> Estudo de Caso 2<span></span></a></li>
+<li class="chapter" data-level="3.2.4" data-path="aplicação.html"><a href="aplicação.html#pacote-climate"><i class="fa fa-check"></i><b>3.2.4</b> Pacote Climate</a></li>
+<li class="chapter" data-level="3.2.5" data-path="aplicação.html"><a href="aplicação.html#inmet"><i class="fa fa-check"></i><b>3.2.5</b> INMET</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modelos-lineares-generalizados.html"><a href="modelos-lineares-generalizados.html"><i class="fa fa-check"></i><b>4</b> Modelos Lineares Generalizados<span></span></a>
+<li class="chapter" data-level="4" data-path="modelos-lineares.html"><a href="modelos-lineares.html"><i class="fa fa-check"></i><b>4</b> Modelos lineares</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="modelos-lineares-generalizados.html"><a href="modelos-lineares-generalizados.html#testes-de-hipótese"><i class="fa fa-check"></i><b>4.1</b> Testes de hipótese<span></span></a></li>
-<li><a href="modelos-lineares-generalizados.html#referências-bibliográficas">Referências Bibliográficas<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html"><i class="fa fa-check"></i><b>5</b> Análise de séries temporais<span></span></a>
+<li class="chapter" data-level="4.1" data-path="covariância.html"><a href="covariância.html"><i class="fa fa-check"></i><b>4.1</b> Covariância</a></li>
+<li class="chapter" data-level="4.2" data-path="correlação.html"><a href="correlação.html"><i class="fa fa-check"></i><b>4.2</b> Correlação</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html#estacionaridade"><i class="fa fa-check"></i><b>5.1</b> Estacionaridade<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html#modelos-univariados-para-séries-temporais"><i class="fa fa-check"></i><b>5.2</b> Modelos univariados para séries temporais<span></span></a>
+<li class="chapter" data-level="4.2.1" data-path="correlação.html"><a href="correlação.html#coeficiente-de-pearson-r"><i class="fa fa-check"></i><b>4.2.1</b> Coeficiente de Pearson (r)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html"><i class="fa fa-check"></i><b>4.3</b> Regressão linear simples</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html#suavização-exponencial-simples-ses"><i class="fa fa-check"></i><b>5.2.1</b> Suavização exponencial simples (SES)<span></span></a></li>
-<li class="chapter" data-level="5.2.2" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html#suavização-exponencial-de-holt-seh"><i class="fa fa-check"></i><b>5.2.2</b> Suavização exponencial de Holt (SEH)<span></span></a></li>
-<li class="chapter" data-level="5.2.3" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html#suavização-exponencial-sazonal-de-holt-winters"><i class="fa fa-check"></i><b>5.2.3</b> Suavização exponencial sazonal de Holt-Winters<span></span></a></li>
+<li class="chapter" data-level="4.3.1" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html#Condicoes"><i class="fa fa-check"></i><b>4.3.1</b> Condições</a></li>
+<li class="chapter" data-level="4.3.2" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html#coeficiente-de-determinação-r²"><i class="fa fa-check"></i><b>4.3.2</b> Coeficiente de Determinação (R²)</a></li>
 </ul></li>
-<li><a href="análise-de-séries-temporais.html#referências-bibliográficas-1">Referências Bibliográficas<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="análise-geoespacial.html"><a href="análise-geoespacial.html"><i class="fa fa-check"></i><b>6</b> Análise geoespacial<span></span></a>
+<li class="chapter" data-level="" data-path="aplicação-1.html"><a href="aplicação-1.html"><i class="fa fa-check"></i>Aplicação</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="análise-geoespacial.html"><a href="análise-geoespacial.html#dados-espaciais-e-geoespaciais"><i class="fa fa-check"></i><b>6.1</b> Dados espaciais e geoespaciais<span></span></a></li>
-<li class="chapter" data-level="6.2" data-path="análise-geoespacial.html"><a href="análise-geoespacial.html#equations"><i class="fa fa-check"></i><b>6.2</b> Equations<span></span></a></li>
-<li class="chapter" data-level="6.3" data-path="análise-geoespacial.html"><a href="análise-geoespacial.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.3</b> Theorems and proofs<span></span></a></li>
-<li><a href="análise-geoespacial.html#referências-biliográficas">Referências Biliográficas<span></span></a></li>
+<li class="chapter" data-level="4.3.3" data-path="aplicação-1.html"><a href="aplicação-1.html#estudo-de-caso-1"><i class="fa fa-check"></i><b>4.3.3</b> Estudo de Caso 1</a></li>
+<li class="chapter" data-level="4.3.4" data-path="aplicação-1.html"><a href="aplicação-1.html#estudo-de-caso-2"><i class="fa fa-check"></i><b>4.3.4</b> Estudo de Caso 2</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book<span></span></a>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html"><i class="fa fa-check"></i><b>5</b> Análise de séries temporais</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing<span></span></a></li>
-<li class="chapter" data-level="7.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages<span></span></a></li>
-<li class="chapter" data-level="7.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing<span></span></a></li>
+<li class="chapter" data-level="5.1" data-path="estacionaridade.html"><a href="estacionaridade.html"><i class="fa fa-check"></i><b>5.1</b> Estacionaridade</a></li>
+<li class="chapter" data-level="5.2" data-path="operador-de-diferenças.html"><a href="operador-de-diferenças.html"><i class="fa fa-check"></i><b>5.2</b> Operador de diferenças</a></li>
+<li class="chapter" data-level="5.3" data-path="passeio-aleatório.html"><a href="passeio-aleatório.html"><i class="fa fa-check"></i><b>5.3</b> Passeio aleatório</a></li>
+<li class="chapter" data-level="5.4" data-path="modelos-autoregressivos.html"><a href="modelos-autoregressivos.html"><i class="fa fa-check"></i><b>5.4</b> Modelos autoregressivos</a></li>
+<li class="chapter" data-level="5.5" data-path="modelos-arma.html"><a href="modelos-arma.html"><i class="fa fa-check"></i><b>5.5</b> Modelos ARMA</a></li>
+<li class="chapter" data-level="5.6" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>5.6</b> Modelos ARIMA</a></li>
+<li class="chapter" data-level="5.7" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>5.7</b> Modelos SARIMA</a></li>
+<li class="chapter" data-level="" data-path="aplicação-2.html"><a href="aplicação-2.html"><i class="fa fa-check"></i>Aplicação</a></li>
+<li class="chapter" data-level="" data-path="referências-bibliográficas.html"><a href="referências-bibliográficas.html"><i class="fa fa-check"></i>Referências Bibliográficas</a></li>
 </ul></li>
-<li><a href="references.html#references">References<span></span></a></li>
+<li class="chapter" data-level="6" data-path="analise-geoespacial.html"><a href="analise-geoespacial.html"><i class="fa fa-check"></i><b>6</b> Analise geoespacial</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dados-espaciais-e-geoespaciais.html"><a href="dados-espaciais-e-geoespaciais.html"><i class="fa fa-check"></i><b>6.1</b> Dados espaciais e geoespaciais</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="dados-espaciais-e-geoespaciais.html"><a href="dados-espaciais-e-geoespaciais.html#sistema-geodesico-de-referência-sgr"><i class="fa fa-check"></i><b>6.1.1</b> Sistema Geodesico de Referência (SGR)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="aplicação-3.html"><a href="aplicação-3.html"><i class="fa fa-check"></i>Aplicação</a></li>
+<li class="chapter" data-level="" data-path="referências-biliográficas.html"><a href="referências-biliográficas.html"><i class="fa fa-check"></i>Referências Biliográficas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="8" data-path="url-your-book-url-like-httpsbookdown.orgyihuibookdown-1.html"><a href="url-your-book-url-like-httpsbookdown.orgyihuibookdown-1.html"><i class="fa fa-check"></i><b>8</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -283,144 +258,34 @@ div.csl-indent {
 </div>
 <p>De acordo com COSTA (2022), existem duas abordagens na análise de séries temporais:</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Clássica</strong>: descreve o comportamento da série por meio de componentes não observáveis, ou seja, a tendência, sazonalidade e ciclo. Os desvios em torno dos valores determinísticos<a href="references.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> ocorrem por erros aleatórios e não pela natureza estocástica da série.</p></li>
-<li><p><strong>Moderna</strong>: supões que a série temporal seja formada por um processo estocástico<a href="references.html#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Sendo cada observação composta por um conjunto de variáveis aleatórias, estas são representadas por funções de densidade individuais. Para capturar sua característica estocástica, são utilizadas modelos estatísticos.</p></li>
+<li><p><strong>Clássica</strong>: descreve o comportamento da série por meio de componentes não observáveis, ou seja, a tendência, sazonalidade e ciclo. Os desvios em torno dos valores determinísticos<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> ocorrem por erros aleatórios e não pela natureza estocástica da série.</p></li>
+<li><p><strong>Moderna</strong>: supões que a série temporal seja formada por um processo estocástico<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Sendo cada observação composta por um conjunto de variáveis aleatórias, estas são representadas por funções de densidade individuais. Para capturar sua característica estocástica, são utilizadas modelos estatísticos.</p></li>
 </ol>
-<div id="estacionaridade" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Estacionaridade<a href="análise-de-séries-temporais.html#estacionaridade" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Para realizar a abordagem de séries temporais assume-se que esta seja formada por um processo estocástico, como citado anteriormente. De forma resumida, uma série estacionária possui a mesma distribuição de probabilidade para cada observação.</p>
-<p>A estacionaridade divide-se em: forte, em que a função densidade de probabilidade não varia no tempo e as distribuição são iguais para todo <span class="math inline">\(t\)</span>; fraca, em que a média, variância e covariância permanecem constantes ao longo do tempo. A estacionaridade fraca é menos restritiva que a forte e, por isso, será a abordagem escolhida.</p>
-<p>Uma série fracamente estacionária tem as seguintes características:</p>
-<ol style="list-style-type: decimal">
-<li>A média é igual a uma constante</li>
-<li>A variância é constante e finita;</li>
-<li>A covariância é dependente somente da diferença no tempo (h) entre duas medidas, sendo a covariância:</li>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Em um modelo determinístico, indepentemente dos conjuntos de entrada, o resultado será sempre o mesmo conjunto de saídas.<a href="análise-de-séries-temporais.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Processo estocástico: sequência de variáveis aleatórias cujas características probabilísticas não se alteram ao longo do tempo. Exemplo: No lançamento de dados cada face tem a mesma probabilidade de ficar para cima<a href="análise-de-séries-temporais.html#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
-<p><span class="math display">\[\tag{4.3}Cov(X_t,X_{t+h})=\sum(X_t-\overline{X_t})(X_{t+h}-\overline{X_{t+h}})\]</span>, em que <span class="math inline">\(X_t\)</span> é a própria série temporal e <span class="math inline">\(h\)</span> é o intervalo de tempo entre as duas medidas.</p>
-<p>Dessa forma, quando a covariância é positiva, a tendência é positiva entre <span class="math inline">\(X_t\)</span> e <span class="math inline">\(X_{t+h}\)</span>. Quando a covariância é negativa, a tendência também é negativa. Se a covariância for nula, não existe tendência.</p>
-<p>É importante citar que se uma série não for estacionária, modelos padrões podem não representar de forma adequada o processo gerador da série temporal e, por isso, não seria possível utilizar o modelo para realizar previsões ou outros objetivos da análise. Conforme o Teorema de Wald, a estacionariedade dá estabilidade e coerência ao modelo.</p>
-</div>
-<div id="modelos-univariados-para-séries-temporais" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Modelos univariados para séries temporais<a href="análise-de-séries-temporais.html#modelos-univariados-para-séries-temporais" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>De acordo com Barros et. al (2022), uma série temporal pode ser representada por um modelo aditivo ou multiplicativo. No modelo aditivo, todas as componentes tem a mesma unidade da série; já no multiplicativo, somente a tendência tem a mesma unidade da variável e todas as outras componentes assumem valor próximos de 1 (Reis, 2022).</p>
-<p><span class="math display">\[ \tag{4.1} Z_t=T_t+S_t+E_t\]</span> <span class="math display">\[ou\]</span> <span class="math display">\[ \tag{4.2}Z_t=T_t*S_t*E_t\]</span></p>
-<div id="suavização-exponencial-simples-ses" class="section level3 hasAnchor" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Suavização exponencial simples (SES)<a href="análise-de-séries-temporais.html#suavização-exponencial-simples-ses" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>O SES é um modelo mais adequado para previsão de séries temporais livres das componentes tendência (T) e sazonalidade (S). Portanto, a estratégia é identificar e remover esses componentes da série, a tornando uma série estacionária.</p>
-<p>Este modelo é descrito da seguinte forma:
-<span class="math display">\[\tag{4.2}\overline{Z_t}=\alpha Z_t+\alpha(1-\alpha)Z_{t-1}+\alpha(1-\alpha)^2Z_{t-2}+...\]</span>, onde <span class="math inline">\(\overline{Z_0}=Z_1, t=1,...,N\)</span>.</p>
-<p>O <span class="math inline">\(\alpha\)</span> representa o parâmetro de suavização com valores de 0 a 1 e quanto mais estável for a previsão, menor o valor de <span class="math inline">\(alpha\)</span> porque as observações passadas terão pesos maiores do que teriam com um <span class="math inline">\(alpha\)</span> grande. Quanto mais próximo de 1, menor amortecimento e <span class="math inline">\(\overline{Z_t}\)</span> é aproximadamente igual a <span class="math inline">\(Z_t\)</span> (COSTA, 2022). Para aplicar o método em R, utiliza-se a função <code>HoltWinters()</code>, sendo x a série temporal de interesse e alpha o parâmetro de suavização. Os parâmetros beta e gamma são descritos como “FALSE”.</p>
-<p>Conforme (COSTA, 2022), a previsão de obervações futuras para o modelo SES consite em:
-<span class="math display">\[\tag{4.3a}\widehat{Z_t}=\overline{Z_t}, \forall h&gt;0\]</span>
-<span class="math display">\[\tag{4.3b}\widehat{Z_t}=\alpha Z_t+\alpha(1-\alpha)Z_{t-1}(h+1)\]</span>, sendo <span class="math inline">\(h\)</span> o número de passos à frente do previsto. Para realizar previsões em R, utiliza-se a função <code>forecast()</code> do pacote forecast, em que objeject é um objeto de classe “HoltWinters”, h é o número de períodos a serem previstos e level é o intervalo de confiança para a predição.</p>
-<p>É importante citar que o modelo SES não é apropriado para séries com tendência linear, porque acarretaria em previsões que subestimariam ou superestimariam os valores da série temporal.</p>
-</div>
-<div id="suavização-exponencial-de-holt-seh" class="section level3 hasAnchor" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Suavização exponencial de Holt (SEH)<a href="análise-de-séries-temporais.html#suavização-exponencial-de-holt-seh" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>O modelo SEH possui um parâmetro de suavização para trabalhar com a tendência da série temporal e, dessa forma, é possível realizar previsões em séries que apresentam o efeito de tendência linear. O modelo é estimado por:
-<span class="math display">\[\tag{4.4} L_t=(1-\alpha)(L_{t-1}+T_{t-1}), 0\le\alpha\le1; t=2,...N\]</span>
-<span class="math display">\[\tag{4.5}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1; t=2,...N\]</span>
-em que <span class="math inline">\(L_t\)</span> estima o nível da série no tempo t, <span class="math inline">\(t_t\)</span> estima a tendência no tempo t e <span class="math inline">\(\alpha\)</span> e <span class="math inline">\(\beta\)</span> são os parâmetros de suavisão para o nível e tendência, respectivamente. Para representar o modelo, também é utilizada a função <code>HoltWinters()</code>. Nesse caso, o argumento <span class="math inline">\(gamma\)</span> será descrito como “FALSE”, já que o modelo utiliza somente os argumentos <span class="math inline">\(\alpha\)</span> e <span class="math inline">\(\beta\)</span>.</p>
-<p>A previsão (<span class="math inline">\(Z_{t+h}\)</span>) é dada por:
-<span class="math display">\[\tag{4.6}\widehat{Z_h}=h\widehat{T_t}, \forall h&gt;0\]</span>
-Para a previsão, também utiliza-se a função <code>forecast()</code>.</p>
-</div>
-<div id="suavização-exponencial-sazonal-de-holt-winters" class="section level3 hasAnchor" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> Suavização exponencial sazonal de Holt-Winters<a href="análise-de-séries-temporais.html#suavização-exponencial-sazonal-de-holt-winters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Para séries temporais que apresental comportamento sazonal, o modelo de Holt-Winters (HW) é o mais indicado. Nesse caso, existe uma equação adicional para a sazonalidade. Existem dois métodos de análise:</p>
-<div id="modelo-aditivo" class="section level4 hasAnchor" number="5.2.3.1">
-<h4><span class="header-section-number">5.2.3.1</span> Modelo aditivo<a href="análise-de-séries-temporais.html#modelo-aditivo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Se a componente sazonal for tratada de forma aditiva, o modelo será:
-<span class="math display">\[\tag{4.7}L_t=\alpha(Z_t-S_{t-m})+(1-\alpha)(L_{t-1}+T_{t-1}, 0\le\alpha\le1, t=m+1,...,N\]</span>
-<span class="math display">\[\tag{4.8}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1, t=m+1,...,N\]</span>
-<span class="math display">\[\tag{4.9}S_t=\gamma(Z_t-L_{t-1}-T_{t-1})+(1-\gamma)S_{t-m}, 0\le\gamma\le1, t=m+1,...,N\]</span>
-, onde <span class="math inline">\(\alpha, \beta\)</span> e <span class="math inline">\(\gamma\)</span> são os parâmetros de suavização para o nível, tendência e sazonalidade respectivamente.
-O modelo de previsão h passos à frente é representado por:
-<span class="math display">\[\tag{4.10}\widehat{Z_{t+h}}=L_t+T_th+S_{t+h-m}\]</span></p>
-</div>
-<div id="modelo-multiplicativo" class="section level4 hasAnchor" number="5.2.3.2">
-<h4><span class="header-section-number">5.2.3.2</span> Modelo multiplicativo<a href="análise-de-séries-temporais.html#modelo-multiplicativo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Seguindo o mesmo raciocínio anterior, o modelo é dado por:
-<span class="math display">\[\tag{4.11}L_t=\alpha(\frac{Z_t}{S_{t-m}})+(1-\alpha)(L_{t-1}+T_{t-1}, 0\le\alpha\le1, t=m+1,...,N\]</span>
-<span class="math display">\[\tag{4.12}T_t=\beta(L_t-L_{t-1})+(1-\beta)T_{t-1}, 0\le\beta\le1, t=m+1,...,N\]</span>
-<span class="math display">\[\tag{4.13}S_t=\gamma(\frac{Z_t}{L_{t-1}-T_{t-1}})+(1-\gamma)S_{t-m}, 0\le\gamma\le1, t=m+1,...,N\]</span>
-E, para a previsão:
-<span class="math display">\[\tag{4.14}\widehat{Z_{t+h}}=(L_t+T_th)S_{t+h-m}\]</span>
-### Modelos SARIMA
-Um modelo ARIMA (Modelos autoregressivos integrados de médias móveis), a partir da abordagem de Box &amp; Jenkins, permite que previsões sejam realizadas tomando por base valores presentes e passados da série temporal. Quando considerada a sazonalidade, o modelo é denominado SARIMA <span class="math inline">\((p,d,q)(P,D,Q)_s\)</span>, representado pela equação 4.15.
-<span class="math display">\[\tag{4.15}\phi(L)\Phi(L)\Delta^d\Delta^Dy_t=\theta(L)\Theta(L)\epsilon_t\]</span>, em que:</p>
-<p>p: ordem do polinômio autoregressivo não sazonal <span class="math inline">\(\phi(L)\)</span>
-P: orgem do polinômio autoregressivo sazonal <span class="math inline">\(\Phi(L)\)</span>
-q: ordem do polinômio de médias móveis não sazonal <span class="math inline">\(\theta(L)\)</span>
-Q: ordem do polinômio de médias móveis sazonal <span class="math inline">\(\Theta(L)\)</span>
-d: ordem de diferença não sazonal
-D: ordem de diferença sazonal
-<span class="math inline">\(\phi(L)=(1-\phi_1L-\phi_2L^2-...-\phi_pL^p\)</span>
-<span class="math inline">\(\Phi(L)=(1-\Phi_1L^s-\Phi_2L^{2s}-...-\Phi_pL^{Ps})\)</span>
-<span class="math inline">\(\theta(L)=(1-\theta_1L-\theta_2L^2-...-\theta_pL^q)\)</span>
-<span class="math inline">\(\Theta(L)=(1-\Theta_1L^2-\Theta_2L^{2s}-\Theta_pL^{Qs})\)</span>
-<span class="math inline">\(\Delta-=1-L\)</span>, sendo o operador de desafasagem (L): <span class="math inline">\(L^ny_t=y_{t-n}\)</span></p>
-<p>Conforme Morettin (2018), Na abordagem de Box &amp; Jenkins, existem 4 etapas:
-1. Identificação do processo gerador de dados
-Para descobrir qual modelo descreve melhor o comportamento dos dados, inicialmente, realiza-se uma análise gráfica, verificando estacionaridade, tendência, sazonalidade, etc. A partir disso…</p>
-<ol start="2" style="list-style-type: decimal">
-<li><p>Estimação de parâmetros
-Os parâmetros do modelo são identificados e, para isso, utilizam-se critérios de informação (Akaike, bayesiano, Hannan-Quinn…). O modelo mais adequado é o que minimiza os critérios de informação.</p></li>
-<li><p>Verificação do modelo (diagnóstico)
-Realiza-se a nálise dos resíduos, na qual:</p></li>
-</ol>
-<ol style="list-style-type: lower-alpha">
-<li>resíduos devem possuir média zero, variância constante e serem estacionários, comportando-se como um <em>ruído branco</em>.</li>
-<li>As funções de autocorrelação devem ser não significativas, ou seja, devem ficar dentro do intervalo de confiança.</li>
-<li>Homocedasticidade: o gráfico deve ter variância constante</li>
-<li>Não correlacionados.</li>
-</ol>
-<ol start="4" style="list-style-type: decimal">
-<li>Previsão</li>
-</ol>
-<p>Reference items in your bibliography file(s) using <code>@key</code>.</p>
-<p>For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="#ref-R-bookdown" role="doc-biblioref">Xie 2021</a>)</span> (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span> (this citation was added manually in an external file book.bib).
-Note that the <code>.bib</code> files need to be listed in the index.Rmd with the YAML <code>bibliography</code> key.</p>
-<p>The RStudio Visual Markdown Editor can also make it easier to insert citations: <a href="https://rstudio.github.io/visual-markdown-editing/#/citations" class="uri">https://rstudio.github.io/visual-markdown-editing/#/citations</a></p>
-</div>
-</div>
-</div>
-<div id="referências-bibliográficas-1" class="section level2 unnumbered hasAnchor">
-<h2>Referências Bibliográficas<a href="análise-de-séries-temporais.html#referências-bibliográficas-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>BARROS, Anna C.; MATTOS, Daiane Marcolino D.; OLIVEIRA, Ingrid Christyne Luquett D.; et al. <strong>Análise de Séries Temporais em R: Curso Introdutório</strong>. Grupo GEN, 2017. 9788595154902. Disponível em: <a href="https://integrada.minhabiblioteca.com.br/#/books/9788595154902/" class="uri">https://integrada.minhabiblioteca.com.br/#/books/9788595154902/</a>. Acesso em: 21 jun. 2022.</p>
-<p>MORETTIN, Pedro A. Análise de Séries Temporais. Editora Blucher, 2018. 9788521213529. Disponível em: <a href="https://integrada.minhabiblioteca.com.br/#/books/9788521213529/" class="uri">https://integrada.minhabiblioteca.com.br/#/books/9788521213529/</a>. Acesso em: 10 jun. 2022.</p>
-<p>REIS, Marcelo Menezes. Análise de séries temporais. Santa Catarina, UFSC, 2022. Disponível em: <a href="https://www.inf.ufsc.br/~marcelo.menezes.reis/Cap4.pdf" class="uri">https://www.inf.ufsc.br/~marcelo.menezes.reis/Cap4.pdf</a> Acesso em: 10 jun. 2022.</p>
-<p>SOARES, Thiago Costa. Séries Temporais. Universidade Federal de Juiz de Fora, 2020. Disponível em: <a href="https://www.youtube.com/watch?v=T4N8ZhmiUEM&amp;list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&amp;index=5" class="uri">https://www.youtube.com/watch?v=T4N8ZhmiUEM&amp;list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&amp;index=5</a>. Acesso em: 29 jun 2022.</p>
-<p>COSTA, Alexandre Cunha. “Introdução à Análise de Séries Temporais”. Disponível em: <a href="https://www.youtube.com/watch?v=emnSZ7qKv9M&amp;list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&amp;index=1" class="uri">https://www.youtube.com/watch?v=emnSZ7qKv9M&amp;list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&amp;index=1</a> Acesso em: 27 jun. 2022.</p>
-
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-xie2015" class="csl-entry">
-Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.org/knitr/">http://yihui.org/knitr/</a>.
-</div>
-<div id="ref-R-bookdown" class="csl-entry">
-———. 2021. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="modelos-lineares-generalizados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="análise-geoespacial.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="aplicação-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estacionaridade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -452,13 +317,16 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["TG Beatriz Lima.pdf", "TG Beatriz Lima.epub"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null
 },
 "toc": {
 "collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
 }
 });
 });
@@ -470,7 +338,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

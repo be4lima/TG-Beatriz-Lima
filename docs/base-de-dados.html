@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.3 Base de dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.3 Base de dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.3 Base de dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+<meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
+
+
+<meta name="date" content="2022-08-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="vetores.html"/>
+<link rel="next" href="seleção-de-variáveis.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Ciência de dados na Engenharia Ambiental e Urbana</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a></li>
+<li class="chapter" data-level="2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html"><i class="fa fa-check"></i><b>2</b> R - Introdução e Comandos Básicos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="definindo-um-diretório-de-trabalho.html"><a href="definindo-um-diretório-de-trabalho.html"><i class="fa fa-check"></i><b>2.1</b> Definindo um diretório de trabalho</a></li>
+<li class="chapter" data-level="2.2" data-path="vetores.html"><a href="vetores.html"><i class="fa fa-check"></i><b>2.2</b> Vetores</a></li>
+<li class="chapter" data-level="2.3" data-path="base-de-dados.html"><a href="base-de-dados.html"><i class="fa fa-check"></i><b>2.3</b> Base de dados</a></li>
+<li class="chapter" data-level="2.4" data-path="seleção-de-variáveis.html"><a href="seleção-de-variáveis.html"><i class="fa fa-check"></i><b>2.4</b> Seleção de variáveis</a></li>
+<li class="chapter" data-level="2.5" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>2.5</b> R packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html"><i class="fa fa-check"></i><b>3</b> Análise Exploratória de Dados</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="população-e-amostra.html"><a href="população-e-amostra.html"><i class="fa fa-check"></i><b>3.1</b> População e amostra</a></li>
+<li class="chapter" data-level="3.2" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html"><i class="fa fa-check"></i><b>3.2</b> Sumarização numérica de dados</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-posição"><i class="fa fa-check"></i><b>3.2.1</b> Medidas de Posição</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-variabilidade"><i class="fa fa-check"></i><b>3.2.2</b> Medidas de Variabilidade</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-forma"><i class="fa fa-check"></i><b>3.2.3</b> Medidas de Forma</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="aplicação.html"><a href="aplicação.html"><i class="fa fa-check"></i>Aplicação</a>
+<ul>
+<li class="chapter" data-level="3.2.4" data-path="aplicação.html"><a href="aplicação.html#pacote-climate"><i class="fa fa-check"></i><b>3.2.4</b> Pacote Climate</a></li>
+<li class="chapter" data-level="3.2.5" data-path="aplicação.html"><a href="aplicação.html#inmet"><i class="fa fa-check"></i><b>3.2.5</b> INMET</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="modelos-lineares.html"><a href="modelos-lineares.html"><i class="fa fa-check"></i><b>4</b> Modelos lineares</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="covariância.html"><a href="covariância.html"><i class="fa fa-check"></i><b>4.1</b> Covariância</a></li>
+<li class="chapter" data-level="4.2" data-path="correlação.html"><a href="correlação.html"><i class="fa fa-check"></i><b>4.2</b> Correlação</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="correlação.html"><a href="correlação.html#coeficiente-de-pearson-r"><i class="fa fa-check"></i><b>4.2.1</b> Coeficiente de Pearson (r)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html"><i class="fa fa-check"></i><b>4.3</b> Regressão linear simples</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html#Condicoes"><i class="fa fa-check"></i><b>4.3.1</b> Condições</a></li>
+<li class="chapter" data-level="4.3.2" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html#coeficiente-de-determinação-r²"><i class="fa fa-check"></i><b>4.3.2</b> Coeficiente de Determinação (R²)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="aplicação-1.html"><a href="aplicação-1.html"><i class="fa fa-check"></i>Aplicação</a>
+<ul>
+<li class="chapter" data-level="4.3.3" data-path="aplicação-1.html"><a href="aplicação-1.html#estudo-de-caso-1"><i class="fa fa-check"></i><b>4.3.3</b> Estudo de Caso 1</a></li>
+<li class="chapter" data-level="4.3.4" data-path="aplicação-1.html"><a href="aplicação-1.html#estudo-de-caso-2"><i class="fa fa-check"></i><b>4.3.4</b> Estudo de Caso 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html"><i class="fa fa-check"></i><b>5</b> Análise de séries temporais</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="estacionaridade.html"><a href="estacionaridade.html"><i class="fa fa-check"></i><b>5.1</b> Estacionaridade</a></li>
+<li class="chapter" data-level="5.2" data-path="operador-de-diferenças.html"><a href="operador-de-diferenças.html"><i class="fa fa-check"></i><b>5.2</b> Operador de diferenças</a></li>
+<li class="chapter" data-level="5.3" data-path="passeio-aleatório.html"><a href="passeio-aleatório.html"><i class="fa fa-check"></i><b>5.3</b> Passeio aleatório</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="passeio-aleatório.html"><a href="passeio-aleatório.html#testes-de-raiz-unitária"><i class="fa fa-check"></i><b>5.3.1</b> Testes de raiz unitária</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="modelos-autoregressivos.html"><a href="modelos-autoregressivos.html"><i class="fa fa-check"></i><b>5.4</b> Modelos autoregressivos</a></li>
+<li class="chapter" data-level="5.5" data-path="médias-móveis.html"><a href="médias-móveis.html"><i class="fa fa-check"></i><b>5.5</b> Médias Móveis</a></li>
+<li class="chapter" data-level="5.6" data-path="modelos-arma.html"><a href="modelos-arma.html"><i class="fa fa-check"></i><b>5.6</b> Modelos ARMA</a></li>
+<li class="chapter" data-level="5.7" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>5.7</b> Modelos ARIMA</a></li>
+<li class="chapter" data-level="5.8" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>5.8</b> Modelos SARIMA</a></li>
+<li class="chapter" data-level="" data-path="aplicação-2.html"><a href="aplicação-2.html"><i class="fa fa-check"></i>Aplicação</a></li>
+<li class="chapter" data-level="" data-path="referências-bibliográficas.html"><a href="referências-bibliográficas.html"><i class="fa fa-check"></i>Referências Bibliográficas</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="analise-geoespacial.html"><a href="analise-geoespacial.html"><i class="fa fa-check"></i><b>6</b> Analise geoespacial</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dados-espaciais-e-geoespaciais.html"><a href="dados-espaciais-e-geoespaciais.html"><i class="fa fa-check"></i><b>6.1</b> Dados espaciais e geoespaciais</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="dados-espaciais-e-geoespaciais.html"><a href="dados-espaciais-e-geoespaciais.html#sistema-geodesico-de-referência-sgr"><i class="fa fa-check"></i><b>6.1.1</b> Sistema Geodesico de Referência (SGR)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="aplicação-3.html"><a href="aplicação-3.html"><i class="fa fa-check"></i>Aplicação</a></li>
+<li class="chapter" data-level="" data-path="referências-biliográficas.html"><a href="referências-biliográficas.html"><i class="fa fa-check"></i>Referências Biliográficas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="8" data-path="url-your-book-url-like-httpsbookdown.orgyihuibookdown-1.html"><a href="url-your-book-url-like-httpsbookdown.orgyihuibookdown-1.html"><i class="fa fa-check"></i><b>8</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="base-de-dados" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Base de dados<a href="base-de-dados.html#base-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para realizar a <strong>leitura</strong> de uma base de dados, basta utilizar a função <code>read()</code>. Exemplos de <strong>formatos de arquivo</strong> são .csv, .txt, .xlsx, entre outros. A forma mais comum de disponibilização de dados é o formato <code>.csv</code> e a leitura dessa base de dados pode ser realizada conforme demonstrado abaixo.</p>
+<p><code>dados &lt;- read.csv("Data Science/dados.csv")</code></p>
+<p>Note que o caminho escrito está pela metade, pois o diretório de trabalho já foi definido. Dessa forma, não é necessário escrever o caminho inteiro do arquivo “dados.csv”, por já estar localizado no diretório.</p>
+<p>Para <strong>exploração dos dados</strong>, inicialmente algumas funções são úteis:</p>
+<ol style="list-style-type: decimal">
+<li><code>View()</code> para visualização dos dados .csv em uma tabela;</li>
+<li><code>Names()</code> para exibição dos nomes das variáveis presentes na base de dados;</li>
+<li><code>Summary()</code> para a realização de um sumário de estatísticas para as variáveis numéricas da base de dados (mínimo, máximo, mediana, média, 1º quartil, 3º quartil e número de NAs).</li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="vetores.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="seleção-de-variáveis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

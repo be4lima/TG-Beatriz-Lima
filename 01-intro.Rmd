@@ -8,13 +8,14 @@ R é uma linguagem e ambiente para computação estatística e gráficos. Essa l
 O **diretório de trabalho** é o local onde a base de dados de um projeto está salva. Para verificar qual é o diretório de trabalho atual, basta utilizar a função ` getwd() `.
 
 ```
+install.packages(c('rlang','tidyverse'))
 getwd()
 ```
 
 Para definir um novo diretório de trabalho, basta utilizar a função `setwd()` e inserir como argumento o caminho desejado, conforme exemplo abaixo.
 
 ```
-setwd("Home/Beatriz/documentos/Data Science")
+#setwd("Home/Beatriz/documentos/Data Science")
 ```
 ## Vetores
 

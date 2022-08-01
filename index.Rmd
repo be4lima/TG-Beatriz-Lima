@@ -2,9 +2,17 @@
 title: "Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações"
 author: "Beatriz Morais Lima e Wallace Gusmão Ferreira"
 date: "`r Sys.Date()`"
-output:
-    html_document:
-      theme: cerulean
+output: 
+  bookdown::gitbook:
+    lib_dir: assets
+    split_by: section
+    config:
+      toolbar:
+        position: static
+  bookdown::pdf_book:
+    keep_tex: true
+  bookdown::html_book:
+    css: toc.css
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -12,8 +20,8 @@ bibliography: [book.bib, packages.bib]
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
   This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
   set in the _output.yml file.
+  The HTML output format for this example is bookdown::gitbook,
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
