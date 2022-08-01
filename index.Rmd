@@ -3,14 +3,14 @@ title: "Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutó
 author: "Beatriz Morais Lima e Wallace Gusmão Ferreira"
 date: "`r Sys.Date()`"
 output: 
+  bookdown::pdf_book:
+    keep_tex: true
   bookdown::gitbook:
     lib_dir: assets
     split_by: section
     config:
       toolbar:
         position: static
-  bookdown::pdf_book:
-    keep_tex: true
   bookdown::html_book:
     css: toc.css
 site: bookdown::bookdown_site
