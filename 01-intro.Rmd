@@ -82,7 +82,7 @@ install.packages("tidyverse")
 
 Após instalar um pacote, é necessário carregá-lo para poder utilizar todas as suas funcionalidades. Portanto, basta utilizar a função `library()` para instalar, inserindo o nome do pacote como argumento. Nesse caso, não utiliza-se aspas no argumento.
 
-## Referências para consulta
+# Referências para consulta
 1. [An introduction to R](https://intro2r.com/)
 2. [R for Data Science](https://r4ds.had.co.nz/)
 3. [Livros gratuitos de diversos temas envolvendo R](https://www.rstudio.com/resources/books/)
