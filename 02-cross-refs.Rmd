@@ -80,7 +80,7 @@ A curva normal possui C=0,263.
 ### Pacote Climate
 Para a análise exploratória de dados, serão utilizados os dados do pacote `climate`, que automatiza o download de dados meteorológicos e hidrológicos de repositórios públicos. Inicialmente, os dados serão carregados e também serão imotidos os valores NA coma  função `na.omit`:
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
 
@@ -98,14 +98,14 @@ dados2 <- na.omit(dados1)
 ```
 Para visualizar a contagem total de valores faltantes (NA) em cada coluna do dataset utilizaremos a função `sapply`. Por ela, é possível concluir que as colunas com dados faltantes são as de *State, Temperature*, e *Flow*.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 sapply(dados1, function(x) sum(is.na(x)))
 
 ```
 Após, é possível visualizar as primeiras seis linhas dos dados com a função `head()`. A partir disso, seguimos com a função `summary` que apresenta a sumarização dos dados. Ou seja, calcula, para cada uma das variáveis numéricas, as seguintes informações: valor mínimo (Min) e máximo (Max); o valor do 25º percentil, também conhecido como primeiro quartil (1st Qu); o valor do 75º quartil, também conhecido como terceiro quartil (3rs Qu); e, por fim, a média e a mediana. 
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 # Visualizar as seis primeiras linhas do dataset
 head(dados2)
@@ -117,7 +117,7 @@ summary(dados2)
 ```
 Também é possível utilizar a função `dim()` para visualizar a dimensão do dataset. 
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 #Dimensão do dataset
 dim(dados2)
@@ -127,7 +127,7 @@ Portanto, o dataset possui 4831 linhas e 10 colunas.
 
 Após visualizar a sumarização dos dados, podemos seguir para a visualização dos dados. Iremos criar um histograma dos valores de Vazão (m³/s) dos rios (Coluna *River_or_Lake*) do nosso dataset.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 #Histograma da vazão
 
 ggplot(data=dados2, aes(x=dados2$`Flow [m3_s]`)) +
@@ -137,7 +137,7 @@ ggplot(data=dados2, aes(x=dados2$`Flow [m3_s]`)) +
 ```
 É possível visualizar que a grande maioria das vazões estão próximas ou são zero. Também é possível visualizar as vazões em um gráfico de dispersão, pareando qualquer combinação de variáveis:
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
   ggplot(data=dados2, aes(x=dados2$River_or_Lake, y=dados2$`Flow [m3_s]`)) +
   geom_point() +
@@ -147,7 +147,7 @@ ggplot(data=dados2, aes(x=dados2$`Flow [m3_s]`)) +
 ```
 Também é possível criar um Boxplot da vazão agrupada pelo rio ou lago correspondente:
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 ggplot(data=dados2, aes(x=dados2$River_or_Lake, y=dados2$`Flow [m3_s]`)) + 
   geom_boxplot(fill="steelblue") +
@@ -167,7 +167,7 @@ Portanto, iremos aplicar a EDA para verificar essa relação entre o El niño e 
 
 Para importar a base de dados em .csv, utiliza-se a função read.csv() e insere-se como argumento o *diretório*:
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 met<- read.csv2("Data/data1.csv")
 
@@ -177,7 +177,7 @@ met1 <- na.omit(met) # Omitindo os valores faltantes do conjunto de dados
 É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto; e, read.csv2(), quando são separados por ponto e vírgula e os decimais por vírgula.
 
 Para visualizar a tabela importada, basta executar a função View():
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 View(met1)
 
@@ -185,7 +185,7 @@ View(met1)
 
 Para iniciar a exploração dos dados, inicialmente será utilizada a função str() que exibe de forma compacta a estrutura da tabela importada.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 str(met1)
 
@@ -193,14 +193,14 @@ str(met1)
 
 Continuando, será utilizada a função ´summary()´ para apresentar o sumário de estatísticas descritivas (média, mediana, mínimo, máximo, 1º quartil, 3º quartil e valores faltantes (NA)).
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 summary(met1)
 
 ```
 Para continuar explorando os dados, realizou-se um gráfico de linhas a fim de analisar o comportamento da precipitação em relação às datas.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 year <- met1$Data
 precip <- met1$PRECIPITACAOTOTAL
@@ -218,7 +218,7 @@ ggplot(df,
 
 A distribuição de frequência da precipitação apresenta assimetria à direita (positiva):
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 ggplot(data = df, 
       aes(x = precip)) +
@@ -228,7 +228,7 @@ ggplot(data = df,
 
 Após realizar a sumarização numérica de todos os dados, agora será focado nos dados de interesse: precipitação e ano. Primeiramente, será encontrada a média de precipitação por ano analisado, com um intervalo de confiança de 95% (escore-x da curva normal igual a 1,96).
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 #Média das precipitações por ano
 
@@ -245,7 +245,7 @@ tabela_stats <- met1 %>%
 
 Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras com os erros padrões das amostras. Utiliza-se o erro padrão e não o desvio padrão porque, neste caso, estamos interessados na variabilidade das médias das amostras e não na variabilidade das observações dentro da amostra.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 #Visualizando a tabela criada com os dados estatísticos
 View(tabela_stats)
 

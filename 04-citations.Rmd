@@ -153,7 +153,7 @@ Os parâmetros do modelo são identificados e testados estatisticamente e, para 
 ## Aplicação {-}
 Para a aplicação, será realizado o exemplo do capítulo 4 do livro de BARROS *et.al* (2017). Será utilizada como *database* a série temporal de vendas de passagens aéreas nos EUA de janeiro de 1949 a dezembro de 1960. 
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
 install.packages(c('rlang','tidyverse'))

@@ -77,7 +77,7 @@ De acordo com Montgomery (2021), o R² pode trazer interpretações errôneas, j
 ### Estudo de Caso 1
 Para a primeira aplicação, serão utilizados dados do exemplo 12-14 do livro do autor Montgomery et al (2016) chamado Estatistica Aplicada e Probabilidade para Engenheiros. O enunciado é o seguinte: ""
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
 install.packages("rlang")
@@ -101,7 +101,7 @@ update.packages(c('ggplot2','tidyverse'))
 ```
 O Coeficiente de Determinação tem como valor 0,7206, ou seja...
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 ## Plotando mod1
 #plot(mod1, which = 4)
@@ -155,7 +155,7 @@ Para o segundo estudo de caso serão utilizados dados reais de emissões dos gas
 
 Um **primeiro passo** será carregar os dados:
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 options("install.lock"=FALSE)
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
@@ -175,7 +175,7 @@ View(dados)
 ```
 Agora que os dados foram carregados, o **segundo passo** será entender os dados. Para saber algumas propriedade dos dados carregados, será utilizado o comando ``head()`, que apresentará uma amostra dos dados, e ``summary()`, que apresenta as estatísticas básicas dos dados (média, mediana, 1º quartil, etc).
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 head(dados)
 
@@ -184,7 +184,7 @@ summary(dados)
 ```
 Como iremos analisar a relação entre a área desmatada por ano (D_Area) e a emissão de 1ª ordem de $CO_2$, é importante verificar qual é o comportamento entre esses dados.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 ## Verificando a relação entre a variável dependente e a variável independente
 plot(dados$D_Area, dados$VR_CO2_1stOrder)
@@ -197,7 +197,7 @@ cor.test(dados$VR_CO2_1stOrder,dados$D_Area)
 
 A partir desse gráfico, é possível verificar que a relação entre as variáveis é linear e, dessa forma, conforme a área desmatada aumenta, a emissão de $CO_2$ aumenta linearmente. O valor da correlação indica que a relação entre as duas variáveis é forte e positiva, já que 0,9987358 é próximo de 1 e maior que zero.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 ## Construção do modelo
 mod <- lm(VR_CO2_1stOrder ~ D_Area, dados, na.action = na.exclude)
@@ -211,7 +211,7 @@ O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor
 
 De acordo com Montgomery e Runger (2021), "*A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo*". Dessa forma, abaixo será realizada a análise residual.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 # Análise dos resíduos
 
 plot(mod,which = 4)
@@ -249,7 +249,7 @@ O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outl
  
 A Distância de Cook informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações 48, 50 e 51 são extremas. 
 
-```` {r}
+```` {r,message=FALSE,warning=FALSE}
 CD <- cooks.distance(mod)
 influentes <- CD[(CD > (3* mean(CD, na.rm=TRUE)))]
 
@@ -261,7 +261,7 @@ Pelo Teste de Shapiro, é possível verificar que o p-value é menor que 0,05, p
 
 Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste de outliers, é interessante utilizar os gráficos Boxplot e Histograma. 
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
 #Encontrando potenciais outliers a partir de gráficos
 
@@ -273,7 +273,7 @@ hist(dados$VR_CO2_1stOrder)
 
 A partir da análise dos resíduos, foi possível inferir que as observações 48, 50 e 51 são outliers influentes. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote `outliers` pode ser utilizado, já que a função `outlier()` consegue encontrar o valor mais distante da média das variáveis.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 #Encontrando os valores com maior diferença da média com o pacote `outliers`
 
 library(outliers)
@@ -321,7 +321,7 @@ plot(mod2)
 Mesmo com a retirada de grande parte dos outliers influentes, o modelo ainda não possui resíduos adequados. Para a realização de uma regressão linear, são assumidas alguns preceitos que, provavelmente, não são o caso dos dados utilizados para o segundo estudo de caso (vide tópico \@ref(Condicoes)). Conforme verificamos, os resíduos não seguem uma distribuição normal e os dados não possuem variância constante. Portanto, pode-se afirmar que a regressão linear não explica os dados de forma adequada. Talvez seja necessário aplicar outro tipo de modelo para estes dados. Além disso, os dados podem não conter variáveis suficientes para explicar a variável resposta (Emissão de primeira ordem de $CO_2$).
 
 
-##Referências Bibliográficas {-}
+## Referências Bibliográficas {-}
 
 CHAPRA, Steven C. **Métodos Numéricos Aplicados com MATLAB® para Engenheiros e Cientistas**. Grupo A, 2013. 9788580551778. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9788580551778/. Acesso em: 21 jun. 2022.
 
