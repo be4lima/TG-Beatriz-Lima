@@ -4,12 +4,30 @@ A **Análise Exploratória de Dados** (EDA) é uma forma de utilizar ferramentas
 
 Para aplicar a EDA, de acordo com Wickhman & Grolemund (2017), basta inicialmente gerar questões sobre os dados, utilizar as funcionalidades do R para encontrar respostas e utilizar o que foi aprendido para gerar novas questões. Portanto, essa análise é um ciclo iterativo.
 
-## População e amostra
+## Introdução à Estatística
+Para aplicar a Ciência de Dados é essencial o uso da Estatística. Conforme Montgomery
+e Runger (2021), "Estatística é a ciência de dados". Em um conjunto de dados, a estatística descritiva detalha e resume as suas principais características, de forma que permite maior entendimento do comportamento desse conjunto. Esse é um dos principais aspectos importantes para facilitar a interpretação e análise de dados em Data Science (FAVERO, 2017; MONTGOMERY; RUNGER, 2021).
+
+
+###População e amostra
 
 A **População** é um conjunto de observações relacionadas a indivíduos com uma característica em comum. Já a **Amostra** é um subconjunto da população, com uma parte das observações relacionadas à população. A partir da amostra realizam-se inferências sobre as características da população. 
 
 É importante que a amostra seja representativa para que os resultados não sejam deturpados.
 
+### Tipos de variáveis
+Uma variável pode ser definida como uma característica da amostra ou população. Para
+aplicar os cálculos de estatísticas e realizar as representações gráficas é importante realizar a classificação da variável. Os tipos de variáveis são: Qualitativa ou não métrica e Quantitativa ou métrica. O primeiro tipo está relacionado com variáveis que categorizam os dados, de forma quenão seja possível medí-los ou realizar cálculos. Já o segundo, relaciona-se com variáveis que podem ser contadas ou mensuradas (FAVERO, 2017).
+
+Dentre as variáveis qualitativas, também chamada de variáveis categóricas, existem
+dois tipos: Nominal e Ordinal. Enquanto na Nominal não possível realizar nenhuma ordenação,
+na Ordinal existe uma ordem para os seus resultados. Para analisar essas variáveis podem
+ser utilizadas tabelas de distribuição de frequência e gráficos (MORETTIN; BUSSAB, 2017;
+FAVERO, 2017).
+
+De forma similar, existem dois tipos para as variáveis quantitativas: Discreta e Contínua.
+As Discretas possuem valores inteiros, ou seja, não assumem valores decimais e, em sua maioria, resultam de uma contagem. Já as Contínuas possuem valores contidos nos números reais e resultam de uma mensuração. Podem ser analisadas a partir de medidas de posição, dispersão e
+forma (MORETTIN; BUSSAB, 2017; FAVERO, 2017).
 
 ## Sumarização numérica de dados
 
@@ -75,103 +93,56 @@ $C=\frac{Q_3-Q_1}{2*(P_{90} - P_{10})}$
 
 A curva normal possui C=0,263.
 
+## Representação gráfica
+Como a representação gráfica de variáveis qualitativas está associada às frequências associadas às categorias, os gráficos mais utilizados são de barras e de composição em setores
+(gráfico de pizza ou retângulos). Em um gráfico de barras, visualiza-se a tabela de frequên-
+cias de forma que as categorias apresentam-se no eixo x e, a frequência absoluta ou rela-
+tiva, no eixo y. É possível que os eixos estejam invertidos, ou seja, no eixo x apresentam-
+se as frequências e, no eixo y, as categorias. Já os gráficos de composição de setores po-
+dem apresentar a contagem de ocorrências das categorias de uma variável e também em
+relação ao seu total de contagens, ou seja, respectivamente as frequências absolutas e re-
+lativas das categorias da variável (MORETTIN; BUSSAB, 2017; BRUCE; BRUCE, 2019).
+
+As representações gráficas para viariáveis quantitativas apresentam maior variedade,
+porque, além dos gráficos usados para variáveis qualitativas, ainda é possível realizar gráficos de linhas, de dispersão, histogramas, de ramo-e-folhas e box-plots (MORETTIN; BUSSAB, 2017; FAVERO, 2017).
+
+A representação gráfica de pontos formados pela intersecção no eixo x e y ligados por
+uma linha reta é o gráfico de linhas. Conforme apresentado por Favero (2017), esse gráfico
+poderá representar o comportamento de somente uma variável. Os valores numéricos da variável
+apresentam-se no eixo y e o eixo x apresenta a distribuição dos dados uniformemente ao longo
+do tempo. Portanto, a partir dessa representação é possível visualizar a evolução (ou tendência) dos dados da variável (FAVERO, 2017). O gráfico de dispersão é muito semelhante ao de linhas, porém, nesse caso, os pontos não são ligados por uma reta. Além disso, os intervalos de distribuição dos dados, normalmente, são irregulares. Existe a possibilidade de utilizar essa representação para duas variáveis simultaneamente (FAVERO, 2017).
+
+Segundo Morettin e Bussab (2017), um gráfico de barras contíguas é um histograma. Os
+valores da variável apresentam-se no eixo x e a distribuição de frequências no eixo y. Como a
+área de cada retângulo é proporcional à respectiva frequência, a área total do histograma sempre será igual a um. Portanto, a primeira etapa para a construção de um histograma é a construção da tabela de frequências, calculando as frequências absoluta e relativa e suas respectivas frequências acumuladas. Além disso, quanto maior a quantidades de dados da categoria (ou classe), mais alto será a barra (ou retângulo) (MORETTIN; BUSSAB, 2017).
+
+Quando uma variável quantitativa apresenta poucas observações, uma alternativa é a
+representação pelo gráfico de ramo-e-folhas. Os ramos são os valores à esquerda da linha que
+representam os primeiros dígitos da observação. À direita ficam as folhas, as quais representam os últimos dígitos da observação. Ou seja, segundo Favero (2017), "os ramos são representados em uma única coluna e seus diferentes valores ao longo de várias colunas". Ambos devem estar ordenados de forma crescente. Quando um ramo apresenta muitas folhas, é possível afirmar que existe maior incidência dele. Se o número de folhas for grande, pode-se criar duas ou mais linhas de um mesmo ramo (FAVERO, 2017; MORETTIN; BUSSAB, 2017).
+
+O boxplot apresenta o valor mínimo, primeiro, segundo e terceiro quartil, mediana e o
+valor máximo de uma determinada variável. Ou seja, é a representação de medidas de posição da
+variável, as quais serão apresentadas a seguir. O primeiro quartil apresenta 25% dos dados; o
+segundo, 50%, o que também é a mediana porque os dados estejam ordenados; e o terceiro, 75%.
+Com o gráfico, é possível verificar se existem dados discrepantes localizados fora dos limites
+superior e inferior.
+
+
 ## Aplicação {-}
-
-### Pacote Climate
-Para a análise exploratória de dados, serão utilizados os dados do pacote `climate`, que automatiza o download de dados meteorológicos e hidrológicos de repositórios públicos. Inicialmente, os dados serão carregados e também serão imotidos os valores NA coma  função `na.omit`:
-
-```{r,message=FALSE,warning=FALSE}
-options(repos = list(CRAN="http://cran.rstudio.com/"))
-options("install.lock"=FALSE)
-
-install.packages("tidyverse")
-#library(tidyverse)
-
-# Carregar pacote climate
-library(climate)
-library(rlang)
-library(ggplot2)
-
-# Carregar dados para análise
-dados1 <- hydro_imgw_monthly(year=2010, coords= FALSE, col_names = "full")
-dados2 <- na.omit(dados1)
-```
-Para visualizar a contagem total de valores faltantes (NA) em cada coluna do dataset utilizaremos a função `sapply`. Por ela, é possível concluir que as colunas com dados faltantes são as de *State, Temperature*, e *Flow*.
-
-```{r,message=FALSE,warning=FALSE}
-
-sapply(dados1, function(x) sum(is.na(x)))
-
-```
-Após, é possível visualizar as primeiras seis linhas dos dados com a função `head()`. A partir disso, seguimos com a função `summary` que apresenta a sumarização dos dados. Ou seja, calcula, para cada uma das variáveis numéricas, as seguintes informações: valor mínimo (Min) e máximo (Max); o valor do 25º percentil, também conhecido como primeiro quartil (1st Qu); o valor do 75º quartil, também conhecido como terceiro quartil (3rs Qu); e, por fim, a média e a mediana. 
-
-```{r,message=FALSE,warning=FALSE}
-
-# Visualizar as seis primeiras linhas do dataset
-head(dados2)
-View(dados2)
-
-# Sumarizando os dados
-summary(dados2)
-
-```
-Também é possível utilizar a função `dim()` para visualizar a dimensão do dataset. 
-
-```{r,message=FALSE,warning=FALSE}
-
-#Dimensão do dataset
-dim(dados2)
-
-```
-Portanto, o dataset possui 4831 linhas e 10 colunas. 
-
-Após visualizar a sumarização dos dados, podemos seguir para a visualização dos dados. Iremos criar um histograma dos valores de Vazão (m³/s) dos rios (Coluna *River_or_Lake*) do nosso dataset.
-
-```{r,message=FALSE,warning=FALSE}
-#Histograma da vazão
-
-ggplot(data=dados2, aes(x=dados2$`Flow [m3_s]`)) +
-  geom_histogram(fill="blue", color="blue") +
-  ggtitle("Histograma de Vazão [m³/s]")
-
-```
-É possível visualizar que a grande maioria das vazões estão próximas ou são zero. Também é possível visualizar as vazões em um gráfico de dispersão, pareando qualquer combinação de variáveis:
-
-```{r,message=FALSE,warning=FALSE}
-
-  ggplot(data=dados2, aes(x=dados2$River_or_Lake, y=dados2$`Flow [m3_s]`)) +
-  geom_point() +
-  ggtitle("Distribuição de vazões por rio ou lago") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
-```
-Também é possível criar um Boxplot da vazão agrupada pelo rio ou lago correspondente:
-
-```{r,message=FALSE,warning=FALSE}
-
-ggplot(data=dados2, aes(x=dados2$River_or_Lake, y=dados2$`Flow [m3_s]`)) + 
-  geom_boxplot(fill="steelblue") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-  
-
-```
-Por existirem rios e lagos com vazões muito próximas, alguns boxplots não são visualizados. Porém, nos outros é possível visualizar.
 
 ### INMET
 
-Para a aplicação, será utilizada a base de dados do Instituto Nacional de Meteorologia (INMET) de precipitação e temperatura na estação meterológica do Mirante de Santana em São Paulo, dos anos de 2014 a 2016. 
+Para a aplicação, será utilizada a base de dados do Instituto Nacional de Meteorologia (INMET) de precipitação e de dias de precipitação do Mirante de Santana em São Paulo.
 
-No ano de 2014, São Paulo passou pela pior estiagem deste o ano de 1953. Entre o fim de 2014 e o outono de 2016, a cidade registrou o maior El Niño deste 1950. O El Niño, quando ocorre, causa um aquecimento anômalo das águas superficiais e sub-superficiais do Oceano Pacífico Equatorial, porém, não se comporta de forma constante em relação ao volume de chuvas. Uma das dúvidas do período era se o El niño poderia afetar o regime de chuvas e, assim, aumentar a precipitação em São Paulo. 
-
-Portanto, iremos aplicar a EDA para verificar essa relação entre o El niño e o volume de chuvas.
-
+Realizaremos a análise exploratória da precipitação total ao longo dos anos (1990-2022).
+ 
 Para importar a base de dados em .csv, utiliza-se a função read.csv() e insere-se como argumento o *diretório*:
 
 ```{r,message=FALSE,warning=FALSE}
+library(readr)
 
-met<- read.csv2("Data/data1.csv")
+inmet <- read.csv2("Data/INMET_SP.csv", header = TRUE, sep = ";", dec = ",")
 
-met1 <- na.omit(met) # Omitindo os valores faltantes do conjunto de dados
 ```
 
 É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto; e, read.csv2(), quando são separados por ponto e vírgula e os decimais por vírgula.
@@ -179,7 +150,7 @@ met1 <- na.omit(met) # Omitindo os valores faltantes do conjunto de dados
 Para visualizar a tabela importada, basta executar a função View():
 ```{r,message=FALSE,warning=FALSE}
 
-View(met1)
+View(inmet)
 
 ```
 
@@ -187,70 +158,77 @@ Para iniciar a exploração dos dados, inicialmente será utilizada a função s
 
 ```{r,message=FALSE,warning=FALSE}
 
-str(met1)
+str(inmet)
 
 ```
-
-Continuando, será utilizada a função ´summary()´ para apresentar o sumário de estatísticas descritivas (média, mediana, mínimo, máximo, 1º quartil, 3º quartil e valores faltantes (NA)).
+Continuando, será utilizada a função ´summary()´ para apresentar o sumário de estatísticas descritivas (média, mediana, mínimo, máximo, 1º quartil, 3º quartil e valores faltantes (NA)), já que as variáveis de precipitação total e número de dias de precipitação são numéricas.
 
 ```{r,message=FALSE,warning=FALSE}
 
-summary(met1)
+summary(inmet)
 
 ```
+
+Inicialmente, os cabeçalhos da coluna serão modificados para facilitar a análise:
+
+```{r,message=FALSE,warning=FALSE}
+colnames(inmet)[c(1,2,3)] <- c("data","dias_de_precipitacao","precipitacao_total")
+
+View(inmet)
+```
+
 Para continuar explorando os dados, realizou-se um gráfico de linhas a fim de analisar o comportamento da precipitação em relação às datas.
 
 ```{r,message=FALSE,warning=FALSE}
 
-year <- met1$Data
-precip <- met1$PRECIPITACAOTOTAL
+month_year <- format(as.Date(inmet$data, format = "%d/%m/%Y"),"%Y/%m")
 
-df <- data.frame(precipitacao=precip, ano=year)
+View(month_year)
 
 library(ggplot2)
 
-ggplot(df,
-       aes(x = ano, y = precipitacao)) +
+ggplot(inmet,
+       aes(x = month_year, y = precipitacao_total)) +
        geom_line(linetype="dashed", color="blue", aes(group=1)) +
-       geom_point()
-
+       geom_point() + 
+        scale_x_discrete(guide = guide_axis(check.overlap = TRUE)) +
+        scale_y_discrete(guide= guide_axis(check.overlap = TRUE))
 ```
-
-A distribuição de frequência da precipitação apresenta assimetria à direita (positiva):
+No momento, nos interessa analisar a precipitação ao longo dos anos de análise. Por isso, essa variável será adicionada como uma coluna ao dataset inicial:
 
 ```{r,message=FALSE,warning=FALSE}
+ano <- format(as.Date(inmet$data, format = "%d/ %m/ %Y"),"%Y")
+inmet_new <- cbind(inmet, ano)
 
-ggplot(data = df, 
-      aes(x = precip)) +
-      geom_histogram() 
-
+View(inmet_new)
 ```
 
-Após realizar a sumarização numérica de todos os dados, agora será focado nos dados de interesse: precipitação e ano. Primeiramente, será encontrada a média de precipitação por ano analisado, com um intervalo de confiança de 95% (escore-x da curva normal igual a 1,96).
+Após realizar a sumarização numérica de todos os dados, agora será focado nos dados de interesse: precipitação e ano. Primeiramente, será encontrada a média de precipitação por ano analisado, com um intervalo de confiança de 95% (escore-x da curva normal igual a 1,96). Para fim de organização do código, será utilizado o [operador pipe](https://www.youtube.com/watch?v=qHCBG14tKns).  
 
-```{r,message=FALSE,warning=FALSE}
+```{r}
 
 #Média das precipitações por ano
 
 library(dplyr) #instalando o pacote para utilizar o operador pipe %>%
 
-tabela_stats <- met1 %>%
-  group_by(ANO) %>%
-  summarise(n_obs = n(), media = mean(PRECIPITACAOTOTAL), desvio_padrao = sd(PRECIPITACAOTOTAL)) %>% 
+tabela_stats <- inmet_new %>%
+  group_by(ano) %>%
+  summarise(n_obs = n(), media = mean(precipitacao_total), desvio_padrao = sd(precipitacao_total)) %>% 
   mutate(erro = 1.96*desvio_padrao/sqrt(n_obs), 
          limite_superior = media + erro,
          limite_inferior = media - erro)
 
+#Visualizando a tabela criada com os dados estatísticos
+
+View(tabela_stats)
 ```
 
 Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras com os erros padrões das amostras. Utiliza-se o erro padrão e não o desvio padrão porque, neste caso, estamos interessados na variabilidade das médias das amostras e não na variabilidade das observações dentro da amostra.
 
 ```{r,message=FALSE,warning=FALSE}
-#Visualizando a tabela criada com os dados estatísticos
-View(tabela_stats)
 
 #Plotando os valores com seus respectivos erros
-ggplot (data = tabela_stats, aes(x=ANO, y = media, fill=ANO)) +
+ggplot (data = tabela_stats, aes(x = ano, y = media, fill = ano)) +
   geom_col() +
   geom_errorbar(aes(ymin=limite_inferior, ymax=limite_superior)) +
   ggtitle("Média das precipitações por ano") +
@@ -261,4 +239,3 @@ ggplot (data = tabela_stats, aes(x=ANO, y = media, fill=ANO)) +
 
 ```
 
-É possível analisar que houve um aumento do volume de chuvas no ano de 2015, se comparado com o ano de 2014. O valor médio de precipitação de 2016 é ligeiramente maior que a média de 2014. Porém, não é possível afirmar que os valores de precipitação se devem somente ao El niño, porque também existem diversos fatores, não analisados aqui, que podem influenciar no volume de chuvas.

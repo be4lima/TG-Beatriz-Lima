@@ -86,3 +86,4 @@ Após instalar um pacote, é necessário carregá-lo para poder utilizar todas a
 1. [An introduction to R](https://intro2r.com/)
 2. [R for Data Science](https://r4ds.had.co.nz/)
 3. [Livros gratuitos de diversos temas envolvendo R](https://www.rstudio.com/resources/books/)
+4. [Ciência de Dados em R](https://livro.curso-r.com/index.html)
