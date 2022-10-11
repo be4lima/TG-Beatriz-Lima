@@ -3,16 +3,290 @@
 '`
 The R Foundation. **R: The R Project**. Disponível em: <https://www.r-project.org/>
 
-Wickham, Hadley; Grolemund, Garrett. **R for Data Science**. Disponível em: <https://r4ds.had.co.nz/exploratory-data-analysis.html>
-
-Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
 
 SIDHU, Rishi. **Layman's Introduction to Linear Regression**. Disponível em: <https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09> 
 
-DAVIS, Jerry. Introduction to Environmental Data Science. SFSU Institute for Geographic Information Science, 2022. Disponível em: https://bookdown.org/igisc/EnvDataSci/#environmental-data-science. Acesso em: 27 abr. 2022.
+ @BOOK{davis2022,
+  title = {Introduction to Environmental Data Science},
+  publisher = {Addison Wesley Longman},
+  year = {2022},
+  author = {Jerry Davis},
+  address = {São Francisco, CA},
+  url = {https://bookdown.org/igisc/EnvDataSci/},
+  note = {Acesso em: 25/08/2022}
+}
 
-FILATRO, Andrea C. Data science da educação. [Digite o Local da Editora]: Editora Saraiva, 2020. 9786587958446. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9786587958446/. Acesso em: 27 abr. 2022.
+  @book{wickham2022,
+  title = {R for Data Socience},
+  author = {Hadley Wickham and Garrett Grolemund},
+  url = {<https://r4ds.had.co.nz/exploratory-data-analysis.html>},
 
-Gibert, Karina; Horsburgh, Jeffery S.; Athanasiadis, Ioannis N.; Holmes, Geoff. Environmental Data Science. Environmental Modelling & Software, 2018. Disponível em: <https://reader.elsevier.com/reader/sd/pii/S1364815218301269?token=6B7E02806686B9D1213F7D7D568DD8607AC7EDC45701E1AB2FF569284245D3B9B73444E8F4532FFF767F851CCECF7289&originRegion=us-east-1&originCreation=20220429000236>. Acesso em: 28 abr. 2022.
+}
 
-R DOCUMENTATION. *shapiro.test(x)*. Disponível em: <https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test>
+@ARTICLE{gilbertetal2018,
+  author = {Karina Gilbert and Jeffery S. Horsburgh and Ioannis N. Athanasiadis and Geoff Holmes},
+  title = {Environmental Data Science},
+  journal = {Environmental Modelling & Software 106},
+  year = {2018},
+  pages = {4-12},
+  month = {April},
+  url = {https://doi.org/10.1016/j.envsoft.2018.04.005},
+  publisher = {Elsevier},
+}
+
+@BOOK{filatro2020,
+  title = {Data science da educação},
+  publisher = {Editora Saraiva},
+  year = {2020},
+  author = {Andrea C. Filatro},
+  url = {https://integrada.minhabiblioteca.com.br/#/books/9786587958446/}
+}
+
+@BOOK{favero2017,
+  title = {Manual de Análise de Dados - Estatística e Modelagem Multivariada com Excel®, SPSS® e Stata®},
+  publisher = {Grupo GEN},
+  year = {2017},
+  author = {Luiz P Favero},
+  url = {https://integrada.minhabiblioteca.com.br/#/books/9788595155602/}
+
+}
+
+@article{gilbert20181,
+title = {Which method to use? An assessment of data mining methods in Environmental Data Science},
+journal = {Environmental Modelling & Software},
+volume = {110},
+pages = {3-27},
+year = {2018},
+note = {Special Issue on Environmental Data Science and Decision Support: Applications in Climate Change and the Ecological Footprint},
+issn = {1364-8152},
+doi = {https://doi.org/10.1016/j.envsoft.2018.09.021},
+url = {https://www.sciencedirect.com/science/article/pii/S1364815218308715},
+author = {Karina Gibert and Joaquín Izquierdo and Miquel Sànchez-Marrè and Serena H. Hamilton and Ignasi Rodríguez-Roda and Geoff Holmes},
+keywords = {Data mining, Data science, Method selection, Multidisciplinarity, Environmental systems}
+}
+
+@article{kadiyala2017,
+issn = {1944-7442},
+abstract = {Open source programming languages and software platforms play a vital role in the progress of research towards developing new methods for addressing data science problems. R is one such platform that the research community may adapt and make the required changes to the codes in accordance with the requisite needs, specifically when analyzing data in different forms (structured, semistructured, unstructured). This study demonstrated the applications of R for analyzing in‐bus carbon dioxide concentrations by: (i) importing the data into RStudio; (ii) performing an exploratory data analysis; (iii) developing statistical regression models; and (iv) developing tree models using machine learning methods. The readers may adopt the methods discussed in this paper to successfully address their own data science problems. © 2017 American Institute of Chemical Engineers Environ Prog, 36: 1358–1364, 2017},
+journal = {Environmental progress},
+pages = {1358--1364},
+volume = {36},
+publisher = {Wiley Subscription Services, Inc},
+number = {5},
+year = {2017},
+title = {Applications of R to evaluate environmental data science problems},
+copyright = {2017 American Institute of Chemical Engineers Environ Prog},
+language = {eng},
+address = {Hoboken},
+author = {Kadiyala, Akhil and Kumar, Ashok},
+keywords = {Air pollution ; biodiesel ; Carbon dioxide ; CRAN ; Data analysis ; Data buses ; Data processing ; Data science ; indoor air quality ; in‐bus air contaminants ; Learning algorithms ; Machine learning ; Mathematical models ; Open source software ; Programming languages ; public transportation buses ; Readers ; Regression analysis ; RStudio ; Statistical analysis},
+}
+@misc{climate2022,
+    author = {RDocumentation},
+    title = {Climate Package},
+    url = {https://www.rdocumentation.org/packages/climate/versions/1.0.5},
+    year = {2022},
+}
+@misc{conway2010,
+    author = {Drew Conway},
+    title = {THE DATA SCIENCE VENN DIAGRAM},
+    url = {http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram},
+    year = {2010},
+    note = {Acesso em: 19 ago. 2022}
+
+}
+@inproceedings{mendes2022,
+    author = {Diana E. Aldea Mendes},
+    year = {2022},
+    conference-location = {Lisboa, Portugal},
+    title = {A ciência de dados ao serviço da sustentabilidade},
+    publisher = {Academia de Lisboa},
+    organization = {Ci\^encia e Cultura - 50 anos depois da Confer\^encia de Estocolmo},
+    eventdate = {06 ago. 2022},
+    pages = {44-47}
+}
+@article{longbing2017,
+    author = {Longbing Cao},
+    title = {Data Science: A Comprehensive Overview},
+    year = {2017},
+    doi = {http://dx.doi.org/10.1145/3076253},
+    publisher = {ACM Comput. Serv.},
+    volume = {50},
+    issue = {3}
+}
+
+@book{xie2022,
+    title = {Bookdown: Authoring Books and Technical Documents with r Markdown},
+    author = {Yihui Xie and J. J. Allaire and Garrett Grolemund},
+    edition = {1},
+    local = {Boca Raton, Florida},
+    url = {https://bookdown.org/yihui/rmarkdown/},
+    year = {2022},
+    publisher = {Chapman & Hall/CRC}
+}
+@article{yu2010,
+    title = {Exploratory data analysis in the context of data mining and resampling},
+    author = {Chong Ho Yu},
+    publisher = {International Journal of Psychological Research},
+    year = {2010},
+    volume = {3},
+    number = {1},
+    pages = {9-22},
+}
+@misc{yu2009,
+    title = {Exploratory data analysis and data
+visualization},
+    url = {http://www.creative-wisdom.com/teaching/WBI/EDA.shtml},
+    author = {Chong Ho Yu},
+    year = {2009},
+    note = {Acesso em: 25 ago. 2022}
+}
+@book{tukey1977,
+    title = {Exploratory Data Analysis},
+    publisher = {Addison-Wesley Publishing Company, Inc},
+    isbn = {0201076160},
+    year = {1977},
+    local = {Reading, Massachusetts},
+    pages = {711},
+    author = {John W. Tukey},
+    copyright = {Princeton University and Bell Telephone Laboratories}
+}
+@book{morettin2017,
+    title = {Estatística básica},
+    publisher = {Editora Saraiva},
+    year = {2017},
+    pages = {75},
+    author = {Pedro A Morettin and Wilton de O. Bussab},
+    note = {Acesso em: 06 set. 2022},
+    isbn = {9788547220228},
+    url = {https://integrada.minhabiblioteca.com.br/#/books/9788547220228/}
+}
+@book{bruce2019,
+    title = {Estatística Prática para Cientistas de Dados - 50 Conceitos Essenciais},
+    author = {Peter Bruce and Andrew Bruce},
+    isbn = {978-85-508-1300-4},
+    publisher = {Starlin Alta Editora e Consultoria Eireli},
+    pages = {392},
+    local = {Brasil},
+    editor = {Alta Books},
+    year={2019}
+}
+@book{chapra2013,
+    author = {Steven C. Chapra},
+    title = {Métodos Numéricos Aplicados com MATLAB para Engenheiros e Cientistas},
+    publisher = {Grupo A},
+    year = {2013},
+    isbn = {9788580551778},
+    url= {https://integrada.minhabiblioteca.com.br/#/books/9788580551778/},
+    note = {Acesso em: 15 set. 2022}
+}
+@book{montgomery2021,
+    title = {Estatística Aplicada e Probabilidade para Engenheiros},
+    author = {Douglas C. Montgomery and George C. Runger},
+    year = {2021},
+    publisher = {Grupo GEN},
+    isbn = {9788521637448},
+    url = {https://integrada.minhabiblioteca.com.br/#/books/9788521637448/},
+    note = {Acesso em: 16 set. 2022}
+}
+@book{barros2017,
+    title = {Análise de Séries Temporais em R: Curso Introdutório},
+    author = {Anna C. Barros and Daiane Marcolino D. and Ingrid Christyne Luquett D.},
+    year = {2017},
+    publisher = {Grupo GEN},
+    isbn = {9788595154902},
+    url = {https://integrada.minhabiblioteca.com.br/#/books/9788595154902/},
+    note = {Acesso em: 21 jun. 2022}
+}
+@book{morettin2018,
+    title = {Análise de Séries Temporais},
+    author = {Pedro A. Morettin},
+    year = {2018},
+    publisher = {Editora Blucher},
+    isbn = {9788521213529},
+    url = {https://integrada.minhabiblioteca.com.br/#/books/9788521213529/},
+    note = {Acesso em: 10 jun. 2022}
+    }
+
+@book{levine2016,
+    title = {Estatística - Teoria e Aplicações usando MS Excel em Português},
+    year = {2017},
+    author = {David M. Levine and David F. Stephan and Kathryn A. Szabat},
+    publisher = {Grupo GEN},
+    edition = {7},
+    local = {Rio de Janeiro},
+    isbn = {9788521631965}
+}
+
+@book{sousa2021,
+    title = {Análise de séries temporais},
+    author = {Alex R. dos Santos Sousa and Cristiana da Silva and Juliane S. Freire},
+    year = {2021},
+    publisher = {Grupo A},
+    ISBN = {9786556902876},
+    local = {Porto Alegre},
+    url = {https://integrada.minhabiblioteca.com.br/#/books/9786556902876/},
+    note = {Acesso em: 20 set. 2022.}
+}
+@monography{reis2011,
+    title = {Modelos de previsão para o ICMS da mesorregião noroeste do estado do Ceará},
+    author = {Deyser de Oliveira dos Reis},
+    year = {2011},
+    adress = {Sobral, Ceará},
+    school = {Universidade Federal do Ceará},
+    pages = {44}
+}
+@chapter{engle1984,
+    author = {R. F. Eagle},
+    title = {Wald, likelihood ratio, and lagrange multiplier tests in econometrics},
+    volume = {2},
+    year = {1984},
+    pages = {775-826},
+    book = {Handbook of econometrics}
+}
+@book{bivand2009,
+    author = {Roger S. Bivand and Edzer J. Pebesma and Virgilio Gómez-Rubio},
+    title = {Applied Spatial Data Analysis with R},
+    publisher = {Springer Science},
+    ISBN = {9780387781709},
+    year = {2008},
+    pages = {378}
+}
+@article{zanetti2017,
+    author = {Maria Aparecida Zehnpfennig Zanetti},
+    year = {2017},
+    title = {Sistema de coordenadas universal transverso de mercator - Sistema UTM},
+    adress = {Curitiba},
+    school = {Universidade Federal do Paraná},
+    %department = {Departamento de Geomática},
+    url = {https://docs.ufpr.br/~felipe/CARTOGRAFIA\%202017.pdf}
+}
+@monography{fernandes2009,
+    title = {Implicações da adoção do referencial geodésico sirgas 2000 na cartografia em escala grande},
+    author = {Vivian de Oliveira Fernandes},
+    year = {2009},
+    school = {Universidade Federal de Santa Catarina},
+    adress = {Florianópolis},
+    %program = {Programa de Pós-graduação em Engenharia Civil},
+    url = {https://repositorio.ufsc.br/xmlui/bitstream/handle/123456789/93360/270322.pdf?sequence=1&isAllowed=y},
+    pages = {141},
+    note = {Acesso em: 05 out. 2022}
+}
+@book{chein2019,
+    title = {Introdução aos modelos de regressão linear: um passo inicial para compreensão da econometria como uma ferramenta de avaliação de políticas públicas},
+    author = {Flávia Chein},
+    adress = {Brasília},
+    year = {2019},
+    publisher = {Enap},
+    pages = {76},
+    isbn = {978-85-256-0115-5}
+}
+@book{reimann2008,
+    title = {Statistical Data Analysis Explained: Applied Environmental Statistics with R},
+    year = {2008},
+    isbn = {978-0-470-98581-6},
+    publisher = {John Wiley & Sons Ltd.},
+    pages = {359},
+    author = {Clemens Reimann and Peter Filzmoser and Robert G. Garrett and Rudolf Dutter},
+    adress = {Inglaterra}
+}

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 3 Análise Exploratória de Dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
+  <title>3.3 Representação gráfica | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
   <meta name="description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 3 Análise Exploratória de Dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta property="og:title" content="3.3 Representação gráfica | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 3 Análise Exploratória de Dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta name="twitter:title" content="3.3 Representação gráfica | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   
   <meta name="twitter:description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="referências-para-consulta.html"/>
-<link rel="next" href="introdução-à-estatística.html"/>
+<link rel="prev" href="sumarização-numérica-de-dados.html"/>
+<link rel="next" href="aplicação.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -252,18 +252,52 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="análise-exploratória-de-dados" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Capítulo 3</span> Análise Exploratória de Dados<a href="análise-exploratória-de-dados.html#análise-exploratória-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A <strong>Análise Exploratória de Dados</strong> (EDA) é uma forma de utilizar ferramentas gráficas e estatísticas apropriadas da linguagem R na exploração de dados. A partir da visualização, transformação e modelagem de dados, essa análise explora os dados de forma sistemática (WICKHMAN &amp; GROLEMUND, 2017).</p>
-<p>Para aplicar a EDA, de acordo com Wickhman &amp; Grolemund (2017), basta inicialmente gerar questões sobre os dados, utilizar as funcionalidades do R para encontrar respostas e utilizar o que foi aprendido para gerar novas questões. Portanto, essa análise é um ciclo iterativo.</p>
+<div id="representação-gráfica" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Representação gráfica<a href="representação-gráfica.html#representação-gráfica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Como a representação gráfica de variáveis qualitativas está associada às frequências associadas às categorias, os gráficos mais utilizados são de barras e de composição em setores
+(gráfico de pizza ou retângulos). Em um gráfico de barras, visualiza-se a tabela de frequên-
+cias de forma que as categorias apresentam-se no eixo x e, a frequência absoluta ou rela-
+tiva, no eixo y. É possível que os eixos estejam invertidos, ou seja, no eixo x apresentam-
+se as frequências e, no eixo y, as categorias. Já os gráficos de composição de setores po-
+dem apresentar a contagem de ocorrências das categorias de uma variável e também em
+relação ao seu total de contagens, ou seja, respectivamente as frequências absolutas e re-
+lativas das categorias da variável (MORETTIN; BUSSAB, 2017; BRUCE; BRUCE, 2019).</p>
+<p>As representações gráficas para viariáveis quantitativas apresentam maior variedade,
+porque, além dos gráficos usados para variáveis qualitativas, ainda é possível realizar gráficos de linhas, de dispersão, histogramas, de ramo-e-folhas e box-plots (MORETTIN; BUSSAB, 2017; FAVERO, 2017).</p>
+<p>A representação gráfica de pontos formados pela intersecção no eixo x e y ligados por
+uma linha reta é o gráfico de linhas. Conforme apresentado por Favero (2017), esse gráfico
+poderá representar o comportamento de somente uma variável. Os valores numéricos da variável
+apresentam-se no eixo y e o eixo x apresenta a distribuição dos dados uniformemente ao longo
+do tempo. Portanto, a partir dessa representação é possível visualizar a evolução (ou tendência) dos dados da variável <span class="citation">(<a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>)</span>. O gráfico de dispersão é muito semelhante ao de linhas, porém, nesse caso, os pontos não são ligados por uma reta. Além disso, os intervalos de distribuição dos dados, normalmente, são irregulares. Existe a possibilidade de utilizar essa representação para duas variáveis simultaneamente <span class="citation">(<a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>)</span>.</p>
+<p>Segundo Morettin e Bussab (2017), um gráfico de barras contíguas é um histograma. Os
+valores da variável apresentam-se no eixo x e a distribuição de frequências no eixo y. Como a
+área de cada retângulo é proporcional à respectiva frequência, a área total do histograma sempre será igual a um. Portanto, a primeira etapa para a construção de um histograma é a construção da tabela de frequências, calculando as frequências absoluta e relativa e suas respectivas frequências acumuladas. Além disso, quanto maior a quantidades de dados da categoria (ou classe), mais alto será a barra (ou retângulo) <span class="citation">(<a href="#ref-morettin2017" role="doc-biblioref">Morettin and O. Bussab 2017</a>)</span>.</p>
+<p>Quando uma variável quantitativa apresenta poucas observações, uma alternativa é a
+representação pelo gráfico de ramo-e-folhas. Os ramos são os valores à esquerda da linha que
+representam os primeiros dígitos da observação. À direita ficam as folhas, as quais representam os últimos dígitos da observação. Ou seja, segundo Favero (2017), “os ramos são representados em uma única coluna e seus diferentes valores ao longo de várias colunas”. Ambos devem estar ordenados de forma crescente. Quando um ramo apresenta muitas folhas, é possível afirmar que existe maior incidência dele. Se o número de folhas for grande, pode-se criar duas ou mais linhas de um mesmo ramo <span class="citation">(<a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>; <a href="#ref-morettin2017" role="doc-biblioref">Morettin and O. Bussab 2017</a>)</span>.</p>
+<p>O boxplot apresenta o valor mínimo, primeiro, segundo e terceiro quartil, mediana e o
+valor máximo de uma determinada variável. Ou seja, é a representação de medidas de posição da
+variável, as quais serão apresentadas a seguir. O primeiro quartil apresenta 25% dos dados; o
+segundo, 50%, o que também é a mediana porque os dados estejam ordenados; e o terceiro, 75%.
+Com o gráfico, é possível verificar se existem dados discrepantes localizados fora dos limites
+superior e inferior.</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-favero2017" class="csl-entry">
+Favero, Luiz P. 2017. <em>Manual de Análise de Dados - Estatística e Modelagem Multivariada Com Excel®, SPSS® e Stata®</em>. Grupo GEN. <a href="https://integrada.minhabiblioteca.com.br/#/books/9788595155602/">https://integrada.minhabiblioteca.com.br/#/books/9788595155602/</a>.
+</div>
+<div id="ref-morettin2017" class="csl-entry">
+Morettin, Pedro A, and Wilton de O. Bussab. 2017. <em>Estatística Básica</em>. Editora Saraiva. <a href="https://integrada.minhabiblioteca.com.br/#/books/9788547220228/">https://integrada.minhabiblioteca.com.br/#/books/9788547220228/</a>.
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="referências-para-consulta.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introdução-à-estatística.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sumarização-numérica-de-dados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="aplicação.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

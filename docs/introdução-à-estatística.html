@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 3 Análise Exploratória de Dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
+  <title>3.1 Introdução à Estatística | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
   <meta name="description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 3 Análise Exploratória de Dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta property="og:title" content="3.1 Introdução à Estatística | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 3 Análise Exploratória de Dados | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta name="twitter:title" content="3.1 Introdução à Estatística | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   
   <meta name="twitter:description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="referências-para-consulta.html"/>
-<link rel="next" href="introdução-à-estatística.html"/>
+<link rel="prev" href="análise-exploratória-de-dados.html"/>
+<link rel="next" href="sumarização-numérica-de-dados.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -252,18 +252,45 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="análise-exploratória-de-dados" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Capítulo 3</span> Análise Exploratória de Dados<a href="análise-exploratória-de-dados.html#análise-exploratória-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A <strong>Análise Exploratória de Dados</strong> (EDA) é uma forma de utilizar ferramentas gráficas e estatísticas apropriadas da linguagem R na exploração de dados. A partir da visualização, transformação e modelagem de dados, essa análise explora os dados de forma sistemática (WICKHMAN &amp; GROLEMUND, 2017).</p>
-<p>Para aplicar a EDA, de acordo com Wickhman &amp; Grolemund (2017), basta inicialmente gerar questões sobre os dados, utilizar as funcionalidades do R para encontrar respostas e utilizar o que foi aprendido para gerar novas questões. Portanto, essa análise é um ciclo iterativo.</p>
+<div id="introdução-à-estatística" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Introdução à Estatística<a href="introdução-à-estatística.html#introdução-à-estatística" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para aplicar a Ciência de Dados é essencial o uso da Estatística. Conforme Montgomery
+e Runger (2021), “Estatística é a ciência de dados”. Em um conjunto de dados, a estatística descritiva detalha e resume as suas principais características, de forma que permite maior entendimento do comportamento desse conjunto. Esse é um dos principais aspectos importantes para facilitar a interpretação e análise de dados em Data Science <span class="citation">(<a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>; <a href="#ref-montgomery2021" role="doc-biblioref">Montgomery and Runger 2021</a>)</span>.</p>
+<p>###População e amostra</p>
+<p>A <strong>População</strong> é um conjunto de observações relacionadas a indivíduos com uma característica em comum. Já a <strong>Amostra</strong> é um subconjunto da população, com uma parte das observações relacionadas à população. A partir da amostra realizam-se inferências sobre as características da população.</p>
+<p>É importante que a amostra seja representativa para que os resultados não sejam deturpados.</p>
+<div id="tipos-de-variáveis" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Tipos de variáveis<a href="introdução-à-estatística.html#tipos-de-variáveis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Uma variável pode ser definida como uma característica da amostra ou população. Para
+aplicar os cálculos de estatísticas e realizar as representações gráficas é importante realizar a classificação da variável. Os tipos de variáveis são: Qualitativa ou não métrica e Quantitativa ou métrica. O primeiro tipo está relacionado com variáveis que categorizam os dados, de forma quenão seja possível medí-los ou realizar cálculos. Já o segundo, relaciona-se com variáveis que podem ser contadas ou mensuradas <span class="citation">(<a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>)</span>.</p>
+<p>Dentre as variáveis qualitativas, também chamada de variáveis categóricas, existem
+dois tipos: Nominal e Ordinal. Enquanto na Nominal não possível realizar nenhuma ordenação,
+na Ordinal existe uma ordem para os seus resultados. Para analisar essas variáveis podem
+ser utilizadas tabelas de distribuição de frequência e gráficos <span class="citation">(<a href="#ref-morettin2017" role="doc-biblioref">Morettin and O. Bussab 2017</a>; <a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>)</span>.</p>
+<p>De forma similar, existem dois tipos para as variáveis quantitativas: Discreta e Contínua.
+As Discretas possuem valores inteiros, ou seja, não assumem valores decimais e, em sua maioria, resultam de uma contagem. Já as Contínuas possuem valores contidos nos números reais e resultam de uma mensuração. Podem ser analisadas a partir de medidas de posição, dispersão e
+forma <span class="citation">(<a href="#ref-morettin2017" role="doc-biblioref">Morettin and O. Bussab 2017</a>; <a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>)</span>.</p>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-favero2017" class="csl-entry">
+Favero, Luiz P. 2017. <em>Manual de Análise de Dados - Estatística e Modelagem Multivariada Com Excel®, SPSS® e Stata®</em>. Grupo GEN. <a href="https://integrada.minhabiblioteca.com.br/#/books/9788595155602/">https://integrada.minhabiblioteca.com.br/#/books/9788595155602/</a>.
+</div>
+<div id="ref-montgomery2021" class="csl-entry">
+Montgomery, Douglas C., and George C. Runger. 2021. <em>Estatística Aplicada e Probabilidade Para Engenheiros</em>. Grupo GEN. <a href="https://integrada.minhabiblioteca.com.br/#/books/9788521637448/">https://integrada.minhabiblioteca.com.br/#/books/9788521637448/</a>.
+</div>
+<div id="ref-morettin2017" class="csl-entry">
+Morettin, Pedro A, and Wilton de O. Bussab. 2017. <em>Estatística Básica</em>. Editora Saraiva. <a href="https://integrada.minhabiblioteca.com.br/#/books/9788547220228/">https://integrada.minhabiblioteca.com.br/#/books/9788547220228/</a>.
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="referências-para-consulta.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introdução-à-estatística.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="análise-exploratória-de-dados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sumarização-numérica-de-dados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
