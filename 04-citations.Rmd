@@ -1,370 +1,251 @@
-# Análise de séries temporais
+# Modelos lineares
 
-Qualquer conjunto de observações ordenadas no tempo são chamadas de [Séries Temporais](https://www.youtube.com/watch?v=T4N8ZhmiUEM&list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&index=5). No caso da Engenharia Ambiental e Urbana, podem ser citados alguns exemplos: valores diários de poluição, valores mensais de temperatura, temperaturas máximas e mínimas diárias ou precipitação atmosférica anual em uma cidade, entre outros @morettin2018. 
+Resumidamente, modelos lineares são utilizados para resumir relações observadas a partir de dados, no caso, ambientais, em uma linha reta. Em um modelo linear descreve-se o comportamento de uma variável dependente (ou variável resposta, y) como função de uma ou mais variáveis independentes (ou variáveis explicativas, x) [@chapra2013]. 
 
-É suposto que, em uma análise de série temporal, "*há um sistema causal mais ou menos constante, relacionado com o tempo, que exerceu influência sobre os dados no passado e pode continuar a fazê-lo no futuro. Este sistema causal costuma atuar criando padrões não aleatórios que podem ser detectados em um gráfico da série temporal, ou mediante algum outro processo estatístico*" @reis2022.
+## Covariância
+A *Covariância*, denotada $\sigma_{xy}$, descreve a variação, em relação a média, entre duas variáveis. 
 
-É importante citar que identificar esses padrões não aleatórios na série temporal de uma variável de interesse é o objetivo da análise. A partir dessa identificação, é possível realizar previsões, orientando tomadas de decisões na área de interesse [@@reis2022].
+$$cov(x,y) = \frac{\sum(x_i - \overline{x})}{n-1}$$
 
-A partir de procedimentos estatísticos, é possível realizar a análise da série de dados de forma que seja possível realizar previsões, analisar causalidades e estudar periodicidades relevantes. Conforme [COSTA (2022)](https://www.youtube.com/watch?v=emnSZ7qKv9M&list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&index=2) e [SOARES (2020)](https://www.youtube.com/watch?v=ICY8gVN1ctc&list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&index=1), em resumo, nas séries temporais caracterizam-se por:
-
-  1. Possuirem variáveis aleatórias;
-  2. Observações altamente correlacionadas, principalmente porque medidas adjacentes (próximas no tempo) tendem a correlatas;
-  3. Existência de fatores determinísticos, como tendência, sazonalidade e ciclos;
-  4. Dificuldade em lidar com outliers;
-  5. Mudanças fundamentais/abruptas.
-
-De acordo com @reis2022 e @barros2017, séries temporais são compostas pelos seguintes padrões:
-
-1) **Tendência (T)**: série temporal que segue determinada direção, não necessariamente linear, podendo também ser crescente ou decrescente. Exemplos podem ser: crescimento demográfico, ou mudança gradual de hábitos de consumo, ou qualquer outro aspecto que afete a variável de interesse no longo prazo;
-
-2) **Variações cíclicas ou ciclos (C)**, flutuações nos valores da variável com duração superior a um ano, e que se repetem com certa periodicidade, que podem ser resultado de variações da economia como períodos de crescimento ou recessão, ou fenômenos climáticos como o El Niño (que se repete com periodicidade superior a um ano);
-
-3) **Variações sazonais ou sazonalidade (S)**, flutuações nos valores da variável com duração inferior a um ano, e que se repetem todos os anos, geralmente em função das estações do ano (ou em função de feriados ou festas populares, ou por exigências legais, como o período para entrega da declaração de Imposto de Renda); se os dados forem registrados anualmente NÃO haverá influência da sazonalidade na série;
-
-4) **Variações irregulares (I)**, que são as flutuações inexplicáveis, resultado de fatos inesperados como catástrofes naturais, decisões intempestivas de governos, etc.
-
-Estes são estudados para controlar o efeito de cada componente a fim de analisar o comportamento de cada "série filtrada" e, ainda, analisar as particularidades de cada componente (COSTA, 2022).
-
-```{r figura 3.1, fig.cap="Figura 3.1: Séries exibindo diferentes tipos de padrões (Fonte: BARROS et. al, 2022)"} 
+Portanto, é possível saber se ambas variáveis desviam na mesma direção (covariância positiva) ou se desviam em direções opostas (covariância negativa). Caso a covariância entre duas variáveis seja zero, a conclusão é que as variáveis são independentes. 
 
 
-knitr::include_graphics("Figuras/Fig4_1.jpg")
+## Correlação
 
-```
-De acordo com COSTA (2022), existem duas abordagens na análise de séries temporais:
+A **Correlação** é útil para medir a relação linear entre duas variáveis x e y, denotada por $\rho_{xy}$.
 
-  1. **Clássica**: descreve o comportamento da série por meio de componentes não observáveis, ou seja, a tendência, sazonalidade e ciclo. Os desvios em torno dos valores determinísticos^[Em um modelo determinístico, indepentemente dos conjuntos de entrada, o resultado será sempre o mesmo conjunto de saídas.] ocorrem por erros aleatórios e não pela natureza estocástica da série.
-  
-  
-  2. **Moderna**: supões que a série temporal seja formada por um processo estocástico^[Processo estocástico: sequência de variáveis aleatórias cujas características probabilísticas não se alteram ao longo do tempo. Exemplo: No lançamento de dados cada face tem a mesma probabilidade de ficar para cima]. Sendo cada observação composta por um conjunto de variáveis aleatórias, estas são representadas por funções de densidade individuais. Para capturar sua característica estocástica, são utilizadas modelos estatísticos.
+$$\rho_xy = \frac{cov(x,Y)}{\sqrt(V(x)V(Y))}$$
 
-## Estacionaridade
-Para realizar a abordagem de séries temporais assume-se que esta seja formada por um processo estocástico, como citado anteriormente. De forma resumida, uma série estacionária possui a mesma distribuição de probabilidade para cada observação.
+Sendo assim, duas variáveis podem estar relacionadas das seguintes formas:
 
-A estacionaridade divide-se em: forte, em que a função densidade de probabilidade não varia no tempo e as distribuição são iguais para todo $t$; fraca, em que a média, variância e covariância permanecem constantes ao longo do tempo. A estacionaridade fraca é menos restritiva que a forte e, por isso, será a abordagem escolhida.
+  1. Positivamente relacionadas. Ou seja, se x aumenta, y aumenta. E o mesmo ocorre para caso X diminua (Y diminui) -  Correlação positiva;
+  2. Negativamente relacionadas. Ou seja, se x aumenta, y diminui. E o mesmo ocorre para caso x diminua (Y aumenta) - Correlação negativa;
+  3. Não há relação entre as duas variáveis.
 
-Uma série fracamente estacionária tem as seguintes características:
+Uma forma gráfica de visualizar a correlação das variáveis que apresenta grande utilidade é a partir do **Diagrama de Dispersão**. O diagrama traz informações importantes porque mostra se a relação entre as variáveis é linear ou não, se existem outliers no conjunto de dados e traz uma ideia de quão forte é o relacionamento entre as variáveis.
 
-1. A média é igual a uma constante
-2. A variância é constante e finita;
-3. A covariância é dependente somente da diferença no tempo (h) entre duas medidas, sendo a covariância:
+É importante afirmar que o valor não implica causalidade, mas quantifica a relação entre as variáveis selecionadas.
 
-$$\tag{4.3}Cov(X_t,X_{t+h})=\sum(X_t-\overline{X_t})(X_{t+h}-\overline{X_{t+h}})$$, em que $X_t$ é a própria série temporal e $h$ é o intervalo de tempo entre as duas medidas.
+### Coeficiente de Pearson (r)
 
-Dessa forma, quando a covariância é positiva, a tendência é positiva entre $X_t$ e $X_{t+h}$. Quando a covariância é negativa, a tendência também é negativa. Se a covariância for nula, não existe tendência.
+O *Coeficiente de Pearson*, também chamado de coeficiente de correlação da amostra $r_{xy}$, mede a força da relação linear entre duas variáveis aleatórias x e y. Se duas variáveis relacionarem-se perfeitamente com inclinação positiva, $r_{xy}=1$; com inclinação negativa, $r_{xy}=-1$; se $r_{xy}=0$, não há relação entre as variáveis. 
 
-É importante citar que se uma série não for estacionária, modelos padrões podem não representar de forma adequada o processo gerador da série temporal e, por isso, não seria possível utilizar o modelo para realizar previsões ou outros objetivos da análise. Conforme o Teorema de Wald, a estacionariedade dá estabilidade e coerência ao modelo.
+De acordo com @filho2009, existem métricas diferentes de acordo com cada autor:
 
-## Operador de diferenças
-Dada uma série temporal {$y_t^T_{t=1}$}, o operador de diferenças transforma a série original em uma nova série formada por diferenças sucessivas:
-$\nabla^dy_t$ é uma série diferenciada "d" vezes, sendo que $\nabla y_t=y_t - y_{t-1}$ é a primeira diferença da série.
+- Cohen (1998) considera valores entre 0,10 e 0,29 pequenos; entre 0,30 e 0,49, médios; e entre 0,50 e 1, grandes.
 
-Dessa forma, a segunda diferença da série será: $\nabla^2y_t = \nabla(\nabla y_t) = \nabla (y_t - y_{t-1}) = \nabla y_t - \nabla y_{t-1} = y_t - 2y_{t-1} + y_{t-2}$
+- Dancey e Reidy (2005) considera valores entre 0,10 e 0,30 pequenos; entre 0,40 e 0,60 moderados; e de 0,70 até 1, grandes.
 
-Para a n-ésima diferença da série: $\nabla^n y_t = \nabla(\nabla y_t) = \sum_{r=0}^n (-1)^r \binom{n}{r} y_{t-r}$, em que $\binom{n}{r}=\frac{n!}{r!(n-r)!}$.
+O consenso é que quanto mais próximo de 1, maior a força da relação linear entre as variáveis, independente do sinal.
 
-##Ruído branco
-No ruído branco, toda a trajetória da série temporal é atribuida a fatores puramente aleatórios. Ou seja, variáveis aleatórias não correlacionadas em um processo estocástico ${\epsilon_t, t \in T}$  possuem média zero e variância constante, portanto, $\epsilon_t\sim RB(0,\sigma^2)$.
+## Regressão linear simples
 
-É representado como:
-$$\tag{4.5}y_t=\epsilon_t$$
+A partir da [regressão](https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09), é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da **regressão linear simples**, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo de regressão linear é:
 
-## Passeio aleatório
-O passeio aleatório é representado por $\tag{4.6}y_t=y_{t-1}+\epsilon_t$ em que $\epsilon_t\sim RB(0,\sigma^2)$. Portanto, o valor da série em $t$ é igual ao valor da série em um instante anterior somado a um erro de média zero e variância constante.
+$$Y = \beta_0 + \beta_1X_1 + e_1$$, sendo $\beta_0$ o coeficiente do intercepto, $\beta_1$ o coeficiente de inclinação, $e_1$ o erro no ajuste do modelo para a observação y.
 
-É possível escrever o passeio aleatório em função de $y_0$:
-$$y_t=y_0+\sum_{i=1}^t{\epsilon_i}$$
-### Testes de raiz unitária
-A raiz unitária indica que a série é uma realização de um processo estocástico não-estacionário. Portanto, uma série com raiz unitária precisa ser diferenciada para se tornar estacionária:
+De acordo com Montgomery & Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, "*a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,* $\beta_1$*, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro* $\sigma^2$". Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x. 
 
-$$ y_t= y_{t-1} + \epsilon_t$$
-$$y_t-(y_{t-1}) = y_{t-1} - (y_{t-1}) + \epsilon_t$$
-$$\nabla y_t= e_{1t}$$
-O número de diferenças necessárias para tornar uma série estacionária é chamado de **ordem de integração** da série. No exemplo acima, a primeira diferença de um passeio aleatório é estacionária e, portanto, passa a ser um ruído branco.
+O erro $e_1$ é estimado pela variabilidade de Y que o modelo criado não consegue explicar, ou seja, o resíduo pode ser quantificado por $\widehat{Y}-Y$. Os resíduos conseguem indicar se as suposições do modelo foram violadas e, por isso, agora conheceremos as condições necessárias para a aplicação da Regressão Linear.
 
-Um processo é dito ser integrado de ordem d se uma série temporal {$y_t_{t=1}^T$} é não estacionária. Porém, após d diferenças, o resultado é uma série temporal estacionária e, portanto, pode ser modelada por um modelo ARMA(p,q).
+### Condições {#Condicoes}
 
-Para realizar o teste da raiz unitária, os mais utilizados é o teste Aumentado de Dickey-Fuller (ADF).
+São assumidas algumas hipóteses sobre os dados de entrada na Regressão Linear:
 
-## Modelos autoregressivos
-[Modelos autoregressivos](https://rpubs.com/frank-pinho/522364#:~:text=A%20classe%20de%20modelos%20autorregressivos,constante%20e%20n%C3%A3o%2Dautocorrelacionado) AR(p) é caracterizado por realizar a modelagem somente a partir das defasagens de uma série temporal, ou seja:
+1. Linearidade: a relação entre X e Y deve ser linear;
 
-$$y_t=\phi_0+\phi_1y_{t-1}+\phi_2y_{t-2}+...+\phi_py_{t-p}+ \epsilon_t$$
-## Médias Móveis
-O [modelo de médias móveis](https://rpubs.com/hudsonchavs/modeloma#:~:text=A%20classe%20de%20modelos%20de,modelar%20o%20retorno%20em%20t.) MA(q) modela a partir das defasagens do termo de erro $\epsilon_t$, sendo assim uma combinação linear de ruídos brancos ($\epsilon+t$ tem média zero, variância constante e não-autocorrelacionado).
+2. Homocedasticidade: a variância da variável dependente (Y) deve ser constante para todos os valores das variáveis independentes (X);
 
-$$y_t=\mu+\theta_1\epsilon_{t-1}+\theta_2\epsilon_{t-2}+...+\theta_p\epsilon_{t-q}+ \epsilon_t$$
+3. Normalidade: para um valor fixo de X, Y é uma variável aleatória com distribuição normal. Os erros também devem ser normalmente distribuídos;
+Dentre diversos testes possíveis, para verificar a não-normalidade dos erros é possível realizar o Teste de Shapiro-Wilk ou um gráfico de Probabilidade Normal com objetivo de verificar visualmente se os dados do modelo apresentam distribuição normal.
 
-## Modelos ARMA
-Um modelo ARMA (p,q) é apresentado como:
-$$\overline Z_t = \phi_1\overline Z_{t-1}+...+\phi_p\overline Z_{t-p}+\alpha_t-\theta_1\alpha_{t-1}-...-\theta_q\alpha_{t-q}$$
-Sendo que $\phi(B)$ e $\theta(B)$ são, respectivamente, os operadores autoregressivos e de médias móveis. Dessa forma:
-$$\phi(B) \overline Z_t=\theta(B) \alpha_t$$
-A determinação das ordens p e q do modelo pode ser realizada a partir da análise gráfica das função de autorrelação FAC (**Função de Autocorrelação**) e FACP (**Função de Autocorrelação Parcial**). A FAC determina a ordem de médias móveis e FACP a ordem autoregressiva.
+3. Independência dos resíduos: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes;
 
-## Modelos ARIMA
-Um modelo ARIMA (p,d,q) (Modelos autoregressivos integrados de médias móveis), a partir da abordagem de Box & Jenkins, permite que previsões sejam realizadas tomando por base valores presentes e passados da série temporal. O modelo é formado por três componentes: o Auto Regressivo (AR), o filtro de integração (I) e o componente de médias móveis. 
-
-Um modelo AR(p) é baseado na ideia de que um valor atual $y_t$ pode ser explicado como uma função de valores passados. Este pode ser descrito como:
-$$y_t=c+\phi_1y_{t-1}+...+\phi_py_{t-p}+\epsilon_t$$ onde $\phi_p$ são parâmetros auto-regressivos; $c$ é uma constante e $\epsilon_t \sim RB(0,\sigma^2)$
-
-Já um modelo MA(q):
-$$y_t=\mu+\epsilon_t-\theta_1\epsilon_{t-1}-...-\theta_q\epsilon_{t-q}$$, onde $\theta_n$ são parâmetros de médias móveis; $c$ é uma constante e $\epsilon_t\sim(0,\sigma^2)$.
+4. Ausência de outliers influentes: não devem existir outliers que influenciem consideravelmente o modelo;
 
 
-## Modelos SARIMA
+### Coeficiente de Determinação (R²)
 
-Quando considerada a sazonalidade, o modelo é denominado SARIMA $(p,d,q)(P,D,Q)_s$, representado pela equação 4.15.
-$$\tag{4.15}\phi(L)\Phi(L)\Delta^d\Delta^Dy_t=\theta(L)\Theta(L)\epsilon_t$$, em que:
+O *Coeficiente de Determinação* é utilizado frequentemente pra avaliar a adequação de um modelo de regressão. É definido pelo quadrado do coeficiente de correlação entre X e Y. Quanto mais próximo de 1, maior a quantidade de variabilidade nos dados explicada pelo modelo de regressão. 
 
-p: ordem do polinômio autoregressivo não sazonal $\phi(L)$
-P: orgem do polinômio autoregressivo sazonal $\Phi(L)$
-q: ordem do polinômio de médias móveis não sazonal $\theta(L)$
-Q: ordem do polinômio de médias móveis sazonal $\Theta(L)$
-d: ordem de diferença não sazonal
-D: ordem de diferença sazonal
-$\phi(L)=(1-\phi_1L-\phi_2L^2-...-\phi_pL^p$
-$\Phi(L)=(1-\Phi_1L^s-\Phi_2L^{2s}-...-\Phi_pL^{Ps})$
-$\theta(L)=(1-\theta_1L-\theta_2L^2-...-\theta_pL^q)$
-$\Theta(L)=(1-\Theta_1L^2-\Theta_2L^{2s}-\Theta_pL^{Qs})$
-$\Delta-=1-L$, sendo o operador de desafasagem (L): $L^ny_t=y_{t-n}$
+De acordo com @montgomery2021, o R² pode trazer interpretações errôneas, já que sempre é possível fazer com que R² seja unitário realizando a adição de mais termos ao modelo. Ou seja, R² aumenta se for adicionado uma nova variável ao modelo, mas isso não indica que o modelo esteja mais adequado.
 
-
-Conforme @morettin2018, Na abordagem de Box & Jenkins, existem 4 etapas:
-1. Identificação do processo gerador de dados
-Para descobrir qual modelo descreve melhor o comportamento dos dados, inicialmente, realiza-se uma análise gráfica, verificando estacionaridade, tendência, sazonalidade, etc. A partir disso, utiliza-se a FAC e FACP (função de autocorrelação parcial) amostrais, além de verificar a ordem de integração da série, ou seja, número de diferenças necessárias para tornar uma série estacionária. É importante que a estacionariedade seja testada a partir dos testes de raiz unitária. 
-
-
-2. Estimação de parâmetros
-Os parâmetros do modelo são identificados e testados estatisticamente e, para isso, utilizam-se critérios de informação.
-
-3. Verificação do modelo (diagnóstico)
-
-  a) resíduos devem possuir média zero, variância constante e serem estacionários, comportando-se como um *ruído branco*.
-  b) As funções de autocorrelação devem ser não significativas, ou seja, devem ficar dentro do intervalo de confiança.
-  c) Pelo teste de Ljung-Box,avalia-se se o modelo sugerido é adequado.
-  d) Verifica-e se os critérios AIC (Akaike) e BIC (Bayesiano) possuem valores menores.
-  
-  Caso haja qualquer problema na etapa, volta-se à etapa de Identificação.
-  
-4. Previsão
 
 ## Aplicação {-}
-Para a aplicação, será realizado o exemplo do capítulo 4 do livro de @barros2017. Será utilizada como *database* a série temporal de vendas de passagens aéreas nos EUA de janeiro de 1949 a dezembro de 1960. 
+
+Para o segundo estudo de caso serão utilizados dados reais de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de 1ª ordem de $CO_2$ na Amazônia Legal.A estimativa de 1ª ordem supõe que, de modo simplificado, 100% das emissões ocorreram no momento da mudança de uso/cobertura.
+
+Um **primeiro passo** será carregar os dados:
 
 ```{r,message=FALSE,warning=FALSE}
+options("install.lock"=FALSE)
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
+
 install.packages(c('rlang','tidyverse'))
 
-# Intalando pacotes necessários
-  install.packages("BETS")
-  install.packages("urca")
-  install.packages("TSA")
-  install.packages("forecast")
-  install.packages("lmtest")
-  install.packages("normtest")
-  install.packages("FinTS")
-  install.packages("xlsx")
-```
+library(ggplot2)
+#library(tidyverse)
 
-```{r}
-# Carregando a série temporal
-  data(AirPassengers)
 
-# Análise gráfica
-  ts.plot(AirPassengers, ylab = "Vendas de Passagens ", xlab = "Anos")
+## Carregando base de dados
+dados0 <- read.csv2("Data/CO2Amazonia.csv")
+dados <- na.omit(dados0)
+
+View(dados)
 
 ```
-A partir do gráfico é possível perceber que existe uma tendência de aumento nas vendas de passagens. Em relação à variância, verifica-se que a distância entre os meses de maior e menor venda está aumentando, indicando uma variância não constante. Além de haver oscilações que se repetem anualmente, dando indícios de presença de sazonalidade, que será analisada mensalmente abaixo:
 
-```{r}
-monthplot(AirPassengers,ylab = "Vendas de Passagens ", xlab = "Meses")
+Agora que os dados foram carregados, o **segundo passo** será entender os dados. Para saber algumas propriedade dos dados carregados, será utilizado o comando ``head()`, que apresentará uma amostra dos dados, e ``summary()`, que apresenta as estatísticas básicas dos dados (média, mediana, 1º quartil, etc).
+
+```{r,message=FALSE,warning=FALSE}
+
+head(dados)
+
+summary(dados)
+
 ```
 
-No gráfico acima, os traços horizontais representam a média, a qual aumenta nos meses de férias dos EUA (Junho, Julho e Agosto). Pelos traços verticais e sua inclinação positiva, é possível verificar um aumento constante na venda de passagens ao longo dos anos. Ambos trazem indícios da não estacionariedade da série temporal.
+Como iremos analisar a relação entre a área desmatada por ano (D_Area) e a emissão de 1ª ordem de $CO_2$, é importante verificar qual é o comportamento entre esses dados.
 
-Conforma comentado ao longo do capítulo, a série temporal é composta por quatro componentes não observáveis e estas serão analisadas a seguir com a função `decompose()`.
-```{r}
+```{r,message=FALSE,warning=FALSE}
 
-plot(decompose(AirPassengers))
+## Verificando a relação entre a variável dependente e a variável independente
+plot(dados$D_Area, dados$VR_CO2_1stOrder)
+
+## Correlação entre as variáveis da base de dados
+cor.test(dados$VR_CO2_1stOrder,dados$D_Area)
+
 ```
-A partir da figura acima, verifica-se que a série temporal é fortemente afetada pela tendência (*trend*), além da sazonalidade (*seasonal*). Sobra, ainda, a componente aleatória que é levemente "contaminada" pela componente sazonal, como é possível verificar na comparação entre *random* e *seasonal* no gráfico.
 
-Conforme citado anteriormente, as análises gráficas dão indícios de não estacionariedade. Portanto, a estacionariedade será testada com **significância estatística** nas partes não sazonal e sazonal da série temporal. Para isso, serão realizados os seguintes passos:
-  1) análise gráfica;
-  2) análise da média e variância em diferentes períodos de tempo;
-  3) análise da Função de Autocorrelação (FAC)
-  4) testes de raiz unitária. 
+A partir desse gráfico, é possível verificar que a relação entre as variáveis é linear e, dessa forma, conforme a área desmatada aumenta, a emissão de $CO_2$ aumenta linearmente. O valor da correlação indica que a relação entre as duas variáveis é forte e positiva, já que 0,9987358 é próximo de 1 e maior que zero.
 
-  - **Parte não sazonal**
-  A identificação da autocorrelação entre o valor atual e suas defasagens (lags) é feita abaixo. O intervalo de confiança (de 95%) são as linhas pontilhadas vermelhas e valores acima ou abaixo da linha são estatisticamente significantes. Portanto, existe autocorrelação significativa até o lag 36.
-  
-```{r}
-  require(BETS)
-    BETS::corrgram(AirPassengers, lag.max = 36, ci=0.95)
+```{r,message=FALSE,warning=FALSE}
+
+## Construção do modelo
+mod <- lm(VR_CO2_1stOrder ~ D_Area, dados, na.action = na.exclude)
+summary(mod)
+
+
 ```
-  
-  Existem três formas de realizar o teste ADF: raiz unitária + constante + tendência determinística escolhe-se 'type="trend"'; raiz unitária + constante, `type = "dryft"`; raiz unitária, `type= "none"`. No teste de raiz unitária, a hipótese nula é que a série temporal possui uma raiz unitária (ST é não estacionária) e a hipótese alternativa é que a série é estacionária.
-  
-  Considerando a série temporal como sem tendência, com variância constante e com o critério de informação sendo o AIC:
-  
-```{r}
-  adf.drift <- urca::ur.df(y=AirPassengers, type= "drift", lag=24, selectlags="AIC")
-  BETS::corrgram(adf.drift@res, lag.max=36)
+
+O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de $CO_2$ O valor indica que o modelo possui bom ajuste. 
+
+O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe baixa probabilidade dos resultados apresentados pelo modelo não possuírem erro amostral. Ou seja, existe alta probabilidade do modelo não ser um bom ajuste. Isso continuará sendo testado a diante.
+
+De acordo com @montgomery2021, "*A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo*". Dessa forma, abaixo será realizada a análise residual.
+
+```{r,message=FALSE,warning=FALSE}
+# Análise dos resíduos
+
+plot(mod,which = 4)
+
+par(mfrow=c(2,2)) 
+plot(mod)
+
+
+## Teste de normalidade
+shapiro.test(mod$residuals)
+
+```
+
+Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo. Os resíduos não podem apresentar uma tendência e, por isso, eles serão analisado abaixo.
  
-  # Estatística de teste 
-  adf.drift@teststat 
-  adf.drift@cval #valores tabulados por MacKinnon (1996)
-  summary(adf.drift)
-```
+ - Residuals vs Fitted
+ 
+O gráfico mostra a relação entre os resíduos e os valores ajustados. Como a distribuição dos resíduos próxima à linha pontilhada demonsta um bom ajuste do modelo, é possível verificar se resíduos tem padrões não-lineares. No caso do nosso modelo, os resíduos não se apresentam próximos à linha pontilhada.
 
-A partir do gráfico, é possível afirmar que a estatística teste ($\tau^2=1,8582$) é maior do que o valor máximo associado ao nível de confiança (-2,88). Portanto, a hipótese nula não é rejeitada e é possível concluir que a série temporal não é estacionária e, portanto, possui raiz unitária. Agora precisamos descobrir o número de diferenciações necessárias para torná-la estacionária. 
-
-Inicialmente, será realizada uma diferenciação para verificar se torna a série estacionária:
+As observações 48, 50 e 51 apresentam grandes valores de resíduos e, por isso, é interessante realizar toda a análise após a remoção dessas observações.
  
-```{r}
-  ts.plot(diff(AirPassengers, lag=1, differences=1))
-  BETS::corrgram(diff(AirPassengers, lag=1, differences=1), lag.max=36)
-```
+ - Normal Q-Q
  
-Com uma diferenciação é possível verificar que a série está estacionária na média. Porém, a ST está crescendo ao longo do tempo e, dessa forma, sua variância não está constante. Uma estratégia importante para tornar a variância constante, é aplicar *log* na série temporal. É o que será feito: 
- 
-```{r}
-  ts.plot(diff(log(AirPassengers), lag=1, differences=1))
-  BETS::corrgram(diff(log(AirPassengers), lag=1, differences=1), lag.max=48)
-```
- 
- Agora, a parte não sazonal da série temporal é estacionária.
- 
-  - **Parte sazonal**
+O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada. Pelo gráfico é possível perceber que a distribuição dos resíduos está diferente da distribuição normal. As observações 48, 50 e 51 apresentam-se extremas novamente.
   
-Pela FAC acima, é possível verificar que nos lags sazonais (12, 24, 36...) a função de autocorrelação apresenta um decrescimento, o que indica que a série temporal não é estacionária na parte sazonal. 
-
-Da mesma forma realizada na parte não sazonal, também será necessário realizar uma diferenciação para verificar se ela se torna estacionária. Nesse caso, o lag é modificado para 12 e, assim, é possível realizar a diferenciação na parte sazonal:
-
-```{r}
-BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
-
-```
-
-A partir da figura acima, é possível verificar que a FAC não apresenta mais o decrescimento de antes, além de ter cortes bruscos nos lags 1 e 12. Para verificar a estacionariedade, será realizado o teste de RU:
-
-```{r}
-  adf.drift2 <- urca::ur.df(y = diff(diff(log(AirPassengers), lag = 1), lag = 12), type = "drift", lags = 24, selectlags = "AIC")
-
-  adf.drift2@teststat # Estatística de Teste
+ - Scale-Location
+ 
+O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade. O ideal, no caso, seria que os resíduos estivessem uniformemente distribuídos ao redor da linha vermelha. Para o caso do nosso modelo, demonstra que há heterocedasticidade, ou seja, os resíduos não estão uniformemente distribuídos em relação ao intervalo de preditores.
   
-  adf.drift2@cval #valores tabulados por MacKinnon (1996)
-  
-  BETS::corrgram(adf.drift2@res, lag.max = 36)
-  
-```
+ - Residuals vs Leverage
+ 
+O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. No caso do modelo criado, há possibilidade de existirem outliers influentes.
 
-A estatística teste ($\tau^2=-4.03891$) é menor do que o valor máximo associado ao nível de confiança (-2,88). Portanto, conclui-se que a *série é estacionária*!
+ - Cook's distance
+ 
+A [Distância de Cook](https://towardsdatascience.com/identifying-outliers-in-linear-regression-cooks-distance-9e212e9136a#:~:text=One%20method%20that%20is%20often,the%20ith%20observation%20is%20removed) informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações 48, 50 e 51 são extremas. 
 
-A partir daqui, será aplicado o método de Box & Jenkins. Para a fase de **identificação** será observado a FAC (Função de Autocorrelação) e FACP (Função de Autocorrelação Parcial) do modelo estacionário:
+```` {r,message=FALSE,warning=FALSE}
+CD <- cooks.distance(mod)
+influentes <- CD[(CD > (3* mean(CD, na.rm=TRUE)))]
 
-```{r}
-#FAC
-  BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
+print(influentes)
+````
 
-#FACP
-  BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), type = "partial", lag.max = 48)
-```
+É possível analisar que existem 6 observações que possuem uma distância de Cook três vezes maior que a média. Além disso, é confirmado que as observações 48, 50 e 51 são extremas.
 
-É importante citar que o próximo passo é verificar as FAC e FACP e obter "p" e "q" nos lags 1, 2, 3... (Não-sazonal) e lags 12, 24, 36... (Sazonais). Em um primeiro cenário, como a FAC determina a ordem das médias móveis (q), é possível verificar que a última observação significativa da FAC é o lag 1, portanto, q=1. Já a FACP dá a ordem da componente autoregressiva (p). Da mesma forma que na FAC, a última observação sigificativa é a 1. Como foi realizada uma diferenciação na parte sazonal e uma na parte não sazonal, a ordem de integração é 1 (d=1). O modelo resultante seria SARIMA(1,1,1)(1,1,1).
+Pelo [Teste de Shapiro](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test), é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. O gráfico Normal Q-Q serve como uma contra-prova, também mostrando que os dados não são normalmente distribuídos e, dessa forma, não são adequados.
 
-Em um segundo cenário, a última observação significativa da FAC continua sendo o lag 1 (q=1). A ordem de integração também continua a mesma. Mas no caso da FACP, é possível visualizar um decrescimento não só na parte sazonal, como também na parte não sazonal (p=0). Portanto, o modelo seria SARIMA(0,1,1)(0,1,1).
+Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste de outliers, é interessante utilizar os gráficos Boxplot e Histograma. 
 
-Com esses possíveis modelos, podemos iniciar a etapa de **Estimação**. Será utilizada a função `Arima()`, em que a variável de entrada é a série temporal original. A transformação logarítmica necessária pra deixar a variância constante é garantida pelo argumento `lambda = 0`. A função `Arima()` automaticamente já diferencia a série. 
+```{r,message=FALSE,warning=FALSE}
 
-```{r}
+#Encontrando potenciais outliers a partir de gráficos
 
-library("forecast")
+hist(dados$D_Area)
 
-fit.air <- Arima(AirPassengers, order = c(1,1,1), seasonal = c(1,1,1), method = "ML", lambda = 0)
-
-fit.air 
-
-```
-O próximo passo é verificar se os parâmetros do modelo são significativos:
-
-```{r}
-
-BETS::t_test(fit.air)
-
-```
-Como o parâmetro AR (ar1) foi rejeitado porque não é sigificativo, é importante retirar o parâmetro e analisá-lo novamente. Ele será retirado colocando o parâmetro p=0.
-
-```{r}
-
-fit.air <- Arima(AirPassengers, order=c(0,1,1), seasonal = c(0,1,1), method = "ML", lambda = 0)
-
-fit.air
-
-BETS::t_test(fit.air)
+hist(dados$VR_CO2_1stOrder)
 
 ```
 
-Como todos os parâmetros do modelo $SARIMA(0,1,1)(0,1,1)_{12}$ são significativos e os critérios de informação AIC, AICc e BIC foram minimizados, esse será o modelo escolhido para a próxima fase: o **diagnóstico**.
+A partir da análise dos resíduos, foi possível inferir que as observações 48, 50 e 51 são outliers influentes. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote `outliers` pode ser utilizado, já que a função `outlier()` consegue encontrar o valor mais distante da média das variáveis.
 
-No diagnóstico, os resíduos serão testados, assim como foram testados no capítulo anterior. Serão analisados a ausência de autocorrelação linear, de heterocedasticidade condicional e normalidade. Para uma análise geral, será utilizada a função `tsdiag()`. 
+```{r,message=FALSE,warning=FALSE}
+#Encontrando os valores com maior diferença da média com o pacote `outliers`
+
+library(outliers)
+
+
+outArea <- outlier(dados$D_Area)
+
+outCO2 <- outlier(dados$VR_CO2_1stOrder)
+
+print(outArea)
+
+print(outCO2)
+
+```
+
+Com esse resultado, analisa-se que existe grande possibilidade de existirem outliers no conjunto de dados, já que as observações 48, 50 e 51 apresentam-se extremas e influentes no modelo de regressão. Além disso, a hipótese de que o resultado dos resíduos indica que seja necessário um maior conjunto de dados também é uma possibilidade.
+
+Após todos os testes, por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.
 
 ```{r}
 
-diag <- tsdiag(fit.air, gof.lag = 20)
+# Diagrama de dispersão com o ajuste
 
+plot(x = dados$D_Area, y = dados$VR_CO2_1stOrder, xlab = "Área desmatada no ano", ylab = "Emissão de CO2 de 1a ordem")
+
+abline(mod, col = "blue")
 ```
-A partir do gráfico **Standarized Residuals**, visualmente os dados aparentam ter heterocedasticidade e média zero, o que indica normalidade. Além disso, é possível verificar a existência de outliers, já que observações fora do intervalo [-3;3] seriam observações atípicas. Portanto, aparentemente não existem outliers.
 
-A **FAC** dos resíduos (segundo gráfico) mostra que não há nenhuma defasagem significativa, portanto, o modelo SARIMA está representando bem a série temporal. O gráfico **p-values for Ljung-Box statistic** não é confiável, já que os p-values são calculados sem levar em conta o fato de os resíduos terem sido gerados a partir de um modelo ajustado. Por mais que a conclusão deste gráfico mostre que não há dependência linear entre os resíduos, a informação não é confiável.
+Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal. Portanto, torna-se importante refazer o modelo, de forma que os outliers influentes (observações 48, 50, 51, 52, 60 e 61) sejam retirados, para verificar se este novo modelo estaria mais adequado para representar a relação entre as variáveis. 
 
-O [teste de Ljung & Box](https://koalatea.io/r-ljung-box-test/) será realizado para testar a autocorrelação dos resíduos:
+É isso que faremos:
 
 ```{r}
+# Retirada dos outliers
+dados_sem_outliers <- dados[-c(48,50,51,52,60,61),]
 
-Box.test(fit.air$residuals, lag=24, type="Ljung-Box", fitdf = 2)
+# Modelagem linear
+mod2<- lm(VR_CO2_1stOrder ~ D_Area, data=dados_sem_outliers)
 
-```
-O teste mostra a ausência de autocorrelação linear nos resíduos, já que o p-value é maior que 0.05. Portanto, a hipótese nula de que a série temporal não possui autocorrelação até o lag 24 não pode ser rejeitada. 
+#Estatísticas do modelo
+summary(mod2)
 
-A seguir será testada a estacionariedade da variância e, para isso, o teste Multiplicador de Lagrange para heterocedasticidade condicional autoregressiva será utilizado. Além disso, também será testada a normalidade dos resíduos com o teste de Shapiro-Wilk.
-
-```{r}
-
-# Variância
-FinTS::ArchTest(fit.air$residuals, lags=12)
-
-#Normalidade dos resíduos
-shapiro.test(fit.air$residuals)
+# Gráfico do modelo
+plot(mod2)
 
 ```
-Em relação à variância, com p-value maior que 0.05, a hipótese nula de estacionariedade da vaiância nao é rejeitada. No caso do teste de Shapiro-Wilk, verifica-se que como p-value é maior que 0.05, a hipótese nula de normalidade também não é rejeitada.
 
-A próxima fase será a **Previsão** utilizando o pacote `forecast()`. O argumento "h" é o horizonte de previsão e o "level" é o nível de confiança. Para verificar se a previsão é adequada, serão analisadas as métricas utilizando a função `accuracy`.
-
-```{r}
-library(forecast)
-
-# Previsão
-plot(forecast(object=fit.air, h=12, level=0.95))
-
-# Métricas
-accuracy(fit.air)
-
-```
-Pelas métricas, o MAPE demonstra que o erro de previsão está em 0,47%, o que é muito bom. Dessa forma, conseguimos confirmar que a previsão está adequada!
-
-## Referências para consulta {-}
-1. [Introdução à Análise de Séries Temporais (youtube)](https://www.youtube.com/watch?v=emnSZ7qKv9M&list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&index=1) 
-
-2. [Séries Temporais (youtube)](https://www.youtube.com/watch?v=ICY8gVN1ctc&list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&index=1)
-
-
-
-
-
+Mesmo com a retirada de grande parte dos outliers influentes, o modelo ainda não possui resíduos adequados. Para a realização de uma regressão linear, são assumidas alguns preceitos que, provavelmente, não são o caso dos dados utilizados para o segundo estudo de caso (vide tópico \@ref(Condicoes)). Conforme verificamos, os resíduos não seguem uma distribuição normal e os dados não possuem variância constante. Portanto, pode-se afirmar que a regressão linear não explica os dados de forma adequada. Talvez seja necessário aplicar outro tipo de modelo para estes dados. Além disso, os dados podem não conter variáveis suficientes para explicar a variável resposta (Emissão de primeira ordem de $CO_2$).
 
 

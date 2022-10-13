@@ -1,285 +1,90 @@
-# Análise Exploratória de Dados 
+# R - Introdução e Comandos Básicos
 
-A **Análise Exploratória de Dados** (EDA) é uma forma de utilizar ferramentas gráficas e estatísticas apropriadas da linguagem R na exploração de dados. A partir da visualização, transformação e modelagem de dados, essa análise explora os dados de forma sistemática [@wickham2022].
-
-Para aplicar a EDA, de acordo com @wickham2022, basta inicialmente gerar questões sobre os dados, utilizar as funcionalidades do R para encontrar respostas e utilizar o que foi aprendido para gerar novas questões. Portanto, essa análise é um ciclo iterativo.
-
-## Introdução à Estatística
-Para aplicar a Ciência de Dados é essencial o uso da Estatística. Conforme @montgomery2021, "Estatística é a ciência de dados". Em um conjunto de dados, a estatística descritiva detalha e resume as suas principais características, de forma que permite maior entendimento do comportamento desse conjunto. Esse é um dos principais aspectos importantes para facilitar a interpretação e análise de dados em Data Science [@favero2017; @montgomery2021].
+R é uma linguagem e ambiente para computação estatística e gráficos. Essa linguagem de programação fornece uma grande variedade de técnicas estatísticas (modelagem linear e não-linear, testes estatísticos clássicos, análise de séries temporais, etc) e gráficas (The R Foundation, 2022).
 
 
-### População e amostra
+## Definindo um diretório de trabalho
 
-A **População** é um conjunto de observações relacionadas a indivíduos com uma característica em comum. Já a **Amostra** é um subconjunto da população, com uma parte das observações relacionadas à população. A partir da amostra realizam-se inferências sobre as características da população. 
+O **diretório de trabalho** é o local onde a base de dados de um projeto está salva. Para verificar qual é o diretório de trabalho atual, basta utilizar a função ` getwd() `.
 
-É importante que a amostra seja representativa para que os resultados não sejam deturpados.
-
-### Tipos de variáveis
-Uma variável pode ser definida como uma característica da amostra ou população. Para
-aplicar os cálculos de estatísticas e realizar as representações gráficas é importante realizar a classificação da variável. Os tipos de variáveis são: Qualitativa ou não métrica e Quantitativa ou métrica. O primeiro tipo está relacionado com variáveis que categorizam os dados, de forma quenão seja possível medí-los ou realizar cálculos. Já o segundo, relaciona-se com variáveis que podem ser contadas ou mensuradas [@favero2017].
-```{r}
-knitr::include_graphics("Figuras/figtiposdevariaveis.PNG")
+```
+install.packages(c('rlang','tidyverse'))
+getwd()
 ```
 
-Dentre as variáveis qualitativas, também chamada de variáveis categóricas, existem
-dois tipos: Nominal e Ordinal. Enquanto na Nominal não possível realizar nenhuma ordenação,
-na Ordinal existe uma ordem para os seus resultados. Para analisar essas variáveis podem
-ser utilizadas tabelas de distribuição de frequência e gráficos [@morettin2017; @favero2017].
+Para definir um novo diretório de trabalho, basta utilizar a função `setwd()` e inserir como argumento o caminho desejado, conforme exemplo abaixo.
 
-De forma similar, existem dois tipos para as variáveis quantitativas: Discreta e Contínua.
-As Discretas possuem valores inteiros, ou seja, não assumem valores decimais e, em sua maioria, resultam de uma contagem. Já as Contínuas possuem valores contidos nos números reais e resultam de uma mensuração. Podem ser analisadas a partir de medidas de posição, dispersão e
-forma [@morettin2017; @favero2017].
+```
+#setwd("Home/Beatriz/documentos/Data Science")
+```
+## Vetores
 
-## Sumarização numérica de dados
+Vetores permitem que sejam armazenados conjuntos de valores sob um mesmo nome. Serão apresentadas três maneiras de criar vetores abaixo.
 
-Resumos numéricos de dados são fundamentais para realizar inferências estatísticas, porque, de acordo com Montgomery & Runger (2021), "*permitem ao engenheiro focar nas características importantes dos dados ou ter discernimento acerca do tipo de modelo que deveria ser usado na solução do problema*". Por isso, torna-se útil descrever numericamente, a partir de medidas de posição, variabilidade e forma, características dos dados.
-
-### Medidas de Posição
-
-#### Média
-
-A média é a divisão da soma de todos os valores da série pelo número de obervações n.
-
-
-  $\bar{x}=\frac{x_{1}+x_{2}+x_{3}...x_{n}}{n}=\frac{\sum x_n}{n}$
-
-#### Mediana
-
-Em um conjunto de valores ordenados, a mediana é o valor que ocupa a posição central. Portanto, a mediana divide a distribuição de valores na metade.
-
-#### Moda
-  Em um conjunto de valores, a Moda seria o valor que ocorre com maior frequência. Ou seja, o valor que mais se repete.
+  1. Utilizando a função `c(v1, v2, v3,..., vi)` que concatena os valores presentes no argumento e cria um vetor;
   
-### Medidas de Variabilidade
+  ```
+  > Valores <- c(1,2,3,4,5)
+  ```
+  
+  2. Utilizando o comando `seq(from,to, by, length)` que gera sequências números de um valor inicial (from) até um valor final (to) com um incremento (by) e um comprimento (length).
+  
+  ```
+  Exemplo 1: seq (from, to, by)
+  > Valores <- seq(1,6,by=1)
+  [1] 1.0 3.0 3.0 4.0 5.0 6.0
+  ```
+  ```
+  Exemplo 2: seq (from, to, length)
+  > Valores <- seq(2,10,length=5)
+  [1] 2 4 6 8 10
+  ```
+  ```
+  Exemplo 3: seq (from, to, length)
+  > Valores <- seq(from=2,by=10,length=6)
+  [1] 2 12 22 32 42 52 
+  ```
+  
+  3. Utilizando o comando `from:to` que cria a sequência de um valor inicial (from) até um final (to) com o incremento de by=1.
+  ```
+  Exemplo: 
+  > Valores <- 1:10
+  [1] 1 2 3 4 5 6 7 8 9 10
+  ```
+  
+## Base de dados
 
-#### Amplitude
+Para realizar a **leitura** de uma base de dados, basta utilizar a função `read() `. Exemplos de **formatos de arquivo** são .csv, .txt, .xlsx, entre outros. A forma mais comum de disponibilização de dados é o formato `.csv` e a leitura dessa base de dados pode ser realizada conforme demonstrado abaixo. 
 
-Em um conjunto de observações, a Amplitude é a diferença entre o maior valor e o menor.
-
-#### Variância
-
-Para uma amostra de *n* observações, a Variância será:
-
- $s=\frac{\sum(x_{i}-\bar{x})^{2}}{n-1}$
-
-#### Desvio Médio (*Standard Deviation*)
-
-Para uma amostra de *n* obervações, o Desvio Padrão (SD) será a raiz quadrada positiva da Variância.
-
-#### Quartis, Decis e Percentis
-
-Os **Quartis** dividem um conjunto de obervações ordenados em 4 partes iguais; os **Decis**, em 10; e, os **Percentis**, em 100.
-
-### Medidas de Forma
-
-As medidas de forma permitem a verificação de como um conjunto de dados está se comportando em sua distribuição. Gráficos de distribuição de frequência e histogramas são ferramentas importantes para essa verificação.
-
-#### Assimetria
-
-Distribuições em forma de sino são simétricas, já que a média, mediana e moda desse conjunto de dados são iguais. Ou seja, a metade esquerda do histograma é aproximadamente igual à metade direita.
-
-Distribuições assimétricas possuem uma concentração de seus dados, à direita ou à esquerda, no histograma. Ou seja, apresentam uma "cauda" em uma das extremidades. Se a distribuição desses dados estiverem concentrados à direita, são dados com **assimetria positiva**. Se concentrados à esquerda, **assimetria negativa**.
-
-##### Coeficiente de Assimetria de Pearson
-
-$A_s=\frac{3*(\bar{x} - Md)}{s}$
-
-#### Curtose
-
-Curtose indica o grau de achatamento de uma distribuição em relação à curva normal. 
-
-##### Coeficiente de Curtose
-
-$C=\frac{Q_3-Q_1}{2*(P_{90} - P_{10})}$
-
-A curva normal possui C=0,263.
-
-## Representação gráfica
-Como a representação gráfica de variáveis qualitativas está associada às frequências associadas às categorias, os gráficos mais utilizados são de barras e de composição em setores
-(gráfico de pizza ou retângulos). Em um gráfico de barras, visualiza-se a tabela de frequên-
-cias de forma que as categorias apresentam-se no eixo x e, a frequência absoluta ou rela-
-tiva, no eixo y. É possível que os eixos estejam invertidos, ou seja, no eixo x apresentam-
-se as frequências e, no eixo y, as categorias. Já os gráficos de composição de setores po-
-dem apresentar a contagem de ocorrências das categorias de uma variável e também em
-relação ao seu total de contagens, ou seja, respectivamente as frequências absolutas e re-
-lativas das categorias da variável[@morettin2017; @bruce2019].
-
-As representações gráficas para viariáveis quantitativas apresentam maior variedade,
-porque, além dos gráficos usados para variáveis qualitativas, ainda é possível realizar gráficos de linhas, de dispersão, histogramas, de ramo-e-folhas e box-plots [@morettin2017; @favero2017].
-
-A representação gráfica de pontos formados pela intersecção no eixo x e y ligados por
-uma linha reta é o gráfico de linhas. Conforme apresentado por @favero2017, esse gráfico
-poderá representar o comportamento de somente uma variável. Os valores numéricos da variável
-apresentam-se no eixo y e o eixo x apresenta a distribuição dos dados uniformemente ao longo
-do tempo. Portanto, a partir dessa representação é possível visualizar a evolução (ou tendência) dos dados da variável [@favero2017]. O gráfico de dispersão é muito semelhante ao de linhas, porém, nesse caso, os pontos não são ligados por uma reta. Além disso, os intervalos de distribuição dos dados, normalmente, são irregulares. Existe a possibilidade de utilizar essa representação para duas variáveis simultaneamente [@favero2017].
-
-```{r}
-knitr::include_graphics("Figuras/graficodelinhas.png")
+```dados <- read.csv("Data Science/dados.csv")
 ```
 
-Segundo @morettin2017, um gráfico de barras contíguas é um histograma. Os
-valores da variável apresentam-se no eixo x e a distribuição de frequências no eixo y. Como a
-área de cada retângulo é proporcional à respectiva frequência, a área total do histograma sempre será igual a um. Portanto, a primeira etapa para a construção de um histograma é a construção da tabela de frequências, calculando as frequências absoluta e relativa e suas respectivas frequências acumuladas. Além disso, quanto maior a quantidades de dados da categoria (ou classe), mais alto será a barra (ou retângulo) [@morettin2017].
-```{r}
-knitr::include_graphics("Figuras/exemplo_graficobarras.png")
-```
+Note que o caminho escrito está pela metade, pois o diretório de trabalho já foi definido. Dessa forma, não é necessário escrever o caminho inteiro do arquivo "dados.csv", por já estar localizado no diretório.
 
-Quando uma variável quantitativa apresenta poucas observações, uma alternativa é a
-representação pelo gráfico de ramo-e-folhas. Os ramos são os valores à esquerda da linha que
-representam os primeiros dígitos da observação. À direita ficam as folhas, as quais representam os últimos dígitos da observação. Ou seja, segundo @favero2017, "os ramos são representados em uma única coluna e seus diferentes valores ao longo de várias colunas". Ambos devem estar ordenados de forma crescente. Quando um ramo apresenta muitas folhas, é possível afirmar que existe maior incidência dele. Se o número de folhas for grande, pode-se criar duas ou mais linhas de um mesmo ramo [@favero2017; @morettin2017].
+Para **exploração dos dados**, inicialmente algumas funções são úteis: 
 
-O boxplot apresenta o valor mínimo, primeiro, segundo e terceiro quartil, mediana e o
-valor máximo de uma determinada variável. Ou seja, é a representação de medidas de posição da
-variável, as quais serão apresentadas a seguir. O primeiro quartil apresenta 25% dos dados; o
-segundo, 50%, o que também é a mediana porque os dados estejam ordenados; e o terceiro, 75%.
-Com o gráfico, é possível verificar se existem dados discrepantes localizados fora dos limites
-superior e inferior.
+  1. `View()` para visualização dos dados .csv em uma tabela;
+  2. `Names()` para exibição dos nomes das variáveis presentes na base de dados;
+  3. `Summary()` para a realização de um sumário de estatísticas para as variáveis numéricas da base de dados (mínimo, máximo, mediana, média, 1º quartil, 3º quartil e número de NAs).
+  
+  
+## Seleção de variáveis
 
-```{r}
-knitr::include_graphics("Figuras/boxplot.PNG")
-```
+Para realizar a análise dos dados, é necessário selecionar variáveis do banco de dados e filtrar seus valores. Ou seja, é necessário criar **subconjuntos**. Em R, estes podem ser criados com o uso de colchetes: `dados[observações,variáveis]`.
+Por exemplo, para um conjunto de dados com numerações para cada uma das observações, se desejamos selecionar as 4 primeiras observações, basta realizar o comando `dados[1:4,]`.
 
-## Aplicação {-}
-
-### INMET
-
-Para a aplicação, será utilizada a base de dados do Instituto Nacional de Meteorologia (INMET) de precipitação e de dias de precipitação do Mirante de Santana em São Paulo.
-
-Realizaremos a análise exploratória da precipitação total ao longo dos anos (1990-2022).
- 
-Para importar a base de dados em .csv, utiliza-se a função read.csv2() e insere-se como argumento o *diretório*:
-
-```{r,message=FALSE,warning=FALSE}
-
-library(readr)
-
-#Importar base de dados
-inmet0 <- read.csv2("Data/INMET_SP.csv", header = TRUE, sep = ";", dec = ",")
+## R packages
+Um *R package* é um conjunto de funções que extendem a capacidade da base R. Na análise exploratória de dados, um pacote importante para a organização dos dados é o tidyverse(); para visualizações, o ggplot2(); e, para gráficos de correlação, corrplot(). Para o instalar, basta escrever a seguinte linha de código, inserindo no argumento o nome do pacote:
 
 ```
-
-É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto; e, read.csv2(), quando são separados por ponto e vírgula e os decimais por vírgula.
-
-Para visualizar a tabela importada, basta executar a função View():
-```{r,message=FALSE,warning=FALSE}
-
-#Visualização da base de dados
-View(inmet0)
-
-# Omitir valores NA da base de dados
-inmet <- na.omit(inmet0)
-
+install.packages("tidyverse")
 ```
 
-Para iniciar a exploração dos dados, inicialmente será utilizada a função str() que exibe de forma compacta a estrutura da tabela importada.
+Após instalar um pacote, é necessário carregá-lo para poder utilizar todas as suas funcionalidades. Portanto, basta utilizar a função `library()` para instalar, inserindo o nome do pacote como argumento. Nesse caso, não utiliza-se aspas no argumento.
 
-```{r,message=FALSE,warning=FALSE}
-
-str(inmet)
-
-```
-Continuando, será utilizada a função ´summary()´ para apresentar o sumário de estatísticas descritivas (média, mediana, mínimo, máximo, 1º quartil, 3º quartil e valores faltantes (NA)), já que as variáveis de precipitação total e número de dias de precipitação são numéricas.
-
-```{r,message=FALSE,warning=FALSE}
-
-summary(inmet)
-
-```
-
-Inicialmente, os cabeçalhos da coluna serão modificados para facilitar a análise:
-
-```{r,message=FALSE,warning=FALSE}
-#Explorando os cabeçalhos da base de dados
-names(inmet)
-
-# Modificando os cabeçalhos
-colnames(inmet)[c(1,2,3)] <- c("data","dias_de_precipitacao","precipitacao_total")
-
-View(inmet)
-```
-
-Para continuar explorando os dados, realizou-se um gráfico de linhas a fim de analisar o comportamento da precipitação em relação às datas.
-
-```{r,message=FALSE,warning=FALSE}
-
-month_year <- format(as.Date(inmet$data, format = "%d/%m/%Y"),"%Y/%m")
-
-View(month_year)
-
-library(ggplot2)
-
-ggplot(inmet,
-       aes(x = month_year, y = precipitacao_total)) +
-       geom_line(linetype="dashed", color="blue", aes(group=1)) +
-       geom_point() + 
-        scale_x_discrete(guide = guide_axis(check.overlap = TRUE)) +
-        scale_y_discrete(guide= guide_axis(check.overlap = TRUE))
-```
-
-No momento, nos interessa analisar a precipitação ao longo dos anos de análise. Por isso, essa variável será adicionada como uma coluna ao dataset inicial:
-
-```{r,message=FALSE,warning=FALSE}
-ano <- format(as.Date(inmet$data, format = "%d/ %m/ %Y"),"%Y")
-inmet_new <- cbind(inmet, ano)
-
-View(inmet_new)
-```
-
-Analisando o histograma da precipitação total, verifica-se que a sua distribuição é positiva e assimétrica:
-
-```{r, warning = FALSE, message=FALSE}
-# Histograma
-
-library(ggplot2)
-
-ggplot(data=inmet_new, aes(x=precipitacao_total)) +
-  geom_histogram() +
-  theme_bw() 
-```
-
-A partir do boxplot abaixo, é possível visualizar que 75% dos valores de precipitação estão entre 50mm e aproximadamente 200mm; a média stá próxima de 150mm e a mediana de 100mm; e, por fim, o valor máximo está próximo de 400 mm. Existem observações além do limite máximo, o que é um indício de outliers, ou seja, observações atípicas (fora do normal).
-
-
-```{r, warning=FALSE, message=FALSE}
-ggplot(data=inmet_new, aes(y=precipitacao_total)) +
-  geom_boxplot() +
-  theme_minimal()
-```
-Primeiramente, será encontrada a média de precipitação por ano analisado, com um intervalo de confiança de 95% (escore-x da curva normal igual a 1,96). Com o objetivo de deixar o código mais organizado, será utilizado o [operador pipe](https://www.youtube.com/watch?v=qHCBG14tKns).  
-
-```{r,message=FALSE,warning=FALSE}
-
-#Média das precipitações por ano
-
-#instalando o pacote para utilizar o operador pipe %>% 
-library(dplyr) 
-
-# Criando tabela de statísticas
-tabela_stats <- inmet_new %>%
-  group_by(ano) %>%
-  summarise(n_obs = n(), media = mean(precipitacao_total), desvio_padrao = sd(precipitacao_total)) %>% 
-  mutate(erro = 1.96*desvio_padrao/sqrt(n_obs), 
-         limite_superior = media + erro,
-         limite_inferior = media - erro)
-
-#Visualizando a tabela criada com os dados estatísticos
-
-View(tabela_stats)
-```
-
-Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras com os erros padrões das amostras. Utiliza-se o erro padrão e não o desvio padrão porque, neste caso, estamos interessados na variabilidade das médias das amostras e não na variabilidade das observações dentro da amostra.
-
-```{r,message=FALSE,warning=FALSE}
-
-#Plotando os valores com seus respectivos erros
-ggplot (data = tabela_stats, aes(x = ano, y = media, fill = ano)) +
-  geom_col() +
-  geom_errorbar(aes(ymin=limite_inferior, ymax=limite_superior)) +
-  ggtitle("Média das precipitações por ano") +
-  xlab("") +
-  ylab("") +
-  theme_bw() +
-  theme(legend.position = "none")
-
-```
+## Referências para consulta
+1. [An introduction to R](https://intro2r.com/)
+2. [R for Data Science](https://r4ds.had.co.nz/)
+3. [Livros gratuitos de diversos temas envolvendo R](https://www.rstudio.com/resources/books/)
+4. [Ciência de Dados em R](https://livro.curso-r.com/index.html)
 

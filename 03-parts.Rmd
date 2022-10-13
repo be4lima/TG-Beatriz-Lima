@@ -1,251 +1,285 @@
-# Modelos lineares
+# Análise Exploratória de Dados 
 
-Resumidamente, modelos lineares são utilizados para resumir relações observadas a partir de dados, no caso, ambientais, em uma linha reta. Em um modelo linear descreve-se o comportamento de uma variável dependente (ou variável resposta, y) como função de uma ou mais variáveis independentes (ou variáveis explicativas, x) [@chapra2013]. 
+A **Análise Exploratória de Dados** (EDA) é uma forma de utilizar ferramentas gráficas e estatísticas apropriadas da linguagem R na exploração de dados. A partir da visualização, transformação e modelagem de dados, essa análise explora os dados de forma sistemática [@wickham2022].
 
-## Covariância
-A *Covariância*, denotada $\sigma_{xy}$, descreve a variação, em relação a média, entre duas variáveis. 
+Para aplicar a EDA, de acordo com @wickham2022, basta inicialmente gerar questões sobre os dados, utilizar as funcionalidades do R para encontrar respostas e utilizar o que foi aprendido para gerar novas questões. Portanto, essa análise é um ciclo iterativo.
 
-$$cov(x,y) = \frac{\sum(x_i - \overline{x})}{n-1}$$
-
-Portanto, é possível saber se ambas variáveis desviam na mesma direção (covariância positiva) ou se desviam em direções opostas (covariância negativa). Caso a covariância entre duas variáveis seja zero, a conclusão é que as variáveis são independentes. 
+## Introdução à Estatística
+Para aplicar a Ciência de Dados é essencial o uso da Estatística. Conforme @montgomery2021, "Estatística é a ciência de dados". Em um conjunto de dados, a estatística descritiva detalha e resume as suas principais características, de forma que permite maior entendimento do comportamento desse conjunto. Esse é um dos principais aspectos importantes para facilitar a interpretação e análise de dados em Data Science [@favero2017; @montgomery2021].
 
 
-## Correlação
+### População e amostra
 
-A **Correlação** é útil para medir a relação linear entre duas variáveis x e y, denotada por $\rho_{xy}$.
+A **População** é um conjunto de observações relacionadas a indivíduos com uma característica em comum. Já a **Amostra** é um subconjunto da população, com uma parte das observações relacionadas à população. A partir da amostra realizam-se inferências sobre as características da população. 
 
-$$\rho_xy = \frac{cov(x,Y)}{\sqrt(V(x)V(Y))}$$
+É importante que a amostra seja representativa para que os resultados não sejam deturpados.
 
-Sendo assim, duas variáveis podem estar relacionadas das seguintes formas:
+### Tipos de variáveis
+Uma variável pode ser definida como uma característica da amostra ou população. Para
+aplicar os cálculos de estatísticas e realizar as representações gráficas é importante realizar a classificação da variável. Os tipos de variáveis são: Qualitativa ou não métrica e Quantitativa ou métrica. O primeiro tipo está relacionado com variáveis que categorizam os dados, de forma quenão seja possível medí-los ou realizar cálculos. Já o segundo, relaciona-se com variáveis que podem ser contadas ou mensuradas [@favero2017].
+```{r}
+knitr::include_graphics("Figuras/figtiposdevariaveis.PNG")
+```
 
-  1. Positivamente relacionadas. Ou seja, se x aumenta, y aumenta. E o mesmo ocorre para caso X diminua (Y diminui) -  Correlação positiva;
-  2. Negativamente relacionadas. Ou seja, se x aumenta, y diminui. E o mesmo ocorre para caso x diminua (Y aumenta) - Correlação negativa;
-  3. Não há relação entre as duas variáveis.
+Dentre as variáveis qualitativas, também chamada de variáveis categóricas, existem
+dois tipos: Nominal e Ordinal. Enquanto na Nominal não possível realizar nenhuma ordenação,
+na Ordinal existe uma ordem para os seus resultados. Para analisar essas variáveis podem
+ser utilizadas tabelas de distribuição de frequência e gráficos [@morettin2017; @favero2017].
 
-Uma forma gráfica de visualizar a correlação das variáveis que apresenta grande utilidade é a partir do **Diagrama de Dispersão**. O diagrama traz informações importantes porque mostra se a relação entre as variáveis é linear ou não, se existem outliers no conjunto de dados e traz uma ideia de quão forte é o relacionamento entre as variáveis.
+De forma similar, existem dois tipos para as variáveis quantitativas: Discreta e Contínua.
+As Discretas possuem valores inteiros, ou seja, não assumem valores decimais e, em sua maioria, resultam de uma contagem. Já as Contínuas possuem valores contidos nos números reais e resultam de uma mensuração. Podem ser analisadas a partir de medidas de posição, dispersão e
+forma [@morettin2017; @favero2017].
 
-É importante afirmar que o valor não implica causalidade, mas quantifica a relação entre as variáveis selecionadas.
+## Sumarização numérica de dados
 
-### Coeficiente de Pearson (r)
+Resumos numéricos de dados são fundamentais para realizar inferências estatísticas, porque, de acordo com Montgomery & Runger (2021), "*permitem ao engenheiro focar nas características importantes dos dados ou ter discernimento acerca do tipo de modelo que deveria ser usado na solução do problema*". Por isso, torna-se útil descrever numericamente, a partir de medidas de posição, variabilidade e forma, características dos dados.
 
-O *Coeficiente de Pearson*, também chamado de coeficiente de correlação da amostra $r_{xy}$, mede a força da relação linear entre duas variáveis aleatórias x e y. Se duas variáveis relacionarem-se perfeitamente com inclinação positiva, $r_{xy}=1$; com inclinação negativa, $r_{xy}=-1$; se $r_{xy}=0$, não há relação entre as variáveis. 
+### Medidas de Posição
 
-De acordo com @filho2009, existem métricas diferentes de acordo com cada autor:
+#### Média
 
-- Cohen (1998) considera valores entre 0,10 e 0,29 pequenos; entre 0,30 e 0,49, médios; e entre 0,50 e 1, grandes.
-
-- Dancey e Reidy (2005) considera valores entre 0,10 e 0,30 pequenos; entre 0,40 e 0,60 moderados; e de 0,70 até 1, grandes.
-
-O consenso é que quanto mais próximo de 1, maior a força da relação linear entre as variáveis, independente do sinal.
-
-## Regressão linear simples
-
-A partir da [regressão](https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09), é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da **regressão linear simples**, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo de regressão linear é:
-
-$$Y = \beta_0 + \beta_1X_1 + e_1$$, sendo $\beta_0$ o coeficiente do intercepto, $\beta_1$ o coeficiente de inclinação, $e_1$ o erro no ajuste do modelo para a observação y.
-
-De acordo com Montgomery & Runger (2021), o modelo de regressão é, na verdade, uma linha de valores médios. Ou seja, "*a altura da linha de regressão em qualquer valor de x é apenas o valor esperado de Y para aquele x. O coeficiente angular,* $\beta_1$*, pode ser interpretado como a mudança na média de Y para uma mudança unitária em x. Além disso, a variabilidade de Y, em um valor particular de x, é determinada pela variância do erro* $\sigma^2$". Portanto, há uma distribuição de valores de Y em cada x de forma que a variância da distribuição é constante em cada x. 
-
-O erro $e_1$ é estimado pela variabilidade de Y que o modelo criado não consegue explicar, ou seja, o resíduo pode ser quantificado por $\widehat{Y}-Y$. Os resíduos conseguem indicar se as suposições do modelo foram violadas e, por isso, agora conheceremos as condições necessárias para a aplicação da Regressão Linear.
-
-### Condições {#Condicoes}
-
-São assumidas algumas hipóteses sobre os dados de entrada na Regressão Linear:
-
-1. Linearidade: a relação entre X e Y deve ser linear;
-
-2. Homocedasticidade: a variância da variável dependente (Y) deve ser constante para todos os valores das variáveis independentes (X);
-
-3. Normalidade: para um valor fixo de X, Y é uma variável aleatória com distribuição normal. Os erros também devem ser normalmente distribuídos;
-Dentre diversos testes possíveis, para verificar a não-normalidade dos erros é possível realizar o Teste de Shapiro-Wilk ou um gráfico de Probabilidade Normal com objetivo de verificar visualmente se os dados do modelo apresentam distribuição normal.
-
-3. Independência dos resíduos: como Yi e Yj são valores estatisticamente independentes (falta de correlação), os resíduos também deverão ser independentes;
-
-4. Ausência de outliers influentes: não devem existir outliers que influenciem consideravelmente o modelo;
+A média é a divisão da soma de todos os valores da série pelo número de obervações n.
 
 
-### Coeficiente de Determinação (R²)
+  $\bar{x}=\frac{x_{1}+x_{2}+x_{3}...x_{n}}{n}=\frac{\sum x_n}{n}$
 
-O *Coeficiente de Determinação* é utilizado frequentemente pra avaliar a adequação de um modelo de regressão. É definido pelo quadrado do coeficiente de correlação entre X e Y. Quanto mais próximo de 1, maior a quantidade de variabilidade nos dados explicada pelo modelo de regressão. 
+#### Mediana
 
-De acordo com @montgomery2021, o R² pode trazer interpretações errôneas, já que sempre é possível fazer com que R² seja unitário realizando a adição de mais termos ao modelo. Ou seja, R² aumenta se for adicionado uma nova variável ao modelo, mas isso não indica que o modelo esteja mais adequado.
+Em um conjunto de valores ordenados, a mediana é o valor que ocupa a posição central. Portanto, a mediana divide a distribuição de valores na metade.
 
+#### Moda
+  Em um conjunto de valores, a Moda seria o valor que ocorre com maior frequência. Ou seja, o valor que mais se repete.
+  
+### Medidas de Variabilidade
+
+#### Amplitude
+
+Em um conjunto de observações, a Amplitude é a diferença entre o maior valor e o menor.
+
+#### Variância
+
+Para uma amostra de *n* observações, a Variância será:
+
+ $s=\frac{\sum(x_{i}-\bar{x})^{2}}{n-1}$
+
+#### Desvio Médio (*Standard Deviation*)
+
+Para uma amostra de *n* obervações, o Desvio Padrão (SD) será a raiz quadrada positiva da Variância.
+
+#### Quartis, Decis e Percentis
+
+Os **Quartis** dividem um conjunto de obervações ordenados em 4 partes iguais; os **Decis**, em 10; e, os **Percentis**, em 100.
+
+### Medidas de Forma
+
+As medidas de forma permitem a verificação de como um conjunto de dados está se comportando em sua distribuição. Gráficos de distribuição de frequência e histogramas são ferramentas importantes para essa verificação.
+
+#### Assimetria
+
+Distribuições em forma de sino são simétricas, já que a média, mediana e moda desse conjunto de dados são iguais. Ou seja, a metade esquerda do histograma é aproximadamente igual à metade direita.
+
+Distribuições assimétricas possuem uma concentração de seus dados, à direita ou à esquerda, no histograma. Ou seja, apresentam uma "cauda" em uma das extremidades. Se a distribuição desses dados estiverem concentrados à direita, são dados com **assimetria positiva**. Se concentrados à esquerda, **assimetria negativa**.
+
+##### Coeficiente de Assimetria de Pearson
+
+$A_s=\frac{3*(\bar{x} - Md)}{s}$
+
+#### Curtose
+
+Curtose indica o grau de achatamento de uma distribuição em relação à curva normal. 
+
+##### Coeficiente de Curtose
+
+$C=\frac{Q_3-Q_1}{2*(P_{90} - P_{10})}$
+
+A curva normal possui C=0,263.
+
+## Representação gráfica
+Como a representação gráfica de variáveis qualitativas está associada às frequências associadas às categorias, os gráficos mais utilizados são de barras e de composição em setores
+(gráfico de pizza ou retângulos). Em um gráfico de barras, visualiza-se a tabela de frequên-
+cias de forma que as categorias apresentam-se no eixo x e, a frequência absoluta ou rela-
+tiva, no eixo y. É possível que os eixos estejam invertidos, ou seja, no eixo x apresentam-
+se as frequências e, no eixo y, as categorias. Já os gráficos de composição de setores po-
+dem apresentar a contagem de ocorrências das categorias de uma variável e também em
+relação ao seu total de contagens, ou seja, respectivamente as frequências absolutas e re-
+lativas das categorias da variável[@morettin2017; @bruce2019].
+
+As representações gráficas para viariáveis quantitativas apresentam maior variedade,
+porque, além dos gráficos usados para variáveis qualitativas, ainda é possível realizar gráficos de linhas, de dispersão, histogramas, de ramo-e-folhas e box-plots [@morettin2017; @favero2017].
+
+A representação gráfica de pontos formados pela intersecção no eixo x e y ligados por
+uma linha reta é o gráfico de linhas. Conforme apresentado por @favero2017, esse gráfico
+poderá representar o comportamento de somente uma variável. Os valores numéricos da variável
+apresentam-se no eixo y e o eixo x apresenta a distribuição dos dados uniformemente ao longo
+do tempo. Portanto, a partir dessa representação é possível visualizar a evolução (ou tendência) dos dados da variável [@favero2017]. O gráfico de dispersão é muito semelhante ao de linhas, porém, nesse caso, os pontos não são ligados por uma reta. Além disso, os intervalos de distribuição dos dados, normalmente, são irregulares. Existe a possibilidade de utilizar essa representação para duas variáveis simultaneamente [@favero2017].
+
+```{r}
+knitr::include_graphics("Figuras/graficodelinhas.png")
+```
+
+Segundo @morettin2017, um gráfico de barras contíguas é um histograma. Os
+valores da variável apresentam-se no eixo x e a distribuição de frequências no eixo y. Como a
+área de cada retângulo é proporcional à respectiva frequência, a área total do histograma sempre será igual a um. Portanto, a primeira etapa para a construção de um histograma é a construção da tabela de frequências, calculando as frequências absoluta e relativa e suas respectivas frequências acumuladas. Além disso, quanto maior a quantidades de dados da categoria (ou classe), mais alto será a barra (ou retângulo) [@morettin2017].
+```{r}
+knitr::include_graphics("Figuras/exemplo_graficobarras.png")
+```
+
+Quando uma variável quantitativa apresenta poucas observações, uma alternativa é a
+representação pelo gráfico de ramo-e-folhas. Os ramos são os valores à esquerda da linha que
+representam os primeiros dígitos da observação. À direita ficam as folhas, as quais representam os últimos dígitos da observação. Ou seja, segundo @favero2017, "os ramos são representados em uma única coluna e seus diferentes valores ao longo de várias colunas". Ambos devem estar ordenados de forma crescente. Quando um ramo apresenta muitas folhas, é possível afirmar que existe maior incidência dele. Se o número de folhas for grande, pode-se criar duas ou mais linhas de um mesmo ramo [@favero2017; @morettin2017].
+
+O boxplot apresenta o valor mínimo, primeiro, segundo e terceiro quartil, mediana e o
+valor máximo de uma determinada variável. Ou seja, é a representação de medidas de posição da
+variável, as quais serão apresentadas a seguir. O primeiro quartil apresenta 25% dos dados; o
+segundo, 50%, o que também é a mediana porque os dados estejam ordenados; e o terceiro, 75%.
+Com o gráfico, é possível verificar se existem dados discrepantes localizados fora dos limites
+superior e inferior.
+
+```{r}
+knitr::include_graphics("Figuras/boxplot.PNG")
+```
 
 ## Aplicação {-}
 
-Para o segundo estudo de caso serão utilizados dados reais de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de 1ª ordem de $CO_2$ na Amazônia Legal.A estimativa de 1ª ordem supõe que, de modo simplificado, 100% das emissões ocorreram no momento da mudança de uso/cobertura.
+### INMET
 
-Um **primeiro passo** será carregar os dados:
+Para a aplicação, será utilizada a base de dados do Instituto Nacional de Meteorologia (INMET) de precipitação e de dias de precipitação do Mirante de Santana em São Paulo.
+
+Realizaremos a análise exploratória da precipitação total ao longo dos anos (1990-2022).
+ 
+Para importar a base de dados em .csv, utiliza-se a função read.csv2() e insere-se como argumento o *diretório*:
 
 ```{r,message=FALSE,warning=FALSE}
-options("install.lock"=FALSE)
-options(repos = list(CRAN="http://cran.rstudio.com/"))
-options("install.lock"=FALSE)
 
-install.packages(c('rlang','tidyverse'))
+library(readr)
+
+#Importar base de dados
+inmet0 <- read.csv2("Data/INMET_SP.csv", header = TRUE, sep = ";", dec = ",")
+
+```
+
+É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto; e, read.csv2(), quando são separados por ponto e vírgula e os decimais por vírgula.
+
+Para visualizar a tabela importada, basta executar a função View():
+```{r,message=FALSE,warning=FALSE}
+
+#Visualização da base de dados
+View(inmet0)
+
+# Omitir valores NA da base de dados
+inmet <- na.omit(inmet0)
+
+```
+
+Para iniciar a exploração dos dados, inicialmente será utilizada a função str() que exibe de forma compacta a estrutura da tabela importada.
+
+```{r,message=FALSE,warning=FALSE}
+
+str(inmet)
+
+```
+Continuando, será utilizada a função ´summary()´ para apresentar o sumário de estatísticas descritivas (média, mediana, mínimo, máximo, 1º quartil, 3º quartil e valores faltantes (NA)), já que as variáveis de precipitação total e número de dias de precipitação são numéricas.
+
+```{r,message=FALSE,warning=FALSE}
+
+summary(inmet)
+
+```
+
+Inicialmente, os cabeçalhos da coluna serão modificados para facilitar a análise:
+
+```{r,message=FALSE,warning=FALSE}
+#Explorando os cabeçalhos da base de dados
+names(inmet)
+
+# Modificando os cabeçalhos
+colnames(inmet)[c(1,2,3)] <- c("data","dias_de_precipitacao","precipitacao_total")
+
+View(inmet)
+```
+
+Para continuar explorando os dados, realizou-se um gráfico de linhas a fim de analisar o comportamento da precipitação em relação às datas.
+
+```{r,message=FALSE,warning=FALSE}
+
+month_year <- format(as.Date(inmet$data, format = "%d/%m/%Y"),"%Y/%m")
+
+View(month_year)
 
 library(ggplot2)
-#library(tidyverse)
 
-
-## Carregando base de dados
-dados0 <- read.csv2("Data/CO2Amazonia.csv")
-dados <- na.omit(dados0)
-
-View(dados)
-
+ggplot(inmet,
+       aes(x = month_year, y = precipitacao_total)) +
+       geom_line(linetype="dashed", color="blue", aes(group=1)) +
+       geom_point() + 
+        scale_x_discrete(guide = guide_axis(check.overlap = TRUE)) +
+        scale_y_discrete(guide= guide_axis(check.overlap = TRUE))
 ```
 
-Agora que os dados foram carregados, o **segundo passo** será entender os dados. Para saber algumas propriedade dos dados carregados, será utilizado o comando ``head()`, que apresentará uma amostra dos dados, e ``summary()`, que apresenta as estatísticas básicas dos dados (média, mediana, 1º quartil, etc).
+No momento, nos interessa analisar a precipitação ao longo dos anos de análise. Por isso, essa variável será adicionada como uma coluna ao dataset inicial:
+
+```{r,message=FALSE,warning=FALSE}
+ano <- format(as.Date(inmet$data, format = "%d/ %m/ %Y"),"%Y")
+inmet_new <- cbind(inmet, ano)
+
+View(inmet_new)
+```
+
+Analisando o histograma da precipitação total, verifica-se que a sua distribuição é positiva e assimétrica:
+
+```{r, warning = FALSE, message=FALSE}
+# Histograma
+
+library(ggplot2)
+
+ggplot(data=inmet_new, aes(x=precipitacao_total)) +
+  geom_histogram() +
+  theme_bw() 
+```
+
+A partir do boxplot abaixo, é possível visualizar que 75% dos valores de precipitação estão entre 50mm e aproximadamente 200mm; a média stá próxima de 150mm e a mediana de 100mm; e, por fim, o valor máximo está próximo de 400 mm. Existem observações além do limite máximo, o que é um indício de outliers, ou seja, observações atípicas (fora do normal).
+
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(data=inmet_new, aes(y=precipitacao_total)) +
+  geom_boxplot() +
+  theme_minimal()
+```
+Primeiramente, será encontrada a média de precipitação por ano analisado, com um intervalo de confiança de 95% (escore-x da curva normal igual a 1,96). Com o objetivo de deixar o código mais organizado, será utilizado o [operador pipe](https://www.youtube.com/watch?v=qHCBG14tKns).  
 
 ```{r,message=FALSE,warning=FALSE}
 
-head(dados)
+#Média das precipitações por ano
 
-summary(dados)
+#instalando o pacote para utilizar o operador pipe %>% 
+library(dplyr) 
 
+# Criando tabela de statísticas
+tabela_stats <- inmet_new %>%
+  group_by(ano) %>%
+  summarise(n_obs = n(), media = mean(precipitacao_total), desvio_padrao = sd(precipitacao_total)) %>% 
+  mutate(erro = 1.96*desvio_padrao/sqrt(n_obs), 
+         limite_superior = media + erro,
+         limite_inferior = media - erro)
+
+#Visualizando a tabela criada com os dados estatísticos
+
+View(tabela_stats)
 ```
 
-Como iremos analisar a relação entre a área desmatada por ano (D_Area) e a emissão de 1ª ordem de $CO_2$, é importante verificar qual é o comportamento entre esses dados.
+Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras com os erros padrões das amostras. Utiliza-se o erro padrão e não o desvio padrão porque, neste caso, estamos interessados na variabilidade das médias das amostras e não na variabilidade das observações dentro da amostra.
 
 ```{r,message=FALSE,warning=FALSE}
 
-## Verificando a relação entre a variável dependente e a variável independente
-plot(dados$D_Area, dados$VR_CO2_1stOrder)
-
-## Correlação entre as variáveis da base de dados
-cor.test(dados$VR_CO2_1stOrder,dados$D_Area)
-
-```
-
-A partir desse gráfico, é possível verificar que a relação entre as variáveis é linear e, dessa forma, conforme a área desmatada aumenta, a emissão de $CO_2$ aumenta linearmente. O valor da correlação indica que a relação entre as duas variáveis é forte e positiva, já que 0,9987358 é próximo de 1 e maior que zero.
-
-```{r,message=FALSE,warning=FALSE}
-
-## Construção do modelo
-mod <- lm(VR_CO2_1stOrder ~ D_Area, dados, na.action = na.exclude)
-summary(mod)
-
+#Plotando os valores com seus respectivos erros
+ggplot (data = tabela_stats, aes(x = ano, y = media, fill = ano)) +
+  geom_col() +
+  geom_errorbar(aes(ymin=limite_inferior, ymax=limite_superior)) +
+  ggtitle("Média das precipitações por ano") +
+  xlab("") +
+  ylab("") +
+  theme_bw() +
+  theme(legend.position = "none")
 
 ```
-
-O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de $CO_2$ O valor indica que o modelo possui bom ajuste. 
-
-O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe baixa probabilidade dos resultados apresentados pelo modelo não possuírem erro amostral. Ou seja, existe alta probabilidade do modelo não ser um bom ajuste. Isso continuará sendo testado a diante.
-
-De acordo com @montgomery2021, "*A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo*". Dessa forma, abaixo será realizada a análise residual.
-
-```{r,message=FALSE,warning=FALSE}
-# Análise dos resíduos
-
-plot(mod,which = 4)
-
-par(mfrow=c(2,2)) 
-plot(mod)
-
-
-## Teste de normalidade
-shapiro.test(mod$residuals)
-
-```
-
-Para a análise residual, é necessário investigar se os resíduos refletem as propriedades impostas pelo erro do modelo. Os resíduos não podem apresentar uma tendência e, por isso, eles serão analisado abaixo.
- 
- - Residuals vs Fitted
- 
-O gráfico mostra a relação entre os resíduos e os valores ajustados. Como a distribuição dos resíduos próxima à linha pontilhada demonsta um bom ajuste do modelo, é possível verificar se resíduos tem padrões não-lineares. No caso do nosso modelo, os resíduos não se apresentam próximos à linha pontilhada.
-
-As observações 48, 50 e 51 apresentam grandes valores de resíduos e, por isso, é interessante realizar toda a análise após a remoção dessas observações.
- 
- - Normal Q-Q
- 
-O gráfico mostra se os resíduos são normalmente distribuídos. Mais uma vez, o ideal é que a distribuição dos resíduos acompanhe a linha pontilhada. Pelo gráfico é possível perceber que a distribuição dos resíduos está diferente da distribuição normal. As observações 48, 50 e 51 apresentam-se extremas novamente.
-  
- - Scale-Location
- 
-O gráfico mostra se os resíduos são igualmente distribuídos em relação ao intervalo de preditores (Fitted values).Também é possível checar a homocedasticidade. O ideal, no caso, seria que os resíduos estivessem uniformemente distribuídos ao redor da linha vermelha. Para o caso do nosso modelo, demonstra que há heterocedasticidade, ou seja, os resíduos não estão uniformemente distribuídos em relação ao intervalo de preditores.
-  
- - Residuals vs Leverage
- 
-O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outliers que influenciam na análise de regressão linear. O que quer dizer que, sem o outlier, o resultado da regressão seria diferente. No caso do modelo criado, há possibilidade de existirem outliers influentes.
-
- - Cook's distance
- 
-A [Distância de Cook](https://towardsdatascience.com/identifying-outliers-in-linear-regression-cooks-distance-9e212e9136a#:~:text=One%20method%20that%20is%20often,the%20ith%20observation%20is%20removed) informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações 48, 50 e 51 são extremas. 
-
-```` {r,message=FALSE,warning=FALSE}
-CD <- cooks.distance(mod)
-influentes <- CD[(CD > (3* mean(CD, na.rm=TRUE)))]
-
-print(influentes)
-````
-
-É possível analisar que existem 6 observações que possuem uma distância de Cook três vezes maior que a média. Além disso, é confirmado que as observações 48, 50 e 51 são extremas.
-
-Pelo [Teste de Shapiro](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test), é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. O gráfico Normal Q-Q serve como uma contra-prova, também mostrando que os dados não são normalmente distribuídos e, dessa forma, não são adequados.
-
-Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste de outliers, é interessante utilizar os gráficos Boxplot e Histograma. 
-
-```{r,message=FALSE,warning=FALSE}
-
-#Encontrando potenciais outliers a partir de gráficos
-
-hist(dados$D_Area)
-
-hist(dados$VR_CO2_1stOrder)
-
-```
-
-A partir da análise dos resíduos, foi possível inferir que as observações 48, 50 e 51 são outliers influentes. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote `outliers` pode ser utilizado, já que a função `outlier()` consegue encontrar o valor mais distante da média das variáveis.
-
-```{r,message=FALSE,warning=FALSE}
-#Encontrando os valores com maior diferença da média com o pacote `outliers`
-
-library(outliers)
-
-
-outArea <- outlier(dados$D_Area)
-
-outCO2 <- outlier(dados$VR_CO2_1stOrder)
-
-print(outArea)
-
-print(outCO2)
-
-```
-
-Com esse resultado, analisa-se que existe grande possibilidade de existirem outliers no conjunto de dados, já que as observações 48, 50 e 51 apresentam-se extremas e influentes no modelo de regressão. Além disso, a hipótese de que o resultado dos resíduos indica que seja necessário um maior conjunto de dados também é uma possibilidade.
-
-Após todos os testes, por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.
-
-```{r}
-
-# Diagrama de dispersão com o ajuste
-
-plot(x = dados$D_Area, y = dados$VR_CO2_1stOrder, xlab = "Área desmatada no ano", ylab = "Emissão de CO2 de 1a ordem")
-
-abline(mod, col = "blue")
-```
-
-Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de $CO_2$ na Amazônia Legal. Portanto, torna-se importante refazer o modelo, de forma que os outliers influentes (observações 48, 50, 51, 52, 60 e 61) sejam retirados, para verificar se este novo modelo estaria mais adequado para representar a relação entre as variáveis. 
-
-É isso que faremos:
-
-```{r}
-# Retirada dos outliers
-dados_sem_outliers <- dados[-c(48,50,51,52,60,61),]
-
-# Modelagem linear
-mod2<- lm(VR_CO2_1stOrder ~ D_Area, data=dados_sem_outliers)
-
-#Estatísticas do modelo
-summary(mod2)
-
-# Gráfico do modelo
-plot(mod2)
-
-```
-
-Mesmo com a retirada de grande parte dos outliers influentes, o modelo ainda não possui resíduos adequados. Para a realização de uma regressão linear, são assumidas alguns preceitos que, provavelmente, não são o caso dos dados utilizados para o segundo estudo de caso (vide tópico \@ref(Condicoes)). Conforme verificamos, os resíduos não seguem uma distribuição normal e os dados não possuem variância constante. Portanto, pode-se afirmar que a regressão linear não explica os dados de forma adequada. Talvez seja necessário aplicar outro tipo de modelo para estes dados. Além disso, os dados podem não conter variáveis suficientes para explicar a variável resposta (Emissão de primeira ordem de $CO_2$).
-
 
