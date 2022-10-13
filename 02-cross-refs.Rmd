@@ -176,6 +176,10 @@ summary(inmet)
 Inicialmente, os cabeçalhos da coluna serão modificados para facilitar a análise:
 
 ```{r,message=FALSE,warning=FALSE}
+#Explorando os cabeçalhos da base de dados
+names(inmet)
+
+# Modificando os cabeçalhos
 colnames(inmet)[c(1,2,3)] <- c("data","dias_de_precipitacao","precipitacao_total")
 
 View(inmet)
@@ -210,7 +214,7 @@ View(inmet_new)
 
 Analisando o histograma da precipitação total, verifica-se que a sua distribuição é positiva e assimétrica:
 
-```{r}
+```{r, warning = FALSE, message=FALSE}
 # Histograma
 
 library(ggplot2)
