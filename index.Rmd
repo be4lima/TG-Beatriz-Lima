@@ -28,7 +28,7 @@ github-repo: rstudio/bookdown-demo
 
 # Sobre {-}
 
-Livro relacionado a técnicas de programação e modelagem de temas específicos da **Engenharia Ambiental e Urbana**. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana.
+Apostila relacionada a técnicas de programação e modelagem de temas específicos da **Engenharia Ambiental e Urbana**. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana.
 
 
 
