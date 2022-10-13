@@ -1,3 +1,15 @@
+# Ciência de dados ambientais
+
+Conforme @kadiyala2017, a Ciência de Dados é definida como um campo interdisciplinar que tem como principal objetivo a "extração de relacionamentos significativos ou *insights* de padrões em bancos de dados multidimensionais por meio da aplicação de métodos matemáticos, computacionais e científicos relevantes". Portanto, basicamente, a Ciência de Dados tem a capacidade de transformar dados em informações úteis, fazendo com que a tomada de decisão seja fundamentada [@mendes2022]. 
+
+```{r}
+knitr::include_graphics("Figuras/diagramadevenn.png")
+```
+
+A área ambiental, assim como diversas outras áreas do conhecimento, cada vez mais está coletando grandes quantidades de dados complexos. Dessa forma, na última década houve um aumento exponencial da quantidade de dados a serem analisados. Com isso, o potencial da aplicação do Data Science & Analytics no desenvolvimento de teorias orientadas a dados já está sendo reconhecido [@mendes2022; @kadiyala2017; @longbing2017]. 
+
+Conforme @mendes2022, "A sustentabilidade precisa de Ciência de Dados para tentar resolver os problemas fundamentais, e a Sustentabilidade traz novos desafios para a Ciência de Dados". Portanto, a aplicação da ciência de dados em *datasets* ambientais torna-se proveitosa não só visando o aumento da eficiência e eficácia da gestão da sustentabilidade, mas, também, ao desafiar o desenvolvimento dos conhecimentos envolvidos na aplicação da Ciência de Dados.
+
 # R - Introdução e Comandos Básicos
 
 R é uma linguagem e ambiente para computação estatística e gráficos. Essa linguagem de programação fornece uma grande variedade de técnicas estatísticas (modelagem linear e não-linear, testes estatísticos clássicos, análise de séries temporais, etc) e gráficas (The R Foundation, 2022).
@@ -87,3 +99,4 @@ Após instalar um pacote, é necessário carregá-lo para poder utilizar todas a
 2. [R for Data Science](https://r4ds.had.co.nz/)
 3. [Livros gratuitos de diversos temas envolvendo R](https://www.rstudio.com/resources/books/)
 4. [Ciência de Dados em R](https://livro.curso-r.com/index.html)
+

@@ -1,19 +1,31 @@
 # Analise geoespacial
 
-## Dados espaciais e geoespaciais
-Dados espaciais são os que utilizam o sistema de coordenadas cartesianas com três (x, y e z) ou mais dimensões. Dados geoespaciais são dados que podem ser mapeados no planeta Terra e relacionadas com outros dados baseados em sistemas de coordenadas geográficas. Como grande parte dos dados ambientais são afetados pela localização geográfica, a análise geoespacial traz informações importantes.
+[Dados espaciais](https://bookdown.org/igisc/EnvDataSci/spatial-data-and-maps.html) são os que utilizam o sistema de coordenadas cartesianas com três (x, y e z) ou mais dimensões. Dados geoespaciais são dados que podem ser mapeados no planeta Terra e relacionadas com outros dados baseados em sistemas de coordenadas geográficas. Como grande parte dos dados ambientais são afetados pela localização geográfica, a análise geoespacial traz informações importantes [@bivand2009; @davis2022].
 
-A teoria por trás da análise geoespacial já é coberta pela disciplina de Cartografia e Geoprocessamento, portanto, aqui iremos abordar somente a parte prática.
+Conforme @zanetti2017, um sistema de projeção é uma a forma de projetar a superfície da Terra numa superfície plana, ou seja, uma superfície de referência. As chamadas superfícies de referência são simples, regulares e com características geométricas já conhecidas e, por isso, servem de base para cálculos e representações [@zanetti2017].
+
+O sistema de referência ou datum utilizado nacionalmente, desde os anos 2000, é o Sistema de referência Geocêntrico para as Américas (SIRGAS2000). Internacionalmente, utiliza-se o World Geodetic System of 1984 (WGS84) comumente.
+
+Basicamente, o SGR é um sistema de coordenadas definido a partir de um elipsóide de referência, posicionado e orientado em relação à superfície da Terra. A partir dele, é possível localizar espacialmente qualquer feição na superfície terrestre. Os mais conhecidos são: SAD69, WGS84 e o SIRGAS 2000. 
+
+O sistema Universal Transverso de Mercator, conhecido como sistema UTM, é o sistema de coordenadas utilizado para o mapeamento do território brasileiro. Sendo M.C a sigla de Meridiano Central, de acordo com @zanetti2017:
+
+\begin{citacao}
+O sistema é formado por 60 cilindros transversos e secantes ao elipsóide de revolução, abrangendo fusos de 6° de amplitude em longitude, compreendidos entre as longitudes múltiplas de 6°[...]. A numeração é contada a partir do antimeridiano de Greenwich, para leste, em coincidência com os fusos da carta do mundo ao milionésimo (0°, 6°, 12°, ..., 42°, 48°, 54°,..., 342°, 348°, 354°). Cada fuso possui um meridiano central (M.C.) que está nas longitudes
+múltiplas de 6° + 3 (3°, 9°, 15°,..., 45°, 51°, 57°,...., 345°, 351°, 357°).
+\end{citacao}
+
+Cada coordenada ou ponto dos dados espaciais podem ter associado a eles uma informação, que é denominada {atributo}. Um conjunto de pontos ordenados é denominado {linha} e uma área fechada formada por uma ou mais linhas é um {polígono}. Já uma Grade (Grid) é formado por linhas verticais e horizontais [@bivand2009].
+
+O restante da teoria por trás da análise geoespacial já é coberta pela disciplina de Cartografia e Geoprocessamento, portanto, aqui iremos abordar somente a parte prática.
 
 No capítulo, serão utilizados os seguintes pacotes: `sf` para ler e trabalhar com dados espaciais e `mapview` para a etapa de criação de mapas.
 
 No curso de Engenharia Ambiental e Urbana, utilizam-se *shapefiles* (.shp) para realizar análises espaciais, portanto, estes serão utilizados no capítulo. A utilização de rasters não será abordada.
 
-### Sistema Geodesico de Referência (SGR)
-Basicamente, o SGR é um sistema de coordenadas definido a partir de um elipsóide de referência, posicionado e orientado em relação à superfície da Terra. A partir dele, é possível localizar espacialmente qualquer feição na superfície terrestre. Os mais conhecidos são: SAD69, WGS84 e o SIRGAS 2000. 
 
 ## Aplicação {-}
-Para a aplicação será reproduzido o exemplo do TBEP R Training. Para isso, serão instalados os pacotes `sf` e `mapview`.
+Para a aplicação será reproduzido o exemplo do [TBEP R Training](https://tbep-tech.github.io/tbep-r-training/mapping.html#Exercise_13). Para isso, serão instalados os pacotes `sf` e `mapview`.
 
 ```{r,message=FALSE,warning=FALSE}
 options(repos = list(CRAN="http://cran.rstudio.com/"))
@@ -164,11 +176,11 @@ mapview(sgdat, col.regions = 'green') +
 ```
 
 
-## Referências Biliográficas {-}
+## Referências para consulta {-}
+1. [TBEP R Training (youtube)](https://www.youtube.com/watch?v=nQVFqkifeSE&t=152s)
 
-https://bookdown.org/igisc/EnvDataSci/spatial-data-and-maps.html
 
-https://www.youtube.com/watch?v=nQVFqkifeSE&t=152s
 
-https://tbep-tech.github.io/tbep-r-training/mapping.html#Exercise_13
+
+
 

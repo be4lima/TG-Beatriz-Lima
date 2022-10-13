@@ -1,12 +1,12 @@
 # Análise de séries temporais
 
-Qualquer conjunto de observações ordenadas no tempo são chamadas de Séries Temporais. No caso da Engenharia Ambiental e Urbana, podem ser citados alguns exemplos: valores diários de poluição, valores mensais de temperatura, temperaturas máximas e mínimas diárias ou precipitação atmosférica anual em uma cidade, entre outros (Morettin, 2018). 
+Qualquer conjunto de observações ordenadas no tempo são chamadas de [Séries Temporais](https://www.youtube.com/watch?v=T4N8ZhmiUEM&list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&index=5). No caso da Engenharia Ambiental e Urbana, podem ser citados alguns exemplos: valores diários de poluição, valores mensais de temperatura, temperaturas máximas e mínimas diárias ou precipitação atmosférica anual em uma cidade, entre outros @morettin2018. 
 
-É suposto que, em uma análise de série temporal, "*há um sistema causal mais ou menos constante, relacionado com o tempo, que exerceu influência sobre os dados no passado e pode continuar a fazê-lo no futuro. Este sistema causal costuma atuar criando padrões não aleatórios que podem ser detectados em um gráfico da série temporal, ou mediante algum outro processo estatístico*" (REIS, 2022).
+É suposto que, em uma análise de série temporal, "*há um sistema causal mais ou menos constante, relacionado com o tempo, que exerceu influência sobre os dados no passado e pode continuar a fazê-lo no futuro. Este sistema causal costuma atuar criando padrões não aleatórios que podem ser detectados em um gráfico da série temporal, ou mediante algum outro processo estatístico*" @reis2022.
 
-É importante citar que identificar esses padrões não aleatórios na série temporal de uma variável de interesse é o objetivo da análise. A partir dessa identificação, é possível realizar previsões, orientando tomadas de decisões na área de interesse (REIS, 2022).
+É importante citar que identificar esses padrões não aleatórios na série temporal de uma variável de interesse é o objetivo da análise. A partir dessa identificação, é possível realizar previsões, orientando tomadas de decisões na área de interesse [@@reis2022].
 
-A partir de procedimentos estatísticos, é possível realizar a análise da série de dados de forma que seja possível realizar previsões, analisar causalidades e estudar periodicidades relevantes. Conforme COSTA (2022) e SOARES (2020), em resumo, nas séries temporais caracterizam-se por:
+A partir de procedimentos estatísticos, é possível realizar a análise da série de dados de forma que seja possível realizar previsões, analisar causalidades e estudar periodicidades relevantes. Conforme [COSTA (2022)](https://www.youtube.com/watch?v=emnSZ7qKv9M&list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&index=2) e [SOARES (2020)](https://www.youtube.com/watch?v=ICY8gVN1ctc&list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&index=1), em resumo, nas séries temporais caracterizam-se por:
 
   1. Possuirem variáveis aleatórias;
   2. Observações altamente correlacionadas, principalmente porque medidas adjacentes (próximas no tempo) tendem a correlatas;
@@ -14,7 +14,7 @@ A partir de procedimentos estatísticos, é possível realizar a análise da sé
   4. Dificuldade em lidar com outliers;
   5. Mudanças fundamentais/abruptas.
 
-De acordo com Reis (2022) e Barros et. al (2022), séries temporais são compostas pelos seguintes padrões:
+De acordo com @reis2022 e @barros2017, séries temporais são compostas pelos seguintes padrões:
 
 1) **Tendência (T)**: série temporal que segue determinada direção, não necessariamente linear, podendo também ser crescente ou decrescente. Exemplos podem ser: crescimento demográfico, ou mudança gradual de hábitos de consumo, ou qualquer outro aspecto que afete a variável de interesse no longo prazo;
 
@@ -88,11 +88,11 @@ Um processo é dito ser integrado de ordem d se uma série temporal {$y_t_{t=1}^
 Para realizar o teste da raiz unitária, os mais utilizados é o teste Aumentado de Dickey-Fuller (ADF).
 
 ## Modelos autoregressivos
-Modelos autoregressivos AR(p) é caracterizado por realizar a modelagem somente a partir das defasagens de uma série temporal, ou seja:
+[Modelos autoregressivos](https://rpubs.com/frank-pinho/522364#:~:text=A%20classe%20de%20modelos%20autorregressivos,constante%20e%20n%C3%A3o%2Dautocorrelacionado) AR(p) é caracterizado por realizar a modelagem somente a partir das defasagens de uma série temporal, ou seja:
 
 $$y_t=\phi_0+\phi_1y_{t-1}+\phi_2y_{t-2}+...+\phi_py_{t-p}+ \epsilon_t$$
 ## Médias Móveis
-O modelo de médias móveis MA(q) modela a partir das defasagens do termo de erro $\epsilon_t$, sendo assim uma combinação linear de ruídos brancos ($\epsilon+t$ tem média zero, variância constante e não-autocorrelacionado).
+O [modelo de médias móveis](https://rpubs.com/hudsonchavs/modeloma#:~:text=A%20classe%20de%20modelos%20de,modelar%20o%20retorno%20em%20t.) MA(q) modela a partir das defasagens do termo de erro $\epsilon_t$, sendo assim uma combinação linear de ruídos brancos ($\epsilon+t$ tem média zero, variância constante e não-autocorrelacionado).
 
 $$y_t=\mu+\theta_1\epsilon_{t-1}+\theta_2\epsilon_{t-2}+...+\theta_p\epsilon_{t-q}+ \epsilon_t$$
 
@@ -131,7 +131,7 @@ $\Theta(L)=(1-\Theta_1L^2-\Theta_2L^{2s}-\Theta_pL^{Qs})$
 $\Delta-=1-L$, sendo o operador de desafasagem (L): $L^ny_t=y_{t-n}$
 
 
-Conforme Morettin (2018), Na abordagem de Box & Jenkins, existem 4 etapas:
+Conforme @morettin2018, Na abordagem de Box & Jenkins, existem 4 etapas:
 1. Identificação do processo gerador de dados
 Para descobrir qual modelo descreve melhor o comportamento dos dados, inicialmente, realiza-se uma análise gráfica, verificando estacionaridade, tendência, sazonalidade, etc. A partir disso, utiliza-se a FAC e FACP (função de autocorrelação parcial) amostrais, além de verificar a ordem de integração da série, ou seja, número de diferenças necessárias para tornar uma série estacionária. É importante que a estacionariedade seja testada a partir dos testes de raiz unitária. 
 
@@ -151,7 +151,7 @@ Os parâmetros do modelo são identificados e testados estatisticamente e, para 
 4. Previsão
 
 ## Aplicação {-}
-Para a aplicação, será realizado o exemplo do capítulo 4 do livro de BARROS *et.al* (2017). Será utilizada como *database* a série temporal de vendas de passagens aéreas nos EUA de janeiro de 1949 a dezembro de 1960. 
+Para a aplicação, será realizado o exemplo do capítulo 4 do livro de @barros2017. Será utilizada como *database* a série temporal de vendas de passagens aéreas nos EUA de janeiro de 1949 a dezembro de 1960. 
 
 ```{r,message=FALSE,warning=FALSE}
 options(repos = list(CRAN="http://cran.rstudio.com/"))
@@ -321,7 +321,7 @@ A partir do gráfico **Standarized Residuals**, visualmente os dados aparentam t
 
 A **FAC** dos resíduos (segundo gráfico) mostra que não há nenhuma defasagem significativa, portanto, o modelo SARIMA está representando bem a série temporal. O gráfico **p-values for Ljung-Box statistic** não é confiável, já que os p-values são calculados sem levar em conta o fato de os resíduos terem sido gerados a partir de um modelo ajustado. Por mais que a conclusão deste gráfico mostre que não há dependência linear entre os resíduos, a informação não é confiável.
 
-O teste de Ljung & Box será realizado para testar a autocorrelação dos resíduos:
+O [teste de Ljung & Box](https://koalatea.io/r-ljung-box-test/) será realizado para testar a autocorrelação dos resíduos:
 
 ```{r}
 
@@ -357,22 +357,14 @@ accuracy(fit.air)
 ```
 Pelas métricas, o MAPE demonstra que o erro de previsão está em 0,47%, o que é muito bom. Dessa forma, conseguimos confirmar que a previsão está adequada!
 
+## Referências para consulta {-}
+1. [Introdução à Análise de Séries Temporais (youtube)](https://www.youtube.com/watch?v=emnSZ7qKv9M&list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&index=1) 
 
-## Referências Bibliográficas {-}
+2. [Séries Temporais (youtube)](https://www.youtube.com/watch?v=ICY8gVN1ctc&list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&index=1)
 
-BARROS, Anna C.; MATTOS, Daiane Marcolino D.; OLIVEIRA, Ingrid Christyne Luquett D.; et al. **Análise de Séries Temporais em R: Curso Introdutório**. Grupo GEN, 2017. 9788595154902. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9788595154902/. Acesso em: 21 jun. 2022.
 
-MORETTIN, Pedro A. Análise de Séries Temporais. Editora Blucher, 2018. 9788521213529. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9788521213529/. Acesso em: 10 jun. 2022.
 
-REIS, Marcelo Menezes. Análise de séries temporais. Santa Catarina, UFSC, 2022. Disponível em: <https://www.inf.ufsc.br/~marcelo.menezes.reis/Cap4.pdf> Acesso em: 10 jun. 2022.
 
-SOARES, Thiago Costa. Séries Temporais. Universidade Federal de Juiz de Fora, 2020. Disponível em: <https://www.youtube.com/watch?v=T4N8ZhmiUEM&list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&index=5>. Acesso em: 29 jun 2022.
 
-COSTA, Alexandre Cunha. "Introdução à Análise de Séries Temporais". Disponível em: <https://www.youtube.com/watch?v=emnSZ7qKv9M&list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&index=1> Acesso em: 27 jun. 2022.
 
-https://www.maxwell.vrac.puc-rio.br/24787/24787_3.PDF
-https://rpubs.com/frank-pinho/522364#:~:text=A%20classe%20de%20modelos%20autorregressivos,constante%20e%20n%C3%A3o%2Dautocorrelacionado).
 
-https://rpubs.com/hudsonchavs/modeloma#:~:text=A%20classe%20de%20modelos%20de,modelar%20o%20retorno%20em%20t.
-
-https://koalatea.io/r-ljung-box-test/

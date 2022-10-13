@@ -1,8 +1,8 @@
 # Análise Exploratória de Dados 
 
-A **Análise Exploratória de Dados** (EDA) é uma forma de utilizar ferramentas gráficas e estatísticas apropriadas da linguagem R na exploração de dados. A partir da visualização, transformação e modelagem de dados, essa análise explora os dados de forma sistemática [@wickhman22].
+A **Análise Exploratória de Dados** (EDA) é uma forma de utilizar ferramentas gráficas e estatísticas apropriadas da linguagem R na exploração de dados. A partir da visualização, transformação e modelagem de dados, essa análise explora os dados de forma sistemática [@wickham2022].
 
-Para aplicar a EDA, de acordo com @wickhman22, basta inicialmente gerar questões sobre os dados, utilizar as funcionalidades do R para encontrar respostas e utilizar o que foi aprendido para gerar novas questões. Portanto, essa análise é um ciclo iterativo.
+Para aplicar a EDA, de acordo com @wickham2022, basta inicialmente gerar questões sobre os dados, utilizar as funcionalidades do R para encontrar respostas e utilizar o que foi aprendido para gerar novas questões. Portanto, essa análise é um ciclo iterativo.
 
 ## Introdução à Estatística
 Para aplicar a Ciência de Dados é essencial o uso da Estatística. Conforme @montgomery2021, "Estatística é a ciência de dados". Em um conjunto de dados, a estatística descritiva detalha e resume as suas principais características, de forma que permite maior entendimento do comportamento desse conjunto. Esse é um dos principais aspectos importantes para facilitar a interpretação e análise de dados em Data Science [@favero2017; @montgomery2021].
@@ -17,6 +17,9 @@ A **População** é um conjunto de observações relacionadas a indivíduos com
 ### Tipos de variáveis
 Uma variável pode ser definida como uma característica da amostra ou população. Para
 aplicar os cálculos de estatísticas e realizar as representações gráficas é importante realizar a classificação da variável. Os tipos de variáveis são: Qualitativa ou não métrica e Quantitativa ou métrica. O primeiro tipo está relacionado com variáveis que categorizam os dados, de forma quenão seja possível medí-los ou realizar cálculos. Já o segundo, relaciona-se com variáveis que podem ser contadas ou mensuradas [@favero2017].
+```{r}
+knitr::include_graphics("Figuras/figtiposdevariaveis.PNG")
+```
 
 Dentre as variáveis qualitativas, também chamada de variáveis categóricas, existem
 dois tipos: Nominal e Ordinal. Enquanto na Nominal não possível realizar nenhuma ordenação,
@@ -110,9 +113,16 @@ poderá representar o comportamento de somente uma variável. Os valores numéri
 apresentam-se no eixo y e o eixo x apresenta a distribuição dos dados uniformemente ao longo
 do tempo. Portanto, a partir dessa representação é possível visualizar a evolução (ou tendência) dos dados da variável [@favero2017]. O gráfico de dispersão é muito semelhante ao de linhas, porém, nesse caso, os pontos não são ligados por uma reta. Além disso, os intervalos de distribuição dos dados, normalmente, são irregulares. Existe a possibilidade de utilizar essa representação para duas variáveis simultaneamente [@favero2017].
 
+```{r}
+knitr::include_graphics("Figuras/graficodelinhas.png")
+```
+
 Segundo @morettin2017, um gráfico de barras contíguas é um histograma. Os
 valores da variável apresentam-se no eixo x e a distribuição de frequências no eixo y. Como a
 área de cada retângulo é proporcional à respectiva frequência, a área total do histograma sempre será igual a um. Portanto, a primeira etapa para a construção de um histograma é a construção da tabela de frequências, calculando as frequências absoluta e relativa e suas respectivas frequências acumuladas. Além disso, quanto maior a quantidades de dados da categoria (ou classe), mais alto será a barra (ou retângulo) [@morettin2017].
+```{r}
+knitr::include_graphics("Figuras/exemplo_graficobarras.png")
+```
 
 Quando uma variável quantitativa apresenta poucas observações, uma alternativa é a
 representação pelo gráfico de ramo-e-folhas. Os ramos são os valores à esquerda da linha que
@@ -125,6 +135,9 @@ segundo, 50%, o que também é a mediana porque os dados estejam ordenados; e o 
 Com o gráfico, é possível verificar se existem dados discrepantes localizados fora dos limites
 superior e inferior.
 
+```{r}
+knitr::include_graphics("Figuras/boxplot.PNG")
+```
 
 ## Aplicação {-}
 
@@ -241,6 +254,7 @@ Primeiramente, será encontrada a média de precipitação por ano analisado, co
 #instalando o pacote para utilizar o operador pipe %>% 
 library(dplyr) 
 
+# Criando tabela de statísticas
 tabela_stats <- inmet_new %>%
   group_by(ano) %>%
   summarise(n_obs = n(), media = mean(precipitacao_total), desvio_padrao = sd(precipitacao_total)) %>% 

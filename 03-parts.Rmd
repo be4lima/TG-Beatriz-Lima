@@ -1,6 +1,6 @@
 # Modelos lineares
 
-Resumidamente, modelos lineares são utilizados para resumir relações observadas a partir de dados, no caso, ambientais, em uma linha reta. Em um modelo linear descreve-se o comportamento de uma variável dependente (ou variável resposta, y) como função de uma ou mais variáveis independentes (ou variáveis explicativas, x). 
+Resumidamente, modelos lineares são utilizados para resumir relações observadas a partir de dados, no caso, ambientais, em uma linha reta. Em um modelo linear descreve-se o comportamento de uma variável dependente (ou variável resposta, y) como função de uma ou mais variáveis independentes (ou variáveis explicativas, x) [@chapra2013]. 
 
 ## Covariância
 A *Covariância*, denotada $\sigma_{xy}$, descreve a variação, em relação a média, entre duas variáveis. 
@@ -30,7 +30,7 @@ Uma forma gráfica de visualizar a correlação das variáveis que apresenta gra
 
 O *Coeficiente de Pearson*, também chamado de coeficiente de correlação da amostra $r_{xy}$, mede a força da relação linear entre duas variáveis aleatórias x e y. Se duas variáveis relacionarem-se perfeitamente com inclinação positiva, $r_{xy}=1$; com inclinação negativa, $r_{xy}=-1$; se $r_{xy}=0$, não há relação entre as variáveis. 
 
-De acordo com Filho e Júnior (2009), existem métricas diferentes de acordo com cada autor:
+De acordo com @filho2009, existem métricas diferentes de acordo com cada autor:
 
 - Cohen (1998) considera valores entre 0,10 e 0,29 pequenos; entre 0,30 e 0,49, médios; e entre 0,50 e 1, grandes.
 
@@ -40,7 +40,7 @@ O consenso é que quanto mais próximo de 1, maior a força da relação linear 
 
 ## Regressão linear simples
 
-A partir da regressão, é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da **regressão linear simples**, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo de regressão linear é:
+A partir da [regressão](https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09), é possível obter a relação matemática que descreva a relação entre duas ou mais variáveis. A análise de regressão é uma coleção de ferramentas estatísticas que permite a modelagem e inferência de uma variável dependente (y) com uma ou mais variáveis independentes (x). No caso da **regressão linear simples**, somente existe uma variável independente; para a regressão linear múltipla, mais de uma. Dessa forma, o formato básico do modelo de regressão linear é:
 
 $$Y = \beta_0 + \beta_1X_1 + e_1$$, sendo $\beta_0$ o coeficiente do intercepto, $\beta_1$ o coeficiente de inclinação, $e_1$ o erro no ajuste do modelo para a observação y.
 
@@ -68,8 +68,7 @@ Dentre diversos testes possíveis, para verificar a não-normalidade dos erros �
 
 O *Coeficiente de Determinação* é utilizado frequentemente pra avaliar a adequação de um modelo de regressão. É definido pelo quadrado do coeficiente de correlação entre X e Y. Quanto mais próximo de 1, maior a quantidade de variabilidade nos dados explicada pelo modelo de regressão. 
 
-De acordo com Montgomery (2021), o R² pode trazer interpretações errôneas, já que sempre é possível fazer com que R² seja unitário realizando a adição de mais termos ao modelo. Ou seja, R² aumenta se for adicionado uma nova variável ao modelo, mas isso não indica que o modelo esteja mais adequado.
-
+De acordo com @montgomery2021, o R² pode trazer interpretações errôneas, já que sempre é possível fazer com que R² seja unitário realizando a adição de mais termos ao modelo. Ou seja, R² aumenta se for adicionado uma nova variável ao modelo, mas isso não indica que o modelo esteja mais adequado.
 
 
 ## Aplicação {-}
@@ -96,6 +95,7 @@ dados <- na.omit(dados0)
 View(dados)
 
 ```
+
 Agora que os dados foram carregados, o **segundo passo** será entender os dados. Para saber algumas propriedade dos dados carregados, será utilizado o comando ``head()`, que apresentará uma amostra dos dados, e ``summary()`, que apresenta as estatísticas básicas dos dados (média, mediana, 1º quartil, etc).
 
 ```{r,message=FALSE,warning=FALSE}
@@ -105,6 +105,7 @@ head(dados)
 summary(dados)
 
 ```
+
 Como iremos analisar a relação entre a área desmatada por ano (D_Area) e a emissão de 1ª ordem de $CO_2$, é importante verificar qual é o comportamento entre esses dados.
 
 ```{r,message=FALSE,warning=FALSE}
@@ -114,7 +115,6 @@ plot(dados$D_Area, dados$VR_CO2_1stOrder)
 
 ## Correlação entre as variáveis da base de dados
 cor.test(dados$VR_CO2_1stOrder,dados$D_Area)
-
 
 ```
 
@@ -128,11 +128,12 @@ summary(mod)
 
 
 ```
+
 O r² (coeficiente de determinação) do modelo é 0,9975 e, portanto, pode-se interpretar que a variável área explica 99,75% da variação na emissão de $CO_2$ O valor indica que o modelo possui bom ajuste. 
 
 O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor que o nível de significância (0,05), mostrando que existe baixa probabilidade dos resultados apresentados pelo modelo não possuírem erro amostral. Ou seja, existe alta probabilidade do modelo não ser um bom ajuste. Isso continuará sendo testado a diante.
 
-De acordo com Montgomery e Runger (2021), "*A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo*". Dessa forma, abaixo será realizada a análise residual.
+De acordo com @montgomery2021, "*A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo*". Dessa forma, abaixo será realizada a análise residual.
 
 ```{r,message=FALSE,warning=FALSE}
 # Análise dos resíduos
@@ -170,7 +171,7 @@ O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outl
 
  - Cook's distance
  
-A Distância de Cook informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações 48, 50 e 51 são extremas. 
+A [Distância de Cook](https://towardsdatascience.com/identifying-outliers-in-linear-regression-cooks-distance-9e212e9136a#:~:text=One%20method%20that%20is%20often,the%20ith%20observation%20is%20removed) informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações 48, 50 e 51 são extremas. 
 
 ```` {r,message=FALSE,warning=FALSE}
 CD <- cooks.distance(mod)
@@ -178,9 +179,10 @@ influentes <- CD[(CD > (3* mean(CD, na.rm=TRUE)))]
 
 print(influentes)
 ````
+
 É possível analisar que existem 6 observações que possuem uma distância de Cook três vezes maior que a média. Além disso, é confirmado que as observações 48, 50 e 51 são extremas.
 
-Pelo Teste de Shapiro, é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. O gráfico Normal Q-Q serve como uma contra-prova, também mostrando que os dados não são normalmente distribuídos e, dessa forma, não são adequados.
+Pelo [Teste de Shapiro](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test), é possível verificar que o p-value é menor que 0,05, portanto, o valor não é adequado. O gráfico Normal Q-Q serve como uma contra-prova, também mostrando que os dados não são normalmente distribuídos e, dessa forma, não são adequados.
 
 Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste de outliers, é interessante utilizar os gráficos Boxplot e Histograma. 
 
@@ -218,7 +220,7 @@ Após todos os testes, por fim, o resultado do modelo de regressão linear simpl
 
 ```{r}
 
-#Diagrama de dispersão com o ajuste
+# Diagrama de dispersão com o ajuste
 
 plot(x = dados$D_Area, y = dados$VR_CO2_1stOrder, xlab = "Área desmatada no ano", ylab = "Emissão de CO2 de 1a ordem")
 
@@ -230,13 +232,16 @@ Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de f
 É isso que faremos:
 
 ```{r}
+# Retirada dos outliers
 dados_sem_outliers <- dados[-c(48,50,51,52,60,61),]
 
-
+# Modelagem linear
 mod2<- lm(VR_CO2_1stOrder ~ D_Area, data=dados_sem_outliers)
 
+#Estatísticas do modelo
 summary(mod2)
 
+# Gráfico do modelo
 plot(mod2)
 
 ```
@@ -244,16 +249,3 @@ plot(mod2)
 Mesmo com a retirada de grande parte dos outliers influentes, o modelo ainda não possui resíduos adequados. Para a realização de uma regressão linear, são assumidas alguns preceitos que, provavelmente, não são o caso dos dados utilizados para o segundo estudo de caso (vide tópico \@ref(Condicoes)). Conforme verificamos, os resíduos não seguem uma distribuição normal e os dados não possuem variância constante. Portanto, pode-se afirmar que a regressão linear não explica os dados de forma adequada. Talvez seja necessário aplicar outro tipo de modelo para estes dados. Além disso, os dados podem não conter variáveis suficientes para explicar a variável resposta (Emissão de primeira ordem de $CO_2$).
 
 
-## Referências Bibliográficas {-}
-
-CHAPRA, Steven C. **Métodos Numéricos Aplicados com MATLAB® para Engenheiros e Cientistas**. Grupo A, 2013. 9788580551778. Disponível em: https://integrada.minhabiblioteca.com.br/#/books/9788580551778/. Acesso em: 21 jun. 2022.
-
-Montgomery, Douglas C.; Runger, George C.. **Estatística aplicada e probabilidade para engenheiros**. tradução e revisão técnica Veronica Calado, Antonio Henrique Monteiro da Fonseca Thomé da Silva · - 7. ed. - Rio de Janeiro : LTC, 2021.
-
-SIDHU, Rishi. **Layman's Introduction to Linear Regression**. Disponível em: <https://towardsdatascience.com/laymans-introduction-to-linear-regression-8b334a3dab09> 
-
-R DOCUMENTATION. *shapiro.test(x)*. Disponível em: <https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test>.
-
-FILHO, Dalson Britto Figueiredo; JÚNIOR, José Alexandre da Silva. *Desvendando os Mistérios do Coeficiente de Correlação de Pearson (r)*. Revista Política Hoje vol. 18, n. 1,  2009. Disponível em: <https://periodicos.ufpe.br/revistas/politicahoje/article/viewFile/3852/3156>.
-
-THIEME, Christian. Identifying Outliers in Linear Regression — Cook’s Distance. Towards Data Science, 2021. Disponível em: <https://towardsdatascience.com/identifying-outliers-in-linear-regression-cooks-distance-9e212e9136a#:~:text=One%20method%20that%20is%20often,the%20ith%20observation%20is%20removed>.

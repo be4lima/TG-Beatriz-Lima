@@ -5,31 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 5 Análise de séries temporais | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-set in the _output.yml file.
-The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 5 Análise de séries temporais | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-set in the _output.yml file.
-The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta property="og:description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Capítulo 5 Análise de séries temporais | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-set in the _output.yml file.
-The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="twitter:description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   
 
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-08-01" />
+<meta name="date" content="2022-10-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -125,6 +119,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -143,27 +159,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a></li>
-<li class="chapter" data-level="2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html"><i class="fa fa-check"></i><b>2</b> R - Introdução e Comandos Básicos</a>
+<li class="chapter" data-level="2" data-path="ciência-de-dados-ambientais.html"><a href="ciência-de-dados-ambientais.html"><i class="fa fa-check"></i><b>2</b> Ciência de dados ambientais</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="definindo-um-diretório-de-trabalho.html"><a href="definindo-um-diretório-de-trabalho.html"><i class="fa fa-check"></i><b>2.1</b> Definindo um diretório de trabalho</a></li>
 <li class="chapter" data-level="2.2" data-path="vetores.html"><a href="vetores.html"><i class="fa fa-check"></i><b>2.2</b> Vetores</a></li>
 <li class="chapter" data-level="2.3" data-path="base-de-dados.html"><a href="base-de-dados.html"><i class="fa fa-check"></i><b>2.3</b> Base de dados</a></li>
 <li class="chapter" data-level="2.4" data-path="seleção-de-variáveis.html"><a href="seleção-de-variáveis.html"><i class="fa fa-check"></i><b>2.4</b> Seleção de variáveis</a></li>
 <li class="chapter" data-level="2.5" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>2.5</b> R packages</a></li>
+<li class="chapter" data-level="2.6" data-path="referências-para-consulta.html"><a href="referências-para-consulta.html"><i class="fa fa-check"></i><b>2.6</b> Referências para consulta</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html"><i class="fa fa-check"></i><b>3</b> Análise Exploratória de Dados</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="população-e-amostra.html"><a href="população-e-amostra.html"><i class="fa fa-check"></i><b>3.1</b> População e amostra</a></li>
+<li class="chapter" data-level="3.1" data-path="introdução-à-estatística.html"><a href="introdução-à-estatística.html"><i class="fa fa-check"></i><b>3.1</b> Introdução à Estatística</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="introdução-à-estatística.html"><a href="introdução-à-estatística.html#população-e-amostra"><i class="fa fa-check"></i><b>3.1.1</b> População e amostra</a></li>
+<li class="chapter" data-level="3.1.2" data-path="introdução-à-estatística.html"><a href="introdução-à-estatística.html#tipos-de-variáveis"><i class="fa fa-check"></i><b>3.1.2</b> Tipos de variáveis</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html"><i class="fa fa-check"></i><b>3.2</b> Sumarização numérica de dados</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-posição"><i class="fa fa-check"></i><b>3.2.1</b> Medidas de Posição</a></li>
 <li class="chapter" data-level="3.2.2" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-variabilidade"><i class="fa fa-check"></i><b>3.2.2</b> Medidas de Variabilidade</a></li>
 <li class="chapter" data-level="3.2.3" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-forma"><i class="fa fa-check"></i><b>3.2.3</b> Medidas de Forma</a></li>
 </ul></li>
+<li class="chapter" data-level="3.3" data-path="representação-gráfica.html"><a href="representação-gráfica.html"><i class="fa fa-check"></i><b>3.3</b> Representação gráfica</a></li>
 <li class="chapter" data-level="" data-path="aplicação.html"><a href="aplicação.html"><i class="fa fa-check"></i>Aplicação</a>
 <ul>
-<li class="chapter" data-level="3.2.4" data-path="aplicação.html"><a href="aplicação.html#pacote-climate"><i class="fa fa-check"></i><b>3.2.4</b> Pacote Climate</a></li>
-<li class="chapter" data-level="3.2.5" data-path="aplicação.html"><a href="aplicação.html#inmet"><i class="fa fa-check"></i><b>3.2.5</b> INMET</a></li>
+<li class="chapter" data-level="3.3.1" data-path="aplicação.html"><a href="aplicação.html#inmet"><i class="fa fa-check"></i><b>3.3.1</b> INMET</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="modelos-lineares.html"><a href="modelos-lineares.html"><i class="fa fa-check"></i><b>4</b> Modelos lineares</a>
@@ -178,11 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.1" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html#Condicoes"><i class="fa fa-check"></i><b>4.3.1</b> Condições</a></li>
 <li class="chapter" data-level="4.3.2" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html#coeficiente-de-determinação-r²"><i class="fa fa-check"></i><b>4.3.2</b> Coeficiente de Determinação (R²)</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="aplicação-1.html"><a href="aplicação-1.html"><i class="fa fa-check"></i>Aplicação</a>
-<ul>
-<li class="chapter" data-level="4.3.3" data-path="aplicação-1.html"><a href="aplicação-1.html#estudo-de-caso-1"><i class="fa fa-check"></i><b>4.3.3</b> Estudo de Caso 1</a></li>
-<li class="chapter" data-level="4.3.4" data-path="aplicação-1.html"><a href="aplicação-1.html#estudo-de-caso-2"><i class="fa fa-check"></i><b>4.3.4</b> Estudo de Caso 2</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="aplicação-1.html"><a href="aplicação-1.html"><i class="fa fa-check"></i>Aplicação</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html"><i class="fa fa-check"></i><b>5</b> Análise de séries temporais</a>
 <ul>
@@ -194,20 +211,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>5.6</b> Modelos ARIMA</a></li>
 <li class="chapter" data-level="5.7" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>5.7</b> Modelos SARIMA</a></li>
 <li class="chapter" data-level="" data-path="aplicação-2.html"><a href="aplicação-2.html"><i class="fa fa-check"></i>Aplicação</a></li>
-<li class="chapter" data-level="" data-path="referências-bibliográficas.html"><a href="referências-bibliográficas.html"><i class="fa fa-check"></i>Referências Bibliográficas</a></li>
+<li class="chapter" data-level="" data-path="referências-para-consulta-1.html"><a href="referências-para-consulta-1.html"><i class="fa fa-check"></i>Referências para consulta</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="analise-geoespacial.html"><a href="analise-geoespacial.html"><i class="fa fa-check"></i><b>6</b> Analise geoespacial</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="dados-espaciais-e-geoespaciais.html"><a href="dados-espaciais-e-geoespaciais.html"><i class="fa fa-check"></i><b>6.1</b> Dados espaciais e geoespaciais</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="dados-espaciais-e-geoespaciais.html"><a href="dados-espaciais-e-geoespaciais.html#sistema-geodesico-de-referência-sgr"><i class="fa fa-check"></i><b>6.1.1</b> Sistema Geodesico de Referência (SGR)</a></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="aplicação-3.html"><a href="aplicação-3.html"><i class="fa fa-check"></i>Aplicação</a></li>
-<li class="chapter" data-level="" data-path="referências-biliográficas.html"><a href="referências-biliográficas.html"><i class="fa fa-check"></i>Referências Biliográficas</a></li>
+<li class="chapter" data-level="" data-path="referências-para-consulta-2.html"><a href="referências-para-consulta-2.html"><i class="fa fa-check"></i>Referências para consulta</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="8" data-path="url-your-book-url-like-httpsbookdown.orgyihuibookdown-1.html"><a href="url-your-book-url-like-httpsbookdown.orgyihuibookdown-1.html"><i class="fa fa-check"></i><b>8</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -230,10 +242,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="análise-de-séries-temporais" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Capítulo 5</span> Análise de séries temporais<a href="análise-de-séries-temporais.html#análise-de-séries-temporais" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Qualquer conjunto de observações ordenadas no tempo são chamadas de Séries Temporais. No caso da Engenharia Ambiental e Urbana, podem ser citados alguns exemplos: valores diários de poluição, valores mensais de temperatura, temperaturas máximas e mínimas diárias ou precipitação atmosférica anual em uma cidade, entre outros (Morettin, 2018).</p>
-<p>É suposto que, em uma análise de série temporal, “<em>há um sistema causal mais ou menos constante, relacionado com o tempo, que exerceu influência sobre os dados no passado e pode continuar a fazê-lo no futuro. Este sistema causal costuma atuar criando padrões não aleatórios que podem ser detectados em um gráfico da série temporal, ou mediante algum outro processo estatístico</em>” (REIS, 2022).</p>
-<p>É importante citar que identificar esses padrões não aleatórios na série temporal de uma variável de interesse é o objetivo da análise. A partir dessa identificação, é possível realizar previsões, orientando tomadas de decisões na área de interesse (REIS, 2022).</p>
-<p>A partir de procedimentos estatísticos, é possível realizar a análise da série de dados de forma que seja possível realizar previsões, analisar causalidades e estudar periodicidades relevantes. Conforme COSTA (2022) e SOARES (2020), em resumo, nas séries temporais caracterizam-se por:</p>
+<p>Qualquer conjunto de observações ordenadas no tempo são chamadas de <a href="https://www.youtube.com/watch?v=T4N8ZhmiUEM&amp;list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&amp;index=5">Séries Temporais</a>. No caso da Engenharia Ambiental e Urbana, podem ser citados alguns exemplos: valores diários de poluição, valores mensais de temperatura, temperaturas máximas e mínimas diárias ou precipitação atmosférica anual em uma cidade, entre outros <span class="citation">Morettin (<a href="#ref-morettin2018" role="doc-biblioref">2018</a>)</span>.</p>
+<p>É suposto que, em uma análise de série temporal, “<em>há um sistema causal mais ou menos constante, relacionado com o tempo, que exerceu influência sobre os dados no passado e pode continuar a fazê-lo no futuro. Este sistema causal costuma atuar criando padrões não aleatórios que podem ser detectados em um gráfico da série temporal, ou mediante algum outro processo estatístico</em>” <span class="citation">Reis (<a href="#ref-reis2022" role="doc-biblioref">2022</a>)</span>.</p>
+<p>É importante citar que identificar esses padrões não aleatórios na série temporal de uma variável de interesse é o objetivo da análise. A partir dessa identificação, é possível realizar previsões, orientando tomadas de decisões na área de interesse <span class="citation">(@ <a href="#ref-reis2022" role="doc-biblioref">Reis 2022</a>)</span>.</p>
+<p>A partir de procedimentos estatísticos, é possível realizar a análise da série de dados de forma que seja possível realizar previsões, analisar causalidades e estudar periodicidades relevantes. Conforme <a href="https://www.youtube.com/watch?v=emnSZ7qKv9M&amp;list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&amp;index=2">COSTA (2022)</a> e <a href="https://www.youtube.com/watch?v=ICY8gVN1ctc&amp;list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&amp;index=1">SOARES (2020)</a>, em resumo, nas séries temporais caracterizam-se por:</p>
 <ol style="list-style-type: decimal">
 <li>Possuirem variáveis aleatórias;</li>
 <li>Observações altamente correlacionadas, principalmente porque medidas adjacentes (próximas no tempo) tendem a correlatas;</li>
@@ -241,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Dificuldade em lidar com outliers;</li>
 <li>Mudanças fundamentais/abruptas.</li>
 </ol>
-<p>De acordo com Reis (2022) e Barros et. al (2022), séries temporais são compostas pelos seguintes padrões:</p>
+<p>De acordo com <span class="citation">Reis (<a href="#ref-reis2022" role="doc-biblioref">2022</a>)</span> e <span class="citation">Barros, D., and D. (<a href="#ref-barros2017" role="doc-biblioref">2017</a>)</span>, séries temporais são compostas pelos seguintes padrões:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Tendência (T)</strong>: série temporal que segue determinada direção, não necessariamente linear, podendo também ser crescente ou decrescente. Exemplos podem ser: crescimento demográfico, ou mudança gradual de hábitos de consumo, ou qualquer outro aspecto que afete a variável de interesse no longo prazo;</p></li>
 <li><p><strong>Variações cíclicas ou ciclos (C)</strong>, flutuações nos valores da variável com duração superior a um ano, e que se repetem com certa periodicidade, que podem ser resultado de variações da economia como períodos de crescimento ou recessão, ou fenômenos climáticos como o El Niño (que se repete com periodicidade superior a um ano);</p></li>
@@ -261,6 +273,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>Clássica</strong>: descreve o comportamento da série por meio de componentes não observáveis, ou seja, a tendência, sazonalidade e ciclo. Os desvios em torno dos valores determinísticos<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> ocorrem por erros aleatórios e não pela natureza estocástica da série.</p></li>
 <li><p><strong>Moderna</strong>: supões que a série temporal seja formada por um processo estocástico<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Sendo cada observação composta por um conjunto de variáveis aleatórias, estas são representadas por funções de densidade individuais. Para capturar sua característica estocástica, são utilizadas modelos estatísticos.</p></li>
 </ol>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-barros2017" class="csl-entry">
+Barros, Anna C., Daiane Marcolino D., and Ingrid Christyne Luquett D. 2017. <em>Análise de Séries Temporais Em r: Curso Introdutório</em>. Grupo GEN. <a href="https://integrada.minhabiblioteca.com.br/#/books/9788595154902/">https://integrada.minhabiblioteca.com.br/#/books/9788595154902/</a>.
+</div>
+<div id="ref-morettin2018" class="csl-entry">
+Morettin, Pedro A. 2018. <em>Análise de Séries Temporais</em>. Editora Blucher. <a href="https://integrada.minhabiblioteca.com.br/#/books/9788521213529/">https://integrada.minhabiblioteca.com.br/#/books/9788521213529/</a>.
+</div>
+<div id="ref-reis2022" class="csl-entry">
+Reis, Marcelo Menezes. 2022. <span>“Análise de Séries Temporais.”</span> <a href="https://www.inf.ufsc.br/~marcelo.menezes.reis/Cap4.pdf">https://www.inf.ufsc.br/~marcelo.menezes.reis/Cap4.pdf</a>.
+</div>
 </div>
 <div class="footnotes">
 <hr />

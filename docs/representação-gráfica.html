@@ -159,7 +159,7 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a></li>
-<li class="chapter" data-level="2" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html"><i class="fa fa-check"></i><b>2</b> R - Introdução e Comandos Básicos</a>
+<li class="chapter" data-level="2" data-path="ciência-de-dados-ambientais.html"><a href="ciência-de-dados-ambientais.html"><i class="fa fa-check"></i><b>2</b> Ciência de dados ambientais</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="definindo-um-diretório-de-trabalho.html"><a href="definindo-um-diretório-de-trabalho.html"><i class="fa fa-check"></i><b>2.1</b> Definindo um diretório de trabalho</a></li>
 <li class="chapter" data-level="2.2" data-path="vetores.html"><a href="vetores.html"><i class="fa fa-check"></i><b>2.2</b> Vetores</a></li>
@@ -200,7 +200,6 @@ div.csl-indent {
 <li class="chapter" data-level="4.3.2" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html#coeficiente-de-determinação-r²"><i class="fa fa-check"></i><b>4.3.2</b> Coeficiente de Determinação (R²)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="aplicação-1.html"><a href="aplicação-1.html"><i class="fa fa-check"></i>Aplicação</a></li>
-<li class="chapter" data-level="" data-path="referências-bibliográficas.html"><a href="referências-bibliográficas.html"><i class="fa fa-check"></i>Referências Bibliográficas</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html"><i class="fa fa-check"></i><b>5</b> Análise de séries temporais</a>
 <ul>
@@ -216,16 +215,12 @@ div.csl-indent {
 <li class="chapter" data-level="5.7" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>5.7</b> Modelos ARIMA</a></li>
 <li class="chapter" data-level="5.8" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>5.8</b> Modelos SARIMA</a></li>
 <li class="chapter" data-level="" data-path="aplicação-2.html"><a href="aplicação-2.html"><i class="fa fa-check"></i>Aplicação</a></li>
-<li class="chapter" data-level="" data-path="referências-bibliográficas-1.html"><a href="referências-bibliográficas-1.html"><i class="fa fa-check"></i>Referências Bibliográficas</a></li>
+<li class="chapter" data-level="" data-path="referências-para-consulta-1.html"><a href="referências-para-consulta-1.html"><i class="fa fa-check"></i>Referências para consulta</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="analise-geoespacial.html"><a href="analise-geoespacial.html"><i class="fa fa-check"></i><b>6</b> Analise geoespacial</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="dados-espaciais-e-geoespaciais.html"><a href="dados-espaciais-e-geoespaciais.html"><i class="fa fa-check"></i><b>6.1</b> Dados espaciais e geoespaciais</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="dados-espaciais-e-geoespaciais.html"><a href="dados-espaciais-e-geoespaciais.html#sistema-geodesico-de-referência-sgr"><i class="fa fa-check"></i><b>6.1.1</b> Sistema Geodesico de Referência (SGR)</a></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="aplicação-3.html"><a href="aplicação-3.html"><i class="fa fa-check"></i>Aplicação</a></li>
-<li class="chapter" data-level="" data-path="referências-biliográficas.html"><a href="referências-biliográficas.html"><i class="fa fa-check"></i>Referências Biliográficas</a></li>
+<li class="chapter" data-level="" data-path="referências-para-consulta-2.html"><a href="referências-para-consulta-2.html"><i class="fa fa-check"></i>Referências para consulta</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -266,9 +261,13 @@ uma linha reta é o gráfico de linhas. Conforme apresentado por <span class="ci
 poderá representar o comportamento de somente uma variável. Os valores numéricos da variável
 apresentam-se no eixo y e o eixo x apresenta a distribuição dos dados uniformemente ao longo
 do tempo. Portanto, a partir dessa representação é possível visualizar a evolução (ou tendência) dos dados da variável <span class="citation">(<a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>)</span>. O gráfico de dispersão é muito semelhante ao de linhas, porém, nesse caso, os pontos não são ligados por uma reta. Além disso, os intervalos de distribuição dos dados, normalmente, são irregulares. Existe a possibilidade de utilizar essa representação para duas variáveis simultaneamente <span class="citation">(<a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>)</span>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="representação-gráfica.html#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;Figuras/graficodelinhas.png&quot;</span>)</span></code></pre></div>
+<p><img src="Figuras/graficodelinhas.png" width="478" /></p>
 <p>Segundo <span class="citation">Morettin and O. Bussab (<a href="#ref-morettin2017" role="doc-biblioref">2017</a>)</span>, um gráfico de barras contíguas é um histograma. Os
 valores da variável apresentam-se no eixo x e a distribuição de frequências no eixo y. Como a
 área de cada retângulo é proporcional à respectiva frequência, a área total do histograma sempre será igual a um. Portanto, a primeira etapa para a construção de um histograma é a construção da tabela de frequências, calculando as frequências absoluta e relativa e suas respectivas frequências acumuladas. Além disso, quanto maior a quantidades de dados da categoria (ou classe), mais alto será a barra (ou retângulo) <span class="citation">(<a href="#ref-morettin2017" role="doc-biblioref">Morettin and O. Bussab 2017</a>)</span>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="representação-gráfica.html#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;Figuras/exemplo_graficobarras.png&quot;</span>)</span></code></pre></div>
+<p><img src="Figuras/exemplo_graficobarras.png" width="408" /></p>
 <p>Quando uma variável quantitativa apresenta poucas observações, uma alternativa é a
 representação pelo gráfico de ramo-e-folhas. Os ramos são os valores à esquerda da linha que
 representam os primeiros dígitos da observação. À direita ficam as folhas, as quais representam os últimos dígitos da observação. Ou seja, segundo <span class="citation">Favero (<a href="#ref-favero2017" role="doc-biblioref">2017</a>)</span>, “os ramos são representados em uma única coluna e seus diferentes valores ao longo de várias colunas”. Ambos devem estar ordenados de forma crescente. Quando um ramo apresenta muitas folhas, é possível afirmar que existe maior incidência dele. Se o número de folhas for grande, pode-se criar duas ou mais linhas de um mesmo ramo <span class="citation">(<a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>; <a href="#ref-morettin2017" role="doc-biblioref">Morettin and O. Bussab 2017</a>)</span>.</p>
@@ -278,6 +277,8 @@ variável, as quais serão apresentadas a seguir. O primeiro quartil apresenta 2
 segundo, 50%, o que também é a mediana porque os dados estejam ordenados; e o terceiro, 75%.
 Com o gráfico, é possível verificar se existem dados discrepantes localizados fora dos limites
 superior e inferior.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="representação-gráfica.html#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;Figuras/boxplot.PNG&quot;</span>)</span></code></pre></div>
+<p><img src="Figuras/boxplot.PNG" width="279" /></p>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
