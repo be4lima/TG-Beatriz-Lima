@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.4 Modelos autoregressivos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
+  <title>6.5 Modelos autoregressivos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
   <meta name="description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.4 Modelos autoregressivos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta property="og:title" content="6.5 Modelos autoregressivos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.4 Modelos autoregressivos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta name="twitter:title" content="6.5 Modelos autoregressivos | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   
   <meta name="twitter:description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-10-13" />
+<meta name="date" content="2022-10-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -206,11 +206,12 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.1" data-path="estacionaridade.html"><a href="estacionaridade.html"><i class="fa fa-check"></i><b>6.1</b> Estacionaridade</a></li>
 <li class="chapter" data-level="6.2" data-path="operador-de-diferenças.html"><a href="operador-de-diferenças.html"><i class="fa fa-check"></i><b>6.2</b> Operador de diferenças</a></li>
-<li class="chapter" data-level="6.3" data-path="passeio-aleatório.html"><a href="passeio-aleatório.html"><i class="fa fa-check"></i><b>6.3</b> Passeio aleatório</a></li>
-<li class="chapter" data-level="6.4" data-path="modelos-autoregressivos.html"><a href="modelos-autoregressivos.html"><i class="fa fa-check"></i><b>6.4</b> Modelos autoregressivos</a></li>
-<li class="chapter" data-level="6.5" data-path="modelos-arma.html"><a href="modelos-arma.html"><i class="fa fa-check"></i><b>6.5</b> Modelos ARMA</a></li>
-<li class="chapter" data-level="6.6" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>6.6</b> Modelos ARIMA</a></li>
-<li class="chapter" data-level="6.7" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>6.7</b> Modelos SARIMA</a></li>
+<li class="chapter" data-level="6.3" data-path="ruído-branco.html"><a href="ruído-branco.html"><i class="fa fa-check"></i><b>6.3</b> Ruído branco</a></li>
+<li class="chapter" data-level="6.4" data-path="passeio-aleatório.html"><a href="passeio-aleatório.html"><i class="fa fa-check"></i><b>6.4</b> Passeio aleatório</a></li>
+<li class="chapter" data-level="6.5" data-path="modelos-autoregressivos.html"><a href="modelos-autoregressivos.html"><i class="fa fa-check"></i><b>6.5</b> Modelos autoregressivos</a></li>
+<li class="chapter" data-level="6.6" data-path="modelos-arma.html"><a href="modelos-arma.html"><i class="fa fa-check"></i><b>6.6</b> Modelos ARMA</a></li>
+<li class="chapter" data-level="6.7" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>6.7</b> Modelos ARIMA</a></li>
+<li class="chapter" data-level="6.8" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>6.8</b> Modelos SARIMA</a></li>
 <li class="chapter" data-level="" data-path="aplicação-2.html"><a href="aplicação-2.html"><i class="fa fa-check"></i>Aplicação</a></li>
 <li class="chapter" data-level="" data-path="referências-para-consulta-1.html"><a href="referências-para-consulta-1.html"><i class="fa fa-check"></i>Referências para consulta</a></li>
 </ul></li>
@@ -240,8 +241,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="modelos-autoregressivos" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Modelos autoregressivos<a href="modelos-autoregressivos.html#modelos-autoregressivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="modelos-autoregressivos" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Modelos autoregressivos<a href="modelos-autoregressivos.html#modelos-autoregressivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><a href="https://rpubs.com/frank-pinho/522364#:~:text=A%20classe%20de%20modelos%20autorregressivos,constante%20e%20n%C3%A3o%2Dautocorrelacionado">Modelos autoregressivos</a> AR(p) é caracterizado por realizar a modelagem somente a partir das defasagens de uma série temporal, ou seja:</p>
 <p><span class="math display">\[y_t=\phi_0+\phi_1y_{t-1}+\phi_2y_{t-2}+...+\phi_py_{t-p}+ \epsilon_t\]</span>
 ## Médias Móveis

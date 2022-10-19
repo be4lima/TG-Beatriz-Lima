@@ -1,5 +1,9 @@
-Seja bem vindo!
+Sejam bem vindos!
 
-Essa apostila tem como objetivo consolidar um material teórico, contendo tutoriais de promogramação afim de aplicar a Ciência de Dados em temas relacionados à Engenharia Ambiental e Urbana.
+Essa apostila online tem como objetivo consolidar um material teórico e apresentar tutoriais de programação em R afim de aplicar a Ciência de Dados em temas relacionados à Engenharia Ambiental e Urbana.
+
+Universidade Federal do ABC - UFABC
+Disciplina: Análise de Sistemas e Modelagem Ambiental
+
 
 Contatos: beatrizmlima@outlook.com.br

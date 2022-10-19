@@ -23,7 +23,7 @@
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-10-13" />
+<meta name="date" content="2022-10-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="estacionaridade.html"/>
-<link rel="next" href="passeio-aleatório.html"/>
+<link rel="next" href="ruído-branco.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -206,11 +206,12 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.1" data-path="estacionaridade.html"><a href="estacionaridade.html"><i class="fa fa-check"></i><b>6.1</b> Estacionaridade</a></li>
 <li class="chapter" data-level="6.2" data-path="operador-de-diferenças.html"><a href="operador-de-diferenças.html"><i class="fa fa-check"></i><b>6.2</b> Operador de diferenças</a></li>
-<li class="chapter" data-level="6.3" data-path="passeio-aleatório.html"><a href="passeio-aleatório.html"><i class="fa fa-check"></i><b>6.3</b> Passeio aleatório</a></li>
-<li class="chapter" data-level="6.4" data-path="modelos-autoregressivos.html"><a href="modelos-autoregressivos.html"><i class="fa fa-check"></i><b>6.4</b> Modelos autoregressivos</a></li>
-<li class="chapter" data-level="6.5" data-path="modelos-arma.html"><a href="modelos-arma.html"><i class="fa fa-check"></i><b>6.5</b> Modelos ARMA</a></li>
-<li class="chapter" data-level="6.6" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>6.6</b> Modelos ARIMA</a></li>
-<li class="chapter" data-level="6.7" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>6.7</b> Modelos SARIMA</a></li>
+<li class="chapter" data-level="6.3" data-path="ruído-branco.html"><a href="ruído-branco.html"><i class="fa fa-check"></i><b>6.3</b> Ruído branco</a></li>
+<li class="chapter" data-level="6.4" data-path="passeio-aleatório.html"><a href="passeio-aleatório.html"><i class="fa fa-check"></i><b>6.4</b> Passeio aleatório</a></li>
+<li class="chapter" data-level="6.5" data-path="modelos-autoregressivos.html"><a href="modelos-autoregressivos.html"><i class="fa fa-check"></i><b>6.5</b> Modelos autoregressivos</a></li>
+<li class="chapter" data-level="6.6" data-path="modelos-arma.html"><a href="modelos-arma.html"><i class="fa fa-check"></i><b>6.6</b> Modelos ARMA</a></li>
+<li class="chapter" data-level="6.7" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>6.7</b> Modelos ARIMA</a></li>
+<li class="chapter" data-level="6.8" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>6.8</b> Modelos SARIMA</a></li>
 <li class="chapter" data-level="" data-path="aplicação-2.html"><a href="aplicação-2.html"><i class="fa fa-check"></i>Aplicação</a></li>
 <li class="chapter" data-level="" data-path="referências-para-consulta-1.html"><a href="referências-para-consulta-1.html"><i class="fa fa-check"></i>Referências para consulta</a></li>
 </ul></li>
@@ -242,14 +243,11 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="operador-de-diferenças" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Operador de diferenças<a href="operador-de-diferenças.html#operador-de-diferenças" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Dada uma série temporal {<span class="math inline">\(y_t^T_{t=1}\)</span>}, o operador de diferenças transforma a série original em uma nova série formada por diferenças sucessivas:
+<p>Dada uma série temporal {<span class="math inline">\(y_t=y_{t=1}\)</span>}, o operador de diferenças transforma a série original em uma nova série formada por diferenças sucessivas:
 <span class="math inline">\(\nabla^dy_t\)</span> é uma série diferenciada “d” vezes, sendo que <span class="math inline">\(\nabla y_t=y_t - y_{t-1}\)</span> é a primeira diferença da série.</p>
 <p>Dessa forma, a segunda diferença da série será: <span class="math inline">\(\nabla^2y_t = \nabla(\nabla y_t) = \nabla (y_t - y_{t-1}) = \nabla y_t - \nabla y_{t-1} = y_t - 2y_{t-1} + y_{t-2}\)</span></p>
 <p>Para a n-ésima diferença da série: <span class="math inline">\(\nabla^n y_t = \nabla(\nabla y_t) = \sum_{r=0}^n (-1)^r \binom{n}{r} y_{t-r}\)</span>, em que <span class="math inline">\(\binom{n}{r}=\frac{n!}{r!(n-r)!}\)</span>.</p>
-<p>##Ruído branco
-No ruído branco, toda a trajetória da série temporal é atribuida a fatores puramente aleatórios. Ou seja, variáveis aleatórias não correlacionadas em um processo estocástico <span class="math inline">\({\epsilon_t, t \in T}\)</span> possuem média zero e variância constante, portanto, <span class="math inline">\(\epsilon_t\sim RB(0,\sigma^2)\)</span>.</p>
-<p>É representado como:
-<span class="math display">\[\tag{4.5}y_t=\epsilon_t\]</span></p>
+<p>É mais comum que uma ou duas diferenças já sejam suficientes para tornar a série estacionária.</p>
 </div>
             </section>
 
@@ -257,7 +255,7 @@ No ruído branco, toda a trajetória da série temporal é atribuida a fatores p
         </div>
       </div>
 <a href="estacionaridade.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="passeio-aleatório.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ruído-branco.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

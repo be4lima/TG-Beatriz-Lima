@@ -53,3 +53,4 @@ introdução-à-estatística
 tipos-de-variáveis
 representação-gráfica
 ciência-de-dados-ambientais
+ruído-branco
