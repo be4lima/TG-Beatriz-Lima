@@ -75,9 +75,11 @@ De acordo com @montgomery2021, o R² pode trazer interpretações errôneas, já
 
 Para o segundo estudo de caso serão utilizados dados reais de emissões dos gases de efeito estufa (GEE) por mudanças de cobertura da terra da Amazônia Legal disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais). Será representada a relação entre a área desmatada por ano e a emissão de 1ª ordem de $CO_2$ na Amazônia Legal.A estimativa de 1ª ordem supõe que, de modo simplificado, 100% das emissões ocorreram no momento da mudança de uso/cobertura.
 
+Antes de iniciar a aplicação, será necessário carregar os pacotes `ggplot2` e `tidyverse`.
+
 Um **primeiro passo** será carregar os dados:
 
-```{r,message=FALSE,warning=FALSE}
+```{r,message=FALSE,warning=FALSE, eval=FALSE}
 options("install.lock"=FALSE)
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
@@ -85,8 +87,10 @@ options("install.lock"=FALSE)
 install.packages(c('rlang','tidyverse'))
 
 library(ggplot2)
-#library(tidyverse)
 
+```
+
+```{r}
 
 ## Carregando base de dados
 dados0 <- read.csv2("Data/CO2Amazonia.csv")

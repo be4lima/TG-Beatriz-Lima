@@ -27,7 +27,7 @@ No curso de Engenharia Ambiental e Urbana, utilizam-se *shapefiles* (.shp) para 
 ## Aplicação {-}
 Para a aplicação será reproduzido o exemplo do [TBEP R Training](https://tbep-tech.github.io/tbep-r-training/mapping.html#Exercise_13). Para isso, serão instalados os pacotes `sf` e `mapview`.
 
-```{r chunk7-1,message=FALSE,warning=FALSE}
+```{r chunk7-1,message=FALSE,warning=FALSE, results='hide'}
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
 

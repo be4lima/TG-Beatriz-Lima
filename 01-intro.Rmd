@@ -2,7 +2,7 @@
 
 Conforme @kadiyala2017, a Ciência de Dados é definida como um campo interdisciplinar que tem como principal objetivo a "extração de relacionamentos significativos ou *insights* de padrões em bancos de dados multidimensionais por meio da aplicação de métodos matemáticos, computacionais e científicos relevantes". Portanto, basicamente, a Ciência de Dados tem a capacidade de transformar dados em informações úteis, fazendo com que a tomada de decisão seja fundamentada [@mendes2022]. 
 
-```{r}
+```{r, echo=FALSE}
 knitr::include_graphics("Figuras/diagramadevenn.png")
 ```
 
