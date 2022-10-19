@@ -17,6 +17,7 @@ A **População** é um conjunto de observações relacionadas a indivíduos com
 ### Tipos de variáveis
 Uma variável pode ser definida como uma característica da amostra ou população. Para
 aplicar os cálculos de estatísticas e realizar as representações gráficas é importante realizar a classificação da variável. Os tipos de variáveis são: Qualitativa ou não métrica e Quantitativa ou métrica. O primeiro tipo está relacionado com variáveis que categorizam os dados, de forma quenão seja possível medí-los ou realizar cálculos. Já o segundo, relaciona-se com variáveis que podem ser contadas ou mensuradas [@favero2017].
+
 ```{r, echo=FALSE}
 knitr::include_graphics("Figuras/figtiposdevariaveis.PNG")
 ```
@@ -107,6 +108,7 @@ knitr::include_graphics("Figuras/graficodelinhas.png")
 
 Segundo @morettin2017, um gráfico de barras contíguas é um histograma. Os
 valores da variável apresentam-se no eixo x e a distribuição de frequências no eixo y. Como a área de cada retângulo é proporcional à respectiva frequência, a área total do histograma sempre será igual a um. Portanto, a primeira etapa para a construção de um histograma é a construção da tabela de frequências, calculando as frequências absoluta e relativa e suas respectivas frequências acumuladas. Além disso, quanto maior a quantidades de dados da categoria (ou classe), mais alto será a barra (ou retângulo) [@morettin2017].
+
 ```{r, echo=FALSE}
 knitr::include_graphics("Figuras/histograma.png")
 ```
