@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Aplicação | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
   <meta name="description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
-  <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Aplicação | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-10-19" />
+<meta name="date" content="2022-11-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -217,14 +217,14 @@ div.csl-indent {
 <li class="chapter" data-level="6.8" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>6.8</b> Modelos ARIMA</a></li>
 <li class="chapter" data-level="6.9" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>6.9</b> Modelos SARIMA</a></li>
 <li class="chapter" data-level="" data-path="aplicação-2.html"><a href="aplicação-2.html"><i class="fa fa-check"></i>Aplicação</a></li>
-<li class="chapter" data-level="" data-path="referências-para-consulta-1.html"><a href="referências-para-consulta-1.html"><i class="fa fa-check"></i>Referências para consulta</a></li>
+<li class="chapter" data-level="" data-path="material-complementar.html"><a href="material-complementar.html"><i class="fa fa-check"></i>Material Complementar</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="analise-geoespacial.html"><a href="analise-geoespacial.html"><i class="fa fa-check"></i><b>7</b> Analise geoespacial</a>
 <ul>
 <li class="chapter" data-level="" data-path="aplicação-3.html"><a href="aplicação-3.html"><i class="fa fa-check"></i>Aplicação</a></li>
-<li class="chapter" data-level="" data-path="referências-para-consulta-2.html"><a href="referências-para-consulta-2.html"><i class="fa fa-check"></i>Referências para consulta</a></li>
+<li class="chapter" data-level="" data-path="material-complementar-1.html"><a href="material-complementar-1.html"><i class="fa fa-check"></i>Material Complementar</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="referências-bibliográficas.html"><a href="referências-bibliográficas.html"><i class="fa fa-check"></i>Referências Bibliográficas</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -252,34 +252,34 @@ div.csl-indent {
 <p>Para a aplicação, será utilizada a base de dados do Instituto Nacional de Meteorologia (INMET) de precipitação e de dias de precipitação do Mirante de Santana em São Paulo.</p>
 <p>Realizaremos a análise exploratória da precipitação total ao longo dos anos (1990-2022).</p>
 <p>Para importar a base de dados em .csv, utiliza-se a função read.csv2() e insere-se como argumento o <em>diretório</em>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="aplicação.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb2-2"><a href="aplicação.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="aplicação.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Importar base de dados</span></span>
-<span id="cb2-4"><a href="aplicação.html#cb2-4" aria-hidden="true" tabindex="-1"></a>inmet0 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;Data/INMET_SP.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="aplicação.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="aplicação.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="aplicação.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Importar base de dados</span></span>
+<span id="cb1-4"><a href="aplicação.html#cb1-4" aria-hidden="true" tabindex="-1"></a>inmet0 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;Data/INMET_SP.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
 <p>É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto; e, read.csv2(), quando são separados por ponto e vírgula e os decimais por vírgula.</p>
 <p>Para visualizar a tabela importada, basta executar a função View():</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="aplicação.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualização da base de dados</span></span>
-<span id="cb3-2"><a href="aplicação.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(inmet0)</span>
-<span id="cb3-3"><a href="aplicação.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="aplicação.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Omitir valores NA da base de dados</span></span>
-<span id="cb3-5"><a href="aplicação.html#cb3-5" aria-hidden="true" tabindex="-1"></a>inmet <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(inmet0)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="aplicação.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualização da base de dados</span></span>
+<span id="cb2-2"><a href="aplicação.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(inmet0)</span>
+<span id="cb2-3"><a href="aplicação.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="aplicação.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Omitir valores NA da base de dados</span></span>
+<span id="cb2-5"><a href="aplicação.html#cb2-5" aria-hidden="true" tabindex="-1"></a>inmet <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(inmet0)</span></code></pre></div>
 <p>Para iniciar a exploração dos dados, inicialmente será utilizada a função str() que exibe de forma compacta a estrutura da tabela importada.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="aplicação.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(inmet)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="aplicação.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(inmet)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    190 obs. of  3 variables:
-##  $ Data.Medicao                                          : chr  &quot;31/08/2006&quot; &quot;30/09/2006&quot; &quot;31/10/2006&quot; &quot;30/11/2006&quot; ...
-##  $ NUMERO.DE.DIAS.COM.PRECIP..PLUV..MENSAL..AUT..nÃºmero.: int  4 7 15 17 21 19 13 13 12 11 ...
-##  $ PRECIPITACAO.TOTAL..MENSAL..AUT..mm.                  : num  6.4 71.2 95.8 219.4 290.4 ...
+##  $ Data.Medicao                                         : chr  &quot;31/08/2006&quot; &quot;30/09/2006&quot; &quot;31/10/2006&quot; &quot;30/11/2006&quot; ...
+##  $ NUMERO.DE.DIAS.COM.PRECIP..PLUV..MENSAL..AUT..número.: int  4 7 15 17 21 19 13 13 12 11 ...
+##  $ PRECIPITACAO.TOTAL..MENSAL..AUT..mm.                 : num  6.4 71.2 95.8 219.4 290.4 ...
 ##  - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:5] 1 29 97 116 131
 ##   ..- attr(*, &quot;names&quot;)= chr [1:5] &quot;1&quot; &quot;29&quot; &quot;97&quot; &quot;116&quot; ...</code></pre>
 <p>Continuando, será utilizada a função ´summary()´ para apresentar o sumário de estatísticas descritivas (média, mediana, mínimo, máximo, 1º quartil, 3º quartil e valores faltantes (NA)), já que as variáveis de precipitação total e número de dias de precipitação são numéricas.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="aplicação.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(inmet)</span></code></pre></div>
-<pre><code>##  Data.Medicao       NUMERO.DE.DIAS.COM.PRECIP..PLUV..MENSAL..AUT..nÃºmero.
-##  Length:190         Min.   : 0.00                                         
-##  Class :character   1st Qu.: 8.00                                         
-##  Mode  :character   Median :12.00                                         
-##                     Mean   :12.44                                         
-##                     3rd Qu.:16.00                                         
-##                     Max.   :28.00                                         
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="aplicação.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(inmet)</span></code></pre></div>
+<pre><code>##  Data.Medicao       NUMERO.DE.DIAS.COM.PRECIP..PLUV..MENSAL..AUT..número.
+##  Length:190         Min.   : 0.00                                        
+##  Class :character   1st Qu.: 8.00                                        
+##  Mode  :character   Median :12.00                                        
+##                     Mean   :12.44                                        
+##                     3rd Qu.:16.00                                        
+##                     Max.   :28.00                                        
 ##  PRECIPITACAO.TOTAL..MENSAL..AUT..mm.
 ##  Min.   :  0.0                       
 ##  1st Qu.: 50.8                       
@@ -288,75 +288,75 @@ div.csl-indent {
 ##  3rd Qu.:188.4                       
 ##  Max.   :493.8</code></pre>
 <p>Inicialmente, os cabeçalhos da coluna serão modificados para facilitar a análise:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="aplicação.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Explorando os cabeçalhos da base de dados</span></span>
-<span id="cb8-2"><a href="aplicação.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(inmet)</span></code></pre></div>
-<pre><code>## [1] &quot;Data.Medicao&quot;                                          
-## [2] &quot;NUMERO.DE.DIAS.COM.PRECIP..PLUV..MENSAL..AUT..nÃºmero.&quot;
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="aplicação.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Explorando os cabeçalhos da base de dados</span></span>
+<span id="cb7-2"><a href="aplicação.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(inmet)</span></code></pre></div>
+<pre><code>## [1] &quot;Data.Medicao&quot;                                         
+## [2] &quot;NUMERO.DE.DIAS.COM.PRECIP..PLUV..MENSAL..AUT..número.&quot;
 ## [3] &quot;PRECIPITACAO.TOTAL..MENSAL..AUT..mm.&quot;</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="aplicação.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modificando os cabeçalhos</span></span>
-<span id="cb10-2"><a href="aplicação.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(inmet)[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;dias_de_precipitacao&quot;</span>,<span class="st">&quot;precipitacao_total&quot;</span>)</span>
-<span id="cb10-3"><a href="aplicação.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="aplicação.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(inmet)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="aplicação.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modificando os cabeçalhos</span></span>
+<span id="cb9-2"><a href="aplicação.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(inmet)[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;dias_de_precipitacao&quot;</span>,<span class="st">&quot;precipitacao_total&quot;</span>)</span>
+<span id="cb9-3"><a href="aplicação.html#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="aplicação.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(inmet)</span></code></pre></div>
 <p>Para continuar explorando os dados, realizou-se um gráfico de linhas a fim de analisar o comportamento da precipitação em relação às datas.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="aplicação.html#cb11-1" aria-hidden="true" tabindex="-1"></a>month_year <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(inmet<span class="sc">$</span>data, <span class="at">format =</span> <span class="st">&quot;%d/%m/%Y&quot;</span>),<span class="st">&quot;%Y/%m&quot;</span>)</span>
-<span id="cb11-2"><a href="aplicação.html#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="aplicação.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(month_year)</span>
-<span id="cb11-4"><a href="aplicação.html#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="aplicação.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb11-6"><a href="aplicação.html#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="aplicação.html#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(inmet,</span>
-<span id="cb11-8"><a href="aplicação.html#cb11-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> month_year, <span class="at">y =</span> precipitacao_total)) <span class="sc">+</span></span>
-<span id="cb11-9"><a href="aplicação.html#cb11-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_line</span>(<span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb11-10"><a href="aplicação.html#cb11-10" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb11-11"><a href="aplicação.html#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_x_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">check.overlap =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
-<span id="cb11-12"><a href="aplicação.html#cb11-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_y_discrete</span>(<span class="at">guide=</span> <span class="fu">guide_axis</span>(<span class="at">check.overlap =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="aplicação.html#cb10-1" aria-hidden="true" tabindex="-1"></a>month_year <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(inmet<span class="sc">$</span>data, <span class="at">format =</span> <span class="st">&quot;%d/%m/%Y&quot;</span>),<span class="st">&quot;%Y/%m&quot;</span>)</span>
+<span id="cb10-2"><a href="aplicação.html#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="aplicação.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(month_year)</span>
+<span id="cb10-4"><a href="aplicação.html#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="aplicação.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-6"><a href="aplicação.html#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="aplicação.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(inmet,</span>
+<span id="cb10-8"><a href="aplicação.html#cb10-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> month_year, <span class="at">y =</span> precipitacao_total)) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="aplicação.html#cb10-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_line</span>(<span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="aplicação.html#cb10-10" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb10-11"><a href="aplicação.html#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_x_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">check.overlap =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
+<span id="cb10-12"><a href="aplicação.html#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_y_discrete</span>(<span class="at">guide=</span> <span class="fu">guide_axis</span>(<span class="at">check.overlap =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>No momento, nos interessa analisar a precipitação ao longo dos anos de análise. Por isso, essa variável será adicionada como uma coluna ao dataset inicial:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="aplicação.html#cb12-1" aria-hidden="true" tabindex="-1"></a>ano <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(inmet<span class="sc">$</span>data, <span class="at">format =</span> <span class="st">&quot;%d/ %m/ %Y&quot;</span>),<span class="st">&quot;%Y&quot;</span>)</span>
-<span id="cb12-2"><a href="aplicação.html#cb12-2" aria-hidden="true" tabindex="-1"></a>inmet_new <span class="ot">&lt;-</span> <span class="fu">cbind</span>(inmet, ano)</span>
-<span id="cb12-3"><a href="aplicação.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="aplicação.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(inmet_new)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="aplicação.html#cb11-1" aria-hidden="true" tabindex="-1"></a>ano <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(inmet<span class="sc">$</span>data, <span class="at">format =</span> <span class="st">&quot;%d/ %m/ %Y&quot;</span>),<span class="st">&quot;%Y&quot;</span>)</span>
+<span id="cb11-2"><a href="aplicação.html#cb11-2" aria-hidden="true" tabindex="-1"></a>inmet_new <span class="ot">&lt;-</span> <span class="fu">cbind</span>(inmet, ano)</span>
+<span id="cb11-3"><a href="aplicação.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="aplicação.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(inmet_new)</span></code></pre></div>
 <p>Analisando o histograma da precipitação total, verifica-se que a sua distribuição é positiva e assimétrica:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="aplicação.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma</span></span>
-<span id="cb13-2"><a href="aplicação.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="aplicação.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb13-4"><a href="aplicação.html#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="aplicação.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>inmet_new, <span class="fu">aes</span>(<span class="at">x=</span>precipitacao_total)) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="aplicação.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb13-7"><a href="aplicação.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="aplicação.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma</span></span>
+<span id="cb12-2"><a href="aplicação.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="aplicação.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-4"><a href="aplicação.html#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="aplicação.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>inmet_new, <span class="fu">aes</span>(<span class="at">x=</span>precipitacao_total)) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="aplicação.html#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb12-7"><a href="aplicação.html#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() </span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>A partir do boxplot abaixo, é possível visualizar que 75% dos valores de precipitação estão entre 50mm e aproximadamente 200mm; a média stá próxima de 150mm e a mediana de 100mm; e, por fim, o valor máximo está próximo de 400 mm. Existem observações além do limite máximo, o que é um indício de outliers, ou seja, observações atípicas (fora do normal).</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="aplicação.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>inmet_new, <span class="fu">aes</span>(<span class="at">y=</span>precipitacao_total)) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="aplicação.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb14-3"><a href="aplicação.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="aplicação.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>inmet_new, <span class="fu">aes</span>(<span class="at">y=</span>precipitacao_total)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="aplicação.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb13-3"><a href="aplicação.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 Primeiramente, será encontrada a média de precipitação por ano analisado, com um intervalo de confiança de 95% (escore-x da curva normal igual a 1,96). Com o objetivo de deixar o código mais organizado, será utilizado o <a href="https://www.youtube.com/watch?v=qHCBG14tKns">operador pipe</a>.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="aplicação.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Média das precipitações por ano</span></span>
-<span id="cb15-2"><a href="aplicação.html#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="aplicação.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#instalando o pacote para utilizar o operador pipe %&gt;% </span></span>
-<span id="cb15-4"><a href="aplicação.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
-<span id="cb15-5"><a href="aplicação.html#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="aplicação.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando tabela de statísticas</span></span>
-<span id="cb15-7"><a href="aplicação.html#cb15-7" aria-hidden="true" tabindex="-1"></a>tabela_stats <span class="ot">&lt;-</span> inmet_new <span class="sc">%&gt;%</span></span>
-<span id="cb15-8"><a href="aplicação.html#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ano) <span class="sc">%&gt;%</span></span>
-<span id="cb15-9"><a href="aplicação.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_obs =</span> <span class="fu">n</span>(), <span class="at">media =</span> <span class="fu">mean</span>(precipitacao_total), <span class="at">desvio_padrao =</span> <span class="fu">sd</span>(precipitacao_total)) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-10"><a href="aplicação.html#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">erro =</span> <span class="fl">1.96</span><span class="sc">*</span>desvio_padrao<span class="sc">/</span><span class="fu">sqrt</span>(n_obs), </span>
-<span id="cb15-11"><a href="aplicação.html#cb15-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">limite_superior =</span> media <span class="sc">+</span> erro,</span>
-<span id="cb15-12"><a href="aplicação.html#cb15-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">limite_inferior =</span> media <span class="sc">-</span> erro)</span>
-<span id="cb15-13"><a href="aplicação.html#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="aplicação.html#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizando a tabela criada com os dados estatísticos</span></span>
-<span id="cb15-15"><a href="aplicação.html#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-16"><a href="aplicação.html#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(tabela_stats)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="aplicação.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Média das precipitações por ano</span></span>
+<span id="cb14-2"><a href="aplicação.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="aplicação.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#instalando o pacote para utilizar o operador pipe %&gt;% </span></span>
+<span id="cb14-4"><a href="aplicação.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
+<span id="cb14-5"><a href="aplicação.html#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="aplicação.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando tabela de statísticas</span></span>
+<span id="cb14-7"><a href="aplicação.html#cb14-7" aria-hidden="true" tabindex="-1"></a>tabela_stats <span class="ot">&lt;-</span> inmet_new <span class="sc">%&gt;%</span></span>
+<span id="cb14-8"><a href="aplicação.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ano) <span class="sc">%&gt;%</span></span>
+<span id="cb14-9"><a href="aplicação.html#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_obs =</span> <span class="fu">n</span>(), <span class="at">media =</span> <span class="fu">mean</span>(precipitacao_total), <span class="at">desvio_padrao =</span> <span class="fu">sd</span>(precipitacao_total)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-10"><a href="aplicação.html#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">erro =</span> <span class="fl">1.96</span><span class="sc">*</span>desvio_padrao<span class="sc">/</span><span class="fu">sqrt</span>(n_obs), </span>
+<span id="cb14-11"><a href="aplicação.html#cb14-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">limite_superior =</span> media <span class="sc">+</span> erro,</span>
+<span id="cb14-12"><a href="aplicação.html#cb14-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">limite_inferior =</span> media <span class="sc">-</span> erro)</span>
+<span id="cb14-13"><a href="aplicação.html#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="aplicação.html#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizando a tabela criada com os dados estatísticos</span></span>
+<span id="cb14-15"><a href="aplicação.html#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="aplicação.html#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(tabela_stats)</span></code></pre></div>
 <p>Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras com os erros padrões das amostras. Utiliza-se o erro padrão e não o desvio padrão porque, neste caso, estamos interessados na variabilidade das médias das amostras e não na variabilidade das observações dentro da amostra.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="aplicação.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotando os valores com seus respectivos erros</span></span>
-<span id="cb16-2"><a href="aplicação.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span> (<span class="at">data =</span> tabela_stats, <span class="fu">aes</span>(<span class="at">x =</span> ano, <span class="at">y =</span> media, <span class="at">fill =</span> ano)) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="aplicação.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb16-4"><a href="aplicação.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>limite_inferior, <span class="at">ymax=</span>limite_superior)) <span class="sc">+</span></span>
-<span id="cb16-5"><a href="aplicação.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Média das precipitações por ano&quot;</span>) <span class="sc">+</span></span>
-<span id="cb16-6"><a href="aplicação.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
-<span id="cb16-7"><a href="aplicação.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
-<span id="cb16-8"><a href="aplicação.html#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb16-9"><a href="aplicação.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="aplicação.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotando os valores com seus respectivos erros</span></span>
+<span id="cb15-2"><a href="aplicação.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span> (<span class="at">data =</span> tabela_stats, <span class="fu">aes</span>(<span class="at">x =</span> ano, <span class="at">y =</span> media, <span class="at">fill =</span> ano)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="aplicação.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="aplicação.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>limite_inferior, <span class="at">ymax=</span>limite_superior)) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="aplicação.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Média das precipitações por ano&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="aplicação.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="aplicação.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="aplicação.html#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb15-9"><a href="aplicação.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 
 </div>

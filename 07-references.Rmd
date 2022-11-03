@@ -1,5 +1,5 @@
 `r if (knitr::is_html_output()) '
-# References {-}
+# Referências Bibliográficas {-}
 '`
 The R Foundation. **R: The R Project**. Disponível em: <https://www.r-project.org/>
 

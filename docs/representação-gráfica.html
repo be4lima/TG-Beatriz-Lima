@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.3 Representação gráfica | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
   <meta name="description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
-  <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.3 Representação gráfica | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-10-19" />
+<meta name="date" content="2022-11-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -217,14 +217,14 @@ div.csl-indent {
 <li class="chapter" data-level="6.8" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>6.8</b> Modelos ARIMA</a></li>
 <li class="chapter" data-level="6.9" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>6.9</b> Modelos SARIMA</a></li>
 <li class="chapter" data-level="" data-path="aplicação-2.html"><a href="aplicação-2.html"><i class="fa fa-check"></i>Aplicação</a></li>
-<li class="chapter" data-level="" data-path="referências-para-consulta-1.html"><a href="referências-para-consulta-1.html"><i class="fa fa-check"></i>Referências para consulta</a></li>
+<li class="chapter" data-level="" data-path="material-complementar.html"><a href="material-complementar.html"><i class="fa fa-check"></i>Material Complementar</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="analise-geoespacial.html"><a href="analise-geoespacial.html"><i class="fa fa-check"></i><b>7</b> Analise geoespacial</a>
 <ul>
 <li class="chapter" data-level="" data-path="aplicação-3.html"><a href="aplicação-3.html"><i class="fa fa-check"></i>Aplicação</a></li>
-<li class="chapter" data-level="" data-path="referências-para-consulta-2.html"><a href="referências-para-consulta-2.html"><i class="fa fa-check"></i>Referências para consulta</a></li>
+<li class="chapter" data-level="" data-path="material-complementar-1.html"><a href="material-complementar-1.html"><i class="fa fa-check"></i>Material Complementar</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="referências-bibliográficas.html"><a href="referências-bibliográficas.html"><i class="fa fa-check"></i>Referências Bibliográficas</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -252,8 +252,8 @@ div.csl-indent {
 <p>A representação gráfica de pontos formados pela intersecção no eixo x e y ligados por uma linha reta é o gráfico de linhas. Conforme apresentado por <span class="citation">Favero (<a href="#ref-favero2017" role="doc-biblioref">2017</a>)</span>, esse gráfico poderá representar o comportamento de somente uma variável. Os valores numéricos da variável apresentam-se no eixo y e o eixo x apresenta a distribuição dos dados uniformemente ao longo do tempo. Portanto, a partir dessa representação é possível visualizar a evolução (ou tendência) dos dados da variável <span class="citation">(<a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>)</span>. O gráfico de dispersão é muito semelhante ao de linhas, porém, nesse caso, os pontos não são ligados por uma reta. Além disso, os intervalos de distribuição dos dados, normalmente, são irregulares. Existe a possibilidade de utilizar essa representação para duas variáveis simultaneamente <span class="citation">(<a href="#ref-favero2017" role="doc-biblioref">Favero 2017</a>)</span>.</p>
 <p><img src="Figuras/graficodelinhas.png" width="478" /></p>
 <p>Segundo <span class="citation">Morettin and O. Bussab (<a href="#ref-morettin2017" role="doc-biblioref">2017</a>)</span>, um gráfico de barras contíguas é um histograma. Os
-valores da variável apresentam-se no eixo x e a distribuição de frequências no eixo y. Como a área de cada retângulo é proporcional à respectiva frequência, a área total do histograma sempre será igual a um. Portanto, a primeira etapa para a construção de um histograma é a construção da tabela de frequências, calculando as frequências absoluta e relativa e suas respectivas frequências acumuladas. Além disso, quanto maior a quantidades de dados da categoria (ou classe), mais alto será a barra (ou retângulo) <span class="citation">(<a href="#ref-morettin2017" role="doc-biblioref">Morettin and O. Bussab 2017</a>)</span>.
-<img src="Figuras/histograma.png" width="480" /></p>
+valores da variável apresentam-se no eixo x e a distribuição de frequências no eixo y. Como a área de cada retângulo é proporcional à respectiva frequência, a área total do histograma sempre será igual a um. Portanto, a primeira etapa para a construção de um histograma é a construção da tabela de frequências, calculando as frequências absoluta e relativa e suas respectivas frequências acumuladas. Além disso, quanto maior a quantidades de dados da categoria (ou classe), mais alto será a barra (ou retângulo) <span class="citation">(<a href="#ref-morettin2017" role="doc-biblioref">Morettin and O. Bussab 2017</a>)</span>.</p>
+<p><img src="Figuras/histograma.png" width="480" /></p>
 <p>O boxplot apresenta o valor mínimo, primeiro, segundo e terceiro quartil, mediana e o valor máximo de uma determinada variável. Ou seja, é a representação de medidas de posição da variável, as quais serão apresentadas a seguir. O primeiro quartil apresenta 25% dos dados; o segundo, 50%, o que também é a mediana porque os dados estejam ordenados; e o terceiro, 75%. Com o gráfico, é possível verificar se existem dados discrepantes localizados fora dos limites superior e inferior.</p>
 <p><img src="Figuras/boxplot.PNG" width="279" /></p>
 </div>

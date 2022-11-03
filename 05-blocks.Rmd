@@ -367,7 +367,7 @@ accuracy(fit.air)
 ```
 Pelas métricas, o MAPE demonstra que o erro de previsão está em 0,47%, o que é muito bom. Dessa forma, conseguimos confirmar que a previsão está adequada!
 
-## Referências para consulta {-}
+## Material Complementar {-}
 1. [Introdução à Análise de Séries Temporais (youtube)](https://www.youtube.com/watch?v=emnSZ7qKv9M&list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&index=1) 
 
 2. [Séries Temporais (youtube)](https://www.youtube.com/watch?v=ICY8gVN1ctc&list=PLW1zGvUGqyiEw1O3HAcjezB9esyI8R8xe&index=1)

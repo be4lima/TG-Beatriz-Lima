@@ -176,7 +176,7 @@ mapview(sgdat, col.regions = 'green') +
 ```
 
 
-## Referências para consulta {-}
+## Material Complementar {-}
 1. [TBEP R Training (youtube)](https://www.youtube.com/watch?v=nQVFqkifeSE&t=152s)
 
 
