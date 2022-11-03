@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Aplicação | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
   <meta name="description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
-  <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Aplicação | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-10-19" />
+<meta name="date" content="2022-11-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -244,63 +244,32 @@ div.csl-indent {
 <div id="aplicação-2" class="section level2 unnumbered hasAnchor">
 <h2>Aplicação<a href="aplicação-2.html#aplicação-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Para a aplicação, será realizado o exemplo do capítulo 4 do livro de <span class="citation">Barros, D., and D. (<a href="#ref-barros2017" role="doc-biblioref">2017</a>)</span>. Será utilizada como <em>database</em> a série temporal de vendas de passagens aéreas nos EUA de janeiro de 1949 a dezembro de 1960.</p>
-<pre><code>## package &#39;rlang&#39; successfully unpacked and MD5 sums checked
-## package &#39;tidyverse&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\wesle\AppData\Local\Temp\RtmpKUHGMA\downloaded_packages</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="aplicação-2.html#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">eval =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-2"><a href="aplicação-2.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Intalando pacotes necessários</span></span>
-<span id="cb3-3"><a href="aplicação-2.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BETS&quot;</span>)</span></code></pre></div>
-<pre><code>## package &#39;lmtest&#39; successfully unpacked and MD5 sums checked
-## package &#39;urca&#39; successfully unpacked and MD5 sums checked
-## package &#39;forecast&#39; successfully unpacked and MD5 sums checked
-## package &#39;BETS&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\wesle\AppData\Local\Temp\RtmpKUHGMA\downloaded_packages</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="aplicação-2.html#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;urca&quot;</span>)</span></code></pre></div>
-<pre><code>## package &#39;urca&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\wesle\AppData\Local\Temp\RtmpKUHGMA\downloaded_packages</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="aplicação-2.html#cb7-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;TSA&quot;</span>)</span></code></pre></div>
-<pre><code>## package &#39;TSA&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\wesle\AppData\Local\Temp\RtmpKUHGMA\downloaded_packages</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="aplicação-2.html#cb9-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;forecast&quot;</span>)</span></code></pre></div>
-<pre><code>## package &#39;forecast&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\wesle\AppData\Local\Temp\RtmpKUHGMA\downloaded_packages</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="aplicação-2.html#cb11-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;lmtest&quot;</span>)</span></code></pre></div>
-<pre><code>## package &#39;lmtest&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\wesle\AppData\Local\Temp\RtmpKUHGMA\downloaded_packages</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="aplicação-2.html#cb13-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;normtest&quot;</span>)</span>
-<span id="cb13-2"><a href="aplicação-2.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;FinTS&quot;</span>)</span></code></pre></div>
-<pre><code>## package &#39;FinTS&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\wesle\AppData\Local\Temp\RtmpKUHGMA\downloaded_packages</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="aplicação-2.html#cb15-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;xlsx&quot;</span>)</span></code></pre></div>
-<pre><code>## package &#39;xlsx&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\wesle\AppData\Local\Temp\RtmpKUHGMA\downloaded_packages</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="aplicação-2.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregando a série temporal</span></span>
-<span id="cb17-2"><a href="aplicação-2.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data</span>(AirPassengers)</span>
-<span id="cb17-3"><a href="aplicação-2.html#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="aplicação-2.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise gráfica</span></span>
-<span id="cb17-5"><a href="aplicação-2.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts.plot</span>(AirPassengers, <span class="at">ylab =</span> <span class="st">&quot;Vendas de Passagens &quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Anos&quot;</span>)</span></code></pre></div>
-<p>A partir do gráfico é possível perceber que existe uma tendência de aumento nas vendas de passagens. Em relação à variância, verifica-se que a distância entre os meses de maior e menor venda está aumentando, indicando uma variância não constante. Além de haver oscilações que se repetem anualmente, dando indícios de presença de sazonalidade, que será analisada mensalmente abaixo:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="aplicação-2.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monthplot</span>(AirPassengers,<span class="at">ylab =</span> <span class="st">&quot;Vendas de Passagens &quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Meses&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="aplicação-2.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intalando pacotes necessários</span></span>
+<span id="cb1-2"><a href="aplicação-2.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;BETS&quot;</span>,<span class="st">&quot;urca&quot;</span>,<span class="st">&quot;TSA&quot;</span>,<span class="st">&quot;forecast&quot;</span>,<span class="st">&quot;lmtest&quot;</span>,<span class="st">&quot;normtest&quot;</span>,<span class="st">&quot;FinTS&quot;</span>,<span class="st">&quot;xlsx&quot;</span>)</span>
+<span id="cb1-3"><a href="aplicação-2.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="aplicação-2.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Chacando se os pacotes já estão instalados</span></span>
+<span id="cb1-5"><a href="aplicação-2.html#cb1-5" aria-hidden="true" tabindex="-1"></a>is.installed <span class="ot">&lt;-</span> <span class="cf">function</span>(mypkg){</span>
+<span id="cb1-6"><a href="aplicação-2.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.element</span>(mypkg, <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])</span>
+<span id="cb1-7"><a href="aplicação-2.html#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-8"><a href="aplicação-2.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(packages <span class="cf">in</span> packages){</span>
+<span id="cb1-9"><a href="aplicação-2.html#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.installed</span>(packages)){</span>
+<span id="cb1-10"><a href="aplicação-2.html#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>((packages), <span class="at">repos =</span> <span class="st">&quot;http://cran.us.r-project.org&quot;</span>)</span>
+<span id="cb1-11"><a href="aplicação-2.html#cb1-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-12"><a href="aplicação-2.html#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="aplicação-2.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregando a série temporal</span></span>
+<span id="cb2-2"><a href="aplicação-2.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data</span>(AirPassengers)</span>
+<span id="cb2-3"><a href="aplicação-2.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="aplicação-2.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise gráfica</span></span>
+<span id="cb2-5"><a href="aplicação-2.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts.plot</span>(AirPassengers, <span class="at">ylab =</span> <span class="st">&quot;Vendas de Passagens &quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Anos&quot;</span>)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+A partir do gráfico é possível perceber que existe uma tendência de aumento nas vendas de passagens. Em relação à variância, verifica-se que a distância entre os meses de maior e menor venda está aumentando, indicando uma variância não constante. Além de haver oscilações que se repetem anualmente, dando indícios de presença de sazonalidade, que será analisada mensalmente abaixo:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="aplicação-2.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monthplot</span>(AirPassengers,<span class="at">ylab =</span> <span class="st">&quot;Vendas de Passagens &quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Meses&quot;</span>)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>No gráfico acima, os traços horizontais representam a média, a qual aumenta nos meses de férias dos EUA (Junho, Julho e Agosto). Pelos traços verticais e sua inclinação positiva, é possível verificar um aumento constante na venda de passagens ao longo dos anos. Ambos trazem indícios da não estacionariedade da série temporal.</p>
 <p>Conforma comentado ao longo do capítulo, a série temporal é composta por quatro componentes não observáveis e estas serão analisadas a seguir com a função <code>decompose()</code>.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="aplicação-2.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">decompose</span>(AirPassengers))</span></code></pre></div>
-<p>A partir da figura acima, verifica-se que a série temporal é fortemente afetada pela tendência (<em>trend</em>), além da sazonalidade (<em>seasonal</em>). Sobra, ainda, a componente aleatória que é levemente “contaminada” pela componente sazonal, como é possível verificar na comparação entre <em>random</em> e <em>seasonal</em> no gráfico.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="aplicação-2.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">decompose</span>(AirPassengers))</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+A partir da figura acima, verifica-se que a série temporal é fortemente afetada pela tendência (<em>trend</em>), além da sazonalidade (<em>seasonal</em>). Sobra, ainda, a componente aleatória que é levemente “contaminada” pela componente sazonal, como é possível verificar na comparação entre <em>random</em> e <em>seasonal</em> no gráfico.</p>
 <p>Conforme citado anteriormente, as análises gráficas dão indícios de não estacionariedade. Portanto, a estacionariedade será testada com <strong>significância estatística</strong> nas partes não sazonal e sazonal da série temporal. Para isso, serão realizados os seguintes passos:
 1) análise gráfica;
 2) análise da média e variância em diferentes períodos de tempo;
@@ -310,85 +279,154 @@ div.csl-indent {
 <li><strong>Parte não sazonal</strong>
 A identificação da autocorrelação entre o valor atual e suas defasagens (lags) é feita abaixo. O intervalo de confiança (de 95%) são as linhas pontilhadas vermelhas e valores acima ou abaixo da linha são estatisticamente significantes. Portanto, existe autocorrelação significativa até o lag 36.</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="aplicação-2.html#cb20-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(BETS)</span>
-<span id="cb20-2"><a href="aplicação-2.html#cb20-2" aria-hidden="true" tabindex="-1"></a>    BETS<span class="sc">::</span><span class="fu">corrgram</span>(AirPassengers, <span class="at">lag.max =</span> <span class="dv">36</span>, <span class="at">ci=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="aplicação-2.html#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(BETS)</span></code></pre></div>
+<pre><code>## Carregando pacotes exigidos: BETS</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
+##   method            from
+##   as.zoo.data.frame zoo</code></pre>
+<pre><code>## 
+## Attaching package: &#39;BETS&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:stats&#39;:
+## 
+##     predict</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="aplicação-2.html#cb10-1" aria-hidden="true" tabindex="-1"></a>    BETS<span class="sc">::</span><span class="fu">corrgram</span>(AirPassengers, <span class="at">lag.max =</span> <span class="dv">36</span>, <span class="at">ci=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <p>Existem três formas de realizar o teste ADF: raiz unitária + constante + tendência determinística escolhe-se ‘type=“trend”’; raiz unitária + constante, <code>type = "dryft"</code>; raiz unitária, <code>type= "none"</code>. No teste de raiz unitária, a hipótese nula é que a série temporal possui uma raiz unitária (ST é não estacionária) e a hipótese alternativa é que a série é estacionária.</p>
 <p>Considerando a série temporal como sem tendência, com variância constante e com o critério de informação sendo o AIC:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="aplicação-2.html#cb21-1" aria-hidden="true" tabindex="-1"></a>  adf.drift <span class="ot">&lt;-</span> urca<span class="sc">::</span><span class="fu">ur.df</span>(<span class="at">y=</span>AirPassengers, <span class="at">type=</span> <span class="st">&quot;drift&quot;</span>, <span class="at">lag=</span><span class="dv">24</span>, <span class="at">selectlags=</span><span class="st">&quot;AIC&quot;</span>)</span>
-<span id="cb21-2"><a href="aplicação-2.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(adf.drift<span class="sc">@</span>res, <span class="at">lag.max=</span><span class="dv">36</span>)</span>
-<span id="cb21-3"><a href="aplicação-2.html#cb21-3" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb21-4"><a href="aplicação-2.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Estatística de teste </span></span>
-<span id="cb21-5"><a href="aplicação-2.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  adf.drift<span class="sc">@</span>teststat </span>
-<span id="cb21-6"><a href="aplicação-2.html#cb21-6" aria-hidden="true" tabindex="-1"></a>  adf.drift<span class="sc">@</span>cval <span class="co">#valores tabulados por MacKinnon (1996)</span></span>
-<span id="cb21-7"><a href="aplicação-2.html#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(adf.drift)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="aplicação-2.html#cb11-1" aria-hidden="true" tabindex="-1"></a>  adf.drift <span class="ot">&lt;-</span> urca<span class="sc">::</span><span class="fu">ur.df</span>(<span class="at">y=</span>AirPassengers, <span class="at">type=</span> <span class="st">&quot;drift&quot;</span>, <span class="at">lag=</span><span class="dv">24</span>, <span class="at">selectlags=</span><span class="st">&quot;AIC&quot;</span>)</span>
+<span id="cb11-2"><a href="aplicação-2.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(adf.drift<span class="sc">@</span>res, <span class="at">lag.max=</span><span class="dv">36</span>)</span>
+<span id="cb11-3"><a href="aplicação-2.html#cb11-3" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb11-4"><a href="aplicação-2.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Estatística de teste </span></span>
+<span id="cb11-5"><a href="aplicação-2.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  adf.drift<span class="sc">@</span>teststat </span></code></pre></div>
+<pre><code>##              tau2     phi1
+## statistic 1.85818 7.914366</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="aplicação-2.html#cb13-1" aria-hidden="true" tabindex="-1"></a>  adf.drift<span class="sc">@</span>cval <span class="co">#valores tabulados por MacKinnon (1996)</span></span></code></pre></div>
+<pre><code>##       1pct  5pct 10pct
+## tau2 -3.46 -2.88 -2.57
+## phi1  6.52  4.63  3.81</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="aplicação-2.html#cb15-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(adf.drift)</span></code></pre></div>
+<pre><code>## Length  Class   Mode 
+##      1  ur.df     S4</code></pre>
 <p>A partir do gráfico, é possível afirmar que a estatística teste (<span class="math inline">\(\tau^2=1,8582\)</span>) é maior do que o valor máximo associado ao nível de confiança (-2,88). Portanto, a hipótese nula não é rejeitada e é possível concluir que a série temporal não é estacionária e, portanto, possui raiz unitária. Agora precisamos descobrir o número de diferenciações necessárias para torná-la estacionária.</p>
 <p>Inicialmente, será realizada uma diferenciação para verificar se torna a série estacionária:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="aplicação-2.html#cb22-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts.plot</span>(<span class="fu">diff</span>(AirPassengers, <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>))</span>
-<span id="cb22-2"><a href="aplicação-2.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(AirPassengers, <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>), <span class="at">lag.max=</span><span class="dv">36</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="aplicação-2.html#cb17-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts.plot</span>(<span class="fu">diff</span>(AirPassengers, <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="aplicação-2.html#cb18-1" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(AirPassengers, <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>), <span class="at">lag.max=</span><span class="dv">36</span>)</span></code></pre></div>
 <p>Com uma diferenciação é possível verificar que a série está estacionária na média. Porém, a ST está crescendo ao longo do tempo e, dessa forma, sua variância não está constante. Uma estratégia importante para tornar a variância constante, é aplicar <em>log</em> na série temporal. É o que será feito:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="aplicação-2.html#cb23-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts.plot</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>))</span>
-<span id="cb23-2"><a href="aplicação-2.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>), <span class="at">lag.max=</span><span class="dv">48</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="aplicação-2.html#cb19-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts.plot</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="aplicação-2.html#cb20-1" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>), <span class="at">lag.max=</span><span class="dv">48</span>)</span></code></pre></div>
 <p>Agora, a parte não sazonal da série temporal é estacionária.</p>
 <ul>
 <li><strong>Parte sazonal</strong></li>
 </ul>
 <p>Pela FAC acima, é possível verificar que nos lags sazonais (12, 24, 36…) a função de autocorrelação apresenta um decrescimento, o que indica que a série temporal não é estacionária na parte sazonal.</p>
 <p>Da mesma forma realizada na parte não sazonal, também será necessário realizar uma diferenciação para verificar se ela se torna estacionária. Nesse caso, o lag é modificado para 12 e, assim, é possível realizar a diferenciação na parte sazonal:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="aplicação-2.html#cb24-1" aria-hidden="true" tabindex="-1"></a>BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag =</span> <span class="dv">1</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">lag =</span> <span class="dv">12</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">lag.max =</span> <span class="dv">48</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="aplicação-2.html#cb21-1" aria-hidden="true" tabindex="-1"></a>BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag =</span> <span class="dv">1</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">lag =</span> <span class="dv">12</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">lag.max =</span> <span class="dv">48</span>)</span></code></pre></div>
 <p>A partir da figura acima, é possível verificar que a FAC não apresenta mais o decrescimento de antes, além de ter cortes bruscos nos lags 1 e 12. Para verificar a estacionariedade, será realizado o teste de RU:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="aplicação-2.html#cb25-1" aria-hidden="true" tabindex="-1"></a>  adf.drift2 <span class="ot">&lt;-</span> urca<span class="sc">::</span><span class="fu">ur.df</span>(<span class="at">y =</span> <span class="fu">diff</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag =</span> <span class="dv">1</span>), <span class="at">lag =</span> <span class="dv">12</span>), <span class="at">type =</span> <span class="st">&quot;drift&quot;</span>, <span class="at">lags =</span> <span class="dv">24</span>, <span class="at">selectlags =</span> <span class="st">&quot;AIC&quot;</span>)</span>
-<span id="cb25-2"><a href="aplicação-2.html#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="aplicação-2.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  adf.drift2<span class="sc">@</span>teststat <span class="co"># Estatística de Teste</span></span>
-<span id="cb25-4"><a href="aplicação-2.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb25-5"><a href="aplicação-2.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  adf.drift2<span class="sc">@</span>cval <span class="co">#valores tabulados por MacKinnon (1996)</span></span>
-<span id="cb25-6"><a href="aplicação-2.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb25-7"><a href="aplicação-2.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(adf.drift2<span class="sc">@</span>res, <span class="at">lag.max =</span> <span class="dv">36</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="aplicação-2.html#cb22-1" aria-hidden="true" tabindex="-1"></a>  adf.drift2 <span class="ot">&lt;-</span> urca<span class="sc">::</span><span class="fu">ur.df</span>(<span class="at">y =</span> <span class="fu">diff</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag =</span> <span class="dv">1</span>), <span class="at">lag =</span> <span class="dv">12</span>), <span class="at">type =</span> <span class="st">&quot;drift&quot;</span>, <span class="at">lags =</span> <span class="dv">24</span>, <span class="at">selectlags =</span> <span class="st">&quot;AIC&quot;</span>)</span>
+<span id="cb22-2"><a href="aplicação-2.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="aplicação-2.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  adf.drift2<span class="sc">@</span>teststat <span class="co"># Estatística de Teste</span></span></code></pre></div>
+<pre><code>##                tau2     phi1
+## statistic -4.039891 8.160779</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="aplicação-2.html#cb24-1" aria-hidden="true" tabindex="-1"></a>  adf.drift2<span class="sc">@</span>cval <span class="co">#valores tabulados por MacKinnon (1996)</span></span></code></pre></div>
+<pre><code>##       1pct  5pct 10pct
+## tau2 -3.46 -2.88 -2.57
+## phi1  6.52  4.63  3.81</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="aplicação-2.html#cb26-1" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(adf.drift2<span class="sc">@</span>res, <span class="at">lag.max =</span> <span class="dv">36</span>)</span></code></pre></div>
 <p>A estatística teste (<span class="math inline">\(\tau^2=-4.03891\)</span>) é menor do que o valor máximo associado ao nível de confiança (-2,88). Portanto, conclui-se que a <em>série é estacionária</em>!</p>
 <p>A partir daqui, será aplicado o método de Box &amp; Jenkins. Para a fase de <strong>identificação</strong> será observado a FAC (Função de Autocorrelação) e FACP (Função de Autocorrelação Parcial) do modelo estacionário:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="aplicação-2.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#FAC</span></span>
-<span id="cb26-2"><a href="aplicação-2.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag =</span> <span class="dv">1</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">lag =</span> <span class="dv">12</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">lag.max =</span> <span class="dv">48</span>)</span>
-<span id="cb26-3"><a href="aplicação-2.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="aplicação-2.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#FACP</span></span>
-<span id="cb26-5"><a href="aplicação-2.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag =</span> <span class="dv">1</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">lag =</span> <span class="dv">12</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">type =</span> <span class="st">&quot;partial&quot;</span>, <span class="at">lag.max =</span> <span class="dv">48</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="aplicação-2.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#FAC</span></span>
+<span id="cb27-2"><a href="aplicação-2.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag =</span> <span class="dv">1</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">lag =</span> <span class="dv">12</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">lag.max =</span> <span class="dv">48</span>)</span>
+<span id="cb27-3"><a href="aplicação-2.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="aplicação-2.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#FACP</span></span>
+<span id="cb27-5"><a href="aplicação-2.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag =</span> <span class="dv">1</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">lag =</span> <span class="dv">12</span>, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">type =</span> <span class="st">&quot;partial&quot;</span>, <span class="at">lag.max =</span> <span class="dv">48</span>)</span></code></pre></div>
 <p>É importante citar que o próximo passo é verificar as FAC e FACP e obter “p” e “q” nos lags 1, 2, 3… (Não-sazonal) e lags 12, 24, 36… (Sazonais). Em um primeiro cenário, como a FAC determina a ordem das médias móveis (q), é possível verificar que a última observação significativa da FAC é o lag 1, portanto, q=1. Já a FACP dá a ordem da componente autoregressiva (p). Da mesma forma que na FAC, a última observação sigificativa é a 1. Como foi realizada uma diferenciação na parte sazonal e uma na parte não sazonal, a ordem de integração é 1 (d=1). O modelo resultante seria SARIMA(1,1,1)(1,1,1).</p>
 <p>Em um segundo cenário, a última observação significativa da FAC continua sendo o lag 1 (q=1). A ordem de integração também continua a mesma. Mas no caso da FACP, é possível visualizar um decrescimento não só na parte sazonal, como também na parte não sazonal (p=0). Portanto, o modelo seria SARIMA(0,1,1)(0,1,1).</p>
 <p>Com esses possíveis modelos, podemos iniciar a etapa de <strong>Estimação</strong>. Será utilizada a função <code>Arima()</code>, em que a variável de entrada é a série temporal original. A transformação logarítmica necessária pra deixar a variância constante é garantida pelo argumento <code>lambda = 0</code>. A função <code>Arima()</code> automaticamente já diferencia a série.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="aplicação-2.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;forecast&quot;</span>)</span>
-<span id="cb27-2"><a href="aplicação-2.html#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="aplicação-2.html#cb27-3" aria-hidden="true" tabindex="-1"></a>fit.air <span class="ot">&lt;-</span> <span class="fu">Arima</span>(AirPassengers, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">seasonal =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">method =</span> <span class="st">&quot;ML&quot;</span>, <span class="at">lambda =</span> <span class="dv">0</span>)</span>
-<span id="cb27-4"><a href="aplicação-2.html#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="aplicação-2.html#cb27-5" aria-hidden="true" tabindex="-1"></a>fit.air </span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="aplicação-2.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;forecast&quot;</span>)</span>
+<span id="cb28-2"><a href="aplicação-2.html#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="aplicação-2.html#cb28-3" aria-hidden="true" tabindex="-1"></a>fit.air <span class="ot">&lt;-</span> <span class="fu">Arima</span>(AirPassengers, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">seasonal =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">method =</span> <span class="st">&quot;ML&quot;</span>, <span class="at">lambda =</span> <span class="dv">0</span>)</span>
+<span id="cb28-4"><a href="aplicação-2.html#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="aplicação-2.html#cb28-5" aria-hidden="true" tabindex="-1"></a>fit.air </span></code></pre></div>
+<pre><code>## Series: AirPassengers 
+## ARIMA(1,1,1)(1,1,1)[12] 
+## Box Cox transformation: lambda= 0 
+## 
+## Coefficients:
+##          ar1      ma1     sar1    sma1
+##       0.1668  -0.5616  -0.0994  -0.497
+## s.e.  0.2458   0.2114   0.1540   0.136
+## 
+## sigma^2 = 0.00138:  log likelihood = 245.16
+## AIC=-480.31   AICc=-479.83   BIC=-465.93</code></pre>
 <p>O próximo passo é verificar se os parâmetros do modelo são significativos:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="aplicação-2.html#cb28-1" aria-hidden="true" tabindex="-1"></a>BETS<span class="sc">::</span><span class="fu">t_test</span>(fit.air)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="aplicação-2.html#cb30-1" aria-hidden="true" tabindex="-1"></a>BETS<span class="sc">::</span><span class="fu">t_test</span>(fit.air)</span></code></pre></div>
+<pre><code>##           Coeffs Std.Errors         t Crit.Values Rej.H0
+## ar1   0.16679124  0.2457980 0.6785705    1.977304  FALSE
+## ma1  -0.56163441  0.2114211 2.6564723    1.977304   TRUE
+## sar1 -0.09938487  0.1539918 0.6453907    1.977304  FALSE
+## sma1 -0.49700743  0.1360485 3.6531644    1.977304   TRUE</code></pre>
 <p>Como o parâmetro AR (ar1) foi rejeitado porque não é sigificativo, é importante retirar o parâmetro e analisá-lo novamente. Ele será retirado colocando o parâmetro p=0.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="aplicação-2.html#cb29-1" aria-hidden="true" tabindex="-1"></a>fit.air <span class="ot">&lt;-</span> <span class="fu">Arima</span>(AirPassengers, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">seasonal =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">method =</span> <span class="st">&quot;ML&quot;</span>, <span class="at">lambda =</span> <span class="dv">0</span>)</span>
-<span id="cb29-2"><a href="aplicação-2.html#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="aplicação-2.html#cb29-3" aria-hidden="true" tabindex="-1"></a>fit.air</span>
-<span id="cb29-4"><a href="aplicação-2.html#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="aplicação-2.html#cb29-5" aria-hidden="true" tabindex="-1"></a>BETS<span class="sc">::</span><span class="fu">t_test</span>(fit.air)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="aplicação-2.html#cb32-1" aria-hidden="true" tabindex="-1"></a>fit.air <span class="ot">&lt;-</span> <span class="fu">Arima</span>(AirPassengers, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">seasonal =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">method =</span> <span class="st">&quot;ML&quot;</span>, <span class="at">lambda =</span> <span class="dv">0</span>)</span>
+<span id="cb32-2"><a href="aplicação-2.html#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="aplicação-2.html#cb32-3" aria-hidden="true" tabindex="-1"></a>fit.air</span></code></pre></div>
+<pre><code>## Series: AirPassengers 
+## ARIMA(0,1,1)(0,1,1)[12] 
+## Box Cox transformation: lambda= 0 
+## 
+## Coefficients:
+##           ma1     sma1
+##       -0.4018  -0.5569
+## s.e.   0.0896   0.0731
+## 
+## sigma^2 = 0.001371:  log likelihood = 244.7
+## AIC=-483.4   AICc=-483.21   BIC=-474.77</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="aplicação-2.html#cb34-1" aria-hidden="true" tabindex="-1"></a>BETS<span class="sc">::</span><span class="fu">t_test</span>(fit.air)</span></code></pre></div>
+<pre><code>##          Coeffs Std.Errors        t Crit.Values Rej.H0
+## ma1  -0.4018268 0.08964405 4.482470    1.977054   TRUE
+## sma1 -0.5569466 0.07309948 7.619023    1.977054   TRUE</code></pre>
 <p>Como todos os parâmetros do modelo <span class="math inline">\(SARIMA(0,1,1)(0,1,1)_{12}\)</span> são significativos e os critérios de informação AIC, AICc e BIC foram minimizados, esse será o modelo escolhido para a próxima fase: o <strong>diagnóstico</strong>.</p>
 <p>No diagnóstico, os resíduos serão testados, assim como foram testados no capítulo anterior. Serão analisados a ausência de autocorrelação linear, de heterocedasticidade condicional e normalidade. Para uma análise geral, será utilizada a função <code>tsdiag()</code>.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="aplicação-2.html#cb30-1" aria-hidden="true" tabindex="-1"></a>diag <span class="ot">&lt;-</span> <span class="fu">tsdiag</span>(fit.air, <span class="at">gof.lag =</span> <span class="dv">20</span>)</span></code></pre></div>
-<p>A partir do gráfico <strong>Standarized Residuals</strong>, visualmente os dados aparentam ter heterocedasticidade e média zero, o que indica normalidade. Além disso, é possível verificar a existência de outliers, já que observações fora do intervalo [-3;3] seriam observações atípicas. Portanto, aparentemente não existem outliers.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="aplicação-2.html#cb36-1" aria-hidden="true" tabindex="-1"></a>diag <span class="ot">&lt;-</span> <span class="fu">tsdiag</span>(fit.air, <span class="at">gof.lag =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+A partir do gráfico <strong>Standarized Residuals</strong>, visualmente os dados aparentam ter heterocedasticidade e média zero, o que indica normalidade. Além disso, é possível verificar a existência de outliers, já que observações fora do intervalo [-3;3] seriam observações atípicas. Portanto, aparentemente não existem outliers.</p>
 <p>A <strong>FAC</strong> dos resíduos (segundo gráfico) mostra que não há nenhuma defasagem significativa, portanto, o modelo SARIMA está representando bem a série temporal. O gráfico <strong>p-values for Ljung-Box statistic</strong> não é confiável, já que os p-values são calculados sem levar em conta o fato de os resíduos terem sido gerados a partir de um modelo ajustado. Por mais que a conclusão deste gráfico mostre que não há dependência linear entre os resíduos, a informação não é confiável.</p>
 <p>O <a href="https://koalatea.io/r-ljung-box-test/">teste de Ljung &amp; Box</a> será realizado para testar a autocorrelação dos resíduos:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="aplicação-2.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(fit.air<span class="sc">$</span>residuals, <span class="at">lag=</span><span class="dv">24</span>, <span class="at">type=</span><span class="st">&quot;Ljung-Box&quot;</span>, <span class="at">fitdf =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="aplicação-2.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(fit.air<span class="sc">$</span>residuals, <span class="at">lag=</span><span class="dv">24</span>, <span class="at">type=</span><span class="st">&quot;Ljung-Box&quot;</span>, <span class="at">fitdf =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## 
+##  Box-Ljung test
+## 
+## data:  fit.air$residuals
+## X-squared = 26.446, df = 22, p-value = 0.233</code></pre>
 <p>O teste mostra a ausência de autocorrelação linear nos resíduos, já que o p-value é maior que 0.05. Portanto, a hipótese nula de que a série temporal não possui autocorrelação até o lag 24 não pode ser rejeitada.</p>
 <p>A seguir será testada a estacionariedade da variância e, para isso, o teste Multiplicador de Lagrange para heterocedasticidade condicional autoregressiva será utilizado. Além disso, também será testada a normalidade dos resíduos com o teste de Shapiro-Wilk.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="aplicação-2.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variância</span></span>
-<span id="cb32-2"><a href="aplicação-2.html#cb32-2" aria-hidden="true" tabindex="-1"></a>FinTS<span class="sc">::</span><span class="fu">ArchTest</span>(fit.air<span class="sc">$</span>residuals, <span class="at">lags=</span><span class="dv">12</span>)</span>
-<span id="cb32-3"><a href="aplicação-2.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="aplicação-2.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Normalidade dos resíduos</span></span>
-<span id="cb32-5"><a href="aplicação-2.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(fit.air<span class="sc">$</span>residuals)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="aplicação-2.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variância</span></span>
+<span id="cb39-2"><a href="aplicação-2.html#cb39-2" aria-hidden="true" tabindex="-1"></a>FinTS<span class="sc">::</span><span class="fu">ArchTest</span>(fit.air<span class="sc">$</span>residuals, <span class="at">lags=</span><span class="dv">12</span>)</span></code></pre></div>
+<pre><code>## 
+##  ARCH LM-test; Null hypothesis: no ARCH effects
+## 
+## data:  fit.air$residuals
+## Chi-squared = 14.859, df = 12, p-value = 0.2493</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="aplicação-2.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Normalidade dos resíduos</span></span>
+<span id="cb41-2"><a href="aplicação-2.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(fit.air<span class="sc">$</span>residuals)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  fit.air$residuals
+## W = 0.98637, p-value = 0.1674</code></pre>
 <p>Em relação à variância, com p-value maior que 0.05, a hipótese nula de estacionariedade da vaiância nao é rejeitada. No caso do teste de Shapiro-Wilk, verifica-se que como p-value é maior que 0.05, a hipótese nula de normalidade também não é rejeitada.</p>
 <p>A próxima fase será a <strong>Previsão</strong> utilizando o pacote <code>forecast()</code>. O argumento “h” é o horizonte de previsão e o “level” é o nível de confiança. Para verificar se a previsão é adequada, serão analisadas as métricas utilizando a função <code>accuracy</code>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="aplicação-2.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb33-2"><a href="aplicação-2.html#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="aplicação-2.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Previsão</span></span>
-<span id="cb33-4"><a href="aplicação-2.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">forecast</span>(<span class="at">object=</span>fit.air, <span class="at">h=</span><span class="dv">12</span>, <span class="at">level=</span><span class="fl">0.95</span>))</span>
-<span id="cb33-5"><a href="aplicação-2.html#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-6"><a href="aplicação-2.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Métricas</span></span>
-<span id="cb33-7"><a href="aplicação-2.html#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(fit.air)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="aplicação-2.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb43-2"><a href="aplicação-2.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="aplicação-2.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Previsão</span></span>
+<span id="cb43-4"><a href="aplicação-2.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">forecast</span>(<span class="at">object=</span>fit.air, <span class="at">h=</span><span class="dv">12</span>, <span class="at">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="aplicação-2.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Métricas</span></span>
+<span id="cb44-2"><a href="aplicação-2.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(fit.air)</span></code></pre></div>
+<pre><code>##                      ME     RMSE      MAE          MPE     MAPE      MASE
+## Training set 0.05140376 10.15504 7.357555 -0.004079321 2.623637 0.2297061
+##                     ACF1
+## Training set -0.03689736</code></pre>
 <p>Pelas métricas, o MAPE demonstra que o erro de previsão está em 0,47%, o que é muito bom. Dessa forma, conseguimos confirmar que a previsão está adequada!</p>
 </div>
 <h3>References</h3>

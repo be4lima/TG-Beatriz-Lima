@@ -163,17 +163,20 @@ install.packages(c('rlang','tidyverse'))
 
 ```
 
-```{r,message=FALSE,warning=FALSE, results='hide'}
-knitr::opts_chunk$set(eval = FALSE)
+```{r,message=FALSE,warning=FALSE, results='hide', eval=FALSE}
+
 # Intalando pacotes necessários
-  install.packages("BETS")
-  install.packages("urca")
-  install.packages("TSA")
-  install.packages("forecast")
-  install.packages("lmtest")
-  install.packages("normtest")
-  install.packages("FinTS")
-  install.packages("xlsx")
+  packages <- c("BETS","urca","TSA","forecast","lmtest","normtest","FinTS","xlsx")
+
+# Chacando se os pacotes já estão instalados
+is.installed <- function(mypkg){
+  is.element(mypkg, installed.packages()[,1])
+}
+for(packages in packages){
+  if(!is.installed(packages)){
+    install.packages((packages), repos = "http://cran.us.r-project.org")
+  }
+}
 ```
 
 ```{r}
