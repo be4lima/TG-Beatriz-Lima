@@ -23,7 +23,7 @@
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-11-03" />
+<meta name="date" content="2022-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -310,7 +310,7 @@ div.csl-indent {
 <span id="cb10-10"><a href="aplicação.html#cb10-10" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb10-11"><a href="aplicação.html#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_x_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">check.overlap =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
 <span id="cb10-12"><a href="aplicação.html#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_y_discrete</span>(<span class="at">guide=</span> <span class="fu">guide_axis</span>(<span class="at">check.overlap =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/3-7-1.png" width="672" /></p>
 <p>No momento, nos interessa analisar a precipitação ao longo dos anos de análise. Por isso, essa variável será adicionada como uma coluna ao dataset inicial:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="aplicação.html#cb11-1" aria-hidden="true" tabindex="-1"></a>ano <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(inmet<span class="sc">$</span>data, <span class="at">format =</span> <span class="st">&quot;%d/ %m/ %Y&quot;</span>),<span class="st">&quot;%Y&quot;</span>)</span>
 <span id="cb11-2"><a href="aplicação.html#cb11-2" aria-hidden="true" tabindex="-1"></a>inmet_new <span class="ot">&lt;-</span> <span class="fu">cbind</span>(inmet, ano)</span>
@@ -324,12 +324,12 @@ div.csl-indent {
 <span id="cb12-5"><a href="aplicação.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>inmet_new, <span class="fu">aes</span>(<span class="at">x=</span>precipitacao_total)) <span class="sc">+</span></span>
 <span id="cb12-6"><a href="aplicação.html#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
 <span id="cb12-7"><a href="aplicação.html#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() </span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/3-9-1.png" width="672" /></p>
 <p>A partir do boxplot abaixo, é possível visualizar que 75% dos valores de precipitação estão entre 50mm e aproximadamente 200mm; a média stá próxima de 150mm e a mediana de 100mm; e, por fim, o valor máximo está próximo de 400 mm. Existem observações além do limite máximo, o que é um indício de outliers, ou seja, observações atípicas (fora do normal).</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="aplicação.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>inmet_new, <span class="fu">aes</span>(<span class="at">y=</span>precipitacao_total)) <span class="sc">+</span></span>
 <span id="cb13-2"><a href="aplicação.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb13-3"><a href="aplicação.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<p><img src="TG-Beatriz-Lima_files/figure-html/3-10-1.png" width="672" />
 Primeiramente, será encontrada a média de precipitação por ano analisado, com um intervalo de confiança de 95% (escore-x da curva normal igual a 1,96). Com o objetivo de deixar o código mais organizado, será utilizado o <a href="https://www.youtube.com/watch?v=qHCBG14tKns">operador pipe</a>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="aplicação.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Média das precipitações por ano</span></span>
 <span id="cb14-2"><a href="aplicação.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -357,7 +357,7 @@ Primeiramente, será encontrada a média de precipitação por ano analisado, co
 <span id="cb15-7"><a href="aplicação.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
 <span id="cb15-8"><a href="aplicação.html#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb15-9"><a href="aplicação.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/3-12-1.png" width="672" /></p>
 
 </div>
 </div>

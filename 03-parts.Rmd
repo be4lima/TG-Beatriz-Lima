@@ -129,7 +129,7 @@ Realizaremos a análise exploratória da precipitação total ao longo dos anos 
  
 Para importar a base de dados em .csv, utiliza-se a função read.csv2() e insere-se como argumento o *diretório*:
 
-```{r,echo=FALSE, eval=FALSE}
+```{r 3-1,echo=FALSE, eval=FALSE}
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
 install.packages("dplyr")
@@ -138,7 +138,7 @@ install.packages("dplyr")
 
 ```
 
-```{r,message=FALSE,warning=FALSE}
+```{r 3-2,message=FALSE,warning=FALSE}
 
 library(readr)
 
@@ -150,7 +150,7 @@ inmet0 <- read.csv2("Data/INMET_SP.csv", header = TRUE, sep = ";", dec = ",")
 É importante lembrar que read.csv() é utilizado quando os valores são separados por vírgula e decimais por ponto; e, read.csv2(), quando são separados por ponto e vírgula e os decimais por vírgula.
 
 Para visualizar a tabela importada, basta executar a função View():
-```{r,message=FALSE,warning=FALSE}
+```{r 3-3,message=FALSE,warning=FALSE}
 
 #Visualização da base de dados
 View(inmet0)
@@ -162,14 +162,14 @@ inmet <- na.omit(inmet0)
 
 Para iniciar a exploração dos dados, inicialmente será utilizada a função str() que exibe de forma compacta a estrutura da tabela importada.
 
-```{r,message=FALSE,warning=FALSE}
+```{r 3-4,message=FALSE,warning=FALSE}
 
 str(inmet)
 
 ```
 Continuando, será utilizada a função ´summary()´ para apresentar o sumário de estatísticas descritivas (média, mediana, mínimo, máximo, 1º quartil, 3º quartil e valores faltantes (NA)), já que as variáveis de precipitação total e número de dias de precipitação são numéricas.
 
-```{r,message=FALSE,warning=FALSE}
+```{r 3-5,message=FALSE,warning=FALSE}
 
 summary(inmet)
 
@@ -177,7 +177,7 @@ summary(inmet)
 
 Inicialmente, os cabeçalhos da coluna serão modificados para facilitar a análise:
 
-```{r,message=FALSE,warning=FALSE}
+```{r 3-6,message=FALSE,warning=FALSE}
 #Explorando os cabeçalhos da base de dados
 names(inmet)
 
@@ -189,7 +189,7 @@ View(inmet)
 
 Para continuar explorando os dados, realizou-se um gráfico de linhas a fim de analisar o comportamento da precipitação em relação às datas.
 
-```{r,message=FALSE,warning=FALSE}
+```{r 3-7,message=FALSE,warning=FALSE}
 
 month_year <- format(as.Date(inmet$data, format = "%d/%m/%Y"),"%Y/%m")
 
@@ -207,7 +207,7 @@ ggplot(inmet,
 
 No momento, nos interessa analisar a precipitação ao longo dos anos de análise. Por isso, essa variável será adicionada como uma coluna ao dataset inicial:
 
-```{r,message=FALSE,warning=FALSE}
+```{r 3-8,message=FALSE,warning=FALSE}
 ano <- format(as.Date(inmet$data, format = "%d/ %m/ %Y"),"%Y")
 inmet_new <- cbind(inmet, ano)
 
@@ -216,7 +216,7 @@ View(inmet_new)
 
 Analisando o histograma da precipitação total, verifica-se que a sua distribuição é positiva e assimétrica:
 
-```{r, warning = FALSE, message=FALSE}
+```{r 3-9, warning = FALSE, message=FALSE}
 # Histograma
 
 library(ggplot2)
@@ -229,14 +229,14 @@ ggplot(data=inmet_new, aes(x=precipitacao_total)) +
 A partir do boxplot abaixo, é possível visualizar que 75% dos valores de precipitação estão entre 50mm e aproximadamente 200mm; a média stá próxima de 150mm e a mediana de 100mm; e, por fim, o valor máximo está próximo de 400 mm. Existem observações além do limite máximo, o que é um indício de outliers, ou seja, observações atípicas (fora do normal).
 
 
-```{r, warning=FALSE, message=FALSE}
+```{r 3-10, warning=FALSE, message=FALSE}
 ggplot(data=inmet_new, aes(y=precipitacao_total)) +
   geom_boxplot() +
   theme_minimal()
 ```
 Primeiramente, será encontrada a média de precipitação por ano analisado, com um intervalo de confiança de 95% (escore-x da curva normal igual a 1,96). Com o objetivo de deixar o código mais organizado, será utilizado o [operador pipe](https://www.youtube.com/watch?v=qHCBG14tKns).  
 
-```{r,message=FALSE,warning=FALSE}
+```{r 3-11,message=FALSE,warning=FALSE}
 
 #Média das precipitações por ano
 
@@ -258,7 +258,7 @@ View(tabela_stats)
 
 Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras com os erros padrões das amostras. Utiliza-se o erro padrão e não o desvio padrão porque, neste caso, estamos interessados na variabilidade das médias das amostras e não na variabilidade das observações dentro da amostra.
 
-```{r,message=FALSE,warning=FALSE}
+```{r 3-12,message=FALSE,warning=FALSE}
 
 #Plotando os valores com seus respectivos erros
 ggplot (data = tabela_stats, aes(x = ano, y = media, fill = ano)) +

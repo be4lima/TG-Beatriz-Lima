@@ -155,7 +155,7 @@ Os parâmetros do modelo são identificados e testados estatisticamente e, para 
 ## Aplicação {-}
 Para a aplicação, será realizado o exemplo do capítulo 4 do livro de @barros2017. Será utilizada como *database* a série temporal de vendas de passagens aéreas nos EUA de janeiro de 1949 a dezembro de 1960. 
 
-```{r,echo=FALSE, message=FALSE,warning=FALSE, eval=FALSE}
+```{r 5-1,echo=FALSE, message=FALSE,warning=FALSE, eval=FALSE}
 
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
@@ -163,7 +163,7 @@ install.packages(c('rlang','tidyverse'))
 
 ```
 
-```{r,message=FALSE,warning=FALSE, results='hide', eval=FALSE}
+```{r 5-2,message=FALSE,warning=FALSE, results='hide', eval=FALSE}
 
 # Intalando pacotes necessários
   packages <- c("BETS","urca","TSA","forecast","lmtest","normtest","FinTS","xlsx")
@@ -179,7 +179,7 @@ for(packages in packages){
 }
 ```
 
-```{r}
+```{r 5-3}
 # Carregando a série temporal
   data(AirPassengers)
 
@@ -189,14 +189,14 @@ for(packages in packages){
 ```
 A partir do gráfico é possível perceber que existe uma tendência de aumento nas vendas de passagens. Em relação à variância, verifica-se que a distância entre os meses de maior e menor venda está aumentando, indicando uma variância não constante. Além de haver oscilações que se repetem anualmente, dando indícios de presença de sazonalidade, que será analisada mensalmente abaixo:
 
-```{r}
+```{r 5-4}
 monthplot(AirPassengers,ylab = "Vendas de Passagens ", xlab = "Meses")
 ```
 
 No gráfico acima, os traços horizontais representam a média, a qual aumenta nos meses de férias dos EUA (Junho, Julho e Agosto). Pelos traços verticais e sua inclinação positiva, é possível verificar um aumento constante na venda de passagens ao longo dos anos. Ambos trazem indícios da não estacionariedade da série temporal.
 
 Conforma comentado ao longo do capítulo, a série temporal é composta por quatro componentes não observáveis e estas serão analisadas a seguir com a função `decompose()`.
-```{r}
+```{r 5-5}
 
 plot(decompose(AirPassengers))
 ```
@@ -211,7 +211,7 @@ Conforme citado anteriormente, as análises gráficas dão indícios de não est
   - **Parte não sazonal**
   A identificação da autocorrelação entre o valor atual e suas defasagens (lags) é feita abaixo. O intervalo de confiança (de 95%) são as linhas pontilhadas vermelhas e valores acima ou abaixo da linha são estatisticamente significantes. Portanto, existe autocorrelação significativa até o lag 36.
   
-```{r}
+```{r 5-6}
   require(BETS)
     BETS::corrgram(AirPassengers, lag.max = 36, ci=0.95)
 ```
@@ -220,7 +220,7 @@ Conforme citado anteriormente, as análises gráficas dão indícios de não est
   
   Considerando a série temporal como sem tendência, com variância constante e com o critério de informação sendo o AIC:
   
-```{r}
+```{r 5-7}
   adf.drift <- urca::ur.df(y=AirPassengers, type= "drift", lag=24, selectlags="AIC")
   BETS::corrgram(adf.drift@res, lag.max=36)
  
@@ -234,14 +234,14 @@ A partir do gráfico, é possível afirmar que a estatística teste ($\tau^2=1,8
 
 Inicialmente, será realizada uma diferenciação para verificar se torna a série estacionária:
  
-```{r}
+```{r 5-8}
   ts.plot(diff(AirPassengers, lag=1, differences=1))
   BETS::corrgram(diff(AirPassengers, lag=1, differences=1), lag.max=36)
 ```
  
 Com uma diferenciação é possível verificar que a série está estacionária na média. Porém, a ST está crescendo ao longo do tempo e, dessa forma, sua variância não está constante. Uma estratégia importante para tornar a variância constante, é aplicar *log* na série temporal. É o que será feito: 
  
-```{r}
+```{r 5-9}
   ts.plot(diff(log(AirPassengers), lag=1, differences=1))
   BETS::corrgram(diff(log(AirPassengers), lag=1, differences=1), lag.max=48)
 ```
@@ -254,14 +254,14 @@ Pela FAC acima, é possível verificar que nos lags sazonais (12, 24, 36...) a f
 
 Da mesma forma realizada na parte não sazonal, também será necessário realizar uma diferenciação para verificar se ela se torna estacionária. Nesse caso, o lag é modificado para 12 e, assim, é possível realizar a diferenciação na parte sazonal:
 
-```{r}
+```{r 5-10}
 BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
 
 ```
 
 A partir da figura acima, é possível verificar que a FAC não apresenta mais o decrescimento de antes, além de ter cortes bruscos nos lags 1 e 12. Para verificar a estacionariedade, será realizado o teste de RU:
 
-```{r}
+```{r 5-11}
   adf.drift2 <- urca::ur.df(y = diff(diff(log(AirPassengers), lag = 1), lag = 12), type = "drift", lags = 24, selectlags = "AIC")
 
   adf.drift2@teststat # Estatística de Teste
@@ -276,7 +276,7 @@ A estatística teste ($\tau^2=-4.03891$) é menor do que o valor máximo associa
 
 A partir daqui, será aplicado o método de Box & Jenkins. Para a fase de **identificação** será observado a FAC (Função de Autocorrelação) e FACP (Função de Autocorrelação Parcial) do modelo estacionário:
 
-```{r}
+```{r 5-12}
 #FAC
   BETS::corrgram(diff(diff(log(AirPassengers), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
 
@@ -290,7 +290,7 @@ Em um segundo cenário, a última observação significativa da FAC continua sen
 
 Com esses possíveis modelos, podemos iniciar a etapa de **Estimação**. Será utilizada a função `Arima()`, em que a variável de entrada é a série temporal original. A transformação logarítmica necessária pra deixar a variância constante é garantida pelo argumento `lambda = 0`. A função `Arima()` automaticamente já diferencia a série. 
 
-```{r}
+```{r 5-13}
 
 library("forecast")
 
@@ -301,14 +301,14 @@ fit.air
 ```
 O próximo passo é verificar se os parâmetros do modelo são significativos:
 
-```{r}
+```{r 5-14}
 
 BETS::t_test(fit.air)
 
 ```
 Como o parâmetro AR (ar1) foi rejeitado porque não é sigificativo, é importante retirar o parâmetro e analisá-lo novamente. Ele será retirado colocando o parâmetro p=0.
 
-```{r}
+```{r 5-15}
 
 fit.air <- Arima(AirPassengers, order=c(0,1,1), seasonal = c(0,1,1), method = "ML", lambda = 0)
 
@@ -322,7 +322,7 @@ Como todos os parâmetros do modelo $SARIMA(0,1,1)(0,1,1)_{12}$ são significati
 
 No diagnóstico, os resíduos serão testados, assim como foram testados no capítulo anterior. Serão analisados a ausência de autocorrelação linear, de heterocedasticidade condicional e normalidade. Para uma análise geral, será utilizada a função `tsdiag()`. 
 
-```{r}
+```{r 5-16}
 
 diag <- tsdiag(fit.air, gof.lag = 20)
 
@@ -333,7 +333,7 @@ A **FAC** dos resíduos (segundo gráfico) mostra que não há nenhuma defasagem
 
 O [teste de Ljung & Box](https://koalatea.io/r-ljung-box-test/) será realizado para testar a autocorrelação dos resíduos:
 
-```{r}
+```{r 5-17}
 
 Box.test(fit.air$residuals, lag=24, type="Ljung-Box", fitdf = 2)
 
@@ -342,7 +342,7 @@ O teste mostra a ausência de autocorrelação linear nos resíduos, já que o p
 
 A seguir será testada a estacionariedade da variância e, para isso, o teste Multiplicador de Lagrange para heterocedasticidade condicional autoregressiva será utilizado. Além disso, também será testada a normalidade dos resíduos com o teste de Shapiro-Wilk.
 
-```{r}
+```{r 5-18}
 
 # Variância
 FinTS::ArchTest(fit.air$residuals, lags=12)
@@ -355,7 +355,7 @@ Em relação à variância, com p-value maior que 0.05, a hipótese nula de esta
 
 A próxima fase será a **Previsão** utilizando o pacote `forecast()`. O argumento "h" é o horizonte de previsão e o "level" é o nível de confiança. Para verificar se a previsão é adequada, serão analisadas as métricas utilizando a função `accuracy`.
 
-```{r}
+```{r 5-19}
 library(forecast)
 
 # Previsão

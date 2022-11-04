@@ -27,7 +27,7 @@ No curso de Engenharia Ambiental e Urbana, utilizam-se *shapefiles* (.shp) para 
 ## Aplicação {-}
 Para a aplicação será reproduzido o exemplo do [TBEP R Training](https://tbep-tech.github.io/tbep-r-training/mapping.html#Exercise_13). Para isso, serão instalados os pacotes `sf` e `mapview`.
 
-```{r chunk7-1,message=FALSE,warning=FALSE, results='hide'}
+```{r 6-1,message=FALSE,warning=FALSE, results='hide'}
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
 
@@ -42,7 +42,7 @@ install.packages("tidyverse")
 
 O shapefile "sgdat.shp" são dados da cobertura de algas marinhas em Tampa Bay em 2016. As "features" são as linhas do vetor e os "fields" são as colunas, ou melhor, atributos ("OBJECT ID" e "FLUCCS"). O SGR do arquivo é WGS 84. A coluna "geometry" armazena os dados espaciais (longitude e latitude).
 
-```{r,message=FALSE,warning=FALSE}
+```{r 6-2,message=FALSE,warning=FALSE}
 #sgdat shapefile
 sgdat <- st_read('Data/sgdat.shp')
 
@@ -52,7 +52,7 @@ methods(class="sf")
 ```
 Esse é o passo a passo de como importar um shapefile. Porém, muitas vezes não possuímos um shapefile e queremos criar um a partir de um dataframe. Para isso, é necessário que o dataframe inclua as coordenadas geográficas (longitude e latitude) e que tenhamos conhecimento do SGR. O dataframe ´fishdat´ possui as características dos peixes encontrados e o statloc apresenta a localização deles. O passo a passo será realizado abaixo.
 
-```{r,message=FALSE,warning=FALSE}
+```{r 6-3,message=FALSE,warning=FALSE}
 getwd()
 # dados da presença de peixes em Tampa Bay
 fishdat <- read.csv("Data/fishdat.csv")
@@ -62,7 +62,7 @@ statloc <- read.csv("Data/statloc.csv")
 
 ```
 
-```{r,message=FALSE,warning=FALSE}
+```{r 6-4,message=FALSE,warning=FALSE}
 # estrutura dos dados
 str(fishdat)
 str(statloc)
@@ -70,7 +70,7 @@ str(statloc)
 ```
 Para isso, utilizaremos a função `st_as_sf()` para transformar o dataframe em um objeto sf. Primeiramente, precisamos juntar os dois *datasets* (fishdat e statloc) e dizer qual coluna que possui os dados da geometria (latitude e longitude). Além disso, é necessário dizer qual o SGR e, além disso, precisamos garantir que ambos datasets possuam o mesmo SGR. Por enquanto, podemos fazer um "chute calibrado" que é o WGS84.
 
-```{r,message=FALSE,warning=FALSE}
+```{r 6-5,message=FALSE,warning=FALSE}
 #juntando os dois dataframes
 library(dplyr)
 joindata <- left_join(fishdat,statloc,by="Reference")
@@ -93,7 +93,7 @@ Agora, iniciaremos a **análise geoespacial** dos dados. Inicialmente, iremos da
 O padrão é que a função ´plot()´ plote todas as feições. Para plotar somente a geometria, utiliza-se `st_geometry()`.
 
 
-```{r,message=FALSE,warning=FALSE}
+```{r 6-6,message=FALSE,warning=FALSE}
 plot(st_geometry(joindata)) 
 ```
 ```{r,message=FALSE,warning=FALSE}
@@ -106,20 +106,20 @@ plot(sgdat)
 
 Conforme observamos o shapefile "sgdat" com os dados das algas marinhas e o "joindata" com os dados do posicionamento de peixes, é possível verificar que existem áreas de intersecção entre ambos. Para analisar novamente, iremos plotar somente a geometria de ambos:
 
-```{r,message=FALSE,warning=FALSE}
+```{r 6-7,message=FALSE,warning=FALSE}
 plot(joindata$geometry)
 plot(sgdat$geometry)
 ```
 
 Vamos filtrar somente os dados dos peixes do ano de 2016:
-```{r,message=FALSE,warning=FALSE}
+```{r 6-8,message=FALSE,warning=FALSE}
 filt_data <- joindata %>%
   filter(yr == 2016)
 plot(st_geometry(filt_data))
 ```
 
 Agora, verificaremos quantos peixes foram vistos nos mesmos locais em que encontraram-se algas marinhas em 2016. Ou seja, iremos selecionar as localizações que possuem ambos dados. Para isso, iremos utilizar o código abaixo:
-```{r,message=FALSE,warning=FALSE}
+```{r 6-9,message=FALSE,warning=FALSE}
 
 fish_crop <- filt_data[sgdat, ]
 
@@ -128,7 +128,7 @@ plot(fish_crop$geometry)
 ```
 O que foi realizado até agora é somente a intersecção da geometria de ambos datasets. Portanto, agora realizaremos a intersecção de ambos dados, incluindo atributos:
 
-```{r,message=FALSE,warning=FALSE}
+```{r 6-10,message=FALSE,warning=FALSE}
 
 fish_int <- st_intersection(filt_data, sgdat)
 
@@ -139,7 +139,7 @@ View(fish_int)
 
 É possível utilizar ferramentas do `tidyverse`. Abaixo, iremos fazer a soma de todos os Pinfish foram pegos em 2016:
 
-```{r,message=FALSE,warning=FALSE}
+```{r 6-11,message=FALSE,warning=FALSE}
 
 fish_cnt <- fish_int %>% 
   group_by(FLUCCS) %>% 
@@ -152,14 +152,14 @@ fish_cnt
 ```
 Além de realizar a soma nos atributos numéricos (quantidade de Pinfish), também é realizada nos atributos geométricos (latitude e longitude). Conforme apresentado na tabela anterior, existe uma maior quantidade de Pinfishs em áreas onde existe maior quantidade de algas marinhas (FLUCCS=9116). É possível realizar um gráfico em relação às duas categorias de cobertura de algas marinhas (´9113´: desigual, ´9116´: contínua).
 
-```{r,message=FALSE,warning=FALSE}
+```{r 6-12,message=FALSE,warning=FALSE}
 ggplot(fish_cnt, aes(x = FLUCCS, y = cnt)) + 
   geom_bar(stat = 'identity', fill='navyblue') 
   
 ```
 Agora será realizada a **confecção de mapas**. Utilizaremos os pacotes `ggplot2` inicialmente:
 
-```{r,message=FALSE,warning=FALSE}
+```{r 6-13,message=FALSE,warning=FALSE}
 
 ggplot() + 
   geom_sf(data = sgdat, fill = 'green') + 
@@ -168,7 +168,7 @@ ggplot() +
 ```
 Agora, para criar um mapa interativo para selecionar e dar zoom nos dados, utilizaremos o pacote `mapview`:
 
-```{r,message=FALSE,warning=FALSE}
+```{r 6-14,message=FALSE,warning=FALSE}
 
 mapview(sgdat, col.regions = 'green') +
   mapview(joindata, zcol = 'Gear')

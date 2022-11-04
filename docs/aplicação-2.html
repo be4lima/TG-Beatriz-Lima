@@ -23,7 +23,7 @@
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-11-03" />
+<meta name="date" content="2022-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -261,14 +261,14 @@ div.csl-indent {
 <span id="cb2-3"><a href="aplicação-2.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="aplicação-2.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise gráfica</span></span>
 <span id="cb2-5"><a href="aplicação-2.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts.plot</span>(AirPassengers, <span class="at">ylab =</span> <span class="st">&quot;Vendas de Passagens &quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Anos&quot;</span>)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-3-1.png" width="672" />
 A partir do gráfico é possível perceber que existe uma tendência de aumento nas vendas de passagens. Em relação à variância, verifica-se que a distância entre os meses de maior e menor venda está aumentando, indicando uma variância não constante. Além de haver oscilações que se repetem anualmente, dando indícios de presença de sazonalidade, que será analisada mensalmente abaixo:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="aplicação-2.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monthplot</span>(AirPassengers,<span class="at">ylab =</span> <span class="st">&quot;Vendas de Passagens &quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Meses&quot;</span>)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-4-1.png" width="672" /></p>
 <p>No gráfico acima, os traços horizontais representam a média, a qual aumenta nos meses de férias dos EUA (Junho, Julho e Agosto). Pelos traços verticais e sua inclinação positiva, é possível verificar um aumento constante na venda de passagens ao longo dos anos. Ambos trazem indícios da não estacionariedade da série temporal.</p>
 <p>Conforma comentado ao longo do capítulo, a série temporal é composta por quatro componentes não observáveis e estas serão analisadas a seguir com a função <code>decompose()</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="aplicação-2.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">decompose</span>(AirPassengers))</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-5-1.png" width="672" />
 A partir da figura acima, verifica-se que a série temporal é fortemente afetada pela tendência (<em>trend</em>), além da sazonalidade (<em>seasonal</em>). Sobra, ainda, a componente aleatória que é levemente “contaminada” pela componente sazonal, como é possível verificar na comparação entre <em>random</em> e <em>seasonal</em> no gráfico.</p>
 <p>Conforme citado anteriormente, as análises gráficas dão indícios de não estacionariedade. Portanto, a estacionariedade será testada com <strong>significância estatística</strong> nas partes não sazonal e sazonal da série temporal. Para isso, serão realizados os seguintes passos:
 1) análise gráfica;
@@ -309,11 +309,11 @@ A identificação da autocorrelação entre o valor atual e suas defasagens (lag
 <p>A partir do gráfico, é possível afirmar que a estatística teste (<span class="math inline">\(\tau^2=1,8582\)</span>) é maior do que o valor máximo associado ao nível de confiança (-2,88). Portanto, a hipótese nula não é rejeitada e é possível concluir que a série temporal não é estacionária e, portanto, possui raiz unitária. Agora precisamos descobrir o número de diferenciações necessárias para torná-la estacionária.</p>
 <p>Inicialmente, será realizada uma diferenciação para verificar se torna a série estacionária:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="aplicação-2.html#cb17-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts.plot</span>(<span class="fu">diff</span>(AirPassengers, <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>))</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-8-1.png" width="672" /></p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="aplicação-2.html#cb18-1" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(AirPassengers, <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>), <span class="at">lag.max=</span><span class="dv">36</span>)</span></code></pre></div>
 <p>Com uma diferenciação é possível verificar que a série está estacionária na média. Porém, a ST está crescendo ao longo do tempo e, dessa forma, sua variância não está constante. Uma estratégia importante para tornar a variância constante, é aplicar <em>log</em> na série temporal. É o que será feito:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="aplicação-2.html#cb19-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts.plot</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>))</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-9-1.png" width="672" /></p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="aplicação-2.html#cb20-1" aria-hidden="true" tabindex="-1"></a>  BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(<span class="fu">log</span>(AirPassengers), <span class="at">lag=</span><span class="dv">1</span>, <span class="at">differences=</span><span class="dv">1</span>), <span class="at">lag.max=</span><span class="dv">48</span>)</span></code></pre></div>
 <p>Agora, a parte não sazonal da série temporal é estacionária.</p>
 <ul>
@@ -388,7 +388,7 @@ A identificação da autocorrelação entre o valor atual e suas defasagens (lag
 <p>Como todos os parâmetros do modelo <span class="math inline">\(SARIMA(0,1,1)(0,1,1)_{12}\)</span> são significativos e os critérios de informação AIC, AICc e BIC foram minimizados, esse será o modelo escolhido para a próxima fase: o <strong>diagnóstico</strong>.</p>
 <p>No diagnóstico, os resíduos serão testados, assim como foram testados no capítulo anterior. Serão analisados a ausência de autocorrelação linear, de heterocedasticidade condicional e normalidade. Para uma análise geral, será utilizada a função <code>tsdiag()</code>.</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="aplicação-2.html#cb36-1" aria-hidden="true" tabindex="-1"></a>diag <span class="ot">&lt;-</span> <span class="fu">tsdiag</span>(fit.air, <span class="at">gof.lag =</span> <span class="dv">20</span>)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-16-1.png" width="672" />
 A partir do gráfico <strong>Standarized Residuals</strong>, visualmente os dados aparentam ter heterocedasticidade e média zero, o que indica normalidade. Além disso, é possível verificar a existência de outliers, já que observações fora do intervalo [-3;3] seriam observações atípicas. Portanto, aparentemente não existem outliers.</p>
 <p>A <strong>FAC</strong> dos resíduos (segundo gráfico) mostra que não há nenhuma defasagem significativa, portanto, o modelo SARIMA está representando bem a série temporal. O gráfico <strong>p-values for Ljung-Box statistic</strong> não é confiável, já que os p-values são calculados sem levar em conta o fato de os resíduos terem sido gerados a partir de um modelo ajustado. Por mais que a conclusão deste gráfico mostre que não há dependência linear entre os resíduos, a informação não é confiável.</p>
 <p>O <a href="https://koalatea.io/r-ljung-box-test/">teste de Ljung &amp; Box</a> será realizado para testar a autocorrelação dos resíduos:</p>
@@ -420,7 +420,7 @@ A partir do gráfico <strong>Standarized Residuals</strong>, visualmente os dado
 <span id="cb43-2"><a href="aplicação-2.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-3"><a href="aplicação-2.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Previsão</span></span>
 <span id="cb43-4"><a href="aplicação-2.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">forecast</span>(<span class="at">object=</span>fit.air, <span class="at">h=</span><span class="dv">12</span>, <span class="at">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-19-1.png" width="672" /></p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="aplicação-2.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Métricas</span></span>
 <span id="cb44-2"><a href="aplicação-2.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(fit.air)</span></code></pre></div>
 <pre><code>##                      ME     RMSE      MAE          MPE     MAPE      MASE

@@ -84,7 +84,7 @@ Antes de iniciar a aplicação, será necessário carregar os pacotes `ggplot2` 
 
 Um **primeiro passo** será carregar os dados:
 
-```{r,message=FALSE,warning=FALSE, eval=FALSE}
+```{r 4-1,message=FALSE,warning=FALSE, eval=FALSE}
 options("install.lock"=FALSE)
 options(repos = list(CRAN="http://cran.rstudio.com/"))
 options("install.lock"=FALSE)
@@ -95,7 +95,7 @@ library(ggplot2)
 
 ```
 
-```{r}
+```{r 4-2}
 
 ## Carregando base de dados
 dados0 <- read.csv2("Data/CO2Amazonia.csv")
@@ -107,7 +107,7 @@ View(dados)
 
 Agora que os dados foram carregados, o **segundo passo** será entender os dados. Para saber algumas propriedade dos dados carregados, será utilizado o comando ``head()`, que apresentará uma amostra dos dados, e ``summary()`, que apresenta as estatísticas básicas dos dados (média, mediana, 1º quartil, etc).
 
-```{r,message=FALSE,warning=FALSE}
+```{r 4-3,message=FALSE,warning=FALSE}
 
 head(dados)
 
@@ -117,7 +117,7 @@ summary(dados)
 
 Como iremos analisar a relação entre a área desmatada por ano (D_Area) e a emissão de 1ª ordem de $CO_2$, é importante verificar qual é o comportamento entre esses dados.
 
-```{r,message=FALSE,warning=FALSE}
+```{r 4-4,message=FALSE,warning=FALSE}
 
 ## Verificando a relação entre a variável dependente e a variável independente
 plot(dados$D_Area, dados$VR_CO2_1stOrder)
@@ -129,7 +129,7 @@ cor.test(dados$VR_CO2_1stOrder,dados$D_Area)
 
 A partir desse gráfico, é possível verificar que a relação entre as variáveis é linear e, dessa forma, conforme a área desmatada aumenta, a emissão de $CO_2$ aumenta linearmente. O valor da correlação indica que a relação entre as duas variáveis é forte e positiva, já que 0,9987358 é próximo de 1 e maior que zero.
 
-```{r,message=FALSE,warning=FALSE}
+```{r 4-5,message=FALSE,warning=FALSE}
 
 ## Construção do modelo
 mod <- lm(VR_CO2_1stOrder ~ D_Area, dados, na.action = na.exclude)
@@ -144,7 +144,7 @@ O p-value do modelo apresenta valor $2.2e^{-16}$ e, assim, apresenta valor menor
 
 De acordo com @montgomery2021, "*A análise dos resíduos é frequentemente útil na verificação da suposição de que os erros sejam distribuídos de forma aproximadamente normal, com variância constante, assim como na determinação da utilidade dos termos adicionais no modelo*". Dessa forma, abaixo será realizada a análise residual.
 
-```{r,message=FALSE,warning=FALSE}
+```{r 4-6,message=FALSE,warning=FALSE}
 # Análise dos resíduos
 
 plot(mod,which = 4)
@@ -182,7 +182,7 @@ O gráfico ajuda na visualização de possíveis casos influentes, ou seja, outl
  
 A [Distância de Cook](https://towardsdatascience.com/identifying-outliers-in-linear-regression-cooks-distance-9e212e9136a#:~:text=One%20method%20that%20is%20often,the%20ith%20observation%20is%20removed) informa o quanto um caso é capaz de influenciar o modelo de regressão. Portanto, o gráfico estima a influência de cada observação no modelo e, novamente, as observações 48, 50 e 51 são extremas. 
 
-```` {r,message=FALSE,warning=FALSE}
+```` {r 4-7,message=FALSE,warning=FALSE}
 CD <- cooks.distance(mod)
 influentes <- CD[(CD > (3* mean(CD, na.rm=TRUE)))]
 
@@ -195,7 +195,7 @@ Pelo [Teste de Shapiro](https://www.rdocumentation.org/packages/stats/versions/3
 
 Os resultados dos resíduos indicam no mínimo uma necessidade de aumento do número de dados ou uma amostra mais representativa. Além disso, outra alternativa seria a existência de outliers. Para realizar o teste de outliers, é interessante utilizar os gráficos Boxplot e Histograma. 
 
-```{r,message=FALSE,warning=FALSE}
+```{r 4-8,message=FALSE,warning=FALSE}
 
 #Encontrando potenciais outliers a partir de gráficos
 
@@ -207,7 +207,7 @@ hist(dados$VR_CO2_1stOrder)
 
 A partir da análise dos resíduos, foi possível inferir que as observações 48, 50 e 51 são outliers influentes. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote `outliers` pode ser utilizado, já que a função `outlier()` consegue encontrar o valor mais distante da média das variáveis.
 
-```{r,message=FALSE,warning=FALSE}
+```{r 4-9,message=FALSE,warning=FALSE}
 #Encontrando os valores com maior diferença da média com o pacote `outliers`
 
 library(outliers)
@@ -227,7 +227,7 @@ Com esse resultado, analisa-se que existe grande possibilidade de existirem outl
 
 Após todos os testes, por fim, o resultado do modelo de regressão linear simples pode ser visualizado abaixo.
 
-```{r}
+```{r 4-10}
 
 # Diagrama de dispersão com o ajuste
 
@@ -240,7 +240,7 @@ Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de f
 
 É isso que faremos:
 
-```{r}
+```{r 4-11}
 # Retirada dos outliers
 dados_sem_outliers <- dados[-c(48,50,51,52,60,61),]
 

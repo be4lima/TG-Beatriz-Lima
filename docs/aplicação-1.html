@@ -23,7 +23,7 @@
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2022-11-03" />
+<meta name="date" content="2022-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -317,7 +317,7 @@ div.csl-indent {
 <p>Como iremos analisar a relação entre a área desmatada por ano (D_Area) e a emissão de 1ª ordem de <span class="math inline">\(CO_2\)</span>, é importante verificar qual é o comportamento entre esses dados.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="aplicação-1.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Verificando a relação entre a variável dependente e a variável independente</span></span>
 <span id="cb7-2"><a href="aplicação-1.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dados<span class="sc">$</span>D_Area, dados<span class="sc">$</span>VR_CO2_1stOrder)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/4-4-1.png" width="672" /></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="aplicação-1.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Correlação entre as variáveis da base de dados</span></span>
 <span id="cb8-2"><a href="aplicação-1.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(dados<span class="sc">$</span>VR_CO2_1stOrder,dados<span class="sc">$</span>D_Area)</span></code></pre></div>
 <pre><code>## 
@@ -359,10 +359,10 @@ div.csl-indent {
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="aplicação-1.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise dos resíduos</span></span>
 <span id="cb12-2"><a href="aplicação-1.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="aplicação-1.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod,<span class="at">which =</span> <span class="dv">4</span>)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/4-6-1.png" width="672" /></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="aplicação-1.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) </span>
 <span id="cb13-2"><a href="aplicação-1.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/4-6-2.png" width="672" /></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="aplicação-1.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Teste de normalidade</span></span>
 <span id="cb14-2"><a href="aplicação-1.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(mod<span class="sc">$</span>residuals)</span></code></pre></div>
 <pre><code>## 
@@ -404,9 +404,9 @@ div.csl-indent {
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="aplicação-1.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Encontrando potenciais outliers a partir de gráficos</span></span>
 <span id="cb18-2"><a href="aplicação-1.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="aplicação-1.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dados<span class="sc">$</span>D_Area)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/4-8-1.png" width="672" /></p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="aplicação-1.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dados<span class="sc">$</span>VR_CO2_1stOrder)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/4-8-2.png" width="672" /></p>
 <p>A partir da análise dos resíduos, foi possível inferir que as observações 48, 50 e 51 são outliers influentes. Possivelmente, em relação a área, o outlier está abaixo de 500000 m²; enquanto para a emissão de CO2, acima de 1400 ppm. Para continuar procurando esses possíveis outliers, o pacote <code>outliers</code> pode ser utilizado, já que a função <code>outlier()</code> consegue encontrar o valor mais distante da média das variáveis.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="aplicação-1.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Encontrando os valores com maior diferença da média com o pacote `outliers`</span></span>
 <span id="cb20-2"><a href="aplicação-1.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -428,7 +428,7 @@ div.csl-indent {
 <span id="cb24-3"><a href="aplicação-1.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> dados<span class="sc">$</span>D_Area, <span class="at">y =</span> dados<span class="sc">$</span>VR_CO2_1stOrder, <span class="at">xlab =</span> <span class="st">&quot;Área desmatada no ano&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Emissão de CO2 de 1a ordem&quot;</span>)</span>
 <span id="cb24-4"><a href="aplicação-1.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="aplicação-1.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/4-10-1.png" width="672" /></p>
 <p>Pelas estatísticas, foi possível analisar que as variáveis relacionam-se de forma positiva e linear, além do modelo apresentar um R² satisfatório. Porém, após a análise dos resíduos, foi possível concluir que o modelo, apesar de ter certas estatísticas boas, não representa de forma adequada a relação entre o desmatamento anual e a emissão de <span class="math inline">\(CO_2\)</span> na Amazônia Legal. Portanto, torna-se importante refazer o modelo, de forma que os outliers influentes (observações 48, 50, 51, 52, 60 e 61) sejam retirados, para verificar se este novo modelo estaria mais adequado para representar a relação entre as variáveis.</p>
 <p>É isso que faremos:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="aplicação-1.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retirada dos outliers</span></span>
@@ -459,7 +459,7 @@ div.csl-indent {
 ## F-statistic: 8.83e+04 on 1 and 53 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="aplicação-1.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico do modelo</span></span>
 <span id="cb27-2"><a href="aplicação-1.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2)</span></code></pre></div>
-<p><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-12-1.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-12-2.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-12-3.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/unnamed-chunk-12-4.png" width="672" /></p>
+<p><img src="TG-Beatriz-Lima_files/figure-html/4-11-1.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/4-11-2.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/4-11-3.png" width="672" /><img src="TG-Beatriz-Lima_files/figure-html/4-11-4.png" width="672" /></p>
 <p>Mesmo com a retirada de grande parte dos outliers influentes, o modelo ainda não possui resíduos adequados. Para a realização de uma regressão linear, são assumidas alguns preceitos que, provavelmente, não são o caso dos dados utilizados para o segundo estudo de caso (vide tópico <a href="regressão-linear-simples.html#Condicoes">5.3.1</a>). Conforme verificamos, os resíduos não seguem uma distribuição normal e os dados não possuem variância constante. Portanto, pode-se afirmar que a regressão linear não explica os dados de forma adequada. Talvez seja necessário aplicar outro tipo de modelo para estes dados. Além disso, os dados podem não conter variáveis suficientes para explicar a variável resposta (Emissão de primeira ordem de <span class="math inline">\(CO_2\)</span>).</p>
 
 </div>
