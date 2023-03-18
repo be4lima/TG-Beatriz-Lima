@@ -42,7 +42,7 @@ install.packages("tidyverse")
 
 O shapefile "sgdat.shp" são dados da cobertura de algas marinhas em Tampa Bay em 2016. As "features" são as linhas do vetor e os "fields" são as colunas, ou melhor, atributos ("OBJECT ID" e "FLUCCS"). O SGR do arquivo é WGS 84. A coluna "geometry" armazena os dados espaciais (longitude e latitude).
 
-```{r 6-2,message=FALSE,warning=FALSE}
+```{r 6-2,message=FALSE,warning=FALSE,results='hide',echo=FALSE}
 #sgdat shapefile
 sgdat <- st_read('Data/sgdat.shp')
 
@@ -53,7 +53,7 @@ methods(class="sf")
 Esse é o passo a passo de como importar um shapefile. Porém, muitas vezes não possuímos um shapefile e queremos criar um a partir de um dataframe. Para isso, é necessário que o dataframe inclua as coordenadas geográficas (longitude e latitude) e que tenhamos conhecimento do SGR. O dataframe ´fishdat´ possui as características dos peixes encontrados e o statloc apresenta a localização deles. O passo a passo será realizado abaixo.
 
 ```{r 6-3,message=FALSE,warning=FALSE}
-getwd()
+
 # dados da presença de peixes em Tampa Bay
 fishdat <- read.csv("Data/fishdat.csv")
 

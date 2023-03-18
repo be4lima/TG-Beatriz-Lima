@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 # Modelos lineares
 
 Resumidamente, modelos lineares são utilizados para resumir relações observadas a partir de dados, no caso, ambientais, em uma linha reta. Em um modelo linear descreve-se o comportamento de uma variável dependente (ou variável resposta, y) como função de uma ou mais variáveis independentes (ou variáveis explicativas, x) [@chapra2013]. 
@@ -256,5 +251,3 @@ plot(mod2)
 ```
 
 Mesmo com a retirada de grande parte dos outliers influentes, o modelo ainda não possui resíduos adequados. Para a realização de uma regressão linear, são assumidas alguns preceitos que, provavelmente, não são o caso dos dados utilizados para o segundo estudo de caso (vide tópico \@ref(Condicoes)). Conforme verificamos, os resíduos não seguem uma distribuição normal e os dados não possuem variância constante. Portanto, pode-se afirmar que a regressão linear não explica os dados de forma adequada. Talvez seja necessário aplicar outro tipo de modelo para estes dados. Além disso, os dados podem não conter variáveis suficientes para explicar a variável resposta (Emissão de primeira ordem de $CO_2$).
-
-
