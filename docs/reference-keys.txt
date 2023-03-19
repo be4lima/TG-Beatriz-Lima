@@ -56,3 +56,5 @@ ciência-de-dados-ambientais
 ruído-branco
 material-complementar
 nocite
+relação-entre-quantidade-de-algas-e-de-peixes-em-tampa-bay
+pontos-de-incêndio-nas-florestas-brasileiras

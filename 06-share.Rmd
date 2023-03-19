@@ -24,7 +24,9 @@ No capítulo, serão utilizados os seguintes pacotes: `sf` para ler e trabalhar 
 No curso de Engenharia Ambiental e Urbana, utilizam-se *shapefiles* (.shp) para realizar análises espaciais, portanto, estes serão utilizados no capítulo. A utilização de rasters não será abordada.
 
 
-## Aplicação {-}
+## Aplicações {-}
+
+### Relação entre quantidade de algas e de peixes em Tampa Bay
 Para a aplicação será reproduzido o exemplo do [TBEP R Training](https://tbep-tech.github.io/tbep-r-training/mapping.html#Exercise_13). Para isso, serão instalados os pacotes `sf` e `mapview`.
 
 ```{r 6-1,message=FALSE,warning=FALSE, results='hide'}
@@ -35,9 +37,10 @@ install.packages(c('sf','mapview'))
 
 library(sf)
 library(mapview)
-library(ggplot2)
-install.packages("tidyverse")
-#library(tidyverse)
+library(ggplot2)     # graphic
+library(tidyverse)
+library(dplyr)       # data manipulation
+library(readr)       # read files
 ```
 
 O shapefile "sgdat.shp" são dados da cobertura de algas marinhas em Tampa Bay em 2016. As "features" são as linhas do vetor e os "fields" são as colunas, ou melhor, atributos ("OBJECT ID" e "FLUCCS"). O SGR do arquivo é WGS 84. A coluna "geometry" armazena os dados espaciais (longitude e latitude).
@@ -175,6 +178,127 @@ mapview(sgdat, col.regions = 'green') +
 
 ```
 
+### Pontos de incêndio nas florestas brasileiras
+Para a segunda aplicação, será utilizada uma base de dados do kaggle com os pontos e a quantidade de incêndios nas florestas brasileiras.
+
+```{r 6-15,message=FALSE,warning=FALSE}
+# Data frame com os incêndios e os estados brasileiros
+# fonte: https://www.kaggle.com/code/tianjinglei/starter-forest-fires-in-brazil-41eec699-a/input
+
+forest_fires <- read.csv("Data/amazon.csv")
+head(forest_fires)
+View(forest_fires)
+str(forest_fires)
+
+```
+
+Analisando a base de dados, é possível perceber que houveram problemas na leitura de estados que possuem acento no nome, como Pará e Piauí. Para resolver isso:
+
+```{r 6-16}
+# Problema com a palavra "Pará" porque tem um acento e o R não está conseguindo ler
+
+Encoding(forest_fires$state) <- "latin1"
+forest_fires$state[forest_fires$state == 'Parï¿½'] <- 'Para' #Ajuste
+
+# Piauí tambémdeu problema
+forest_fires$state[forest_fires$state == 'Piau'] <- 'Piaui' #Ajuste
+View(forest_fires)
+
+```
+
+Para analisar a quantidade de incêndios ao longo dos anos nos estados brasileiros, será realizada a soma deles em cada estado:
+
+```{r 6-17}
+# Agrupando a soma dos incêndios por estado
+
+total_fires_by_state <- forest_fires %>%
+  group_by(state) %>%
+  summarise(sum = sum(number))
+
+# Visualizando a base de dados criada com a soma por estado
+View(total_fires_by_state)
+
+# Sumarização dos dados
+summary(total_fires_by_state)
+```
+
+Para visualizar a quantidade de incêndios por estado, será realizado um gráfico de barras:
+```{r 6-18}
+# Gráfico de barras com a soma de incêncios por estado
+ggplot(total_fires_by_state, aes(x = state, y = sum)) +
+  geom_bar(stat='identity') +
+  coord_flip()
+
+```
+
+Para poder realizar a criação de mapas, foi criado um arquivo com as coordenadas (retiradas do Google Maps) de cada um dos estados brasileiros em WGS84:
+
+```{r 6-19}
+# Dataframe com as coordenadas lat e long em WGS84 (fonte: google maps)
+coord <- read.table("Data/coordenadas.txt", sep=",",dec=".",header = TRUE)
+View(coord)
+```
+Para poder analisar a quantidade de incêndios no mapa, será realizada a junção entre a tabela com a quantidade de incêndio por estado e a tabela de coordenadas:
+```{r 6-20}
+
+# Juntando os dataframes
+joindata <- inner_join(total_fires_by_state,coord,by="state")
+View(joindata)
+
+```
+Para que as coordenadas da tabela sejam tratadas como `simple features`, será utilizada a função `st_as_sf()` para criar os pontos das coordenadas de acordo com a latitude e longitude:
+```{r 6-21}
+# Junção entre a tabela com as coordenadas e a quantidade de incêndios:
+joindata2 <- inner_join(total_fires_by_state,coord,by="state") %>%
+  st_as_sf(coords=c('long','lat'), crs=4326) # criação dos pontos com as coordenadas e inserção do CRS de referência
+```
+
+Para poder visualizar cada um dos pontos com os limites geográficos dos estados brasileiros, será importado um shapefile do IBGE. Sabe-se que os shapefiles do IBGE como CRS o SIRGAS 2000 e isso será confirmado a partir da função ´st_crs()´.
+```{r 6-22}
+# Importando shapefile (fonte: ibge)
+
+shape <- read_sf('Data/Shapefiles/BR_UF_2020.shp') # por ser do ibge, utiliza crs = SIRGAS2000 (EPSG code: 4674), precisamos mudar para WGS84
+st_crs(shape)
+View(shape)
+```
+Como o objetivo é a visualização da ´joindata´ e do shapefile em um mesmo mapa, ambos precisam estar com o mesmo CRS. Dessa forma, o shapefile do IBGE será transformado em WGS84 a partir da função ``st_transform`:
+
+```{r 6-23}
+shape2 <- st_transform(shape, 4326) # Mudando crs para WGS84 (EPSG code: 4326)
+st_crs(shape2)
+```
+
+Antes de criarmos os mapas, iremos checr se os CRS são os mesmos:
+
+```{r 6-24}
+# Checando SGR
+st_crs(joindata2) 
+st_crs(shape2)
+```
+O primeiro mapa será um mapa interativo:
+
+```{r 6-25}
+# Mapa Interativo com os pontos no mapa do Brasil
+mapview(shape2, col.regions = 'green') +
+  mapview(joindata2)
+```
+
+O segundo mapa levará em conta a quantidade de incêndio em cada estado. Será criada uma escala de cor de acordo com a quantidade de incêndios. Assim, poderemos analisar quais estados apresentam maior quantidade de incêndios nas florestas ao longo dos anos.
+
+```{r 6-26}
+# Mapa com cor de ponto diferente de acordo com a quantidade de incêndios
+ggplot() + 
+  geom_sf(data = shape2) + 
+  geom_sf(data = shape2, colour = "green", fill = NA) + 
+  geom_point(data = joindata, mapping = aes(x = long, y = lat, colour = sum, size = 3)) +
+    scale_colour_gradient2(
+    low = "yellow", 
+    mid = "orange", 
+    high = "red",
+    midpoint = 30388) +
+  coord_sf() +
+  ggtitle("Pontos de incêndio no Brasil")
+```
 
 ## Material Complementar {-}
 1. [TBEP R Training (youtube)](https://www.youtube.com/watch?v=nQVFqkifeSE&t=152s)

@@ -1,0 +1,28 @@
+state,abbreviation,lat,long,area
+Acre,AC,-8.77,-70.55,164 123.964
+Alagoas,AL,-9.62,-36.82,27 843.295
+Amazonas,AM,-3.47,-65.10,142 470.762
+Amapa,AP,1.41,-51.77,1 559 167.889
+Bahia,BA,-13.29,-41.71,564 760.427
+Ceara,CE,-5.20,-39.53,148 894.441
+Distrito Federal,DF,-15.83,-47.86,5 760.783
+Espirito Santo,ES,-19.19,-40.34,46 074.447
+Goias,GO,-15.98,-49.86,340 203.329
+Maranhao,MA,-5.42,-45.44,329 642.182
+Mato Grosso,MT,-12.64,-55.42,903 207.019
+Mato Grosso do Sul,MS,-20.51,-54.54,357 145.534
+Minas Gerais,MG,-18.10,-44.38,586 521.123
+Para,PA,-3.79,-52.48,1 245 870.798
+Paraiba,PB,-7.28,-36.72,56 467.242
+Parana,PR,-24.89,-51.55,199 298.979
+Pernambuco,PE,-8.38,-37.86,98 067.881
+Piaui,PI,-6.60,-42.28,251 756.515
+Rio de Janeiro,RJ,-22.25,-42.66,43 750.427
+Rio Grande do Norte,RN,-5.81,-36.59,52 809.602
+Rondonia,RO,-10.83,-63.34,281 707.156
+Rio Grande do Sul,RS,-30.17,-53.50,237 765.24
+Roraima,RR,1.99,-61.33,223 644.527
+Santa Catarina,SC,-27.45,-50.95,95 730.684
+Sergipe,SE,-10.57,-37.45,248 219.481
+Sao Paulo,SP,-22.19,-48.79,21 925.424
+Tocantins,TO,-9.46,-48.2,277 466.763
