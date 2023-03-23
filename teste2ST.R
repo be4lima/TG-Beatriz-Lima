@@ -1,5 +1,5 @@
 # Packages
-packages <- c("BETS","urca","TSA","forecast","lmtest","normtest","FinTS","xlsx")
+packages <- c("BETS","urca","TSA","forecast","lmtest","nortest","FinTS","xlsx", "MLmetrics")
 
 # Checando se os pacotes já estão instalados
 is.installed <- function(mypkg){
@@ -10,12 +10,87 @@ for(packages in packages){
     install.packages((packages), repos = "http://cran.us.r-project.org")
   }
 }
+library(dplyr)
+library(forecast)
+library(astsa)
+library(MLmetrics)
 
 # Carregando base de dados
 # Fonte: https://www.kaggle.com/datasets/kvnxls/co2-emissions-dataset-1750-2020
+
 emissions <- read.csv("Data/co2data.csv", sep = ",", dec = ".")
 View(emissions)
+str(emissions)
+
+# Filtrando somente as emissões do Brasil
+emissions_br <- emissions %>%
+  filter(country == 'Brazil')
+
+View(emissions_br)
 
 # Separando somente as informações importantes para a análise
-analise_co2 <- emissions[]
-ts.plot(emissions, ylab="Emissão de GEEs", xlab="Anos")
+# Para a análise, precisamos somente da coluna de ano e de concentração de CO2
+
+emissions_br <- emissions_br[c(3,4)]
+
+# Mudando o nome das linhas para os anos da série temporal
+year <- emissions_br[,1]
+
+row.names(emissions_br) <- year
+
+# Criando tabela somente com as concentrações de CO2 como coluna
+emissions_br <- emissions_br[c(2)]
+
+# EDA
+str(emissions_br)
+head(emissions_br)
+summary(emissions_br)
+
+# Criando a série temporal (ts)
+emissions_br.ts <- ts(emissions_br$co2,start=c(1901),frequency=1)
+View(emissions_br.ts)
+
+# Análise gráfica
+
+# Tendência de aumento
+plot.ts(emissions_br.ts, ylab="Emissão de CO2", xlab="Anos")
+
+# Comentários: Tendência de aumento clara, não aparenta possuir sazonalidade já que não existem padrões que se repetem ao longo dos anos
+
+require(BETS)
+corrgram(emissions_br.ts,lag.max = 36, ci=0.95)
+
+#Comentários: existe autocorrelação significativa até o lag 36
+
+library(urca)
+adf.drift <- ur.df(y=emissions_br.ts, type= "drift", lag=24, selectlags="AIC")
+corrgram(adf.drift@res, lag.max=36)
+
+# Estatística de teste 
+adf.drift@teststat 
+adf.drift@cval #valores tabulados por MacKinnon (1996)
+#A partir do gráfico, é possível afirmar que a estatística teste (1,765614)
+#é maior do que o valor máximo associado ao nível de confiança (-2,88).
+#conclui-se que a série não é estacionária
+
+# Uma diferenciação para tornar a série estacionária
+ts.plot(diff(emissions_br.ts, lag=1, differences=1))
+BETS::corrgram(diff(emissions_br.ts, lag=1, differences=1), lag.max=36)
+
+# Aplicação do log para tornar a variância constante
+ts.plot(diff(log(AirPassengers), lag=1, differences=1))
+
+# A série, agora, é estacionária.
+
+# Identificação
+#FAC
+BETS::corrgram(diff(diff(log(emissions_br.ts), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
+# Última observação significativa: 11
+
+#FACP
+BETS::corrgram(diff(diff(log(emissions_br.ts), lag = 1, differences = 1), lag = 12, differences = 1), type = "partial", lag.max = 48)
+# Última observação significativa: 11
+
+# Estimação
+library(forecast)
+arima(emissions_br.ts, order = c(1,1,1), method = "ML")
