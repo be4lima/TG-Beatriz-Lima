@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Aplicação 1 | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</title>
+  <meta name="description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Aplicação 1 | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Aplicação 1 | Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações" />
+  
+  <meta name="twitter:description" content="Livro relacionado a técnicas de programação e modelagem de temas específicos da Engenharia Ambiental e Urbana. Será realizado um conjunto de materiais teóricos, equacionamentos, fluxo de dados e principais análises numéricas e gráficas. Além da elaboração de estudos de casos e tutoriais didáticos relacionados a esses tópicos da Engenharia Ambiental e Urbana." />
+  
+
+<meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
+
+
+<meta name="date" content="2023-04-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="modelos-sarima.html"/>
+<link rel="next" href="aplicação-2.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Ciência de dados na Engenharia Ambiental e Urbana</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like https://bookdown.org/yihui/bookdown</a></li>
+<li class="chapter" data-level="2" data-path="ciência-de-dados-ambientais.html"><a href="ciência-de-dados-ambientais.html"><i class="fa fa-check"></i><b>2</b> Ciência de dados ambientais</a></li>
+<li class="chapter" data-level="3" data-path="r---introdução-e-comandos-básicos.html"><a href="r---introdução-e-comandos-básicos.html"><i class="fa fa-check"></i><b>3</b> R - Introdução e Comandos Básicos</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="definindo-um-diretório-de-trabalho.html"><a href="definindo-um-diretório-de-trabalho.html"><i class="fa fa-check"></i><b>3.1</b> Definindo um diretório de trabalho</a></li>
+<li class="chapter" data-level="3.2" data-path="vetores.html"><a href="vetores.html"><i class="fa fa-check"></i><b>3.2</b> Vetores</a></li>
+<li class="chapter" data-level="3.3" data-path="base-de-dados.html"><a href="base-de-dados.html"><i class="fa fa-check"></i><b>3.3</b> Base de dados</a></li>
+<li class="chapter" data-level="3.4" data-path="seleção-de-variáveis.html"><a href="seleção-de-variáveis.html"><i class="fa fa-check"></i><b>3.4</b> Seleção de variáveis</a></li>
+<li class="chapter" data-level="3.5" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>3.5</b> R packages</a></li>
+<li class="chapter" data-level="3.6" data-path="material-complementar.html"><a href="material-complementar.html"><i class="fa fa-check"></i><b>3.6</b> Material complementar</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html"><i class="fa fa-check"></i><b>4</b> Análise Exploratória de Dados</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="introdução-à-estatística.html"><a href="introdução-à-estatística.html"><i class="fa fa-check"></i><b>4.1</b> Introdução à Estatística</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="introdução-à-estatística.html"><a href="introdução-à-estatística.html#população-e-amostra"><i class="fa fa-check"></i><b>4.1.1</b> População e amostra</a></li>
+<li class="chapter" data-level="4.1.2" data-path="introdução-à-estatística.html"><a href="introdução-à-estatística.html#tipos-de-variáveis"><i class="fa fa-check"></i><b>4.1.2</b> Tipos de variáveis</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html"><i class="fa fa-check"></i><b>4.2</b> Sumarização numérica de dados</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-posição"><i class="fa fa-check"></i><b>4.2.1</b> Medidas de Posição</a></li>
+<li class="chapter" data-level="4.2.2" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-variabilidade"><i class="fa fa-check"></i><b>4.2.2</b> Medidas de Variabilidade</a></li>
+<li class="chapter" data-level="4.2.3" data-path="sumarização-numérica-de-dados.html"><a href="sumarização-numérica-de-dados.html#medidas-de-forma"><i class="fa fa-check"></i><b>4.2.3</b> Medidas de Forma</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="representação-gráfica.html"><a href="representação-gráfica.html"><i class="fa fa-check"></i><b>4.3</b> Representação gráfica</a></li>
+<li class="chapter" data-level="" data-path="aplicação.html"><a href="aplicação.html"><i class="fa fa-check"></i>Aplicação</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="aplicação.html"><a href="aplicação.html#inmet"><i class="fa fa-check"></i><b>4.3.1</b> INMET</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modelos-lineares.html"><a href="modelos-lineares.html"><i class="fa fa-check"></i><b>5</b> Modelos lineares</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="covariância.html"><a href="covariância.html"><i class="fa fa-check"></i><b>5.1</b> Covariância</a></li>
+<li class="chapter" data-level="5.2" data-path="correlação.html"><a href="correlação.html"><i class="fa fa-check"></i><b>5.2</b> Correlação</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="correlação.html"><a href="correlação.html#coeficiente-de-pearson-r"><i class="fa fa-check"></i><b>5.2.1</b> Coeficiente de Pearson (r)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html"><i class="fa fa-check"></i><b>5.3</b> Regressão linear simples</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html#Condicoes"><i class="fa fa-check"></i><b>5.3.1</b> Condições</a></li>
+<li class="chapter" data-level="5.3.2" data-path="regressão-linear-simples.html"><a href="regressão-linear-simples.html#coeficiente-de-determinação-r²"><i class="fa fa-check"></i><b>5.3.2</b> Coeficiente de Determinação (R²)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="aplicação-1.html"><a href="aplicação-1.html"><i class="fa fa-check"></i>Aplicação</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="análise-de-séries-temporais.html"><a href="análise-de-séries-temporais.html"><i class="fa fa-check"></i><b>6</b> Análise de séries temporais</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="estacionaridade.html"><a href="estacionaridade.html"><i class="fa fa-check"></i><b>6.1</b> Estacionaridade</a></li>
+<li class="chapter" data-level="6.2" data-path="operador-de-diferenças.html"><a href="operador-de-diferenças.html"><i class="fa fa-check"></i><b>6.2</b> Operador de diferenças</a></li>
+<li class="chapter" data-level="6.3" data-path="ruído-branco.html"><a href="ruído-branco.html"><i class="fa fa-check"></i><b>6.3</b> Ruído branco</a></li>
+<li class="chapter" data-level="6.4" data-path="passeio-aleatório.html"><a href="passeio-aleatório.html"><i class="fa fa-check"></i><b>6.4</b> Passeio aleatório</a></li>
+<li class="chapter" data-level="6.5" data-path="modelos-autoregressivos.html"><a href="modelos-autoregressivos.html"><i class="fa fa-check"></i><b>6.5</b> Modelos autoregressivos</a></li>
+<li class="chapter" data-level="6.6" data-path="modelos-arma.html"><a href="modelos-arma.html"><i class="fa fa-check"></i><b>6.6</b> Modelos ARMA</a></li>
+<li class="chapter" data-level="6.7" data-path="modelos-arima.html"><a href="modelos-arima.html"><i class="fa fa-check"></i><b>6.7</b> Modelos ARIMA</a></li>
+<li class="chapter" data-level="6.8" data-path="modelos-sarima.html"><a href="modelos-sarima.html"><i class="fa fa-check"></i><b>6.8</b> Modelos SARIMA</a></li>
+<li class="chapter" data-level="" data-path="aplicação-1-1.html"><a href="aplicação-1-1.html"><i class="fa fa-check"></i>Aplicação 1</a></li>
+<li class="chapter" data-level="" data-path="aplicação-2.html"><a href="aplicação-2.html"><i class="fa fa-check"></i>Aplicação 2</a></li>
+<li class="chapter" data-level="" data-path="material-complementar-1.html"><a href="material-complementar-1.html"><i class="fa fa-check"></i>Material Complementar</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="analise-geoespacial.html"><a href="analise-geoespacial.html"><i class="fa fa-check"></i><b>7</b> Analise geoespacial</a>
+<ul>
+<li class="chapter" data-level="" data-path="aplicações.html"><a href="aplicações.html"><i class="fa fa-check"></i>Aplicações</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="aplicações.html"><a href="aplicações.html#pontos-de-incêndio-nas-florestas-brasileiras"><i class="fa fa-check"></i><b>7.0.1</b> Pontos de incêndio nas florestas brasileiras</a></li>
+<li class="chapter" data-level="7.0.2" data-path="aplicações.html"><a href="aplicações.html#relação-entre-quantidade-de-algas-e-de-peixes-em-tampa-bay"><i class="fa fa-check"></i><b>7.0.2</b> Relação entre quantidade de algas e de peixes em Tampa Bay</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="material-complementar-2.html"><a href="material-complementar-2.html"><i class="fa fa-check"></i>Material Complementar</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referências-bibliográficas.html"><a href="referências-bibliográficas.html"><i class="fa fa-check"></i>Referências Bibliográficas</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Ciência de dados na Engenharia Ambiental e Urbana: abordagem introdutória com aplicações</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="aplicação-1-1" class="section level2 unnumbered hasAnchor">
+<h2>Aplicação 1<a href="aplicação-1-1.html#aplicação-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para a aplicação, foi utilizada uma base de dados de emissões de <span class="math inline">\(CO_2\)</span> de diversos países ao longo dos anos de 1750 a 2020 da plataforma Kaggle. Além dos valores de emissão de <span class="math inline">\(CO_2\)</span>, também apresenta valores de emissão de metano e óxido nitroso.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="aplicação-1-1.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregando base de dados</span></span>
+<span id="cb1-2"><a href="aplicação-1-1.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fonte: https://www.kaggle.com/datasets/kvnxls/co2-emissions-dataset-1750-2020</span></span>
+<span id="cb1-3"><a href="aplicação-1-1.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="aplicação-1-1.html#cb1-4" aria-hidden="true" tabindex="-1"></a>emissions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/co2data.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;.&quot;</span>)</span>
+<span id="cb1-5"><a href="aplicação-1-1.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(emissions)</span>
+<span id="cb1-6"><a href="aplicação-1-1.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(emissions)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    25989 obs. of  60 variables:
+##  $ iso_code                           : chr  &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; ...
+##  $ country                            : chr  &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; ...
+##  $ year                               : int  1949 1950 1951 1952 1953 1954 1955 1956 1957 1958 ...
+##  $ co2                                : num  0.015 0.084 0.092 0.092 0.106 0.106 0.154 0.183 0.293 0.33 ...
+##  $ co2_per_capita                     : num  0.002 0.011 0.012 0.012 0.013 0.013 0.019 0.022 0.034 0.038 ...
+##  $ trade_co2                          : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ cement_co2                         : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ cement_co2_per_capita              : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ coal_co2                           : num  0.015 0.021 0.026 0.032 0.038 0.043 0.062 0.062 0.077 0.092 ...
+##  $ coal_co2_per_capita                : num  0.002 0.003 0.003 0.004 0.005 0.005 0.008 0.007 0.009 0.011 ...
+##  $ flaring_co2                        : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ flaring_co2_per_capita             : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ gas_co2                            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ gas_co2_per_capita                 : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ oil_co2                            : num  NA 0.063 0.066 0.06 0.068 0.064 0.092 0.121 0.216 0.238 ...
+##  $ oil_co2_per_capita                 : num  NA 0.008 0.008 0.008 0.008 0.008 0.011 0.014 0.025 0.027 ...
+##  $ other_industry_co2                 : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ other_co2_per_capita               : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ co2_growth_prct                    : num  NA 475 8.7 0 16 ...
+##  $ co2_growth_abs                     : num  NA 0.07 0.007 0 0.015 0 0.048 0.029 0.11 0.037 ...
+##  $ co2_per_gdp                        : num  NA 0.009 0.01 0.009 0.01 0.01 0.014 0.016 0.025 0.027 ...
+##  $ co2_per_unit_energy                : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ consumption_co2                    : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ consumption_co2_per_capita         : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ consumption_co2_per_gdp            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ cumulative_co2                     : num  0.015 0.099 0.191 0.282 0.388 ...
+##  $ cumulative_cement_co2              : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ cumulative_coal_co2                : num  0.015 0.036 0.061 0.093 0.131 0.174 0.236 0.298 0.375 0.467 ...
+##  $ cumulative_flaring_co2             : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ cumulative_gas_co2                 : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ cumulative_oil_co2                 : num  NA 0.063 0.129 0.189 0.257 0.321 0.413 0.534 0.75 0.988 ...
+##  $ cumulative_other_co2               : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ trade_co2_share                    : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ share_global_co2                   : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ share_global_cement_co2            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ share_global_coal_co2              : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ share_global_flaring_co2           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ share_global_gas_co2               : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ share_global_oil_co2               : num  NA 0 0 0 0 0 0 0 0.01 0.01 ...
+##  $ share_global_other_co2             : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ share_global_cumulative_co2        : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ share_global_cumulative_cement_co2 : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ share_global_cumulative_coal_co2   : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ share_global_cumulative_flaring_co2: num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ share_global_cumulative_gas_co2    : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ share_global_cumulative_oil_co2    : num  NA 0 0 0 0 0 0 0 0 0 ...
+##  $ share_global_cumulative_other_co2  : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ total_ghg                          : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ ghg_per_capita                     : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ total_ghg_excluding_lucf           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ ghg_excluding_lucf_per_capita      : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ methane                            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ methane_per_capita                 : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ nitrous_oxide                      : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ nitrous_oxide_per_capita           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ population                         : num  7624058 7752117 7840151 7935996 8039684 ...
+##  $ gdp                                : num  NA 9.42e+09 9.69e+09 1.00e+10 1.06e+10 ...
+##  $ primary_energy_consumption         : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ energy_per_capita                  : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ energy_per_gdp                     : num  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+<p>Como o nosso interesse são as emissões do Brasil, foi realizada uma nova base de dados com somente as emissões brasileiras de <span class="math inline">\(CO_2\)</span> ao longo dos anos.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="aplicação-1-1.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrando somente as emissões do Brasil</span></span>
+<span id="cb3-2"><a href="aplicação-1-1.html#cb3-2" aria-hidden="true" tabindex="-1"></a>emissions_br <span class="ot">&lt;-</span> emissions <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="aplicação-1-1.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">&#39;Brazil&#39;</span>)</span>
+<span id="cb3-4"><a href="aplicação-1-1.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="aplicação-1-1.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(emissions_br)</span></code></pre></div>
+<p>Porém, gostaríamos de analisar somente as emissões de <span class="math inline">\(CO_2\)</span> do Brasil. Dessa forma, iremos separar em uma base de dados somente os dados que interessam para a análise: País e Emissão de <span class="math inline">\(CO_2\)</span>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="aplicação-1-1.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separando somente as informações importantes para a análise</span></span>
+<span id="cb4-2"><a href="aplicação-1-1.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Para a análise, precisamos somente da coluna de ano e de concentração de CO2</span></span>
+<span id="cb4-3"><a href="aplicação-1-1.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="aplicação-1-1.html#cb4-4" aria-hidden="true" tabindex="-1"></a>emissions_br <span class="ot">&lt;-</span> emissions_br[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]</span>
+<span id="cb4-5"><a href="aplicação-1-1.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="aplicação-1-1.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Mudando o nome das linhas para os anos da série temporal</span></span>
+<span id="cb4-7"><a href="aplicação-1-1.html#cb4-7" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> emissions_br[,<span class="dv">1</span>]</span>
+<span id="cb4-8"><a href="aplicação-1-1.html#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="aplicação-1-1.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(emissions_br) <span class="ot">&lt;-</span> year</span>
+<span id="cb4-10"><a href="aplicação-1-1.html#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="aplicação-1-1.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando tabela somente com as concentrações de CO2 como coluna</span></span>
+<span id="cb4-12"><a href="aplicação-1-1.html#cb4-12" aria-hidden="true" tabindex="-1"></a>emissions_br <span class="ot">&lt;-</span> emissions_br[<span class="fu">c</span>(<span class="dv">2</span>)]</span></code></pre></div>
+<p>A partir disso, realiza-se a análise exploratória da base de dados:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="aplicação-1-1.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EDA</span></span>
+<span id="cb5-2"><a href="aplicação-1-1.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(emissions_br)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    120 obs. of  1 variable:
+##  $ co2: num  2.1 2.51 2.44 2.62 2.8 ...</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="aplicação-1-1.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(emissions_br)</span></code></pre></div>
+<pre><code>##        co2
+## 1901 2.103
+## 1902 2.506
+## 1903 2.440
+## 1904 2.620
+## 1905 2.799
+## 1906 3.206</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="aplicação-1-1.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(emissions_br)</span></code></pre></div>
+<pre><code>##       co2         
+##  Min.   :  2.103  
+##  1st Qu.:  5.513  
+##  Median : 47.998  
+##  Mean   :135.321  
+##  3rd Qu.:221.342  
+##  Max.   :557.901</code></pre>
+<p>Agora, é necessário transformar a base de dados em uma série temporal. Isso será realizado a partir da função <code>ts()</code>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="aplicação-1-1.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando a série temporal (ts)</span></span>
+<span id="cb11-2"><a href="aplicação-1-1.html#cb11-2" aria-hidden="true" tabindex="-1"></a>emissions_br.ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(emissions_br<span class="sc">$</span>co2,<span class="at">start=</span><span class="dv">1901</span>, <span class="at">end=</span><span class="dv">2020</span>, <span class="at">frequency=</span><span class="dv">1</span>)</span></code></pre></div>
+<p>Criada a série temporal, será realizada a estapa de Identificação utilizando a análise gráfica para obter mais conhecimento acerca da série. Portanto, iremos plotar a série temporal:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="aplicação-1-1.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise gráfica</span></span>
+<span id="cb12-2"><a href="aplicação-1-1.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="aplicação-1-1.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Tendência de aumento</span></span>
+<span id="cb12-4"><a href="aplicação-1-1.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.ts</span>(emissions_br.ts, <span class="at">ylab=</span><span class="st">&quot;Emissão de CO2&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Anos&quot;</span>)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="aplicação-1-1.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comentários: Tendência de aumento clara, não aparenta possuir sazonalidade já que não existem padrões que se repetem ao longo dos anos</span></span></code></pre></div>
+<p>Conforme apresentado no gráfico, foi possível verificar que a série apresenta uma tendência de aumento clara. Além disso, não possui sazonalidade, já que não existem padrões que se repetem ao longo do ano.</p>
+<p>Sabe-se que uma série temporal é estacionária quando a sua média, variância e autocorrelação são contantes ao longo do tempo. Ou seja, uma série é estacionária quando não é dependente do tempo e não tem uma tendência ou sazonalidade. Como já foi verificado graficamente que a série possui uma tendência de aumento ao longo do tempo, é necessário verificar a partir de um teste estatístico se a série é estacionária.</p>
+<p>O teste que será utilizado é o Teste de Dickey-Fuller Aumentado (ADF). A hipótese nula do teste é que a série temporal possui uma raiz única, ou seja, não é estacionária. Portanto, se o p-value do teste for menor que o nível de significância <span class="math inline">\(\alpha\)</span> (5% ou 1%), a hipótese nula é rejeitada. Caso o p-value seja maior, a hipótese nula não é rejeitada e a série é não-estacionária.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="aplicação-1-1.html#cb14-1" aria-hidden="true" tabindex="-1"></a>adf.drift <span class="ot">&lt;-</span> urca<span class="sc">::</span><span class="fu">ur.df</span>(<span class="at">y=</span>emissions_br.ts, <span class="at">type=</span> <span class="st">&quot;drift&quot;</span>, <span class="at">lag=</span><span class="dv">24</span>, <span class="at">selectlags=</span><span class="st">&quot;AIC&quot;</span>)</span>
+<span id="cb14-2"><a href="aplicação-1-1.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Utiliza-se &quot;drift&quot; como argumento quando a série temporal possui tendência</span></span>
+<span id="cb14-3"><a href="aplicação-1-1.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="aplicação-1-1.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Estatística de teste: Estacionariedade</span></span>
+<span id="cb14-5"><a href="aplicação-1-1.html#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="aplicação-1-1.html#cb14-6" aria-hidden="true" tabindex="-1"></a>adf.drift<span class="sc">@</span>teststat </span></code></pre></div>
+<pre><code>##               tau2     phi1
+## statistic 1.765614 3.819948</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="aplicação-1-1.html#cb16-1" aria-hidden="true" tabindex="-1"></a>adf.drift<span class="sc">@</span>cval <span class="co">#valores tabulados por MacKinnon (1996)</span></span></code></pre></div>
+<pre><code>##       1pct  5pct 10pct
+## tau2 -3.46 -2.88 -2.57
+## phi1  6.52  4.63  3.81</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="aplicação-1-1.html#cb18-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">adf.test</span>(emissions_br.ts, <span class="at">alternative=</span><span class="st">&quot;stationary&quot;</span>, <span class="at">k=</span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  emissions_br.ts
+## Dickey-Fuller = -1.2795, Lag order = 0, p-value = 0.8758
+## alternative hypothesis: stationary</code></pre>
+<p>A partir dos valores do teste ADF, é possível afirmar que a estatística teste (1,765614) é maior do que o valor máximo associado ao nível de confiança (-2,88). Dessa forma, conclui-se que a série não é estacionária. Outra função que pode ser usada para o teste ADF é a <code>adf.test()</code> do pacote tseries. O teste também mostra que a série não é estacionária, já que o p-value é maior que o nível de significância de 5%.</p>
+<p>Portanto, para transformá-la em estacionária, será realizada uma diferenciação:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="aplicação-1-1.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ts.plot</span>(<span class="fu">diff</span>(emissions_br.ts, <span class="at">differences =</span> <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-28-1.png" width="672" /></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="aplicação-1-1.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Com uma diferenciação é possível verificar que a série está estacionária na média. </span></span></code></pre></div>
+<p>A partir da função <code>adf.test</code> será verificado se a série será estacionária com uma diferenciação:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="aplicação-1-1.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conferindo se a série realmente é estacionária</span></span>
+<span id="cb22-2"><a href="aplicação-1-1.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># H0: não é estacionária</span></span>
+<span id="cb22-3"><a href="aplicação-1-1.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># H1: é estacionária</span></span>
+<span id="cb22-4"><a href="aplicação-1-1.html#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="aplicação-1-1.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(<span class="fu">diff</span>(emissions_br.ts, <span class="at">differences =</span> <span class="dv">1</span>), <span class="at">alternative=</span><span class="st">&quot;stationary&quot;</span>, <span class="at">k=</span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## Warning in adf.test(diff(emissions_br.ts, differences = 1), alternative =
+## &quot;stationary&quot;, : p-value smaller than printed p-value</code></pre>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  diff(emissions_br.ts, differences = 1)
+## Dickey-Fuller = -7.9529, Lag order = 0, p-value = 0.01
+## alternative hypothesis: stationary</code></pre>
+<p>Como o p-value apresenta o valor de 0,01, é possível afirmar que, a um intervalo de confiança de 95%, a série temporal é estacionária.</p>
+<p>Agora que a série é estacionária, seguiremos para a próxima fase (Identificação).</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="aplicação-1-1.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identificação</span></span>
+<span id="cb25-2"><a href="aplicação-1-1.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#FAC</span></span>
+<span id="cb25-3"><a href="aplicação-1-1.html#cb25-3" aria-hidden="true" tabindex="-1"></a>BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(emissions_br.ts), <span class="at">lag.max =</span> <span class="dv">36</span>, <span class="at">style =</span> <span class="st">&quot;normal&quot;</span>)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-30-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="aplicação-1-1.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Última observação significativa: 2</span></span>
+<span id="cb26-2"><a href="aplicação-1-1.html#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="aplicação-1-1.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#FACP</span></span>
+<span id="cb26-4"><a href="aplicação-1-1.html#cb26-4" aria-hidden="true" tabindex="-1"></a>BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(emissions_br.ts), <span class="at">type =</span> <span class="st">&quot;partial&quot;</span>, <span class="at">lag.max =</span> <span class="dv">36</span>,  <span class="at">style =</span> <span class="st">&quot;normal&quot;</span>)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-30-2.png" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="aplicação-1-1.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Última observação significativa: 2</span></span></code></pre></div>
+<p>A Função de Correlação (FAC), que determina a ordem das médias móveis (q), indica que a última observação significativa é a 2. E a FACP, que determina a ordem p da componente autoregressiva (AR), indica que a última observação significativa é a 2 também.</p>
+<p>A partir disso, o modelo que será utilizado é o ARIMA (2,2,1).</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="aplicação-1-1.html#cb28-1" aria-hidden="true" tabindex="-1"></a>fit_co2 <span class="ot">&lt;-</span> <span class="fu">arima</span>(emissions_br.ts, <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span></code></pre></div>
+<p>Para verificar se o modelo escolhido ARIMA (2,2,1) é o melhor fit, iremos utilizar a função <code>auto.arima()</code>.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="aplicação-1-1.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(emissions_br.ts)</span></code></pre></div>
+<pre><code>## Series: emissions_br.ts 
+## ARIMA(2,2,1) 
+## 
+## Coefficients:
+##          ar1     ar2      ma1
+##       0.2411  0.1609  -0.9677
+## s.e.  0.0976  0.0968   0.0300
+## 
+## sigma^2 = 101.8:  log likelihood = -439.64
+## AIC=887.27   AICc=887.63   BIC=898.36</code></pre>
+<p>Conforme apresentado, a função <code>auto.arima</code> indica o modelo que escolhemos e, dessa forma, pode-se afirmar que o modelo escolhido é o que minimiza os critérios AIC e BIC.</p>
+<p>O próximo passo é verificar os resíduos do modelo:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="aplicação-1-1.html#cb31-1" aria-hidden="true" tabindex="-1"></a>diag <span class="ot">&lt;-</span> <span class="fu">tsdiag</span>(fit_co2, <span class="at">gof.lag =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-33-1.png" width="672" />
+A partir do gráfico <em>Standardized Residuals</em>, visualmente os dados aparentam ter homocedasticidade e média zero, o que indica normalidade. Além disso, é possível verificar a existência de outliers, já que observações fora do intervalo [-3;3] seriam observações atípicas. Portanto, aparentemente existem alguns outliers a partir do ano 2000. A <em>FAC</em> dos resíduos (segundo gráfico) mostra que não há nenhuma defasagem significativa, portanto, o modelo ARIMA (2,2,1) está representando bem a série temporal. O gráfico <em>p-values for Ljung-Box statistic</em> não é confiável, já que os p-values são calculados sem levar em conta o fato de os resíduos terem sido gerados a partir de um modelo ajustado. Por mais que a conclusão deste gráfico mostre que não há dependência linear entre os resíduos, a informação não é confiável.</p>
+<p>O <a href="https://koalatea.io/r-ljung-box-test/">teste de Ljung &amp; Box</a> será realizado para testar a autocorrelação dos resíduos:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="aplicação-1-1.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(fit_co2<span class="sc">$</span>residuals, <span class="at">lag=</span><span class="dv">24</span>, <span class="at">type=</span><span class="st">&quot;Ljung-Box&quot;</span>, <span class="at">fitdf =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## 
+##  Box-Ljung test
+## 
+## data:  fit_co2$residuals
+## X-squared = 20.466, df = 22, p-value = 0.5539</code></pre>
+<p>O teste mostra a ausência de autocorrelação linear nos resíduos, já que o p-value é maior que 0.05. Portanto, a hipótese nula de que a série temporal não possui autocorrelação até o lag 24 não pode ser rejeitada.</p>
+<p>A seguir será testada a estacionariedade da variância e, para isso, o teste Multiplicador de Lagrange para heterocedasticidade condicional autoregressiva será utilizado. Além disso, também será testada a normalidade dos resíduos com o teste de Shapiro-Wilk.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="aplicação-1-1.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variância</span></span>
+<span id="cb34-2"><a href="aplicação-1-1.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arch.test</span>(fit_co2)</span></code></pre></div>
+<pre><code>## ARCH heteroscedasticity test for residuals 
+## alternative: heteroscedastic 
+## 
+## Portmanteau-Q test: 
+##      order   PQ  p.value
+## [1,]     4 32.7 1.40e-06
+## [2,]     8 85.0 4.66e-15
+## [3,]    12 85.7 3.39e-13
+## [4,]    16 85.8 1.46e-11
+## [5,]    20 85.9 3.89e-10
+## [6,]    24 85.9 6.75e-09
+## Lagrange-Multiplier test: 
+##      order     LM  p.value
+## [1,]     4 59.504 7.50e-13
+## [2,]     8  5.908 5.51e-01
+## [3,]    12  2.989 9.91e-01
+## [4,]    16  1.792 1.00e+00
+## [5,]    20  1.259 1.00e+00
+## [6,]    24  0.801 1.00e+00</code></pre>
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-35-1.png" width="672" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="aplicação-1-1.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Normalidade dos resíduos</span></span>
+<span id="cb36-2"><a href="aplicação-1-1.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(fit_co2<span class="sc">$</span>residuals)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  fit_co2$residuals
+## W = 0.71345, p-value = 5.383e-14</code></pre>
+<p>Em relação à variância, com p-value menor que 0.05, a hipótese nula de homocedasticidade da variância é rejeitada. No caso do teste de Shapiro-Wilk, verifica-se que como p-value é menor que 0.05, a hipótese nula de normalidade é rejeitada. Portanto, é possível verificar que os resíduos do modelo não estão adequados.</p>
+<p>Após a análise dos resíduos, mesmo utilizando o modelo que minimiza os critérios de informação (AIC e BIC) e apresenta ausência de autocorrelação linear nos resíduos, é possível afirmar que o modelo escolhido não é adequado para representar a série temporal devido a heterocedasticidade e não-normalidade dos resíduos. É importante que a análise de resíduos seja realizada sempre, já que, se não tivesse sido feita na aplicação, o modelo pareceria adequado.</p>
+<p>Apesar dos problemas da análise de resíduos, a etapa de Previsão será realizada para fins didáticos:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="aplicação-1-1.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimação</span></span>
+<span id="cb38-2"><a href="aplicação-1-1.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb38-3"><a href="aplicação-1-1.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="aplicação-1-1.html#cb38-4" aria-hidden="true" tabindex="-1"></a>forecast_co2 <span class="ot">&lt;-</span> forecast<span class="sc">::</span><span class="fu">forecast</span>(<span class="at">object=</span>fit_co2, <span class="at">h=</span><span class="dv">12</span>)</span>
+<span id="cb38-5"><a href="aplicação-1-1.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(forecast_co2)</span></code></pre></div>
+<p><img src="TG-Beatriz-Lima_files/figure-html/5-36-1.png" width="672" /></p>
+<p>Dessa forma, a partir da função <code>accuracy()</code> é possível analisar se o modelo é adequado:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="aplicação-1-1.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Métricas</span></span>
+<span id="cb39-2"><a href="aplicação-1-1.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(fit_co2)</span></code></pre></div>
+<pre><code>##                     ME     RMSE     MAE       MPE     MAPE     MASE        ACF1
+## Training set 0.7565773 9.877258 4.93605 0.7380682 7.166957 0.748034 -0.01481926</code></pre>
+<p>Pelas métricas, o MAPE (Mean Absolute Percentage Error) demonstra que o erro de previsão está em 7,167%, o que, teoricamente, é um bom ajuste. Apesar da métrica adequada, como já analisamos, os resíduos do modelo não estão adequados e, dessa forma, é possível afirmar que o modelo também não está.</p>
+<p>O problema da heterocedasticidade pode ser resolvido a partir da inclusão de mais variáveis no modelo. A não-normalidade dos resíduos pode ser resolvida a partir de uma transformação logarítmica ou uma transformação de Box-Cox.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="modelos-sarima.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="aplicação-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-blocks.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

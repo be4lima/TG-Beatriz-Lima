@@ -152,7 +152,206 @@ Os parâmetros do modelo são identificados e testados estatisticamente e, para 
   
 4. Previsão
 
-## Aplicação {-}
+## Aplicação 1 {-}
+
+```{r 5-20, include=FALSE}
+# Packages
+packages <- c("BETS","urca","aTSA","forecast","lmtest","nortsTest","FinTS","xlsx", "MLmetrics", "TTR")
+
+# Checando se os pacotes já estão instalados
+is.installed <- function(mypkg){
+  is.element(mypkg, installed.packages()[,1])
+}
+for(packages in packages){
+  if(!is.installed(packages)){
+    install.packages((packages), repos = "http://cran.us.r-project.org")
+  }
+}
+library(dplyr)
+library(forecast)
+library(aTSA)
+library(MLmetrics)
+library(TTR)
+library(tseries)
+
+```
+
+Para a aplicação, foi utilizada uma base de dados de emissões de $CO_2$ de diversos países ao longo dos anos de 1750 a 2020 da plataforma Kaggle. Além dos valores de emissão de $CO_2$, também apresenta valores de emissão de metano e óxido nitroso. 
+
+```{r 5-21}
+# Carregando base de dados
+# Fonte: https://www.kaggle.com/datasets/kvnxls/co2-emissions-dataset-1750-2020
+
+emissions <- read.csv("Data/co2data.csv", sep = ",", dec = ".")
+View(emissions)
+str(emissions)
+```
+
+Como o nosso interesse são as emissões do Brasil, foi realizada uma nova base de dados com somente as emissões brasileiras de $CO_2$ ao longo dos anos.
+```{r 5-22}
+# Filtrando somente as emissões do Brasil
+emissions_br <- emissions %>%
+  filter(country == 'Brazil')
+
+View(emissions_br)
+```
+
+Porém, gostaríamos de analisar somente as emissões de $CO_2$ do Brasil. Dessa forma, iremos separar em uma base de dados somente os dados que interessam para a análise: País e Emissão de $CO_2$.
+
+```{r 5-23}
+# Separando somente as informações importantes para a análise
+# Para a análise, precisamos somente da coluna de ano e de concentração de CO2
+
+emissions_br <- emissions_br[c(3,4)]
+
+# Mudando o nome das linhas para os anos da série temporal
+year <- emissions_br[,1]
+
+row.names(emissions_br) <- year
+
+# Criando tabela somente com as concentrações de CO2 como coluna
+emissions_br <- emissions_br[c(2)]
+```
+
+A partir disso, realiza-se a análise exploratória da base de dados:
+```{r 5-24}
+# EDA
+str(emissions_br)
+head(emissions_br)
+summary(emissions_br)
+```
+
+Agora, é necessário transformar a base de dados em uma série temporal. Isso será realizado a partir da função `ts()`.
+
+```{r 5-25}
+# Criando a série temporal (ts)
+emissions_br.ts <- ts(emissions_br$co2,start=1901, end=2020, frequency=1)
+```
+
+Criada a série temporal, será realizada a estapa de Identificação utilizando a análise gráfica para obter mais conhecimento acerca da série. Portanto, iremos plotar a série temporal:
+
+```{r 5-26}
+# Análise gráfica
+
+# Tendência de aumento
+plot.ts(emissions_br.ts, ylab="Emissão de CO2", xlab="Anos")
+
+# Comentários: Tendência de aumento clara, não aparenta possuir sazonalidade já que não existem padrões que se repetem ao longo dos anos
+```
+
+Conforme apresentado no gráfico, foi possível verificar que a série apresenta uma tendência de aumento clara. Além disso, não possui sazonalidade, já que não existem padrões que se repetem ao longo do ano.
+
+Sabe-se que uma série temporal é estacionária quando a sua média, variância e autocorrelação são contantes ao longo do tempo. Ou seja, uma série é estacionária quando não é dependente do tempo e não tem uma tendência ou sazonalidade. Como já foi verificado graficamente que a série possui uma tendência de aumento ao longo do tempo, é necessário verificar a partir de um teste estatístico se a série é estacionária.
+
+O teste que será utilizado é o Teste de Dickey-Fuller Aumentado (ADF). A hipótese nula do teste é que a série temporal possui uma raiz única, ou seja, não é estacionária. Portanto, se o p-value do teste for menor que o nível de significância $\alpha$ (5% ou 1%), a hipótese nula é rejeitada. Caso o p-value seja maior, a hipótese nula não é rejeitada e a série é não-estacionária.
+
+```{r 5-27}
+adf.drift <- urca::ur.df(y=emissions_br.ts, type= "drift", lag=24, selectlags="AIC")
+# Utiliza-se "drift" como argumento quando a série temporal possui tendência
+
+# Estatística de teste: Estacionariedade
+
+adf.drift@teststat 
+adf.drift@cval #valores tabulados por MacKinnon (1996)
+
+
+ adf.test(emissions_br.ts, alternative="stationary", k=0)
+ 
+```
+A partir dos valores do teste ADF, é possível afirmar que a estatística teste (1,765614) é maior do que o valor máximo associado ao nível de confiança (-2,88). Dessa forma, conclui-se que a série não é estacionária. Outra função que pode ser usada para o teste ADF é a `adf.test()` do pacote tseries. O teste também mostra que a série não é estacionária, já que o p-value é maior que o nível de significância de 5%.
+
+Portanto, para transformá-la em estacionária, será realizada uma diferenciação:
+
+```{r 5-28}
+ts.plot(diff(emissions_br.ts, differences = 1))
+
+# Com uma diferenciação é possível verificar que a série está estacionária na média. 
+
+```
+A partir da função `adf.test` será verificado se a série será estacionária com uma diferenciação:
+
+```{r 5-29}
+# Conferindo se a série realmente é estacionária
+# H0: não é estacionária
+# H1: é estacionária
+
+adf.test(diff(emissions_br.ts, differences = 1), alternative="stationary", k=0)
+
+```
+Como o p-value apresenta o valor de 0,01, é possível afirmar que, a um intervalo de confiança de 95%, a série temporal é estacionária.
+
+Agora que a série é estacionária, seguiremos para a próxima fase (Identificação).
+
+```{r 5-30}
+# Identificação
+#FAC
+BETS::corrgram(diff(emissions_br.ts), lag.max = 36, style = "normal")
+# Última observação significativa: 2
+
+#FACP
+BETS::corrgram(diff(emissions_br.ts), type = "partial", lag.max = 36,  style = "normal")
+# Última observação significativa: 2
+```
+A Função de Correlação (FAC), que determina a ordem das médias móveis (q), indica que a última observação significativa é a 2. E a FACP, que determina a ordem p da componente autoregressiva (AR), indica que a última observação significativa é a 2 também.
+
+A partir disso, o modelo que será utilizado é o ARIMA (2,2,1).
+```{r 5-31}
+fit_co2 <- arima(emissions_br.ts, c(2,2,1))
+```
+
+Para verificar se o modelo escolhido ARIMA (2,2,1) é o melhor fit, iremos utilizar a função `auto.arima()`.
+```{r 5-32}
+auto.arima(emissions_br.ts)
+```
+Conforme apresentado, a função `auto.arima` indica o modelo que escolhemos e, dessa forma, pode-se afirmar que o modelo escolhido é o que minimiza os critérios AIC e BIC.
+
+O próximo passo é verificar os resíduos do modelo:
+
+```{r 5-33}
+diag <- tsdiag(fit_co2, gof.lag = 20)
+```
+A partir do gráfico *Standardized Residuals*, visualmente os dados aparentam ter homocedasticidade e média zero, o que indica normalidade. Além disso, é possível verificar a existência de outliers, já que observações fora do intervalo [-3;3] seriam observações atípicas. Portanto, aparentemente existem alguns outliers a partir do ano 2000. A *FAC* dos resíduos (segundo gráfico) mostra que não há nenhuma defasagem significativa, portanto, o modelo ARIMA (2,2,1) está representando bem a série temporal. O gráfico *p-values for Ljung-Box statistic* não é confiável, já que os p-values são calculados sem levar em conta o fato de os resíduos terem sido gerados a partir de um modelo ajustado. Por mais que a conclusão deste gráfico mostre que não há dependência linear entre os resíduos, a informação não é confiável.
+
+O [teste de Ljung & Box](https://koalatea.io/r-ljung-box-test/) será realizado para testar a autocorrelação dos resíduos:
+
+```{r 5-34}
+Box.test(fit_co2$residuals, lag=24, type="Ljung-Box", fitdf = 2)
+```
+O teste mostra a ausência de autocorrelação linear nos resíduos, já que o p-value é maior que 0.05. Portanto, a hipótese nula de que a série temporal não possui autocorrelação até o lag 24 não pode ser rejeitada.
+
+A seguir será testada a estacionariedade da variância e, para isso, o teste Multiplicador de Lagrange para heterocedasticidade condicional autoregressiva será utilizado. Além disso, também será testada a normalidade dos resíduos com o teste de Shapiro-Wilk.
+```{r 5-35}
+# Variância
+arch.test(fit_co2)
+
+#Normalidade dos resíduos
+shapiro.test(fit_co2$residuals)
+```
+Em relação à variância, com p-value menor que 0.05, a hipótese nula de homocedasticidade da variância é rejeitada. No caso do teste de Shapiro-Wilk, verifica-se que como p-value é menor que 0.05, a hipótese nula de normalidade é rejeitada. Portanto, é possível verificar que os resíduos do modelo não estão adequados.
+
+Após a análise dos resíduos, mesmo utilizando o modelo que minimiza os critérios de informação (AIC e BIC) e apresenta ausência de autocorrelação linear nos resíduos, é possível afirmar que o modelo escolhido não é adequado para representar a série temporal devido a heterocedasticidade e não-normalidade dos resíduos. É importante que a análise de resíduos seja realizada sempre, já que, se não tivesse sido feita na aplicação, o modelo pareceria adequado.
+
+Apesar dos problemas da análise de resíduos, a etapa de Previsão será realizada para fins didáticos:
+
+```{r 5-36}
+# Estimação
+library(forecast)
+
+forecast_co2 <- forecast::forecast(object=fit_co2, h=12)
+plot(forecast_co2)
+```
+
+
+Dessa forma, a partir da função `accuracy()` é possível analisar se o modelo é adequado:
+```{r 5-37}
+# Métricas
+accuracy(fit_co2)
+```
+Pelas métricas, o MAPE (Mean Absolute Percentage Error) demonstra que o erro de previsão está em 7,167%, o que, teoricamente, é um bom ajuste. Apesar da métrica adequada, como já analisamos, os resíduos do modelo não estão adequados e, dessa forma, é possível afirmar que o modelo também não está. 
+
+O problema da heterocedasticidade pode ser resolvido a partir da inclusão de mais variáveis no modelo. A não-normalidade dos resíduos pode ser resolvida a partir de uma transformação logarítmica ou uma transformação de Box-Cox. 
+
+## Aplicação 2 {-}
 Para a aplicação, será realizado o exemplo do capítulo 4 do livro de @barros2017. Será utilizada como *database* a série temporal de vendas de passagens aéreas nos EUA de janeiro de 1949 a dezembro de 1960. 
 
 ```{r 5-1,echo=FALSE, message=FALSE,warning=FALSE, eval=FALSE}
@@ -168,7 +367,7 @@ install.packages(c('rlang','tidyverse'))
 # Intalando pacotes necessários
   packages <- c("BETS","urca","TSA","forecast","lmtest","normtest","FinTS","xlsx")
 
-# Chacando se os pacotes já estão instalados
+# Checando se os pacotes já estão instalados
 is.installed <- function(mypkg){
   is.element(mypkg, installed.packages()[,1])
 }
@@ -359,13 +558,14 @@ A próxima fase será a **Previsão** utilizando o pacote `forecast()`. O argume
 library(forecast)
 
 # Previsão
-plot(forecast(object=fit.air, h=12, level=0.95))
+forecast_air <- forecast::forecast(object=fit.air, h=12)
+plot(forecast_air)
 
 # Métricas
 accuracy(fit.air)
 
 ```
-Pelas métricas, o MAPE demonstra que o erro de previsão está em 0,47%, o que é muito bom. Dessa forma, conseguimos confirmar que a previsão está adequada!
+Pelas métricas, o MAPE demonstra que o erro de previsão está em 2,62%, o que é muito bom. Dessa forma, conseguimos confirmar que a previsão está adequada!
 
 ## Material Complementar {-}
 1. [Introdução à Análise de Séries Temporais (youtube)](https://www.youtube.com/watch?v=emnSZ7qKv9M&list=PLSDVadsSlXTCVcg95hQsEOVRnVwgaPTRC&index=1) 
