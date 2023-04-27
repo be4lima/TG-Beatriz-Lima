@@ -290,20 +290,19 @@ BETS::corrgram(diff(emissions_br.ts), lag.max = 36, style = "normal")
 
 #FACP
 BETS::corrgram(diff(emissions_br.ts), type = "partial", lag.max = 36,  style = "normal")
-# Última observação significativa: 2
+# Última observação significativa: 1 ou 2
 ```
-A Função de Correlação (FAC), que determina a ordem das médias móveis (q), indica que a última observação significativa é a 2. E a FACP, que determina a ordem p da componente autoregressiva (AR), indica que a última observação significativa é a 2 também.
-
-A partir disso, o modelo que será utilizado é o ARIMA (2,2,1).
-```{r 5-31}
-fit_co2 <- arima(emissions_br.ts, c(2,2,1))
-```
+A partir disso, verifica-se que a Função de Autocorrelação, que determina a ordem das médias móveis (q), indica que a última observação significativa é a 2. E a Função de Autocorrelação Parcial, que determina a ordem p da componente autoregressiva, indica que a última observação significativa é a 1 ou 2. Dessa forma, o modelo que seria utilizado seria o ARIMA (2,1,2) ou (1,1,2).
 
 Para verificar se o modelo escolhido ARIMA (2,2,1) é o melhor fit, iremos utilizar a função `auto.arima()`.
 ```{r 5-32}
 auto.arima(emissions_br.ts)
 ```
-Conforme apresentado, a função `auto.arima` indica o modelo que escolhemos e, dessa forma, pode-se afirmar que o modelo escolhido é o que minimiza os critérios AIC e BIC.
+Como a FAC e FACP não foram claras, na fase de Estimação, para verificar se o modelo escolhido apresenta os critérios AIC e BIC minimizados, utilizou-se a função auto.arima() que retorna o modelo de melhor ajuste à série temporal de estudo. Como a função retornou o modelo *ARIMA (2,2,1)*, este será utilizado, já que é o que é o modelo de melhor ajuste e, portanto, apresenta os critérios de informação minimizados.
+
+```{r 5-31}
+fit_co2 <- arima(emissions_br.ts, c(2,2,1))
+```
 
 O próximo passo é verificar os resíduos do modelo:
 

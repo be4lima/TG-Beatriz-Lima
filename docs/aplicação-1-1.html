@@ -23,7 +23,7 @@
 <meta name="author" content="Beatriz Morais Lima e Wallace Gusmão Ferreira" />
 
 
-<meta name="date" content="2023-04-06" />
+<meta name="date" content="2023-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -418,12 +418,10 @@ div.csl-indent {
 <span id="cb26-3"><a href="aplicação-1-1.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#FACP</span></span>
 <span id="cb26-4"><a href="aplicação-1-1.html#cb26-4" aria-hidden="true" tabindex="-1"></a>BETS<span class="sc">::</span><span class="fu">corrgram</span>(<span class="fu">diff</span>(emissions_br.ts), <span class="at">type =</span> <span class="st">&quot;partial&quot;</span>, <span class="at">lag.max =</span> <span class="dv">36</span>,  <span class="at">style =</span> <span class="st">&quot;normal&quot;</span>)</span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/5-30-2.png" width="672" /></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="aplicação-1-1.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Última observação significativa: 2</span></span></code></pre></div>
-<p>A Função de Correlação (FAC), que determina a ordem das médias móveis (q), indica que a última observação significativa é a 2. E a FACP, que determina a ordem p da componente autoregressiva (AR), indica que a última observação significativa é a 2 também.</p>
-<p>A partir disso, o modelo que será utilizado é o ARIMA (2,2,1).</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="aplicação-1-1.html#cb28-1" aria-hidden="true" tabindex="-1"></a>fit_co2 <span class="ot">&lt;-</span> <span class="fu">arima</span>(emissions_br.ts, <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="aplicação-1-1.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Última observação significativa: 1 ou 2</span></span></code></pre></div>
+<p>A partir disso, verifica-se que a Função de Autocorrelação, que determina a ordem das médias móveis (q), indica que a última observação significativa é a 2. E a Função de Autocorrelação Parcial, que determina a ordem p da componente autoregressiva, indica que a última observação significativa é a 1 ou 2. Dessa forma, o modelo que seria utilizado seria o ARIMA (2,1,2) ou (1,1,2).</p>
 <p>Para verificar se o modelo escolhido ARIMA (2,2,1) é o melhor fit, iremos utilizar a função <code>auto.arima()</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="aplicação-1-1.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(emissions_br.ts)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="aplicação-1-1.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(emissions_br.ts)</span></code></pre></div>
 <pre><code>## Series: emissions_br.ts 
 ## ARIMA(2,2,1) 
 ## 
@@ -434,7 +432,8 @@ div.csl-indent {
 ## 
 ## sigma^2 = 101.8:  log likelihood = -439.64
 ## AIC=887.27   AICc=887.63   BIC=898.36</code></pre>
-<p>Conforme apresentado, a função <code>auto.arima</code> indica o modelo que escolhemos e, dessa forma, pode-se afirmar que o modelo escolhido é o que minimiza os critérios AIC e BIC.</p>
+<p>Como a FAC e FACP não foram claras, na fase de Estimação, para verificar se o modelo escolhido apresenta os critérios AIC e BIC minimizados, utilizou-se a função auto.arima() que retorna o modelo de melhor ajuste à série temporal de estudo. Como a função retornou o modelo <em>ARIMA (2,2,1)</em>, este será utilizado, já que é o que é o modelo de melhor ajuste e, portanto, apresenta os critérios de informação minimizados.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="aplicação-1-1.html#cb30-1" aria-hidden="true" tabindex="-1"></a>fit_co2 <span class="ot">&lt;-</span> <span class="fu">arima</span>(emissions_br.ts, <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p>O próximo passo é verificar os resíduos do modelo:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="aplicação-1-1.html#cb31-1" aria-hidden="true" tabindex="-1"></a>diag <span class="ot">&lt;-</span> <span class="fu">tsdiag</span>(fit_co2, <span class="at">gof.lag =</span> <span class="dv">20</span>)</span></code></pre></div>
 <p><img src="TG-Beatriz-Lima_files/figure-html/5-33-1.png" width="672" />

@@ -1,5 +1,5 @@
 # Packages
-packages <- c("BETS","urca","TSA","forecast","lmtest","nortest","FinTS","xlsx", "MLmetrics")
+packages <- c("BETS","urca","TSA","forecast","lmtest","nortest","FinTS","xlsx", "MLmetrics", "TTR")
 
 # Checando se os pacotes já estão instalados
 is.installed <- function(mypkg){
@@ -14,6 +14,7 @@ library(dplyr)
 library(forecast)
 library(astsa)
 library(MLmetrics)
+library(TTR)
 
 # Carregando base de dados
 # Fonte: https://www.kaggle.com/datasets/kvnxls/co2-emissions-dataset-1750-2020
@@ -47,8 +48,7 @@ head(emissions_br)
 summary(emissions_br)
 
 # Criando a série temporal (ts)
-emissions_br.ts <- ts(emissions_br$co2,start=c(1901),frequency=1)
-View(emissions_br.ts)
+emissions_br.ts <- ts(emissions_br$co2,start=1901, end=2020, frequency=1)
 
 # Análise gráfica
 
@@ -57,40 +57,48 @@ plot.ts(emissions_br.ts, ylab="Emissão de CO2", xlab="Anos")
 
 # Comentários: Tendência de aumento clara, não aparenta possuir sazonalidade já que não existem padrões que se repetem ao longo dos anos
 
-require(BETS)
-corrgram(emissions_br.ts,lag.max = 36, ci=0.95)
+# Estatística de teste: Estacionariedade
 
-#Comentários: existe autocorrelação significativa até o lag 36
-
-library(urca)
-adf.drift <- ur.df(y=emissions_br.ts, type= "drift", lag=24, selectlags="AIC")
-corrgram(adf.drift@res, lag.max=36)
-
-# Estatística de teste 
 adf.drift@teststat 
 adf.drift@cval #valores tabulados por MacKinnon (1996)
+
 #A partir do gráfico, é possível afirmar que a estatística teste (1,765614)
 #é maior do que o valor máximo associado ao nível de confiança (-2,88).
 #conclui-se que a série não é estacionária
 
-# Uma diferenciação para tornar a série estacionária
-ts.plot(diff(emissions_br.ts, lag=1, differences=1))
-BETS::corrgram(diff(emissions_br.ts, lag=1, differences=1), lag.max=36)
+#
+ adf.test(emissions_br.ts, alternative="stationary", k=0)
+
+# A série é estacionária! 
+
+ts.plot(diff(emissions_br.ts, differences = 1))
+
+# Com uma diferenciação é possível verificar que a série está estacionária na média. 
+# Porém, a ST está crescendo ao longo do tempo e, dessa forma, sua variância não está constante. 
+# Uma estratégia importante para tornar a variância constante, é aplicar log na série temporal.
 
 # Aplicação do log para tornar a variância constante
-ts.plot(diff(log(AirPassengers), lag=1, differences=1))
+ts.plot(diff(log(emissions_br.ts)))
+library(tseries)
 
-# A série, agora, é estacionária.
+# Realizando uma diferenciação para tornar a série estacionária
+
+# Conferindo se a série realmente é estacionária
+# H0: não é estacionária
+# H1: é estacionária
+
+adf.test(diff(log(emissions_br.ts), differences = 1), alternative="stationary", k=0)
 
 # Identificação
 #FAC
-BETS::corrgram(diff(diff(log(emissions_br.ts), lag = 1, differences = 1), lag = 12, differences = 1), lag.max = 48)
-# Última observação significativa: 11
+BETS::corrgram(diff(log(emissions_br.ts)), lag.max = 36, style = "normal")
+# Última observação significativa: 18
 
 #FACP
-BETS::corrgram(diff(diff(log(emissions_br.ts), lag = 1, differences = 1), lag = 12, differences = 1), type = "partial", lag.max = 48)
-# Última observação significativa: 11
+BETS::corrgram(diff(log(emissions_br.ts)), type = "partial", lag.max = 36,  style = "normal")
+# Última observação significativa: 18
 
 # Estimação
 library(forecast)
-arima(emissions_br.ts, order = c(1,1,1), method = "ML")
+# arima(emissions_br.ts, order = c(18,18,1), method = "ML")
+# Não está sendo possível devido ao número grande de p e q.
