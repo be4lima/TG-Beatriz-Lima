@@ -256,7 +256,7 @@ tabela_stats <- inmet_new %>%
 View(tabela_stats)
 ```
 
-Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras com os erros padrões das amostras. Utiliza-se o erro padrão e não o desvio padrão porque, neste caso, estamos interessados na variabilidade das médias das amostras e não na variabilidade das observações dentro da amostra.
+Com o objetivo de analisar a graficamente os valores de precipitação por ano, será utilizado um gráfico de barras com os intervalos de confiança da média de cada ano. Utiliza-se o erro padrão e não o desvio padrão porque, neste caso, estamos interessados na variabilidade das médias das amostras e não na variabilidade das observações dentro da amostra.
 
 ```{r 3-12,message=FALSE,warning=FALSE}
 
